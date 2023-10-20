@@ -1,0 +1,298 @@
+\section{January 19, 2023}
+
+\subsection{Correlation}
+
+\begin{definition}
+\deflabel
+
+The covariance of two random variables $X,Y$ is given by
+\[\cov(X,Y) = \EE[(X-\EE[X])(Y-\EE[Y])] = \EE[XY] - \EE[X]\EE[Y].\]
+\end{definition}
+
+Approximately, covariance measures the strength of the linear relationship between $X$ and $Y$, e.g., whether or not greater values of $X$ corresponds to greater values of $Y$ and vice versa. When $X=Y$, $\cov(X,Y) = \var(X)$. In some sense, it can be thought of as a weaker version of independence, since it captures linear dependence, but not dependence in full generality.
+
+\begin{theorem}
+\lemlabel
+
+If $X,Y$ are independent, then $\cov(X,Y)=0$.
+\end{theorem}
+
+\begin{proof}
+$\EE[XY] = \EE[X]\EE[Y]$ when $X$ and $Y$ are independent.
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+The converse is not true.
+\end{theorem}
+
+\begin{proof}
+Let $X\sim U[-1,1]$ and $Y=X^2$ so that $X,Y$ are not independent. On the other hand, 
+\[\cov(X,Y) = \EE[X^3]-\EE[X]\EE[X^2] = 0.\]
+\end{proof}
+
+Covariance allows us to capture linear sums of variances:
+\begin{theorem}
+\lemlabel
+
+For random variables $X,Y$, 
+\[\var[X+Y] = \var[X] + \var[Y] + 2\cov(X,Y).\]
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+    \var[X+Y] &= \EE[(X+Y - \EE[X+Y])^2] \\
+    &= \EE[((X-\EE[X]) + (Y-\EE[Y]))^2]\\
+    &= \var(X) + \var(Y) + 2\cov(X,Y).
+\end{align*}
+\end{proof}
+Properties of covariance:
+\begin{itemize}
+    \item $\cov(X,a)=0$
+    \item $\cov(X,X)=\var[X]$
+    \item $\cov(X,Y) = \cov(Y,X)$
+    \item Covariance is bilinear: $\cov(aX+bY, cZ+dW) = ac\cov(X,Z) + ad\cov(X,W) + bc\cov(Y,Z) + bd\cov(Y,W)$.
+\end{itemize}
+
+\begin{example}
+\exlabel
+
+Let $S$ be drawn uniformly at random among all subsets of size $k$ of $[n]$. For each $1\leq i\leq n$, $X_i=1$ if $i\in S$ and $X_i=0$ otherwise. Find $\cov(X_1, X_2)$. 
+\end{example}
+
+By symmetry, $\cov(X_i,X_j)$ are equal for all $i\neq j$. Also, $X_i\sim \text{Bern}(k/n)$, so $\var[X_i] = k/n - (k/n)^2 = k(n-k)/n^2$. Using $\var[a] = 0$, 
+\[0 = \var[k] = \var[X_1 + \hdots + X_n] = n\var[X_1] + 2\binom{n}{2}\cov(X_1, X_2).\]
+Therefore,
+\[\cov(X_1, X_2) = \frac{-k(n-k)}{n^2(n-1)}.\]
+
+Intuitively, it makes sense that this quantity is negative, since, if we are given that $X_1=1$, the probability that $X_2$ is also $1$ decreases. 
+
+\begin{definition}
+\deflabel
+
+The \ac{correlation} between $X,Y$ is defined as 
+\[\rho(X,Y) = \frac{\cov(X,Y)}{\sqrt{\var[X]\cdot \var[Y]}}.\]
+\end{definition}
+
+Correlation can be thought of as a normalized version of covariance, in the sense that correlation is immune to scaling: $\rho(aX, bY) = \rho(X,Y)$ for constants $a,b$. Correlation is also dimensionless. 
+
+\begin{theorem}
+\lemlabelname{Translation invariance}
+
+For constants $a,b$, $\rho(X+a, Y+b) = \rho(X,Y)$.
+\end{theorem}
+
+\begin{theorem}
+\lemlabel
+
+For any random variables $X,Y$, $\vert \rho(X,Y)\vert \leq 1$. 
+\end{theorem}
+
+\begin{proof}
+By translation invariance, shift everything so that $\EE[X] = \EE[Y] = 0$. Then $\cov(X,Y) = \EE[XY]$, $\var[X] = \EE[X^2]$, and $\var[Y] = \EE[Y^2]$, so we want to show $\EE[XY] \leq \sqrt{\EE[X^2]\EE[Y^2]}$. To do so, we can apply Cauchy-Schwarz to the pair of functions $(x\sqrt{p_{X,Y}(x,y)}, y\sqrt{p_{X,Y}(x,y)})$:
+\begin{align*}
+    \EE[XY] &= \iint_{\RR^2}xyp_{X,Y}(x,y) \\
+    & \leq \sqrt{\left(\iint_{\RR^2} x^2p_{X,Y}(x,y)\ddd y \ddd x\right)\left(\iint_{\RR^2} y^2p_{X,Y}(x,y)\ddd y \ddd x\right)} \\
+    &= \sqrt{\left(\iint_{\RR}x^2p_X(x)\ddd x\right)\left(\iint_{\RR}y^2p_Y(y)\ddd y\right)} \\ 
+    &= \sqrt{\EE[X^2]\EE[Y^2]}.
+\end{align*}
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Let $A,B,C$ be random variables with $\rho(A,B) = \rho(A,C) = 0.5$. What are the possible values of $\rho(B,C)$?
+\end{example}
+
+Shift and scale so that $\sigma_A = \sigma_B = \sigma_C = 0$ and $\var(A) = \var(B) = \var(C) = 1$. When $B=C$, $\rho(B,C) = \cov(B,C) / \var(B) = 1$. Also, if we consider the random variable $B+C-A$: 
+\begin{align*}
+    \var[B+C-A] &= \var[B] + \var[C] + \var[-A] + \\
+    &\qquad 2(\cov(B,C) + \cov(B, -A) + \cov(C, -A))\\
+    &= 3+2(\rho(B,C) - \rho(A,B) - \rho(A,c)) \\
+    &= 1+2\rho(B,C).
+\end{align*}
+
+Since $\var[B+C-A]\geq 0$, $\rho(B,C)\geq -1/2$. To show that all values in between are attainable, let $A\sim N(0,1)$, $X\sim N(0,t)$, and $Y\sim N(0,1-t)$ to be independent for $t\leq 1$. Then, let 
+\[B = \frac{A}{2} + \frac{\sqrt{3}}{2}(X+Y), \quad C = \frac{A}{2} + \frac{\sqrt{3}}{2}(X-Y).\]
+
+Note that $\EE[B] = \EE[C] = 0$. Also, since every variable is chosen independnetly, linearity of variance implies $\var(B) = \var(C) = (1/2)^2 + (\sqrt{3}/2)^2 = 1$. Now, 
+\begin{align*}
+    \rho(B,C) &= \cov(B,C) \\
+    &= \EE\left[\left(\frac{A}{2} + \frac{\sqrt{3}}{2}(X+Y)\right)\left(\frac{A}{2} + \frac{\sqrt{3}}{2}(X-Y)\right)\right] \\
+    &= \frac{3t-1}{2}.
+\end{align*}
+By construction, this works for any $0\leq t\leq 1$, so we're done.
+
+\begin{definition}
+\deflabel
+
+Given random variables $X_1, \hdots, X_n$, their \ac{covariance matrix} is defined as the $n\times n$ matrix $K$, whose entry $K_{ij}$ is defined to be $\cov(X_i, X_j)$. 
+\end{definition}
+
+\begin{itemize}
+    \item Diagonal entries are the variances of each $X_i$. 
+    \item The covariance matrix is positive semidefinite. 
+\end{itemize}
+
+\begin{definition}
+    \deflabel
+    
+    A real $n\times n$ matrix $A$ is positive-semidefinite if, for any vector $x$, the quantity $x^tAx$ is nonnegative. This is equivalent to $A$ having nonnegative eigenvalues. 
+\end{definition}
+
+\subsection{The indicator method}
+
+\begin{theorem}
+\thmlabelname{Linearity of Expectation}
+
+\[\EE[X+Y] = \EE[X] + \EE[Y].\]
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+        \EE[X+Y] &= \iint (x+y)p_{x,y}(x,y)\ddd x \ddd y\\
+        &= \iint xp_{x,y}(x,y)\ddd x\ddd y + \iint yp_{x,y}(x,y) \ddd x\ddd y\\
+        &= \int xp_x\ddd x + \int yp_y\ddd y \\
+        &= \EE[X] + \EE[Y]. 
+    \end{align*}
+\end{proof}
+
+\begin{example}
+\exlabel
+
+$n$ people put their hats into a bag. They take turns drawing a random hat from a bag. Compute the expectation and variance of the number of people who get their original hat back. 
+\end{example}
+
+To compute the variance, we need $\EE[X^2]$. We can compute this using a decomposition trick.
+\begin{align*}
+    \EE[(X_1 + \hdots + X_n)^2] = \sum_{1\leq i,j\leq n}\EE[X_iX_j]. 
+\end{align*}
+
+When $i\neq j$, $\PP[X_iX_j]=1$ is $1/(n\cdot (n-1))$. When $i=j$, $\PP[X_iX_j] = 1/n$. Therefore, $\EE[X^2] = n(n-1)/(n(n-1)) + n/n = 2$, so $\var[X] = \EE[X^2] - \EE[X]^2 = 1$.
+
+\begin{example}
+\exlabelname{Coupon collector's problem}
+
+Consider a cereal box contest in which each box of cereal contains one of $n$ different types of coupons, and one must collect one of every coupon to win. Let $T$ be the number of boxes we must open to win. Compute $\EE[T]$. 
+\end{example}
+
+Let $Z_k$ be the amount of time it takes to aquire the $(k+1)^{\text{th}}$ new coupon. 
+Note that $\EE[Z_k] = n/(n-k)$, since on each draw the probability that you get a new type, having already collected $k$ types, is $(n-k)/n$. Also, $T = \sum Z_k$, so we can use linearity of expectation to get
+\[\EE[T] = \EE\left[\sum_{k=1}^{n-1}Z_k\right] = n\sum_{k=1}^{n-1}\frac{1}{k}\approx n\log n.\]
+
+\subsection{Results on conditional expectations}
+
+\begin{theorem}
+\lemlabel
+
+For independent random variables $X$, $Y$ and any deterministic function $f$, 
+\[\EE[Yf(X)\vert X] = f(X)\EE[Y].\]
+\end{theorem}
+
+\begin{proof}
+When $X$ and $Y$ are independent, $f_{Y\vert X}(y\vert x) = f_Y(y)$. So, 
+\begin{align*}
+    \EE[Yf(X)\vert X=x] &= \int_{\RR}yf(x)f_{Y}(y)\ddd y \\
+    &= f(x)\EE[Y]. 
+\end{align*}
+Since this holds for any $x\in X(\Omega)$, we are done.
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+For random variables $X,Y$ and deterministic function $f$, 
+\[\EE[\EE[f(Y)\vert X]\vert X] = \EE[f(Y)\vert X]. \]
+\end{theorem}
+
+Remember that $\EE[X\vert Y]$ is a function of $Y$, so it is itself a random variable, and we may therefore compute the expectation and variance of this quantity. 
+
+The next two theorems are dubbed the \ac{tower laws}.
+\begin{theorem}
+\thmlabelname{Law of total expectation}
+
+For random variables $X,Y$ where $\EE[X]$ is finite, 
+\[\EE[\EE[X\vert Y]] = \EE[X].\]
+This can be generalized: 
+\[\EE[f(Y)\EE[X\vert Y]] = \EE[f(Y)X],\]
+for deterministic function $f$. 
+\end{theorem}
+
+Recall that $\EE[X\vert Y]$ is the expected value of $X$ given a prior $Y$. The law of total expectation says that the best prediction that we can make for $X$ across all possible priors is $\EE[X]$, which is the same as the value that we predict $X$ to have with no priors. 
+
+\begin{theorem}
+\thmlabelname{Law of total variance}
+
+For random variables $X,Y$ with finite $\var[X]$, 
+\[\var[X] = \var_Y[\EE_X[X\vert Y]] + \EE_Y[\var_X[X\vert Y]]. \]
+(Subscripts denote what to take expectation/variance over).
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+Start with a distribution $X$ with mean $\mu$ and standard deviation $\sigma$. Then, raise $\mu$ by $20\%$ with probability $0.5$. Compute the expected value and variance of $X$ after this takes place. 
+\end{example}
+
+Let $Y$ be the distribution of $X$ after applying the changes. 
+\[\EE[Y] = \EE_X[\EE_Y[Y\vert X]] = \EE_X[1.1X] = 1.1\mu.\]
+Using the law of total variance, 
+\[\var[Y] = 0.01\mu^2 + 1.22\sigma^2.\]
+
+\subsection{Moment generating functions}
+
+The expression $\EE[X^k]$ is called the \ac{$k$-th moment} of $X$. The first moment of $X$ is its mean. The second moment is the variance (when the mean is normalized). The third and fourth moments are called skew and kurtosis. Each moment is significant in some way. 
+
+\begin{definition}
+\deflabel
+
+The moment generating function (mgf) of a random variable $X$ is defined to be the function 
+\[M_X(t) = \EE[e^{tX}]\]
+for values of $t$ where the expectation is defined. If the only such value is $t=0$, then $X$ does not have an mgf. 
+\end{definition}
+
+\begin{theorem}
+\lemlabel
+
+For each $k$, 
+\[\EE[X^k] = \frac{\ddd^k}{\ddd t^k}M(t)\bigg|_{t=0} = M^{(k)}(0).\]
+\end{theorem}
+
+\begin{proof}
+\[\EE[e^{tX}] = \EE\left[\sum_{i\geq 0}\frac{(tX)^i}{i!}\right].\]
+Taking $k$ derivatives and setting $t=0$, everything dies except for $X^k$, hence done.
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+For independent $X,Y$, 
+\[M_{X+Y}(t) = M_X(t)M_Y(t)\]
+for all $t$. 
+\end{theorem}
+
+\begin{proof}
+$X,Y$ independent implies that $e^{tX}$ and $e^{tY}$ are also independent, given fixed $t$. Therefore, 
+\[M_{X+Y}(t) = \EE[e^{tX+tY}] = \EE[e^{tX}]\EE[e^{tY]}] = M_X(t)M_Y(t).\]
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Let $X$ follow the geometric distribution with parameter $p$, i.e., 
+\[\PP[X=k] = (1-p)^{k-1}p\]
+for $k\geq 1$. Compute $\var(X)$. 
+\end{example}
+
+The key here is to know how to cleanly evaluate $\EE[X^2]$. One approach is to compute the moment generating function $M_X(t)$ as follows: 
+\begin{align*}
+    M_X(t) = \EE[e^{tX}] = \sum_{k\geq 1} (1-p)^{k-1}p e^{kt} = \frac{pe^t}{1-(1-p)e^t}.
+\end{align*}
+Then, take some derivatives. The other approach is to use a nested geometric series. Both are ugly.
+
+
+
+
+
+
