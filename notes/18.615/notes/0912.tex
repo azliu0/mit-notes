@@ -1,0 +1,151 @@
+\section{September 12, 2023}
+
+\subsection{Last lecture review}
+
+A time-homogeneous MC is a sequence of r.v.s $X_1, X_2, \hdots$ taking values in $\mathcal{X}$, s.t.
+\[\PP[X_{i+1}=z_{i+1}|X_0=z_0, \hdots, X_i=z_i] = \PP[X_1=z_{i+1} | X_0 = z_i].\]
+We also introduced the notation 
+\[P^i(x,y) = \PP[X_i=y|X_0=x],\]
+and said $x\sim y$ (i.e., $x$ \ac{communicates} with $y$) if $\exists i,j>0$ s.t. \[P^i(x,y)>0\text{ and }P^i(y,x)>0\text{, or } x=y.\]
+Since $\sim$ is an equivalence relation, this implies a partition 
+\[\mathcal{X} = \mathcal{X}_1\cup \mathcal{X}_2\cup \hdots, \cup \mathcal{X}_u\]
+s.t. $x\sim y$ if and only if $x,y\in \mathcal{X}_i$ for some $i$. We call each partite set a \ac{communicating class}. 
+
+We say that $P$ is \ac{irreducible} if there is exactly one class, i.e., $x\sim y\forall x,y\in \mathcal{X}$. We also say that a class $A\subseteq \mathcal{X}$ is \ac{closed} if $\forall x\in A$, $y\not\in A$, $P(x,y)=0$.  
+
+\subsection{Periodicity}
+
+\begin{definition}
+\deflabelname{Periodicity}
+
+Let $P$ be a markov chain on $\mathcal{X}$. Let the \ac{period} of $x$ be
+\[\per(x) = \gcd\{i | P^i(x,x)>0\}.\]
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+$x\sim y\implies \per(x) = \per(y)$. 
+\end{theorem}
+\begin{proof}
+If $x=y$, then we're done, so consider $x\neq y$. Then, $\exists i,j>0$ s.t. $P^i(x,y)>0$ and $P^i(y,x)>0$. 
+
+Now, if $P^k(x,x)>0$, then $P^{k+i+j}(y,y)>0$, since we can travel from $y$ to $x$ to $x$ to $y$ with non-zero probability. Also, $P^{i+j}(y,y)>0$. Therefore, $\per(y)|\gcd(k+i+j,i+j)\implies \per(y)|k$. Since this is true for all $k$ for which $P^k(x,x)>0$, $\per(y)|\per(x)$. Since $x$ and $y$ are interchangeable, $\per(x)|\per(y)$, thus $\per(x) = \per(y)$. 
+\end{proof}
+
+\begin{definition}
+\deflabel
+
+If $P$ is irreducible, it's period is $\per(x)$ for any $x$. We say that $P$ is \ac{aperiodic} if its period is $1$. 
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+Let $P$ be an irreducible MC with period $k$; then there exists a partition 
+\[\mathcal{X}=C_1\cup \hdots \cup C_k\] 
+s.t. $P(x,y)>0$ only if $x\in C_i,y\in C_{i+1}$ for some $i$. 
+\end{theorem}
+
+\begin{proof}
+In the hw. For an example, consider $P=C_k$ with transition probabilities all $1$. 
+\end{proof}
+
+\subsection{Stationary Distribution}
+
+\begin{definition}
+\deflabel
+
+$P$ MC on $\mathcal{X}$. A distribution $\mu$ on $\mathcal{X}$ is \ac{stationary} if $\mu P=\mu$. 
+\end{definition}
+This is equivalent to: 
+\[\PP[X_i=x|X_i\sim \mu]=\mu(x),\]
+which is also equivalent to
+\[\sum_x \mu(x)P(x,y)=\mu(y)\forall y.\]
+In general, they may or may not exist, and they may not be unique. For example, a random walk on $\ZZ$ has no stationary distribution. Also, MCs with multiple classes may have multiple stationary distributions.
+
+Notation: stationary distributions will always be $\pi$. 
+
+\begin{theorem}
+\thmlabel
+
+If $\vert \mathcal{X}\vert < \infty$, $\exists$ a stationary distribution. 
+\end{theorem}
+
+We can easily show that there exists a solution to $\mu P=\mu$. In particular, note that $[1,1,\hdots, 1]^T$ is a right eigenvector for $P$. Since left and right eigenvectors come in pairs, there exists left eigenvector $\mu$ that satisfies $\mu P=\mu$. 
+
+The hard part of the proof is to show that there exists a solution that represents an actual distribution, i.e., nonnegative values summing to $1$. First, some definitions: 
+
+\begin{definition}
+\deflabel
+
+Define the \ac{return time}, or \ac{hitting time}, as
+\[\tau_x^+ = \min\{i>0|X_i=x\}.\]
+If we never hit $x$, $\tau_x^+=\infty$. 
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+If $P$ is irreducible and $\vert \mathcal{X}\vert < \infty$, then $\EE[\tau_x^+] < \infty$. 
+\end{theorem}
+
+\begin{proof}
+Since $P$ irreducible, $\vert \mathcal{X}\vert < \infty$, there exists $u\in \NN$, $\varepsilon>0$, s.t. $\forall x,y\in \mathcal{X}$, $\exists i\leq u$ s.t. $P^i(x,y)>\varepsilon$. 
+
+Then, no matter what $X_i$ is, there is an $\varepsilon$ chance to hit $x$ between $X_j$ and $X_{j+i}$. So, 
+\[\PP[\tau_x^+ > kr] \leq (1-\varepsilon)\PP[\tau_x^+>k(r-1)] \leq (1-\varepsilon)^r.\]
+Thus,
+\begin{align*}
+    \EE[\tau_x^+] &= \sum_{i\geq 0}\PP[\tau_x^+>i] \\
+    &\leq \sum_{r>0}k\PP[\tau_x^+ > kr] \leq \sum_{r>0}(1-\varepsilon)^kk<\infty.
+\end{align*}
+\end{proof}
+
+Now, proof of the main theorem: 
+\begin{proof}
+Pick $z\in \mathcal{X}$ in a closed class. Let $\pi(x) = \EE[N_x]/\EE[\tau_x^+]$, where $N_x$ is the number of visits to $x$ until we return to $z$. It turns out that this is a stationary distribution. 
+
+First we show that $\pi$ is a distribution. Clearly, $\pi(x)\geq 0\forall x\in \mathcal{X}$. Also, $\sum_x N_x = \tau_z^+$, which implies that $\sum_x\pi(x) = 1$, so $\pi$ is a distribution.
+
+Now, we show $\pi P=\pi$. It suffices to show 
+\[\sum_x \EE[N_x]P(x,y) = \EE[N_y] \forall y.\]
+We know $N_x = \sum_{i\geq 0}\mathbbm{1}(X_i=x, \tau_z^+>i)$, which implies
+\begin{align*}
+    \sum_x\EE[N_x]P(x,y) &= \sum_x\sum_{i\geq 0}P(x,y)\PP[X_i=x,\tau_z^+>i] \\
+    &= \sum_x\sum_{i\geq 0}\PP(X_{i+1}=y|X_i=x, \tau_z^+>i)\cdot \PP(X_i=x,\tau_z^+>i).
+\end{align*}
+
+We can make this substitution since $\{\tau_z^+>i\}=\{X_1\neq z, \hdots, X_i\neq z\}$, which only depends on events in the past; by the Markov property, conditioning on past events does not affect the current probability. Now, by the law of total probability, our sum simplifies
+\begin{align*}
+    &\sum_{i\geq 0} \PP[X_{i+1}=y | \tau_z^+ \geq i+1] \\
+    &= \EE[N_y] - \PP[X_0=y, \tau_z^+>0] + \sum_{i=1}^\infty \PP[X_i=y, \tau_z^+=i] \\
+    &= \EE[N_y] - \PP[X_0=y, \tau_z^+>0] + \PP(X_{\tau_z^+}=y). 
+\end{align*}
+If $y=z$, the two right hand terms are equal to $1$; otherwise, they are both equal to $0$. Either way, the sum collapses to $\EE[N_y]$, so we are done.  
+\end{proof}
+
+\begin{theorem}
+\thmlabel
+
+If $P$ is irreducible, $\vert \mathcal{X}\vert < \infty$, there is at most one stationary distribution. 
+\end{theorem}
+
+This is still true without assuming $\vert \mathcal{X}\vert < \infty$, but the proof is more difficult without this assumption, so we assume it to be true here. 
+
+\begin{proof}
+Let $\pi_1, \pi_2$ be stationary. By HW, $\pi_1(x), \pi_2(x)>0\forall x$. Choose $z$ s.t. $\pi_1(z)/\pi_2(z)$ is minimized, which is well defined since we have a finite list of positive probabilities. 
+
+\[\frac{\pi_1(z)}{\pi_2(z)} = \frac{\sum_x \frac{\pi_1(x)}{\pi_2(x)} \pi_2(x)P(x,z)}{\sum_x \pi_2(x) P(x,z)}.\]
+Note that the right hand side is a weighted average of $\pi_1(x)/\pi_2(x)$ over all $x$. Therefore, if $\pi_1(x)/\pi_2(x) > \pi_1(z)/\pi_2(z)$ for any $x$ with $P(x,z)>0$, we get a contradiction, since the RHS would necessary exceed the LHS. This implies $\pi_1(x)/\pi_2(x) = \pi_1(z)/\pi_2(z)\forall x$ with $P(x,z)>0$. We can replace $P$ with $P^i$ to force this to hold for all $x$, implying that $\pi_1/\pi_2$ is a constant. Since their elements must both sum to $1$, this means that they're the same distribution, so we're done.   
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+The unique stationary distribution for irreducible $P$, $\vert \mathcal{X}\vert < \infty$ is given by $\pi(x) = 1/\EE[\tau_x^+]$.
+\end{theorem}
+
+\begin{proof}
+We showed that $\pi(x) = \EE[N_x]/\EE[\tau_x^+]$ works for any $z\in \mathcal{\chi}$. Since we can choose $z=x$, this gives $\pi(x) = 1/\EE[\tau_x^+]$. 
+\end{proof}

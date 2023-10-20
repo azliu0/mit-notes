@@ -1,0 +1,58 @@
+\section{April 18, 2023}
+
+\subsection{Bayesian vs Frequentist statistics}
+
+Consider the kissing example. Suppose $R_1, \hdots, R_n\sim \Bern(p)$. We would like to test $H_0: p=1/2$, $H_1: p\neq 1/2$.
+
+\begin{example}
+\exlabel
+
+Frequentist analysis.
+\end{example}
+
+In frequentist statistics, we assume that parameter $p$ is a true constant, and use estimator $\hat{p} = \EE[R_i]$ to estimate the value of this parameter. All of the tools we have discussed so far (CI, Wald test, etc.) would be relevant to conduct this test. 
+
+\begin{example}
+\exlabel
+
+Bayesian analysis.
+\end{example}
+
+We take $p$ to be a random variable with some \ac{prior distribution}. In this case, say $p\sim \textsc{Beta}(a,b)$, where the beta distribution is defined with pdf 
+\[f_{(a,b)}(x) = \begin{cases}
+\frac{x^{a-1}(1-x)^{b-1}}{\textsc{beta}(a,b)} & x\in [0,1] \\
+0 & \text{otherwise}.
+\end{cases},\]
+and $\textsc{beta}(a,b) = \Gamma(a)\Gamma(b)/\Gamma(a+b)$. Then, we say that $R_1|p, \hdots, R_n|p \sim \Bern(p)$. 
+
+The conditional density is 
+\[f(R_1=r_1, \hdots, R_n=r_n | p) = p^{\sum_{i=1}^n r_i}(1-p)^{n-\sum_{i=1}^nr_i}.\]
+To find the marginal distribution of $R_i$, we integrate out $p$:
+\[f(R_1=r_1, \hdots, R_n=r_n) = \int_{0}^1 p^{\sum_{i=1}^n r_i}(1-p)^{n-\sum_{i=1}^nr_i} \frac{p^{a-1}(1-p)^{b-1}}{\textsc{beta}(a,b)} \ddd p.\]
+Note that this value does not depend on the value of $p$. It represents the general probability that we observed the given data over all possible values of $p$. 
+
+For any single data point, $f(R_i=r_i|p) = p^{r_i}(1-p)^{1-r_i}$, so $\EE[R_i|p] = p$, and by the towering property of conditional expectation, 
+\[\EE[R_i] = \EE[\EE[R_i|p]] = \EE[p] = \int_{0}^1p\frac{p^{a-1}(1-p)^{b-1}}{\textsc{beta}(a,b)} \ddd p.\]
+
+The \ac{posterior distribution} is the conditional distribution of $p$ given $R_1, \hdots, R_n$:
+\begin{align*}
+    f(p|R_1=r_1, \hdots, R_n=r_n) &= \frac{f(P=p)f(R_1=r_1, \hdots, R_n=r|p)}{f(R_1=r_1, \hdots, R_n=r_n)} \\
+    &= \frac{p^{\sum_{i=1}^n r_i}(1-p)^{n-\sum_{i=1}^nr_i} \frac{p^{a-1}(1-p)^{b-1}}{\textsc{beta}(a,b)}}{\int_{0}^1 p^{\sum_{i=1}^n r_i}(1-p)^{n-\sum_{i=1}^nr_i} \frac{p^{a-1}(1-p)^{b-1}}{\textsc{beta}(a,b)} \ddd p}.
+\end{align*}
+
+\begin{theorem}
+\claimlabel
+
+$f(p|R_1=r_1, \hdots, R_n=r_n)$ is the same density as $\textsc{Beta}(a+\sum_{i=1}^nr_i, b+n-\sum_{i=1}^nr_i)$. 
+\end{theorem}
+
+Given $p\sim \textsc{Beta}(a,b)$, it can be shown that $\EE[p] = a/(a+b)$. By the above claim, 
+\[\EE[p|R_1=r, \hdots, R_n=r] = \frac{a + \sum_{i=1}^nr_i}{b+n-\sum_{i=1}^nr_i + a + \sum_{i=1}^nr_i} = \frac{a/n + 1/n\sum_{i=1}^nr_i}{a/n+b/n+1}.\]
+As $n\rightarrow \infty$, $\EE[p|R_1=r_1, \hdots, R_n=r_n]$ approaches $\EE[R_i]$. 
+
+\subsection{Choices of Priors}
+
+\begin{itemize}
+    \item \ac{Non-informative priors} give no preference to any particular point. For example, if $a=b=1$, then $\textsc{Beta(1,1)}=\Unif[0,1]$. 
+    \item \ac{Jeffrey's Prior} $\pi(\theta)\propto \sqrt{I(\theta)}$. 
+\end{itemize}

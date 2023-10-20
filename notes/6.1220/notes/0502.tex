@@ -1,0 +1,92 @@
+\section{May 2, 2023}
+
+\subsection{Online Learning}
+
+\begin{definition}
+\deflabel
+
+In online learning, the length of the input is not known in advance. The problem instance can grow forever, and the goal of an algorithm is to, with a fixed amount of memory, produce reasonable outputs for each new part of the input that is read. 
+\end{definition}
+
+Defining competitiveness for deterministic and random algorithms: 
+
+\begin{definition}
+\deflabel
+
+A \textit{deterministic} algorithm $\mathcal{A}$ is $\alpha$-competitive if it satisfies 
+\[C_{\mathcal{A}}(R)\leq \alpha \cdot C_{\textsc{OPT}}(R) + c,\]
+for constants $\alpha,c$. A \textit{randomized} algorithm $\mathcal{A}$ is $\alpha$-competitive if it satisfies
+\[\EE[C_{\mathcal{A}}(R)]\leq \alpha \cdot C_{\textsc{OPT}}(R) + c.\]
+\end{definition}
+
+Adversarial inputs in the randomized case are assumed to have no knowledge of the outcome of each random decision. This is called an \ac{oblivious adversary}.
+
+\subsection{BIT for self-organizing lists}
+
+BIT is a randomized algorithm for the problem of self-organizing lists. Consider the variant of this problem where we can move elements to the front of the list for free. We showed previously that the deterministic MTF algorithm achieves $2$-competitiveness on this problem.
+
+To start, randomly initialize a binary array $b$ for each entry in the list. Then, for each access:
+\begin{itemize}
+    \item flip $b(x) = 1-b(x)$
+    \item if $b(x)=1$, move $x$ to the front of $L$.
+\end{itemize}
+This means that every element is moved to the front of $L$ on every other access. 
+
+\begin{theorem}
+\thmlabel
+
+BIT is $7/4$-competitive.
+\end{theorem}
+
+\begin{proof}
+
+As before, define:
+\begin{itemize}
+    \item $A_i$ the number of elements before $x_i$ in $L_i$ and $L_i^*$
+    \item $B_i$ the number of elements before $x_i$ in $L_i$ and after in $L_i^*$
+    \item $C_i$ the number of elements after $x_i$ in $L_i$ and before in $L_i^*$
+    \item $D_i$ the number of elements after $x_i$ in $L_i$ and $L_i^*$
+\end{itemize}
+
+The potential function we will use is 
+\[\Phi_i = (\text{inversions with }b(y)=0) + 2\cdot (\text{inversions with }b(y)=1).\]
+
+This is a valid potential function, since it starts at $\Phi_0=0$ and is always nonnegative. Now there are two cases to analyze, each of which occurs with probability $1/2$: 
+\begin{itemize}
+    \item If $b(x_i)=0$, BIT moves $x_i$ to the front of $L_i$. This fixes $B_i$ inversions and creates $A_i$ inversions. 
+    
+    Let $A_i'$ be the number of elements in the $A_i$ new inversions created that OPT fixes. Let $t_i$ be the number of transpositions made afterwards. OPT fixes $A_i'$ inversions and creates at most $t_i$ new inversions. 
+
+    Finally, each inversion fixed/destroyed contributes e.v. $3/2$ to the potential function. So,
+    \[\EE[\Delta \Phi] \leq \frac{3}{2}(A_i-A_i'-B_i+t_i).\]
+    \item If $b(x_i)=1$, BIT does not move $x_i$ to the front, so no inversions are fixed by BIT. However, all of the inversions corresponding to $B_i$ now contribute $1$ to the potential instead of $2$, since $b(x_i)$ flipped, hence $B_i$ are ``fixed''. 
+
+    As before, if OPT moves forwards by $A_i'$, then $A_i'$ new inversions are created. If we let $t_i$ be the number of transpositions made afterwards, at most $t_i$ new inversions are created. So,
+    \[\EE[\Delta \Phi] \leq \frac{3}{2}(A_i'-B_i+t_i).\]
+\end{itemize}
+
+The true cost to access $x_i$ in BIT is $A_i+B_i+1$, while the true cost to access $x_i$ in OPT is $A_i+C_i+1+t_i$. The amortized cost is 
+\begin{align*}
+    A_i+B_i+1+\Delta \Phi &\leq A_i+B_i+1+\frac{1}{2}\left(\frac{3}{2}(A_i-A_i'-B_i+t_i) + \frac{3}{2}(A_i'-B_i+t_i)\right) \\
+    &= \frac{7}{4}A_i - \frac{1}{2}B_i + \frac{3}{2}t_i+1 \\
+    &\leq \frac{7}{4}(A_i+C_i+t_i+1),
+\end{align*}
+which completes the proof.
+
+\end{proof}
+
+\subsection{Regret}
+
+Here, we say that our adversarial sequence of inputs is \ac{adaptive}, i.e., it has access to our algorithm and what it has predicted so far. To determine the performance of a learning algorithm, we incur some cost for each action that we take. 
+
+Then, we take a benchmark loss, and compare it with our true loss, to determine the \ac{regret} of the algorithm. For example, $B = \sum_{i=1}^T\min_{a\in A}c_t(a)$ is a benchmark where the best actions in hindsight are taken at every step, while $B = \min_{a\in A}\sum_{i=1}^Tc_t(a)$ is the cost incurred by picking the best fixed action in hindsight. 
+
+Let $C$ be the true cost incurred by the algorithm. If 
+\[\frac{1}{T}(\EE[C]-\EE[B])=0,\]
+the algorithm has \textit{no regret} with respect to the benchmark. \ac{External regret} is the regret with respect to the benchmark of the best fixed action.
+
+\subsection{Weighted Majority}
+
+\comment{not finished}
+
+

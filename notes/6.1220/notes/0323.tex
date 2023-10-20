@@ -1,0 +1,175 @@
+\section{March 23, 2023}
+
+Game Theory!
+
+\subsection{Motivation: Prisoner's Dilemma}
+
+Two prisoners, prisoners $A$ and $B$. Their sentenced vary based on whether or not they choose to testify against the other:
+
+\begin{center}
+    \begin{tabular}{c|c|c|}
+A/B & silent & testify \\
+\hline
+    silent & 1/1 & 3/0 \\
+\hline
+    testify & 0/3 & 2/2 \\
+\hline
+\end{tabular}
+\end{center}
+
+For example, if $B$ testifies against $A$, but $A$ chooses to remain silent, then $B$ will walk free, while $A$ will serve $3$ years in prison. 
+
+Intuitively, the best outcome is to both stay silent. However, from either individual perspective, it is always better to testify; if $B$ knows that $A$ will testify, it is better for $B$ to testify, and if $B$ knows that $A$ will stay silent, it is still better for $B$ to testify. This leads to the only ``stable outcome'', which is for both prisoners to testify. In this scenario, neither prisoner has motivation to deviate. 
+
+\subsection{Games}
+
+More generally, game theory seeks to predict and reason about the actions of rational agents in situations of conflict. 
+
+\begin{definition}
+\deflabelname{Game}
+
+In this class, we will only deal with two-player games between player $A$ and $B$. Let $A$ be the utility matrix of player $A$, and $B$ be the utility matrix of player $B$. Then, we say that $A_{ij}$ (resp. $B_{ij}$) is the utility of player $A$ (resp. player $B$) given the action $i$ of player $A$ and action $j$ of player $B$. 
+\end{definition}
+For example, in the prisoner's dilemma: 
+\begin{center}
+A\hspace{2.2cm}B\medskip
+
+\begin{tabular}{|c|c|}
+\hline
+    -1 & -3 \\
+\hline
+    0 & -2 \\
+\hline
+\end{tabular}\hspace{1cm}\begin{tabular}{|c|c|}
+\hline
+    -1 & 0 \\
+\hline
+    -3 & -2 \\
+\hline
+\end{tabular}
+\end{center}
+$A$ is the ``row player'' and $B$ is the ``columm player''. The first row/column represents staying silent, and the second row/column represents testifying. 
+
+\subsection{Two-player zero-sum}
+
+In a \ac{zero-sum} game, $A_{ij}=-B_{ij}$ for all $i,j$. In other words, ``my gain is your loss''. These games can be fully described by matrix $A$ or $B$. 
+
+\begin{example}
+\exlabel
+
+Rock-paper-scissors is a zero-sum game. 
+\end{example}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|}
+ \multicolumn{1}{c}{} & \multicolumn{1}{c}{$R$} & \multicolumn{1}{c}{$P$} & \multicolumn{1}{c}{$S$} \\
+\cline{2-4}
+    $R$ & 0 & -1 & 1 \\
+\cline{2-4}
+    $P$ & 1 & 0 & -1 \\
+\cline{2-4}
+    $S$ & -1 & 1 & 0 \\
+\cline{2-4}
+\end{tabular}
+\end{center}
+
+There is no ``stable outcome'' for this game, if we insist that each player must stick to one action only:
+\begin{itemize}
+    \item If I know the other player will pick $R$, I switch to $P$
+    \item If they know I will switch to $P$, they will switch to $S$
+    \item If I know they will switch to $S$, I switch to $R$
+    \item ...
+\end{itemize}
+
+If we allow randomized strategies, then the pair of strategies $((1/3, 1/3, 1/3), (1/3, 1/3, 1/3))$ is stable, because there is no motivation for either player to deviate from this truly random strategy. 
+
+\begin{definition}
+\deflabelname{Nash Equilibrium}
+
+A \ac{nash equilibrium} is an outcome such that no player has an incentive to unilaterally deviate. 
+\end{definition}
+
+\begin{theorem}
+\thmlabelname{Nash, 1950}
+
+Every finite game has a Nash equilibrium.
+\end{theorem}
+
+\begin{theorem}
+\thmlabelname{Min-Max Theorem -- Von Neumann, 1928}
+
+Let $P=\{x | x\geq 0, \sum x_i=1\}$, $Q = \{y | y\geq 0, \sum y_i=1\}$. For any $A$, let
+\[V_R = \max_{x\in P}\min_{y\in Q}x^TAy\]
+and
+\[V_C = \min_{y\in Q}\max_{x\in P}x^TAy.\]
+Then, $V_R = V_C=V$. 
+\end{theorem}
+
+Think of $P$ as the set of strategies that the row player can choose from, and $Q$ the set of strategies that the column player can choose from. $x^TAy$ can be thought of as the utility of the row player given that he chooses strategy $x$, and the column player chooses strategy $y$. Then, $V_R$ represents the utility of the row player if he plays first, while $V_C$ represents the utility of the row player if his adversary plays first. 
+
+\comment{Proof follows from LP duality}.
+
+\subsection{Stock Market}
+
+Let $x_t$ be the index of a stock on day $t$. Initially, $x_0=0$. On day $t$, you have to predict if $x_t = x_{t-1}+1$ or $x_t = x_{t-1}-1$. After you have made your prediction, $x_t$ is revealed. If your prediction is correct, you make money; otherwise, you lose money. 
+
+Additionally, on day $t$, you get advice from $n$ experts telling you that the index will go up or down the next day. 
+
+\begin{definition}
+\deflabelname{Regret}
+
+Define the \ac{regret} to be the number of mistakes that I make, $m$, minus the number of mistakes that the best expert would make, $m^*$. 
+\end{definition}
+
+Our goal is to minimize regret. 
+
+\begin{example}
+\exlabel
+
+Assume $m^*=0$.
+\end{example}
+
+If $m^*=0$, at least one of the experts plays the market perfectly. In this case, we can use the \ac{Halving algorithm}:
+\begin{itemize}
+    \item Maintain a list of ``credible'' experts that have not made any mistakes, $S$
+    \item At each step, predict the majority pick of experts in $S$
+    \item Remove from $S$ anyone who made a mistake
+\end{itemize}
+
+The regret of the Halving algorithm is $O(\log n)$. A mistake is made if and only if at least half of the experts in $S$ predict wrong, in which the set $S$ is reduced by at least half. Since $\vert S\vert = n$ in the beginning, we make at most $\log n$ mistakes. 
+
+\begin{example}
+\exlabel
+
+Now consider the general case, i.e., $m^*\geq 0$.
+\end{example}
+
+One idea is to use an iterated halving algorithm. Run the halving algorithm until all experts have made a mistake; then, reset $S$ to all experts, and repeat. The regret of this algorithm is $O(\log n\cdot (m^*+1))$, since we need to run the algorithm at least $m^*+1$ times. 
+
+Intuitively, this is inefficient, since we ``reset'' our knowledge each time we reset the algorithm. An algorithm that better captures the intuition that we want to retain information about each expert is the \ac{weighted majority algorithm}:
+\begin{itemize}
+    \item maintain weight $w_i$ for each expert $i$
+    \item initially, all weights are $1$
+    \item at day $t$, predict according to the weighted majority 
+    \item set $w_i = w_i/2$ for each expert $i$ that was wrong.
+\end{itemize}
+
+\begin{theorem}
+\claimlabel
+
+The weighted majority algorithm achieves regret of $\leq 1.4m^* + 2.4\log m$. 
+\end{theorem}
+
+\begin{proof}
+Let $W^t$ denote the total weight of all experts on day $t$. Each time a mistake in the algorithm is made, at least half of the total weight of all experts is halved, i.e., $W^t\leq 3W^{t-1}/4$ in these rounds, which implies 
+\[W^t \leq \left(\frac{3}{4}\right)^mW^0 = \left(\frac{3}{4}\right)^mn.\]
+On the other hand, given that the best expert makes $m^*$ mistakes, his weight $w_{i^*}^t = (1/2)^{m^*}$. So, we have 
+\[\left(\frac{1}{2}\right)^{m^*} = w_{i^*}^t\leq W^t\leq \left(\frac{3}{4}\right)^mn,\]
+which implies 
+\[m^*\log1/2\leq m\log3/4+\log n,\]
+which reduces to 
+\[m-m^*\leq 1.4m^* + 2.4\log n.\]
+\end{proof}
+
+
+

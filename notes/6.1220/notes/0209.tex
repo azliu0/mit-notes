@@ -1,0 +1,105 @@
+\section{February 9, 2023}
+
+Today we'll be going over the divide and conquer technique, which are problems that can be split into subproblems in such a way that 
+\[T(n) = aT\left(\frac{m}{b}\right) + \text{(anything else)}\]
+
+\subsection{Median Finding}
+
+Given a set $S$ of $n$ numbers, define the rank of $x$ as the number of elements in $S\leq x$. Define the median of $S$ as the element of rank $\lfloor (n+1)/2\rfloor$. 
+
+\hrulebar
+
+Idea: solve this more general problem first. 
+
+\begin{example}
+\exlabel
+
+Given a set of $n$ distinct numbers $S$, and index $i\in [n]$, find $x\in S$ such that $\text{rank}(x) = i$. 
+\end{example}
+
+One idea: sort $S$, then return the element at position $i$. The runtime of this algorithm is $O(n\log n)$. 
+
+We can do better, due to an algorithm by \textbf{Blum, Floyd, Pratt, Rivest, Tarjan} in $1973$: 
+\begin{itemize}
+    \item Pick an element $x\in S$
+    \item Compute $L = \{y\in S : y < x\}$, and $G = \{y\in S : y > x\}$. From this, we know that rank$(x) = \vert L\vert + 1$. 
+    \item If rank$(x) = i$, then we're done. If rank$(x) > i$, find the element of rank $i$ in $L$. Otherwise, find the element of rank $i-\vert L\vert - 1$ in $G$.
+\end{itemize}
+
+The runtime of step $1$ is $O(n)$ (generous). The runtime of step $2$ is $O(n)$. The runtime of step $3$ is $T(\max\{\vert L\vert, \vert G\vert\})$. Therefore, 
+\[T(n) = T(\max\{\vert L\vert, \vert G\vert\}) + O(n).\]
+Note that $\max\{\vert L\vert, \vert G\vert\}\leq n-1$, so our worst case performance is $T(n) = O(n^2)$. However, this is only possible if we were to choose $x$ that is optimally bad at each step of the recursion. If we instead pick $x$ ``cleverly'', we can guarantee a better runtime. 
+
+\begin{definition}
+\deflabel
+
+$x$ is \ac{$c$-balanced} for some $c < 1$ if and only if \vspace{-0.3cm}
+\[\max\{\text{rank}(x), n-\text{rank}(x)\}\leq cn .\]
+\end{definition}
+
+If we choose $c$-balanced $x$ at each step of the way, our new recursion becomes 
+\[T(n) = T(c\cdot n) + O(n),\]
+which gives 
+\[T(n) = O(n) + O(c\cdot n) + \hdots \in O\left(\frac{n}{1-c}\right)\in O(n),\]
+which is what we wanted. Here is one way to run the algorithm in a way that selects $x$ ``cleverly'':
+\begin{itemize}
+    \item Divide $S$ into $n/5$ groups of size $5$.
+    \item Sort each group and find the median of each one.
+    \item Compute the median of these $n/5$ medians, call $x$.
+    \item Continue as before. 
+\end{itemize}
+
+\begin{theorem}
+\lemlabel
+
+$x$ is $3/4$-bounded. 
+\end{theorem}
+
+\begin{proof}
+There are at least $n/10$ group medians $\leq x$, which implies that there are at least $3n/10$ elements $\leq x$. Therefore, 
+\[\vert L\vert \geq \frac{3n}{10}\geq \frac{n}{4},\]
+which implies that $n-\text{rank}(x)\leq 3n/4$. Similarly, there are at least $3n/10$ elements $\geq x$, so $\text{rank}(x)\leq 3n/4$.
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+Given that $x$ is $3/4$-bounded, our algorithm is linear. 
+\end{theorem}
+
+\begin{proof}
+This is equivalent to showing that there exists $c_1$ such that $T(n)\leq c_1\cdot n$. We will prove this using induction. Our recursion is
+\[T(n) = T\left(\frac{3}{4}n\right) + T\left(\frac{n}{5}\right) + O(n).\]
+Let $c_2$ be the constant such that the $O(n)$ term contributes less than or equal to $c_2\cdot n$ work at each step of the recursion. Now, assume that our claim is true for all $1, \hdots, n-1$. Then, 
+\begin{align*}
+    T(n) \leq \frac{c_1\cdot n}{5} + \frac{3c_1n}{4} + c_2n = c_1n + \left(c_2 - \frac{c_1}{20}\right)n < c_1n,
+\end{align*}
+since we can set $c_1$ to be as large as we want. 
+\end{proof}
+
+\subsection{Integer multiplication}
+
+Given two $n$-bit integers $a, b$, compute $a\cdot b$. ($n$ can be as large as we want, so multiplication in the usual sense is not constant time). 
+
+\hrulebar
+
+One approach is to do ``old-school'' multiplication, i.e., set up the multiplication table and manually compute everything. The complexity of this solution is $O(n^2)$. 
+
+A more efficient solution is to use divide and conquer. Let 
+\begin{align*}
+    a = 2^{n/2}\cdot x + y,\\
+    b = 2^{n/2}\cdot w + z,
+\end{align*}
+where $x,y,z,w$ are all $n/2$-bit integers. Then, 
+\[a\cdot b = 2^n\cdot xw + yz + 2^{n/2}\cdot (xz+yw),\]
+so our recursion is 
+\[T(n) = 4T\left(\frac{n}{2}\right) + \Theta(n) = O(n^2),\]
+by Master theorem. Unfortunately, this is just as bad as the normal multiplication algorithm, but this bound can be improved by reducing the number of multiplications required.
+
+\begin{theorem}
+\lemlabelname{Anatoli Karatsuba, 1962}
+\[XZ + YW = (X+Y)(Z+W) - XW - YZ.\]
+\end{theorem}
+
+So, to complete the recursion, it suffices to only compute three products: $(x+y)(z+w)$, $xw$, and $yz$. Then, our recursion becomes 
+\[T(n) = 3T\left(\frac{n}{2}\right) + \Theta(n) \in \Theta(n^{\log_2 3}) = \Theta(n^{1.58}).\]

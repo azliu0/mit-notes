@@ -1,0 +1,42 @@
+\section{April 13, 2023}
+
+\subsection{Nearest Neighbors Classifier}
+
+From last lecture, 
+\[r(x) = \PP[Y=1|X=x] = \frac{\pi_0f_1(x)}{\pi_0f_1(x) + (1-\pi_0)f_0(x)},\]
+where $Y_i\sim \Bern(\pi_0)$, and $f_1$ and $f_0$ are the conditional densities of $x$ given $Y=1$ and $Y=0$, respectively. 
+
+The most accurate hypothesis is the Bayes classifier $h(x) = \mathbbm{1}(r(x) > 1/2)$. If we assume $\pi_0=1/2$, this rearranges to $h(x) = \mathbbm{1}(f_1(x) > f_0(x))$. 
+
+\begin{definition}
+\deflabel
+
+In a nearest neighbor classifier, suppose the data $x_i$ is $d$-dimensional. Then we use the following kernel density estimator:
+\[\hat{f}(x) = \frac{1}{nh^d}\sum_{i=1}^nK\left(\frac{\vert x_i-x\vert}{h}\right),\]
+where $K(x) = \mathbbm{1}(\vert x\vert \leq 1)/2$. Then, $\hat{f}_1(x) = \hat{f}(x)\mathbbm{1}(Y_i=1)$ and $\hat{f}_0(x) = \hat{f}(x)\mathbbm{1}(Y_i=0)$. 
+\end{definition}
+Recall that last time we used a gaussian kernel, which leads to a different estimator. The nearest neighbors classifier predicts $y=1$ when $\hat{f}_1(x) > \hat{f}_0(x)$. 
+
+If we did not want to naively assume that $\pi_0=1/2$, similar logic can be applied with the estimator $\hat{\pi}_0 = \sum_{i=1}^n\mathbbm{1}(Y_i=1)/n$:
+\begin{align*}
+    h(x) = \mathbbm{1}(r(x)>1/2) &= \mathbbm{1}\left(\frac{\hat{\pi}_0f_1(x)}{\hat{\pi}_0f_1(x) + (1-\hat{\pi}_0)f_0(x)} > \frac{1}{2}\right) \\
+    &= \mathbbm{1}(\hat{\pi}_0\hat{f}_1(x) > (1-\hat{\pi}_0)\hat{f}_0(x)).
+\end{align*}
+(But this is generally how nearest neighbor is implemented). 
+
+\subsection{Determinant Analysis}
+Let $\Sigma_i$ be the covariance matrix for all data classified as $i\in \{0,1\}$. Then, we can use a kernel density estimator with gaussian kernel:
+\[f_i(x) = \frac{1}{(2\pi^d\det(\Sigma_i))^{1/2}}\exp\left(-\frac{(x-\mu_i)^T\Sigma_i^{-1}(x-\mu_i)}{2}\right),\]
+where we use the fact that $U^TSU$ gives the variance of data point $U$ given covariance matrix $S$ (this was proven two lectures ago). 
+
+Here, the threshold for classification $f_1(x)>f_0(x)$ reduces to 
+\[(x-\mu_1)^T\Sigma^{-1}(x-\mu_1)\leq (x-\mu_0)^T\Sigma^{-1}(x-\mu_0),\]
+which assumes that $\Sigma_1=\Sigma_0=\Sigma$.
+
+Note \comment{explain this} that
+\[x^T(\Sigma^{-1}(\mu_1-\mu_0))=\mu_1^T\Sigma^{-1}\mu_1-\mu_0^T\Sigma^{-1}\mu_0.\]
+
+If $\mu_0$, $\mu_1$, $\Sigma$ are not known, we may use the estimators 
+\[\hat{\mu}_i = \frac{\sum_{j=1}^nX_j\mathbbm{1}(Y_j=i)}{\sum_{j=1}^n\mathbbm{1}(Y_j=i)},\]
+and 
+\[\hat{\Sigma} = \frac{1}{n}\left(\sum_{i=1}^n\mathbbm{1}(Y_i=1)(X_i-\hat{\mu}_1)(X_i-\hat{\mu}_1)^T + \sum_{i=1}^n\mathbbm{1}(Y_i=0)(X_i-\hat{\mu}_0)(X_i-\hat{\mu}_0)^T\right).\]

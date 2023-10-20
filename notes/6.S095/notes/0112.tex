@@ -1,0 +1,344 @@
+\section{January 10, 2023}
+
+\subsection{Probability Measure}
+
+\begin{definition}
+\deflabel
+
+A \ac{sample space} $\Omega$ is a set of individual outcomes. An \ac{event space} $\mathcal{F}$ is a family of subsets of $\Omega$. 
+\end{definition}
+
+Technical jargon: $\mathcal{F}$ must form a $\sigma$-algebra over $\Omega$, meaning that $\Omega$ is in $\mathcal{F}$, and so are complements and countable intersections, unions of elements in $\Omega$. When $\Omega$ is finite, we assume that $\mathcal{F}$ is just the power set of $\Omega$. We won't talk more about the technical details for $\sigma$-algebras.
+
+\begin{example}
+\exlabel
+
+Roll $2$ fair die.
+\end{example}
+
+The sample space is $\Omega = \{(i,j), 1\leq i,j\leq 6\}$ recording the pair of rolls. The event space $\mathcal{F} = \mathcal{P}(\Omega)$ is the power set of $\Omega$. If we let $E$ be the event that the sum of the rolls is $7$, then 
+\[E = \{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\}\in \mathcal{F}.\]
+
+\begin{definition}
+\deflabel
+
+A \ac{probability measure} is a function $\mathbb{P}: \mathcal{F}\rightarrow [0,1]$ satisfying 
+\begin{itemize}
+    \item $\PP[\Omega] = 1.$
+    \item For disjoint events $A_1, \hdots, A_n$, 
+    \[\PP\left[\bigcup_{i\geq 1} A_i\right] = \sum_{i\geq 1}\mathbb{P}[A_i]\]
+\end{itemize}
+\end{definition}
+
+The principle of inclusion-exclusion holds for probability measures. 
+\begin{theorem}
+\thmlabel
+
+For events $A,B\in \mathcal{F}$, 
+\[\PP[A\cup B] = \PP[A] + \PP[B] - \PP[A\cap B],\]
+and appropriate generalizations hold for an arbitrary number of events. 
+\end{theorem}
+
+\begin{proof}
+Use set operations.
+\end{proof}
+
+The simplest probability measure that can  be defined on discrete sample space is the \ac{counting measure}, also called the \ac{uniform measure}. 
+
+\begin{definition}
+\deflabel
+
+The \ac{counting measure} $\PP$ on $(\Omega, \mathcal{F})$ is defined by
+\[\PP[E] = \frac{\vert E\vert}{\vert \Omega\vert},\]
+for all $E\in \mathcal{F}$.
+\end{definition}
+
+Intuitively, this measure defines $\PP[E]$ as the number of satisfying cases $\vert E\vert$ divided by the total number of cases $\vert \Omega\vert$. Another probability measure can be defined via the probability mass function (pmf). 
+
+\begin{definition}
+\deflabel
+
+If $\Omega = \{\omega_1, \hdots, \omega_n\}$ is a finite set and $p(\omega_1), \hdots, p(\omega_n)$ are nonnegative real numbers that sum to $1$, 
+\[\PP[E] = \sum_{\omega \in E}p(\omega)\]
+defines a probability measure on $\mathcal{P}(\Omega)$ (i.e., $\mathcal{F}$). The function $p$ is called the \ac{probability mass function} (pmf) of $\PP$. 
+\end{definition}
+
+\subsection{Continuous Probability Spaces}
+How do we pick a random number from $[0,1]$? We want a uniform measure $\PP$ on $[0,1]$ that satisfies $\PP[(a,b)] = b-a$. This is not possible for $\mathcal{F} = \mathcal{P}(\Omega)$ (which is not really even well-defined). The solution is to restrict events to a smaller set $\mathcal{B}_{[0,1]}$, called the \ac{Borel sets} of $[0,1]$. As before, the event space (in this case, the Borel sets) are a $\sigma$-algebra over $\Omega$, meaning that they are formed by countable unions and intersections of elements in $\Omega$. Borel sets are formed specifically by unions and intersections of open intervals. $\mathcal{B}_{[0,1]}$ can also contains closed intervals. For example, 
+\[[0.1, 0.2] = \bigcap_{i\geq 5} (0.1 - 2^{-i}, 0.2+2^{-i}),\]
+which is a closed interval formed by a union of countably infinite open intervals that approach the upper and lower bounds infinitely close. 
+
+When $\PP$ is uniform on $[0,1]$, what is $\PP[{0.5}]$? If $\PP[{0.5}]=c > 0$, every $\PP[\{x\}] = c$, so $\PP$ on any set with more than $1/c$ elements exceeds $1$. Therefore, $\PP$ of any singleton is zero. This leads to a natural question: is this a contradiction?
+\[1 = \PP[\Omega] = \PP[\cup_{x\in [0,1]}\{x\}] = \sum_{x\in [0,1]}\PP(\{x\}) = 0.\]
+
+The answer is no. Our event space is $\mathcal{B}_{[0,1]}$, which has a countably infinite number of elements. On the other hand, the above is summing over all real number between $0$ and $1$, which is an uncountably infinite set. Over this set, $\PP$ is not necessarily a probability measure, i.e., the sum of the probabilities of disjoint events need not strictly equal the sum of their union. 
+
+\subsection{Random Variables}
+
+Random variables correspond to observations on random experiments. For example, 
+\begin{itemize}
+    \item $\Omega$ is the set of people in Cambridge.
+    \item Experiment: Pick random person
+    \item Observation: height $H$ of person chosen. 
+\end{itemize}
+
+$H: \Omega\rightarrow \RR$ is called a \ac{random variable}.
+
+\begin{definition}
+\deflabel
+
+Given a probability space $(\Omega, \mathcal{F}, \PP)$, a random variable $X$ is a function $\Omega\rightarrow \RR$. 
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+Given random variable $X$ on the probability space $(\Omega, \mathcal{F}, \PP)$, consider the function $\PP_X : \mathcal{B}_{\RR}\rightarrow [0,1]$ defined by 
+\[\PP_{X}[B] =\PP[X^{-1}(B)] = \PP[\{\omega\in \Omega \vert X(\omega)\in B\}].\]
+
+$\PP_X$ is called the \ac{pushforward} of $X$ and determines a probability measure on $(\RR, \mathcal{B}_{\RR})$. 
+\end{definition}
+
+$\PP$ takes events as input, whereas $\PP_X$ takes as input a subset of $\RR$. This is important!
+
+\begin{example}
+\exlabel
+
+Let $\Omega = \{H, T\}$ and $\PP$ be the counting measure on $\Omega$. Let $X$ be a random variable with $X(H) = 5$ and $X(T) = 10$ which represents how many dollars you win for flipping a head or a tail. Its pushforward measure $\PP_X$ satisfies 
+\[\PP_X[B] = \frac{1}{2} 1_{5\in B} + \frac{1}{2} 1_{10\in B},\]
+
+where $1_{x\in B}$ is $1$ when $x\in B$ and $0$ otherwise. 
+\end{example}
+
+For concreteness, $\PP_X[\{5\}]$ is the image of the set of elements in $\Omega$ which satisfies $X(\Omega) = 5$ under $\PP$, which is $1/2$ (the only such element is $H$). Intuitively, $\PP_X$ looks at the probabilities of $X$ taking on certain values and not necessarily which specific elements cause $X(\omega)$ to take on those values. $\PP_X$ is also referred to as the \ac{distribution} or \ac{law} of $X$. 
+
+\begin{theorem}
+\thmlabel
+
+Pushforward $\PP_X$ defines a probability measure on $(\RR, \mathcal{B}_{\RR})$. 
+\end{theorem}
+
+\begin{proof}
+$\PP_X[\Omega] = \PP_X[\RR] = \PP[X\in \RR] = 1$, since $X$ is a real number by definition. Also, for disjoint $A_1, \hdots, A_n\in \mathcal{B}_{\RR}$,
+\begin{align*}
+    \PP_X\left[\bigcup_{i} A_i\right] &= \PP\left[\bigcup_{i}\{\omega\in \Omega \vert X(\omega)\in A_i\}\right] \\
+    &= \sum_i \PP[\{\omega \in \Omega\vert X(\omega)\in A_i\}] = \sum_i \PP_X[A_i],
+\end{align*}
+where the third equality follows from two facts: (1) $X$ is a function, i.e., no element can belong to two disjoint images at the same time, so the huge expression corresponding to $A_i$ are all disjoint, and (2) $\PP$ itself satisfies additivity of disjoint events. 
+\end{proof}
+
+Consider events of the form $\{X\leq a\}$ for real numbers $a$. 
+
+\begin{definition}
+\deflabel
+
+Given a random variable $X$, its \ac{cumulative distribution function} (cdf) is a function $F_X: \RR \rightarrow [0,1]$ defined by 
+\[F_X(a) = \PP_X[(-\infty, a)] = \PP[\{\omega\in \Omega \vert X(\omega)\leq a\}].\]
+\end{definition}
+
+CDFs are good because they describe lots of things. For example, 
+\[\PP[a < X \leq b] = \PP_X[(a, b]] = \PP_X[(-\infty, b]] - \PP_X[(-\infty, a]] = 
+F_X(b) - F_X(a).\]
+(The inclusive/exclusive bounds here don't really matter). 
+
+Clarification on ``random variable domain'' vs ``distribution''. 
+\begin{example}
+\exlabel
+
+Let $\PP$ be the uniform measure on $\Omega = [0,1]$. Define $X(x) = x^2$ for $x\in [0,1]$, and let $\PP_X$ be the pushforward measure, or distribution of $X$. 
+\end{example}
+
+In this example, $\PP[[0, 1/4]] = 1/4$, since it is the uniform measure. On the other hand, $\PP_X[[0,1/4]] = 1/2$, since any $\omega\in \Omega$ satisfying $0\leq \omega \leq 1/2$ satisfies $0\leq \omega^2\leq 1/4$. 
+
+\begin{definition}
+\deflabel
+
+Let $X$ be a random variable and $F_X$ its cdf. Then a function $f_X: \RR\rightarrow \RR_{\geq 0}$ is a \ac{probability density function} (pdf) for $X$ if for all $a$, 
+\[\int_{-\infty}^a f_X{(x)} dx = F_X(a).\]
+\end{definition}
+
+The pdf is not always defined, for example, when the cdf is not differentiable. The fundamental theorem of calculus implies that $f_X(a) = F'_X(a)$. 
+
+\begin{example}
+\exlabel
+
+A random variable $X$ is \ac{Bernoulli} with parameter $p$ if its domain is $\{0,1\}$ with $\PP[X=0] = 1-p$ with $\PP[X=1] = p$. This we denote $X\sim \Bern(p)$. 
+\end{example}
+
+The cdf of $X\sim \Bern(p)$ is given by 
+\[F_X(a) = \begin{cases}0 & a < 0 \\ 1-p & 0\leq a < 1 \\ 1 & a\geq 1.\end{cases}\]
+
+\begin{example}
+\exlabel
+
+A random variable $X$ is \ac{standard normal} if it has pdf 
+\[f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}.\]
+This we denote $X\sim N(0,1)$. 
+\end{example}
+
+The cdf given by 
+\[F_X(x) = \int_{-\infty}^x f_X(x) dx\]
+does not have a nice closed form.
+
+\subsection{Multiple Random Variables}
+
+\begin{definition}
+\deflabel
+
+Given two continuous random variables $X,Y$ defined on the same probability space, their $\ac{joint density}$ is a function $f_{X,Y}$ that satisfies 
+\[\PP[a\leq X\leq b, c\leq Y\leq d] = \int_{a}^b\int_c^d f_{X,Y}(x,y) dydx.\]
+
+For discrete random variables $X,Y$, an analogous quantity is 
+\[\PP[X=x, Y=y] = f_{X,Y}(x,y).\]
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Let $X,Y$ be independent, standard normal random variables on the same probability space. $X$ and $Y$ are said to be independent if their joint density factors as a product of their marginal distributions.
+\end{example}
+
+A few notes:
+\begin{itemize}
+    \item Given a joint density function $f_{X,Y}$, the \ac{marginal distributions} of $X$ and $Y$ are defined by integrating out the other variables, i.e.,
+    \[f_X(x) = \int f_{X,Y}(x,y)dy\qquad f_Y(y) = \int f_{X,Y}(x,y) dx.\]
+    \item Integrating away other variables in order to obtain the marginal distrubtions for each individual random variable is a process called \ac{marginalization}. 
+    \item In the context of Example $2.17$, this definition of independence implies that 
+    \[f_{X,Y}(x,y) = f_X(x)\cdot f_Y(y) = \frac{1}{2\pi}e^{-x^2/2-y^2/2}.\]
+\end{itemize}
+
+Now let's deal with simple functions of multiple random variables. 
+
+\begin{example}
+\exlabel
+
+Let $X,Y$ be independent and uniform on $[0,1]$ with joint density $f_{X,Y}(x,y) = 1$ for all $x,y\in [0,1]$. Define $Z = X+Y$. What is the distribution of $Z$?
+\end{example}
+
+\[F_Z(z) = \PP[Z\leq z] = \iint_{x+y\leq z}f_{X,Y}(x,y)dxdy = \iint_{x+y\leq z}1dxdy.\]
+
+This is the area of the intersection of the unit square with $x+y<z$ for constant $z$, so we find that $F_Z(z) = z^2/2$ when $0\leq z\leq 1$, $F_Z(z) = 1 - (2-z)^2/2$ when $z\geq 1$, and $F_Z(z) = 1$ when $z\geq 2$. To calculate the pdf, 
+\[f_Z(z) = F'_Z(z) = \begin{cases}z & 0\leq z\leq 1,\\ 2-z & 1\leq z\leq 2,\end{cases}\] 
+hence the name triangular distribution.
+
+\begin{example}
+\exlabel
+
+Let $X,Y$ be independent standard normal variables. Compute the distribution of $Z = X/Y$. 
+\end{example}
+
+As before, let's compute the cdf. 
+\[F_Z(z) = \PP[Z\leq z] = \iint_{x/y\leq z} f_{X,Y}(x,y) dxdy = \iint_{x/y\leq z}\frac{1}{2\pi}e^{-x^2/2-y^2/2}dxdy.\]
+
+Use the Jacobian to change variables to $a = x/y$ and $b=y$:
+\[\frac{\partial{(a, b)}}{\partial{(x, y)}} = \lnorm{\twotwo{\partial a/\partial x}{\partial a/\partial y}{\partial b/\partial x}{\partial b/\partial y}} = \lnorm{\twotwo{1/y}{-x/y^2}{0}{1}} = 1/y,\]
+
+so
+\begin{align*}
+    F_Z(z) &= \iint_{a\leq z}\frac{\vert b\vert}{2\pi}e^{-(ab)^2/2 - b^2/2}dbda \\
+    &= \int_{-\infty}^z \int_{-\infty}^{\infty}\frac{\vert b\vert}{2\pi}e^{-(ab)^2/2 - b^2/2}dbda \\
+    &= \frac{1}{2\pi}\int_{-\infty}^z \int_{0}^{\infty}\frac{2e^u}{a^2+1} duda \\
+    &= \int_{-\infty}^{z}\frac{1}{\pi (a^2+1)} da.
+\end{align*}
+
+Note that this implies $f_Z(z) = 1/(\pi (z^2+1))$ is the pdf of $Z$. Finishing our computation, 
+\[F_Z(z) = \frac{1}{\pi}\arctan{(z)} + \frac{1}{2}.\]
+
+It turns out that $Z$ follows the $\ac{standard cauchy distribution}$.  
+
+\begin{definition}
+\deflabel
+
+Given a nonnegative integer random variable $X$ with pdf $p_x$, its \ac{probability generating function} is 
+\[p(t) = \sum_{k=0}^{\infty} p_X(k)t^k = p_X(0) + tp_X(1) + t^2p_X(2) + \hdots \]
+\end{definition}
+
+\begin{theorem}
+\lemlabel
+
+If $p,q,r$ are the probability generating functions of $X, Y$ and $Z=X+Y$ respectively, then $r(t) = p(t)\cdot q(t)$. 
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+What positive integer labels can we give to two fair $6$-sided dice such that the distribution of the sum of the rolls is the same as for two standard die?
+\end{example}
+
+For standard die $C,D$, their generating functions 
+\[p^C(t) = p^D(t) = \frac{1}{6}(t+t^2+\hdots +t^6).\]
+Therefore, the problem reduces to finding two polynomials $p^A(t)$, $p^B(t)$ satisfying
+\[p^A(t)p^B(t) = p^C(t)p^D(t) = \frac{1}{36}t^2(t+1)^2(t^2-t+1)^2(t^2+t+1)^2.\]
+
+\subsection{Expectation}
+
+\begin{definition}
+\deflabel
+
+For a discrete random variable $X$, its \ac{expectation} is 
+\[\EE[X] = \sum_{x\in X(\omega)} x\PP[X = x]\]
+if the sum converges. For a continuous random variable $X$, 
+\[\EE[X] = \int_{-\infty}^{\infty}xf_X(x)dx,\]
+if it converges.
+\end{definition}
+
+\begin{theorem}
+\thmlabelname{Linearity of Expectation}
+
+Given random variables $X_1, X_2$, not necessarily independent, and constants $c_1,c_2$, 
+\[\EE[c_1X_1 + c_2X_2] = c_1\EE[X_1] + c_2\EE[X_2].\]
+\end{theorem}
+
+\begin{definition}
+\deflabel
+
+Given a random variable $X$, its \ac{variance} is defined as 
+\[\sigma^2_X = \var[X] = \EE[(X-\EE[X])^2].\]
+\end{definition}
+
+In practice, 
+\[\var[X] = \EE[(X - \EE[X])^2] = \EE[X^2 - 2X\EE[X] + \EE[X]^2] = \EE[X^2] - \EE[X]^2\]
+is an easier formula to use.
+
+\begin{definition}
+\deflabel
+
+Given a random variable $X$, its \ac{standard deviation} is defined as 
+\[\sigma_X = \sqrt{\var[X]} = \sqrt{\EE[(X-\EE[X])^2]}.\]
+\end{definition}
+
+Standard deviation is often easier to interpret than variance, because it has the same units as the original quantity $X$. 
+
+\begin{theorem}
+\lemlabel
+
+For nonnegative $X$, 
+\[\EE[X] = \int_{0}^{\infty} \PP[X > x]dx = \int_{0}^{\infty} 1 - F_X(x) dx.\]
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+        \int_{0}^{\infty} \PP[X > x]dx &= \int_{x=0}^{\infty}\int_{y=x}^{\infty} f_X(y) dydx \\ 
+        &= \int_{y=0}^{\infty}\int_{x=0}^y f_X(y) dxdy \\
+        &= \int_{y=0}^{\infty} yf_X(y) dy = \EE[X].
+    \end{align*}
+\end{proof}
+
+This makes it easier to calculate expectation (in some cases). 
+
+\begin{example}
+\exlabel
+
+The \ac{exponential distribution} with rate $\lambda$ is given by the pdf 
+\[p_X(x) = \begin{cases}\lambda e^{-\lambda x} & x\geq 0 \\ 0 & x < 0.\end{cases}\]
+\end{example}
+
+Expectation calculation using integration by parts: 
+\[\EE[X] = \int_{0}^{\infty} x\cdot \lambda e^{-\lambda x}dx = \left(-xe^{-\lambda x} - \left.\frac{1}{\lambda}e^{-\lambda x}\right) \right\vert_{0}^{\infty} = \frac{1}{\lambda}.\]
+
+Expectation calculation using the trick from above: 
+\[\EE[X] = \int_{0}^{\infty}\left(1 - \int_{0}^{x}\lambda e^{-\lambda x}dx\right)dx = \int_{0}^{\infty} e^{-\lambda x}dx = \frac{1}{\lambda}.\]
+
+Variance calculation using integration by parts: 
+\[\EE[X^2] = \int_{0}^{\infty} x^2\cdot \lambda e^{-\lambda x}dx = \left(-x^2e^{-\lambda x} - \frac{2x}{\lambda}e^{-\lambda x} - \left.\frac{2}{\lambda^2}e^{-\lambda x}\right) \right\vert_{0}^{\infty} = \frac{2}{\lambda^2},\]
+so $\var[X] = 1/\lambda^2$. 

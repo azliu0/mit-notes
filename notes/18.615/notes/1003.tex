@@ -1,0 +1,52 @@
+\section{October 3, 2023}
+
+\subsection{Random Lattice Walks}
+
+\begin{theorem}
+\lemlabel 
+
+Let $P$ be a Markov Chain, and $N$ the number of times that starting from $x$, it visits $x$. Then, $\PP[N = \infty] = 1$, or $\PP[N < \infty] = 1$, which occurs when $\PP[\tau_x^+ < \infty] = 1$ or $\PP[\tau_x^+ < \infty] < 1$, respectively.
+\end{theorem}
+
+\begin{proof}
+$\PP[\tau_x^+ < \infty]$ represents the probability that we revisit $x$ in a finite amount of time. If this occurs certainly, then we will visit $x$ infinite times; otherwise, $N$ is a geometric sum with parameter $<1$, which is finite. 
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Consider a walk on $\ZZ^d$ with $d=1$. We want to know whether it will return to $0$ infinitely often. 
+\end{example}
+
+On the number line,
+\[\EE[N] = \sum_{i=0}^{\infty}\PP[X_i=0] = \sum_{i=0}^{\infty}\frac{1}{2^{2i}}\binom{2i}{i},\]
+which sums the probability of seeing an equal number of left and right moves in all sequences of length $2i$. Using Stirling's approximation, 
+\[\binom{2i}{i}\sim \frac{n^{2n}\sqrt{4\pi n}}{(n/2)^{2n}2\pi n} = \frac{4^n}{\sqrt{\pi n}},\]
+so 
+\[\EE[N] \sim \sum_{i=0}^{\infty}\frac{1}{4^n}\cdot \frac{4^n}{\sqrt{\pi n}} = \infty.\]
+
+In other words, we visit $N$ infinitely often, which implies $\PP[\tau_0^+ < \infty] = 1$. On the other hand, we can show that $\EE[\tau_0^+]=\infty$. If we let $\tau_x^{y}$ denote the time taken to hit $x$ starting from $y$, we have 
+\[\EE[\tau_0^+] = \frac{1}{2}\EE[\tau_0^{1}] + \frac{1}{2}\EE[\tau_0^{-1}] + 1 = \EE[\tau_0^{1}] + 1,\]
+and 
+\[\EE[\tau_0^1] = \frac{1}{2}\EE[\tau_0^2] + 1 = \frac{1}{2}\EE[\tau_1^2 + \tau_0^1] + 1 = \EE[\tau_0^1] + 1,\]
+hence $\EE[\tau_0^1] = \EE[\tau_0^+] = \infty$. This is a counterintuitive result and only possible because our state space is infinite. 
+
+\begin{example}
+\exlabel 
+
+$d=2,3$. 
+\end{example}
+
+\comment{omitting other proofs. add later? }
+
+\begin{theorem}
+\lemlabel 
+
+Random walks on $\ZZ^d$ for $d=1,2$ return to $0$ infinitely often with probability $1$. When $d\geq 3$, the walks return to $0$ finitely often. $\EE[\tau_{0}^+] = \infty$ for all $d$. 
+\end{theorem}
+
+\begin{definition}
+\deflabel
+
+Let $P$ be a Markov chain with countable state space $\mathcal{X}$. $x\in \mathcal{X}$ is \ac{recurrent} if $P$, starting from $x$, visits $x$ infinitely often with probability $1$. $x$ is \ac{transient} if it only visits $x$ finitely many times with probability $1$. 
+\end{definition}

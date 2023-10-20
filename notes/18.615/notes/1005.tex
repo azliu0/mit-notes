@@ -1,0 +1,143 @@
+\section{October 5, 2023}
+
+We'll start to focus more on Markov Chains with countably infinite state spaces, rather than strictly finite state spaces.
+
+\begin{definition}
+\deflabel
+
+Let $G$ be a countably infinite graph which is \ac{locally finite}. This means that $\deg(v) < \infty$ for all $v\in \mathcal{X}$. We can define a random walk on $G$ in the same way as the finite case. 
+\end{definition}
+
+Recall from last lecture: 
+
+\begin{definition}
+\deflabel
+
+A state $x\in \mathcal{X}$ is recurrent if $P$, starting from $x$, visits $x$ infinite often with probability $1$. $x$ is transient if it only visits $x$ finitely many times with probability $1$. 
+\end{definition}
+
+\subsection{More on Transience and Recurrence}
+
+\begin{definition}
+\deflabel
+
+Let $P$ be a Markov chain. Then, \ac{Green's function} $G: \mathcal{X}\times \mathcal{X}\rightarrow \RR\cup \{\infty\}$ is given by 
+\[G(x,y) = \sum_{i=0}^{\infty}P^i(x,y),\]
+which is equal to the expected number of visits to $y$ starting from $x$. 
+\end{definition}
+
+In particular, $x$ is recurrent if and only if $G(x,x)=\infty$. 
+
+\begin{theorem}
+\proplabel
+
+Suppose $x\sim y$. Then, the following are true:  
+\begin{itemize}
+    \item $G(z,x) < \infty\iff G(z,y) < \infty$
+    \item $G(x,z) < \infty\iff G(y,z) < \infty$
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Since $x\sim y$, there exists $r$ s.t. $P^r(y,x)>0$. First bullet point:
+\[G(z,y)P^r(y,x) = \sum_{i=0}^{\infty}P^i(z,y)P^r(y,x)\leq \sum_{i=0}^{\infty}P^{i+r}(z,x)\leq G(z,x).\]
+Therefore, if $G(z,x) < \infty$, so is $G(z,y)$. This argument is reversible. 
+
+The second bullet point follows from the same argument: 
+\[P^s(x,y)G(y,z) = \sum_{i=0}^{\infty}P^s(x,y)P^i(y,z)\leq \sum_{i=0}^{\infty}P^{i+s}(x,z)\leq G(x,z).\]
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+Transience and recurrence are class properties.  
+\end{theorem}
+
+Recall that a class property is a property that holds for $x\in C$ if and only if it holds for every other element in $C$. 
+
+\begin{proof}
+If $x$ is transient, $G(x,x)<\infty\iff G(y,x)<\infty\iff G(y,y)<\infty$ for all $y\sim x$ by the previous proposition. Similarly, if $x$ is recurrent, $G(x,x)=\infty\iff G(y,x)=\infty\iff G(y,y)=\infty$ for all $y\sim x$.
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+Let $P$ be an irreducible Markov chain. The following are equivalent:
+\begin{itemize}
+    \item $G(x,y) < \infty$ for some $x,y\in \mathcal{X}$
+    \item $G(x,y) < \infty$ for all $x,y\in \mathcal{X}$
+    \item There is a transient state
+    \item All states are transient
+    \item $\PP[\tau_x^+=\infty|X_0=x]>0$ for some $x\in \mathcal{X}$
+    \item $\PP[\tau_x^+=\infty|X_0=x]>0$ for all $x\in \mathcal{X}$
+\end{itemize}
+\end{theorem}
+
+\begin{proof} This is essentially a restatement of the previous proposition:
+\begin{itemize}
+    \item $1\iff 2$ follows directly by the proposition.
+    \item $3\iff 1$ follows by definition, as does $2\iff 4$.
+    \item $\PP[\tau_x^+=\infty|X_0=x] = 1-\PP[\tau_x^+<\infty|X_0=x] > 0\implies \PP[\tau_x^+<\infty|X_0=x] < 1$, which we showed last lecture was equivalent to $x$ being transient. 
+\end{itemize}
+\end{proof}
+
+By the above Corollary, we can now say: 
+
+\begin{definition}
+\deflabel
+
+An irreducible Markov Chain $P$ is \ac{recurrent} if it has a recurrent state. It is \ac{transient} if it has a transient state. 
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+If $x\in C$ is recurrent, $C$ must be closed.
+\end{theorem}
+
+\begin{proof}
+Suppose there exists $z\in C$ and $y\not\in C$ s.t. $P(z,y) > 0$. Since recurrence is a class property, $z$ must also be recurrent. This is not possible given non-zero possibility of escaping the class. 
+\end{proof}
+
+\subsection{Positive / Null recurrence}
+
+\begin{definition}
+\deflabel
+
+If $x\in \mathcal{X}$ is recurrent, it is \ac{positive recurrent} if $\EE[\tau_x^+]<\infty$. Otherwise, it is null recurrent. 
+\end{definition}
+
+For example:
+
+\begin{itemize}
+    \item Random walks on $\ZZ^d$ for $d=1,2$ returns to $0$ infinitely often. On the other hand, we also showed $\EE[\tau_x^+] = \infty$, so this is an example of a null recurrent MC. 
+    \item Recurrent MCs on finite state spaces are positive recurrent. 
+\end{itemize}
+
+\begin{theorem}
+\lemlabelname{Wald's Lemma}
+
+If $Z_i$ are independent and $K$ is a stopping time wrt $Z_i$, $T_i$ a function of $Z_0, \hdots, Z_i$ such that $T_i$ are identically distributed, then 
+\[\EE\left(\sum_{i=1}^KT_i\right) = \EE(K)\EE(T_1).\]
+\end{theorem}
+
+We will prove a generalized version of Wald's Lemma later in the class. 
+
+\begin{theorem}
+\proplabel
+
+Positive/null recurrence are class properties. In particular, $z$ positive recurrent implies $\tau_y^{x} = \EE[\tau_y^+|X_0=x]<\infty$ for all $x,y\sim z$. 
+\end{theorem}
+
+\begin{proof}
+Recurrence is a class property, and further recurrent states can only be positive or null recurrent. Therefore, the second part of the proposition implies the first, so it suffices to prove only the second part. 
+
+Assume $z$ positive recurrent, which implies $x,y$ recurrent. Now, 
+\[\EE[\tau_z^+]\geq \PP[\tau_x < \tau_z^+|X_0=z]\EE[\tau_z^+|\tau_x<\tau_z^+, X_0=z].\]
+Also, $\EE[\tau_z^+|\tau_x<\tau_z^+, X_0=z]\geq \EE[\tau_z|X_0=x] = \EE[\tau_z^x]$, since we have to travel from $z\rightarrow x\rightarrow z$ in the first expectation. Therefore, 
+\[\EE[\tau_z^+]\geq \PP[\tau_x<\tau_z^+|X_0=z]\EE[\tau_z^x].\]
+Since $x\sim z$, we have $\PP[\tau_x < \tau_z^+|X_0=z]>0$, and thus $\EE[\tau_z^x]<\infty$. 
+
+Now, we can finish with Wald's Lemma. Let $K$ be the number of visits to $z$ before hitting $y$, starting from $x$. After hitting $z$ for the first time, $K$ is geometric with common ratio $\PP[\tau_z^+<\tau_y^z]<1$, so $\EE[K]<\infty$. Define $T_0=\tau_z^x$ and $T_i$ the time it takes to hit $z$ for the $(i+1)$th time. Define $Z_i$ as the series of steps taken between $T_i$ and $T_{i+1}$. Clearly, $T_i$ is a function of $Z_0, \hdots, Z_i$, and also $T_{i+1}-T_i$ are independent by the strong Markov property, so we have 
+\[\EE[\tau_y^x] = \EE\left[T_0+\sum_{i=1}^{K-1}T_i\right] = \EE[\tau_z^x] + \EE[K-1]\EE[\tau_z^+] < \infty.\]
+\end{proof}

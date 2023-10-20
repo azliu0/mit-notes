@@ -1,0 +1,25 @@
+% \section{February 6, 2023}
+
+% This is a test!
+
+% \begin{algorithm}[!ht]
+% \DontPrintSemicolon
+% \SetNoFillComment
+
+% \caption{\textsc{Perceptron}}\label{alg:perceptron}
+% \tcc{this is better than a random linear classifier}
+% \KwInput{$\tau, \mathcal{D}_n$}
+% \KwOutput{$\theta, \theta_0$ \tcp*[l]{recall that $\theta, \theta_0$ represents a hypothesis}}
+% $\theta = \begin{bmatrix}0 & 0 & \cdots & 0\end{bmatrix}^T$\;
+% $\theta_0 = 0$\;
+% \For{$t = 1$ to $\tau$}{
+%     \For{$i = 1$ to $n$} {
+%         \If {$y^{(i)}(\theta^Tx^{(i)} + \theta_0) \leq 0$}{
+%         \tcp*[l]{if the prediction is wrong, adjust it}
+%             $\theta = \theta + y^{(i)}x^{(i)}$\;
+%             $\theta_0 = \theta_0 + y^{(i)}$\;
+%         }
+%     }
+% }
+% \Return{$\theta, \theta_0$}
+% \end{algorithm}

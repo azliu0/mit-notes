@@ -1,0 +1,75 @@
+\section{March 16, 2023}
+
+Linear regression setup: we desire 
+\[\argmin_{(a,b)}\frac{1}{n}\sum_{i=1}^n \vert Y_i-ax_i-b\vert^2.\]
+
+If we instead use perpendicular distances instead of vertical distance, we would want to minimize 
+\[\frac{1}{n}\sum \vert Y_i-ax_i-b\vert^2\sin^2\theta,\]
+where $\theta$ is the angle between the line and the vertical. Since $\tan{\theta}=a$ (the slope of the line), $\sin{\theta}=a/(\sqrt{1-a^2})$, so the expression becomes 
+\[\frac{1}{n}\sum \vert Y_i-ax_i-b\vert^2\frac{a^2}{1-a^2}.\]
+
+\subsection{Multivariate Linear Regression}
+
+(this is basically the same content covered in the ML notes)
+
+The setup here is that we have $n$ outputs $Y_i$, and $n$ $(k+1)$-dimensional explanatory variables $X_i=[1, x_i^{(1)}, \hdots, x_i^{(k)}]^T\in \RR^{(k+1)}$, which are linearly related. Our goal is to construct a linear model $\beta$ between the explanatory variables and the outputs. 
+
+\[Y_i = \beta_0 + \beta_1x_i^{(1)} + \beta_2x_i^{(2)} + \hdots + \beta_kx_i^{(k)} + \varepsilon_i = X_i^T\beta + \epsilon_i,\]
+for all $i\in \{1, \hdots, n\}$. $\beta_0$ is the \ac{intercept}. Like normal linear regression, $\varepsilon_i$ is gaussian noise.
+
+\begin{definition}
+\deflabel
+
+The \ac{least squares estimator} (LSE) of $\beta$ is given by 
+\[\hat{\beta} = \argmin_{(\beta\in \RR^{k+1})}\sum_{i=1}^k(Y_i-X_i^T\beta)^2.\]
+\end{definition}
+
+The matrix $\XX = [X_1^T, \hdots, X_n^T]^T\in \RR^{n\times (k+1)}$ is called the \ac{design matrix}. Let $Y = [Y_1, \hdots, Y_n]^T\in \RR^n$ and $\varepsilon = [\varepsilon_1, \hdots, \varepsilon_n]^T\in \RR^n$. Then, we want to find the best-fit $\beta$ such that
+\[Y = \XX\beta + \varepsilon.\]
+As before, the LSE is given by
+\[\hat{\beta} = \argmin_{\beta\in \RR^{n+1}}\vert Y-\XX\beta\vert^2_2.\]
+(The subscript $2$ notation says that we are in the $L_2$ norm, i.e., normal Euclidean distance). 
+\textbf{This has an analytic solution:}
+\[\hat{\beta} = (\XX^T\XX)^{-1}\XX^TY.\]
+Assumptions about this model:
+\begin{itemize}
+    \item The model is \ac{homoscedastic}, i.e., all $\varepsilon_i$ are i.i.d.
+    \item Noise is gaussian, i.e., $\varepsilon_i\sim \Norm(0,\sigma^2)$, for some $\sigma^2$. 
+\end{itemize}
+Other important things to know:
+\begin{itemize}
+    \item $\hat{\beta}$ is normally distributed: $\hat{\beta}\sim \Norm(\beta, \sigma^2(\XX^T\XX)^{-1})$
+    \item $\EE[\vert Y-\XX\hat{\beta}\vert^2] = \sigma^2(n-k-1)$
+    \item Unbiased estimator of $\sigma^2$: $\displaystyle \hat{\sigma^2} = \frac{\vert Y-\XX\beta\vert^2_2}{n-k-1}$.
+    \item $\displaystyle \frac{\vert Y-\XX\hat{\beta}\vert^2_2}{\sigma^2}\sim \chi_{n-k-1}^2$. This is true by Cochran's Theorem, since $\vert Y-\XX\hat{\beta}\vert^2_2=\hat{\sigma^2}(n-k-1)$. 
+\end{itemize}
+
+\subsection{Significance Testing}
+To test whether the $j$th explanatory variable is significant in the linear regression, we use
+\begin{align*}
+    H_0: \beta_j = 0\\
+    H_1: \beta_j\neq 0.
+\end{align*}
+Then, a test with non-asymptotic level $\alpha$:
+\[\Psi = \mathbbm{1}\left(\frac{\hat{\beta_j}}{\sqrt{\hat{\sigma^2}\gamma_j}} > q_{\alpha/2}^{(t_{n-k-1})}\right),\]
+where $\gamma_j$ is the $j$th diagonal coefficient of $(X^TX)^{-1}$. 
+
+\subsection{Non-parametric Regression}
+
+Non-parametric regression is a regression model that does \textit{not} make a parametric assumption about $f(x) = \EE[Y_i | X_i = x]$, $x\in \RR^{(k+1)}$. Examples of parametric assumptions: 
+\begin{itemize}
+    \item $f(x) = a+bx$ (linear regression)
+    \item $f(x) = e^{a+bx}$
+\end{itemize}
+In parametric cases, we can use LSE and MSE theory to estimate the function $f$. 
+
+\begin{example}
+\exlabel
+
+Non-parametric regression: take local averages.
+\end{example}
+One idea of a non-parametric regression model is to assume that $f$ is very smooth, and take local averages. Let $h > 0$, and $I_x = \{i\in \{1,\hdots, n\} : \vert X_i-x\vert < h\}$. Then, we can approximate $f$ with 
+\[\hat{f}_{n,h}(x) = \begin{cases}
+\displaystyle\frac{1}{\vert I_x\vert}\sum_{i\in I_x}Y_i & I_x\neq \emptyset\\
+0 & \text{else}.
+\end{cases}\]

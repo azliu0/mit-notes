@@ -1,0 +1,99 @@
+\section{February 28, 2023}
+
+Today we will talk about Hashing. We want to support a dictionary $T$ that stores $(k,v)$ key value pairs, where all keys $k\in \mathcal{U}$ for some universe $\mathcal{U}$. Let $n$ be the number of objects in $T$, and $m = \vert T\vert$.
+
+We want to support three methods:
+\begin{itemize}
+    \item $\textsc{Insert}(x)$: insert $x=(x.\textsc{Key}, x.\textsc{Value})$ into the dictionary
+    \item $\textsc{Delete}(x)$: delete $x=(x.\textsc{Key}, x.\textsc{Value})$ from the dictionary
+    \item $\textsc{Search}(k)$: search for the key $k$, i.e., return $x.\textsc{Value}$ if $x.\textsc{Key}=k$.
+\end{itemize}
+
+\subsection{Direct Addressing}
+
+Make $m = \vert \mathcal{U}\vert$. Then, we could insert, delete, and search in constant time. Unfortunately, the space complexity here is horrible, since $\vert \mathcal{U}\vert \gg n$ most of the time.  
+
+\subsection{``Solution Zero''}
+
+\begin{itemize}
+    \item Use a list (e.g., linked) as the dictionary. In the worst case, $\textsc{Insert}$ and $\textsc{Delete}$ are $O(1)$, while $\textsc{Search}$ is $O(n)$.
+    \item Use some sort of tree as the dictionary. In this case, we can achieve $O(\log m)$ for all three methods. 
+\end{itemize}
+
+\subsection{Hashing}
+
+Hashing allows us to shrink $\mathcal{U}$. We start with a hash function 
+\[h : \mathcal{U}\rightarrow M=\{0,\hdots, m-1\}.\]
+Assuming that we restrict $m\in O(n)$, this is highly compressed. Inevitably, there will exist two keys $k,k'$ such that $h(k)=h(k')$, which is called a \ac{collision}. There are many different ways to deal with collisions. 
+
+\begin{example}
+\exlabel
+
+One way to deal with collisions is \ac{chaining}. 
+\end{example}
+
+In chaining, for each available space in the dictionary, instead of storing a single value, store another data structure, like a list (or even another dictionary). So, when two keys collide, insert them into the same data structure. 
+
+The space complexity of this solution is $O(m+n)$. Assuming that hashing is constant, and inserting into our list is constant, insertion takes $O(1)$. Deletion can also take $O(1)$. Searching takes $O(\vert L\vert)$, where $L$ is the length of the list stored at a particular key value.
+
+\begin{definition}
+\deflabel
+
+Define \ac{load factor} as $\alpha = n/m$, which is the ratio of the number of items we are trying to store in our dictionary, and its total space. 
+\end{definition}
+
+Note $\EE[\vert L\vert] = \alpha$. In a \ac{random oracle} process, we make a hash function that assigns objects to lists at random and independently. It is not possible to design an efficient random oracle, but we ignore this for now. 
+
+Using the random oracle, we intuitively keep the lengths of all of the lists short. In fact, by the Chernoff bounds, if $n=\Theta(m)$, the maximum load of any bin is $O(\log m/(\log \log m))$ with high probability. 
+
+\subsection{Universal Hashing}
+
+\begin{definition}
+\deflabel
+
+A hash family $\mathcal{H} = \{h : \mathcal{U}\rightarrow M\}$ is \ac{universal} if for all $k, k'\in \mathcal{U}$,
+\[\PP[h(k) = h(k')]\leq \frac{1}{m}.\]
+\end{definition}
+
+Note that this probability is taken over all hash functions in $\mathcal{H}$. The motivation for this definition is that the bound is tight for the random oracle, i.e., $\PP[\textsc{RO}(k) = \textsc{RO}(k')]=1/m$.
+
+Consider the expected length of each list in universal hashing. For $j\neq j'$, let $X_{j,j'}=\mathbbm{1}(h(k_j)=h(k_{j'}))$. Assuming that our hash family is universal, $\EE[X_{j,j'}]\leq 1/m$. By linearity of expectation, the number of keys colliding with $k_j$ has expected value 
+\[\sum_{j\neq j'}\EE[X_{j,j'}] \leq \frac{n-1}{m},\]
+so the expected length of the list with $k_j$ is $1+(n-1)/m < 1+\alpha$.
+
+\begin{example}
+\exlabel
+
+Construct a universal hash function.
+\end{example}
+
+Let $r = \log_m\vert \mathcal{U}\vert$. Write all keys in base $r$, i.e., for any key $k\in \mathcal{U}$, express it as some $a\in M^r$, $a = (a_0, a_1, \hdots, a_{r-1})$. Now, define our family of hash functions
+\[h_a(k) = \gen{a,k} = \sum_{\ell=0}^{r-1}a_{\ell}d_{\ell}^{(k)}\pmod{m},\]
+where $k=(d_0^{(k)}, d_1^{(k)}, \hdots, d_{r-1}^{(k)})$.
+
+\begin{theorem}
+\thmlabel
+
+This hash function is universal.
+\end{theorem}
+
+\begin{proof}
+For any two $k,k'\in \mathcal{U}$, we want to show
+\begin{align*}
+    \PP_{a\in_R M^r}[\gen{a,k} = \gen{a,k'}]\leq \frac{1}{m}.
+\end{align*}
+Since $k\neq k'$, let $\ell^{*}$ be an index such that $d_{\ell^*}^{(k)}\neq d_{\ell^*}^{(k')}$. Now, $\gen{a,k}=\gen{a,k'}$ if and only if
+\begin{align*}
+    \sum_{\ell=0}^{r-1}a_{\ell}d_{\ell}^{(k)}\pmod{m} \equiv \sum_{\ell=0}^{r-1}a_{\ell}d_{\ell}^{(k')}\pmod{m} \\
+    \iff \sum_{\ell=0}^{r-1}a_{\ell}\left(d_{\ell}^{(k)} - d_{\ell}^{(k')}\right) \equiv 0\pmod{m} \\
+    \iff a_{\ell^*}\left(d_{\ell^*}^{(k)} - d_{\ell^*}^{(k')}\right) \equiv -\sum_{\ell\neq \ell^*}a_{\ell}\left(d_{\ell}^{(k)} - d_{\ell}^{(k')}\right)\pmod{m} \\
+    \iff a_{\ell^*} = -\left(d_{\ell^*}^{(k)} - d_{\ell^*}^{(k')}\right)^{-1}\sum_{\ell\neq \ell^*}a_{\ell}\left(d_{\ell}^{(k)} - d_{\ell}^{(k')}\right)\pmod{m},
+\end{align*}
+Assuming that we are working with a ``nice'' $m$, i.e., some prime number, the probability that this is true is exactly $1/m$, since everything is chosen randomly. 
+\end{proof}
+
+
+
+
+
+

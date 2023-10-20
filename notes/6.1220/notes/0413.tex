@@ -1,0 +1,81 @@
+\section{April 13, 2023}
+
+Random Walks I. 
+
+\subsection{Scotland Yard}
+
+Consider a game on $K_5$. A runner is allowed to move around the vertices, jumping to an adjacent vertex once each move. A detective, which is visible to the runner, is also able to move around the vertices. After some number of moves, the location of the runner is visible to the detective. If they happen to be in the same place, the detective wins. Otherwise, the game continues. 
+
+\subsubsection{Version 0.5}
+
+In this version of the game, the runner cannot stay put. Let $X_i=(p_A, \hdots, p_E)$ be a tuple denoting the probabilities that the runner ends up at each vertex after $i$ moves, assuming that he moves randomly. For example, $X_1 = (0,1/4,1/4,1/4,1/4)$, and $X_2=(1/4,3/16,3/16,3/16,3/16)$. 
+
+\begin{theorem}
+\claimlabel
+
+Let $A$ be the adjacency matrix of a graph $G$. Then $(A^{\ell})_{ij}$ counts the number of paths from $i$ to $j$ in $G$ with length exactly $\ell$. 
+\end{theorem}
+
+For example, 
+\[
+\begin{pmatrix}
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 1 & 1 \\
+1 & 1 & 0 & 1 & 1 \\
+1 & 1 & 1 & 0 & 1\\
+1 & 1 & 1 & 1 & 0
+\end{pmatrix}^2 = \begin{pmatrix}
+4 & 3 & 3 & 3 & 3 \\
+3 & 4 & 3 & 3 & 3 \\
+3 & 3 & 4 & 3 & 3 \\
+3 & 3 & 3 & 4 & 3\\
+3 & 3 & 3 & 3 & 4
+\end{pmatrix}.
+\]
+By repeatedly squaring the adjacency matrix $K_5$, we have a way to compute $X_{\ell}$ for any $\ell$. When we normalize the rows, we get a \ac{transition matrix}. Multiplying to infinity, it turns out that $X_i$ converges to $(1/5, 1/5, \hdots, 1/5)$. 
+
+In general, it can be shown that for any graph $G$ that $X_i$ converges to $(p_1, \hdots, p_n)$, where $p_j$ is the ratio of the degree of $j$ to the total number of edges. 
+
+\subsection{Gambling}
+
+I start with $\$20$. I choose to play a game until I either go broke, or double my money and reach $\$40$. The game that I play has a $50/50$ chance of winning and losing. Each win gives me $\$5$, while each loss causes me to lose $\$5$.
+
+\begin{definition}
+\deflabel
+
+A stochastic process is a sequence of random variables $X_0$, $X_1$, $\hdots$.
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+A markov process is a memoryless stochastic process, i.e., $X_{t+1}|X_t = X_{t+1}|X_t,X_{t-1}, \hdots, X_0$. 
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+A markov process is \ac{time-homogenous} when $\PP[X_t=u|X_{t-1}=v]$ is independent of $t$. 
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+The \ac{period} of a directed (resp. undirected) graph is defined as the greatest common divisor of the lengths of all directed (resp. undirected) cycles in the graph. If the period is $1$, the graph is said to be \ac{aperiodic}. Otherwise, the graph is \ac{periodic}. 
+\end{definition}
+
+Recall that we can represent the transition state for any (time-homogenous) Markov process with a unique walk matrix $W$.
+
+\begin{definition}
+\deflabel
+
+A stationary distribution $\vec{x}$ is any distribution satisfying $\vec{x}W=\vec{x}$. 
+\end{definition}
+
+For example, in Scotland yard, the distribution $(1/5, 1/5, 1/5, 1/5, 1/5)$ is a stationary distribution.
+
+\begin{theorem}
+\thmlabelname{Fundamental Theorem of Markov Chains}
+
+Let $G_{\chi}$ be a Markov Chain for Markov Process $\chi=\{X_t\}_{t\geq 0}$. If $G_{\chi}$ is strongly connected and aperiodic, then every random walk on $G_{\chi}$ converges to a unique stationary distribution. 
+\end{theorem}
