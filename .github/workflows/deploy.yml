@@ -8,6 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
+      - name: Install tree
+        run: |
+          sudo apt-get install tree
       - name: Checkout
         uses: actions/checkout@v4
       - name: Create build folder
