@@ -8,9 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
+      - name: Create build folder
+        run: |
+          mkdir dist
       - name: Generate tree
         run: |
-          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
+          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > dist/index.html
   deploy:
     permissions: 
       id-token: write
@@ -19,3 +22,5 @@ jobs:
     steps: 
       - name: Deploy
         uses: actions/deploy-pages@v2
+        with: 
+          folder: dist 
