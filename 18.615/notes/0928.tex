@@ -1,0 +1,62 @@
+\section{September 28, 2023}
+
+\subsection{Coupling Example}
+
+\begin{example}
+\exlabel
+
+Consider a lazy random walk on a hypercube, where ``lazy'' means that each step stays in the same place with $p=1/2$ and otherwise travels to a uniformly randomly selected neighbor with $p=1/2$. 
+\end{example}
+
+The uniform distribution $\pi(x) = 2^{-n}$ is stationary. Let $(X_i, Y_i)$ be two independent copies of the Markov chain, where $X_0=\vec{0}$ and $Y_0$ is drawn from $\pi$. We can use coupling to generate intuition on how long it takes until $X_i=Y_i$.
+
+Consider $Z_i$ which has coordinate $0$ if and only if $X_i$ and $Y_i$ agree in that coordinate. When $X_i$ makes a step, $Z_i$ has $p=1/2$ of staying the same and $p=1/2$ of flipping a coordinate; the same is true when $Y_i$ takes a step. Therefore $Z_i$ is equivalent to the original markov chain when taking two steps at a time. Also, $Z_0\sim \pi$, and finding how long it takes for $X_i=Y_i$ is the same as finding how long it takes until $Z_0=\vec{0}$. We know $\EE[\tau_{\vec{0}}^+]=2^n$, so it'll take around $2^n$ steps at most. 
+
+Now consider a non-independent coupling. Define $(X_i,Y_i)$ through the following joint process: randomly select a coordinate, and then set that coordinate to be $0$ or $1$ with equal probability in both $X_i$ and $Y_i$ simultaneously. The marginals $X_i$ and $Y_i$ each follow the original Markov chain, so this is a valid coupling. Also, $X_i=Y_i$ only after every coordinate has been selected at least once, so 
+\[d_{TV}(\mu P^i, \pi)\leq \PP[X_i\neq Y_i] \leq \PP[T > i],\]
+which turns into the coupon collector problem. 
+
+\subsection{Lower bound on variation distance}
+
+\begin{theorem}
+\proplabel
+
+Let $P$ be an irreducible, aperiodic Markov chain and $\pi$ stationary. Let $A\subseteq \mathcal{X}$ be the set of states which cannot be reached from $x$ in $i$ steps. Then, 
+\[d_{TV}(P^i(x, \cdot),\pi)\geq \pi(A).\]
+\end{theorem}
+
+\begin{proof}
+\[d_{TV}(P^i(x,\cdot),\pi)\geq \vert \pi(A) - P^i(x,A)\vert = \pi(A).\]
+\end{proof}
+
+Consider the previous example. After taking $i=n/2$ from $\vec{0}$, the set of reachable states $A_i$ has size at least $2^{n-1}$, so 
+\[d_{TV}(P^i(\vec{0},\cdot),\pi) \geq \pi(A_i) \geq 2^{n-1}/2^n = 1/2.\]
+In other words, after taking $n/2$ steps, we are still ``far away'' from the stationary distribution. 
+
+\subsection{Random walk on binary tree}
+
+\begin{definition}
+\deflabel
+
+A binary tree of \ac{depth} $n$ is a graph with vertices representing binary strings of length at most $n$, including the empty word ($2^{n+1}-1$ nodes total). Edges exist between nodes such that one can be obtained from the other by adding a $0$ or $1$. 
+\end{definition}
+
+A lazy random walk on a binary tree remains stationary with $p=1/2$, or moves to an adjacent node randomly with $p=1/2$. We want to bound $d_{TV}(P^i(x,\cdot), \pi)$. 
+
+Consider the following coupling $(X_i,Y_i)$: 
+\begin{itemize}
+    \item first, pick one of $X_i$ or $Y_i$ to move, with the other staying. repeat until both are on the same level. 
+    \item after the first stage, $X_i$ and $Y_i$ always move or stay together. 
+\end{itemize}
+Each marginal distribution of both stages is equivalent to the original Markov chain, so this is a valid coupling. Based on the previous lower bound, we can make some heuristics about how long it takes until $X_i=Y_i$:
+
+\begin{itemize}
+    \item the random walk that starts with the lower level will never, at any point, exceed the level of the other walk. Therefore, once the walk who starts with higher level reaches the root, $X_i=Y_i$.
+    \item we will prove in the HW that we can project this coupled Markov chain onto a birth and death chain on the level of each walk. 
+    \item starting from root $x_0$, a random walk can reach at most level $i$ in $i$ steps. Let $A$ be the set of all such vertices. recall that $\pi(v) = \text{deg}(v)/2\vert E\vert$, since this is a graph. therefore, 
+    \[\pi(A)\leq \frac{3\vert A\vert}{2^{n+2}-4}.\]
+    this implies 
+    \[d_{TV}(P^i(x_0, \cdot), \pi)\geq \pi(A^c) \geq 1-\frac{3(2^{i+1}-1)}{2^{n+2}-4}.\]
+    If $i$ is small, this distance is large, so we intuitively need a lot of steps to get close. 
+\end{itemize}
+

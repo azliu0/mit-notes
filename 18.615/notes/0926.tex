@@ -1,0 +1,96 @@
+\section{September 26, 2023}
+
+\subsection{Total Variation Distance}
+
+\begin{definition}
+\deflabelname{Total Variation Distance}
+
+Let $\mu$ and $\nu$ be two distributions on $\mathcal{X}$. The \ac{total variation distance}, $d_{TV}(\mu, \nu)$ is given by 
+\[d_{TV}(\mu, \nu) = \sup_{A\subseteq \mathcal{X}}\vert \mu(A) - \nu(A)\vert.\]
+\end{definition}
+
+We can use $\mu$ and $\nu$ in the definition of $d_{TV}$ interchangeably with random variables distributed as $\mu$ and $\nu$ respectively. 
+
+\begin{example}
+\exlabel
+
+If $X$ and $Y$ are Bernoulli random variables with parameters $p,q$ respectively, then $d_{TV}(X,Y) = \vert p-q\vert$. 
+\end{example}
+
+In this example, $\mathcal{X}=\{0,1\}$. For all possible $A\subseteq X$, the difference in their probability is at most $\vert p-q\vert$. 
+
+\begin{theorem}
+\proplabel
+
+Total variation distance is a distance metric, along with some other properties:
+\begin{itemize}
+    \item $d_{TV}(\mu, \nu) = 0$
+    \item $d_{TV}(\mu, \nu) = d_{TV}(\nu, \mu)$
+    \item Triangle inequality: $d_{TV}(\mu, \nu)\leq d_{TV}(\mu, \eta) + d_{TV}(\eta, \nu)$
+    \item 
+    \[d_{TV}(\mu, \nu) = \frac{1}{2}\sum_{x\in \mathcal{X}}\vert \mu(x) - \nu(x)\vert = \sum_{x:\mu(x)>\nu(x)}\mu(x)-\nu(x).\]
+    \item $X_n\cd X$ if and only if $d_{TV}(X_n, X)\rightarrow 0$. 
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Proof of third bullet point: think of $\mu, \nu$ like a bar graph. Shade all area above $\mu$ and below $\nu$ red, and shade all area above $\nu$ and below $\mu$ blue. The maximal difference $\mu(A)-\nu(A)$ is achieved by collecting all the blue area, which is the expression on the right side. Since $\mu$ and $\nu$ are distributions, the red and blue areas are equal; since the middle expression is the sum of both areas, it is also equal to the right hand side. 
+\end{proof}
+
+The goal of defining a total variation distance is to eventually try to compute 
+\[d_{TV}(\mu P^i, \pi).\]
+As $i$ increases, the total variation distance to the stationary distribution should decrease. To help us understand this more concretely, we define a notion of \ac{coupling}. 
+
+\begin{definition}
+\deflabelname{Coupling}
+
+A \ac{coupling} of two distributions $\mu$ and $\nu$ on probability space $\mathcal{X}$ is a joint distribution $\eta$ on $\mathcal{X}\times \mathcal{X}$ whose marginals are $\mu$ and $\nu$ respectively. 
+\end{definition}
+
+A coupling of random variables $X$ and $Y$ is a random variable $(\tilde{X}, \tilde{Y})$ for which $X\sim \tilde{X}$ and $Y\sim \tilde{Y}$. 
+
+\begin{example}
+\exlabel
+
+Let $X$ and $Y$ be $\Bern(p)$ random variables. 
+\end{example}
+
+Then, the independent coupling is given by
+\[\PP[(\tilde{X},\tilde{Y})=(x,y)] = 
+\begin{cases}
+(1-p)^2 & (x,y)=(0,0) \\
+p(1-p) & (x,y)\in \{(0,1),(1,0)\} \\
+p^2 & (x,y) = (1,1).
+\end{cases}\]
+
+Another coupling is to take $\tilde{X}=\tilde{Y}$:
+\[\PP[(\tilde{X},\tilde{Y})=(x,y)] = 
+\begin{cases}
+1-p & (x,y)=(0,0) \\
+p & (x,y)=(1,1) \\
+0 & (x,y)\in \{(0,1),(1,0)\}.
+\end{cases}\]
+
+\begin{example}
+\exlabel
+
+Consider the finite Gambler's ruin MC with $n$ states. Let $X_0=x$, $Y_0=y$, with $x\leq y$. Show that for some $i$, $\PP[X_i=n|X_0=x]\leq \PP[Y_i=n|Y_0=y]$. 
+\end{example}
+
+We will use a coupling $(\tilde{X_i}, \tilde{Y_i})$ with $\tilde{X_0}=x$ and $\tilde{Y_0}=y$ that move left/right in parallel. This is a valid coupling, since the marginal distribution of each variable is the same as their individual distributions. Now, 
+
+\[\PP[X_i=n] = \PP[\tilde{X_i}=n] = \PP[\tilde{X_i}=n, \tilde{Y_i}=n]\leq \PP[\tilde{Y_i}=n] = \PP[Y_i=n].\]
+
+\begin{theorem}
+\proplabel
+
+$d_{TV}(\mu, \nu) \leq \inf\{\PP[X\neq Y] : (X,Y)\text{ is a coupling of }\mu, \nu\}.$
+\end{theorem}
+
+\begin{proof}
+\[\mu(A) - \nu(A) = \PP[X\in A] - \PP[Y\in A] \leq \PP[X\in A, Y\neq A]\leq \PP[X\neq Y].\]
+\end{proof}
+
+This is always an inequality; there always exists coupling $(X,Y)$ such that $\PP[X\neq Y] = d_{TV}(\mu, \nu)$. We will not prove this, but one such example is to take $p\leq q$, $U\sim \Unif[0,1]$, $X=\mathbbm{1}_{u\leq p}$, $Y=\mathbbm{1}_{u\leq q}$. 
+
+
