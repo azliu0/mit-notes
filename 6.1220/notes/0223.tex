@@ -1,0 +1,94 @@
+\section{February 23, 2023}
+
+\subsection{Competitive Analysis and Self-organizing Lists}
+
+Think of a self-organizing list as a singly-linked list. 
+
+The method \textsc{Access}$(x)$ finds and returns the element with key $x$. The cost of \textsc{Access}$(x)$ is \textsc{Rank}$_L(x)$. 
+
+After accessing, we reorder $L$ via transposing adjacent elements. The cost of reordering is equal to the number of transpositions.
+
+Consider a sequence of operations on elements $S=\{x_1, \hdots, x_N\}$. The cost of operation $i$ is the sum of its axis cost and reordering cost. Say that the reordering cost of operation $i$ is $t_i$. Then, the total access cost and total reordering cost for an arbitrary sequence of $N$ operations is
+\[C_A(S) = \sum_{i=1}^N \textsc{Rank}(x_i) + \sum_{i=1}^Nt_i.\]
+
+\begin{definition}
+\deflabel
+
+An \ac{offline algorithm} is an algorithm that knows what operations it needs to perform in advance. An \ac{online algorithm} does not. 
+\end{definition}
+
+Say we have $L$ with these keys:
+\[1\longrightarrow 2\longrightarrow 3\longrightarrow 4\]
+
+Say we design the (online) algorithm so that we always move the previously accessed element to the front. Then, we can design a sequence of inputs such that it still costs $n$ per operation: $S=\{4,3,2,1\}$. In general, we won't be able to do better than this for the online version of the algorithm. 
+
+\begin{definition}
+\deflabel
+
+Let \textsc{OPT} be an optimal offline algorithm. Let $A$ be an online algorithm. $A$ is \ac{$\alpha$-competitive} if there exists a constant $c$ such that for any access sequence $S$, 
+\[c_A(S)\leq \alpha\cdot c_{\textsc{OPT}}(S) + c.\]
+\end{definition}
+
+In some cases, even the efficiency of the offline algorithm $\textsc{OPT}$ cannot be better than the online algorithm. For example, when we have $L$:
+\[1\longrightarrow 2\longrightarrow \hdots \longrightarrow n,\]
+accessing $S = \{n, n-1, \hdots\}$ is $\Omega(n^2)$, even for $\textsc{OPT}$. For example, consider the cost of the first $n/3$ operations. For each of these operations, we can choose to transpose them beforehand to get a lower cost, or access them directly. Both of these options are $\Omega(n)$, so the cost of the first $n/3$ operations is $\Omega(n^2)$.
+
+\begin{theorem}
+\thmlabel
+
+Consider the \ac{\textsc{MTF}} (move to front) strategy: after accessing an element, move it to the front. \textsc{MTF} is $4$-competitive. 
+\end{theorem}
+
+We will prove this theorem using potential function analysis, like we used during recitation. Recall:
+\begin{itemize}
+    \item We want to define a potential function $\Phi$ taking the state of the data structure to some real number. Let $D_i$ be the state of the data structure after update $i$. We require $\Phi(D_i)\geq \Phi(D_0)$.
+    \item We define an imaginary (amortized) cost:
+    \[\hat{c}_i = c(i) + \Delta \Phi,\]
+    where $c(i)$ is the true cost of operation $i$.
+    \item In sum, 
+    \[\sum_{i=1}^{\vert S\vert}c(i)\leq \sum_{i=1}^{\vert S\vert}\hat{c}(i),\]
+    completing our amortized analysis.
+\end{itemize}
+
+\begin{proof}
+Both \textsc{MTF} and \textsc{OPT} start with the same list $L_0$, and sequence of operations $S = \{x_1, \hdots, x_N\}$. After \textsc{Access}$(x_i)$, MTF has list $L_i$, and OPT has list $L_i^*$. Now, consider the cost of operation $i+1$. 
+\begin{itemize}
+    \item For MTF, the total cost is 
+    \[\textsc{Rank}_{L_i}(x_{i+1}) + \textsc{Rank}_{L_i}(x_{i+1})-1 = 2\textsc{Rank}_{L_i}(x_{i+1})-1.\]
+    \item For OPT, the total cost is 
+    \[\textsc{Rank}_{L_i}(x_{i+1})+t_{i+1},\] 
+    where $t_{i+1}$ is the number of transpositions that the algorithm performs.
+\end{itemize}
+Define our potential function as follows: 
+\[\Phi(i) = 2\cdot \vert\{(x,y) : x <_{L_i} y, x >_{L_i^*} y\}\vert.\]
+This is a valid potential function, since $\Phi(i)\geq 0 = \Phi(0)$ for all $i$. 
+
+Now, after the $i$th operation concludes, let $A_{i+1}$ be the set of all keys before $x_{i+1}$ in both $L_i$ and $L_i^*$; let $B_{i+1}$ be the set of all keys after $x_{i+1}$ in $L_i$, and before $X_{i+1}$ in $L_i^*$; let $C_{i+1}$ be the set of all keys after $x_{i+1}$ in $L_i^*$, and before $x_{i+1}$ in $L_i$; and let $D_{i+1}$ be the set of all keys after $x_{i+1}$ in both $L_i$ and $L_i^*$.
+
+Let's consider $\Delta \Phi$. During the operation changing $L_i$ to $L_{i+1}$, $x_{i+1}$ is moved to the first element in the list. This creates $\vert A_{i+1}\vert$ new inversions, and removes $\vert C_{i+1}\vert$ inversions. During the operation changing $L_i^*$ to $L_{i+1}^*$, $x_{i+1}$ is transposed $t_{i+1}$ times, which creates at most $t_{i+1}$ new inversions. Therefore, 
+\[\Delta \Phi \leq 2(\vert A_{i+1}\vert  - \vert C_{i+1}\vert + t_i).\]
+We also know that $\textsc{Rank}_{L_i}(x_{i+1}) = \vert A\vert + \vert C\vert + 1$, and $\textsc{Rank}_{L_i}(x_{i+1}) = \vert A\vert + \vert B\vert + 1$. So, we may say
+\begin{align*}
+    \hat{c}_{i+1}^{MTF} &= 2\textsc{Rank}_{L_i}(x_{i+1})-1+\Delta \Phi \\
+    &\leq 2(\vert A_{i+1}\vert + \vert C_{i+1}\vert + 1) - 1 + 2(\vert A\vert - \vert C\vert + t_{i+1}) \\
+    &\leq 4(\vert A_{i+1} + 1 + t_{i+1}\vert),
+\end{align*}
+while
+\begin{align*}
+    c_{i+1}^{OPT} = \vert A_{i+1}\vert + \vert B_{i+1}\vert + 1 + t_{i+1} \geq \vert A_{i+1}\vert + 1 + t_{i+1}.
+\end{align*}
+Thus,
+\[\sum_i c_i^{MTF}\leq \sum_i \hat{c}_i^{MTF} \leq 4\sum_i(\vert A_i\vert + 1 + t_i) \leq 4 \sum_i c_{i}^{OPT},\]
+which completes the proof.
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Here is some motivation for the potential function that we used to prove the previous theorem. Consider the reordering cost of $L$ into $L^*$:\vspace{-0.1cm}
+\begin{itemize}
+    \item The minimum number of transpositions needed to turn $L$ into $L^*$ is at least the number of inversions. If $x$ and $y$ are inverted, there is no transposition that can swap $x$ and $y$ besides the transposition that swaps $x$ and $y$ directly.
+    \item There is a sequence of $v$ transpositions that fixes all $v$ transpositions. Fix each element in reverse order, and it works.
+\end{itemize}
+Since the potential function counts the number of inversions, it approximately captures how far apart $L$ and $L^*$ are after a given operation. 
+\end{example}

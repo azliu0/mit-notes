@@ -1,0 +1,100 @@
+\section{March 14, 2023}
+
+\subsection{Ford-Fulkerson}
+
+First, recap on some definitions from last time. A net flow $f:V\times V\rightarrow \RR$ is a function satisfying:
+\begin{itemize}
+    \item feasability: $f(u,v)\leq c(u,v)\forall u,v$
+    \item flow conservation: $\sum_u f(u,v) = 0\forall v\neq s,t$
+    \item skew symmetry: $f(u,v) = -f(v,u)$
+\end{itemize}
+
+The residual network $G_f = (V, E_f, s, t, c_f)$ of a flow $f$ in graph $G$ has a different set of \textbf{residual capacities} $c_f(u,v) = c(u,v) - f(u,v)$, and \textbf{edges} $(u,v)\in E_f$ whenever $c_f(u,v) > 0$, so that saturated edges are disguarded. 
+
+\begin{definition}
+\deflabel
+
+An \ac{augmenting} path in $G_f$ is a directed $s-t$ path in $G_f$. For any augmenting path $P$, define the \ac{bottleneck capacity} $c_f(P) = \min_{(u,v)\in P}(c_f(u,v))$. 
+\end{definition}
+
+We saw last time that pushing $c_f(P)$ along any augmenting path increases $\vert f\vert$ by $c_f(P)$; and, if no such path exists, then we have found a max flow. So now, the \ac{Ford Fulkerson algorithm}:
+\begin{itemize}
+    \item start with $f\equiv 0$
+    \item while an augmenting path $P$ exists in $G_f$, augment $f$ by $c_f(P)$
+    \item return $f$
+\end{itemize}
+
+The correctness of this algorithm comes from this important theorem: 
+
+\begin{theorem}
+\thmlabelname{Max Flow-Min Cut Theorem}
+
+The following statements are equivalent:
+\begin{enumerate}
+    \item [(1)] $\vert f\vert = c(S)$ for some $s-t$ cut $S$
+    \item [(2)] $f$ is a max flow 
+    \item [(3)] $f$ admits no augmenting path, i.e., there is no $s-t$ path in $G_f$
+\end{enumerate}
+\end{theorem}
+
+$(1)\iff (2)$ implies that, if $S^*$ is the minimal $s-t$ cut, then $\vert f^*\vert = c(S^*)$. This is called the \ac{strong duality} of flows and $s-t$ cuts. This implies the weak duality principle, i.e., that the max flow is smaller than the minimum $s-t$ cut. 
+
+$(3)\implies (2)$ implies that Ford-Fulkerson always works, since the algorithm keeps removing augmenting paths until no more exist. \V
+
+Runtime:
+\begin{itemize}
+    \item If capacities are integers bounded above by $C$, $c_f(P)\geq 1$ always. This implies that the number of augmentations $X$ satisfies: 
+    \[X\leq \vert f^*\vert \leq c(\{s\})\leq n\cdot C.\]
+    With some dfs strategy, it takes $O(m)$ time to find an augmented path and perform the necessary augmentations. Therefore, an upper bound on the runtime is $O(mnC)$, which is \ac{pseudo-polynomial}. 
+    \item If capacities are rational, the number of augmentations is bounded above by something least common multiples of the capacity of each edge adjacent to $s$. This still gives finite, pseudo-polynomial runtime.
+    \item If capacities are real, it is possible to construct a graph that gives infinite runtime, since there is no longer the guarantee that some linear combination of edge weights can be an integer. 
+\end{itemize}
+
+\subsection{Optimizing Ford-Fulkerson (weakly polynomial)}
+
+Instead of picking any augmenting path, we can try choosing the augmenting path at each step ``smartly''. 
+
+\begin{definition}
+\deflabel
+
+The \ac{maximum bottleneck path} is the augmenting path $P$ that maximizes the bottleneck capacity $c_f(P)$. 
+\end{definition}
+
+\begin{theorem}
+\claimlabel
+
+It is possible to choose the maximum bottleneck path in $O(m\log n)$. 
+\end{theorem}
+
+\begin{proof}
+Sort all edges by their residual capacity in $O(m\log m)\in O(m\log n)$. Then, perform a binary search on the bottleneck capacity through this list of edges; for each iteration, run a DFS to check whether or not it is possible to find an augmenting path with a given bottleneck capacity. Since each DFS is $O(m)$, and we run $O(\log m)\in O(\log n)$ iterations, the total runtime is $O(m\log n)$. 
+\end{proof}
+
+\begin{theorem}
+\claimlabel
+
+In any graph $G_f$, there exists an $s-t$ path $P$ in $G_f$ with 
+\[c_f(P)=\min_{e\in P}c(e) \geq \vert f^*\vert/m,\]
+where $\vert f^*\vert$ is the value of the max flow in $G_f$ (not the original graph $G$). 
+\end{theorem}
+
+\begin{proof}
+By the flow decomposition lemma, the graph with positive flow edges can be decomposed into paths and cycles. If we choose these paths and cycles such that each completely saturates at least $1$ edge, the number of such paths/cycles $\leq m$. 
+
+Thus, we have $\leq m$ paths from $s$ to $t$ that partition the flow in $G_f$. Since the max flow is $\vert f^*\vert$, this implies that at least one of these paths has flow $\vert f^*\vert/m$, as desired. 
+\end{proof}
+
+The improved runtime is now as follows:
+\begin{itemize}
+    \item The implication of the first claim is that we can perform each augmentation in $O(m\log n)$.
+    \item The implication of the second claim is that (with some proof) the total number of augmentations is bounded above by $O(m\log nC)$. Each time we augment a path, we multiply the amount of flow we have remaining by a factor of $(1-1/m)$. Since $\vert f^*\vert \leq nC$, this reduces to bounding $nC(1-1/m)^x < 1$, where $x$ is the number of augmentations. Now,
+    \[nC\left(1-\frac{1}{m}\right)^x < 1\implies -\log(nC) < x\log\left(1-\frac{1}{m}\right).\]
+    Since $x\log(1-1/m)>x\cdot (-1/m)$, this holds for some $x < m\log(nC)$, as desired. 
+\end{itemize}
+ 
+
+Thus, the total runtime of this version of the algorithm is $O(m^2\log n\log nC)$, which is \ac{weakly polynomial}. 
+
+\subsection{Edmonds-Karp (polynomial Ford Fulkerson)}
+
+To achieve polynomial runtime, choose augmenting paths in another different way. In particular, choose them with BFS, so that the augmented path is always the shortest in terms of path length. It can be shown that the runtime in this case is $O(nm^2)$. 

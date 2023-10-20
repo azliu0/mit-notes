@@ -1,0 +1,105 @@
+\section{April 11, 2023}
+
+Intractability III. 
+
+\subsection{Vertex Cover}
+
+\begin{definition}
+\deflabel
+
+A \ac{vertex cover} of a graph $G=(V,E)$ is a vertex subset $S\subseteq V$ such that for every edge $(u,v)$ either $u\in S$ or $v\in S$ or both. 
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Vertex cover of $K_4$. 
+\end{example}
+
+All four vertices forms a vertex cover of size $4$. Any subset of three vertices forms a vertex cover of size $3$. There are no vertex covers of size $\leq 2$, because then there exists an edge between the other two vertices which is not covered by the two selected vertices. 
+
+The vertex cover decision problem has graph $G=(V,E)$ and integer $K$. The output is YES if and only if there is a subset $S\subseteq V$ of size $\leq K$ s.t. $S$ is a vertex cover. 
+
+\begin{theorem}
+\thmlabel
+
+Vertex Cover is NP-complete via $3$SAT$\leq_p$VC. 
+\end{theorem}
+
+As a reminder, to prove this, we need to show:
+\begin{itemize}
+    \item Vertex Cover is in NP. This is easy to show, since it is easy to check whether a given vertex cover is valid. 
+    \item there exists a graph $G=(V,E)$ and integer $K$ such that $G,K$ is created in polynomial time in $n$ and $m$, given a $3$CNF formula $F$
+    \item $F$ has a satisfying assignment if and only if $G$ has a vertex cover of size $\leq K$. 
+\end{itemize}
+
+\begin{proof}
+First, we construct our reduction:
+\begin{itemize}
+    \item Let $m$ be the number of clauses and $n$ the number of literals. Set $K=n+2m$. 
+    \item For each variable $x_i$, create two vertices connected by an edge $x_i^T$, $x_i^F$. In a vertex cover, this means that either $x_i^T$ or $x_i^F$ needs to be selected, which can be thought of as the variable $x_i$ being true or false. 
+    \item For every clause $(l_{j1}, l_{j2}, l_{j3})$, create a triangle with vertices $l_{j1}, l_{j2}, l_{j3}$. 
+    \item For each $l_{jk}$ in clause $j$, connect $l_{jk}$ to $x_p^T$ if $l_{jk}=x_p$ and connect $l_{jk}$ to $x_p^F$ if $l_{jk}=\neg x_p$. 
+\end{itemize}
+
+This reduction can be constructed in linear time. Now we show that it works. 
+
+\hrulebar
+
+(FORWARD DIRECTION) Let $x_1=b_1, \hdots, x_n=b_n$ be a satisfying assignment to $F$. First, add $x_i^T$ to $S$ for all $x_i$ with $b_i=1$, and $x_i^F$ to $S$ for all $x_i$ with $b_i=0$. Then, each clause has at least one of the literals set to $1$, since we have a satisfying assignment. Pick one of the literals set to $1$ and put the vertices corresponding to the other two literals in $S$. 
+
+Since we are adding two vertices per clause, and one additional vertex per variable ($x_i^T$ or $x_i^F$), $\vert S\vert = n+2m$. Now we show that $S$ is a vertex cover. 
+\begin{itemize}
+    \item Edges of the form $(x_i^T, x_i^F)$ are covered, since we always select either $x_i^T$ or $x_i^F$. 
+    \item Edges that are clause edges, i.e., $(l_{jk}, l_{jh})$, are covered, since we selected two vertices per clause triangle. 
+    \item All other edges are of the form $(l_{jk}, x_p^B)$, where if $l_{jk}=x_p$, then $B=T$, and if $l_{jk}=\neg x_p$, then $B=F$. If $l_{jk}\in S$, then this edge is covered. Otherwise, $l_{jk}$ was set to true. If $l_{jk}=x_p$, this means that $x_p$ was set to true, so $x_p^T$ was selected and the edge was covered. If $l_{jk}=\neg x_p$, this means that $x_p$ was set to false, so $x_p^F$ was selected and the edge was covered. 
+\end{itemize}
+
+\hrulebar
+
+(BACKWARDS DIRECTION) Let $S$ be a vertex cover of $G$ of size $\leq K=2m+n$. Every one of the $m$ clause triangles must have at least $2$ vertices in $S$. Each of the $n$ edges must have at least one vertex in $S$. Thus, $\vert S\vert \geq 2m+n = K \geq \vert S\vert$, so $\vert S\vert = 2m+n$. Now, for our assignment, if $x_i^T\in S$, set $x_i=1$, otherwise set $x_i=0$. 
+
+To show that this works, we need to show that every clause triangle contains a literal that was set to true. Consider any clause $(l_1, l_2, l_3)$. Exactly two vertices are in $S$. Suppose WLOG that $l_3$ was not selected to be in $S$, and consider the edge $(l_3, x_p^B)$. If $l_3=x_p$, $x_p^T$ has to be in $S$, which implies that $x_p$ is true, hence $l_3$ is true. Otherwise, $l_3=\neg x_p$, so $x_p^F$ has to be in $S$, implying that $x_p$ is false, lence $l_3$ is still true. Therefore, the literal not selected to $S$ in each clause triangle evaluates to true, so we are done. 
+\end{proof}
+
+\subsection{Subset Sum}
+\begin{itemize}
+    \item Input: $n$ integers $S=\{a_1, \hdots, a_n\}$ and a target integer $t$ encoded in binary
+    \item Output: YES if there are $a_{i_1}, \hdots, a_{i_k}\in S$ such that $\sum_{j=1}^ka_{i_j}=t$. Otherwise, NO. 
+\end{itemize}
+
+This can be solved in $O(nt)$ with knapsack DP. Note that this runtime is pseudopolynomial, since it is not polynomial in $\log t$, which is the size of $t$ in binary.
+
+\begin{theorem}
+\thmlabel
+
+Subset Sum is NP-complete via VC$\leq_p$Subset Sum.
+\end{theorem}
+
+\begin{proof}
+First, our reduction. Let $G=(V,E)$ and $K$ be an instance of the vertex cover problem. Let $E=\{0,\hdots,m-1\}$. Create two types of integers in $S$: 
+\begin{itemize}
+    \item for every $e\in E$, $b_e = 4^e$.
+    \item for every $v\in V$, $b_v = 4^m+\sum_{e\in E, e=(u,v)}4^e$.
+\end{itemize}
+Then, let the target $t=K\cdot 4^m + 2\sum_{e\in E}4^e$. This is a polynomial-time reduction. Now, we show that it works. 
+
+\hrulebar
+
+(FORWARD DIRECTION) Let $C$ be a vertex cover of $G$ of size $K$. Each edge is covered by $C$ once or twice. Let $E'\subseteq E$ be the edges in $G$ that are covered by $C$ exactly once. Now, let 
+\[A = \{b_v : v\in C\}\cup \{b_e : e\in E'\}.\]
+Note that 
+\[\sum_{v\in C}b_v = \vert C\vert 4^m + \sum_{e\in E-E'}2\cdot 4^e + \sum_{e\in E'}4^e.\]
+Therefore, 
+\[\sum_{b\in A}b = \sum_{v\in C}b_v + \sum_{e\in E'}b_e = \vert C\vert 4^m + 2\sum_{e\in E}4^e = t,\]
+as desired. 
+
+\hrulebar
+
+(BACKWARDS DIRECTION) Suppose $A\subseteq S$ sums to $t$. $A$ contains vertex numbers $b_v$ for vertices from some set $C$, and edge numbers $b_e$ for edges in some set $E'$. As before, $E'$ represents the set of edges that we can cover only once. We know that 
+\[\sum_{v\in C}b_v + \sum_{e\in E'}b_e=t.\]
+
+The key is to look at each of the numbers in $A$, in base $4$. The number of times that edge $e$ is counted corresponds to the number of times that $e$ is counted in the sum. In the sum over the vertices $\sum_{v\in C}b_v$, each edge is counted at most twice, since it is covered at most twice. In the sum over the edges in $E'$, each edge is covered only once. Therefore, in each coordinate $e\in \{0, \hdots, m-1\}$, the value is at most $3$ (in particular, there are no carries). 
+
+Now, the target has a value of $2$ in each edge coordinate. Since the contribution to each edge $e$ is (number of times edge covered by $C$) + ($1$ if $e\in E'$ and $0$ otherwise), and we know this has a value of $2$ for each edge, this means that the number of times each edge is covered by $C$ is at least $1$, so $C$ covers every edge. Therefore, $C$ is a vertex cover, and we are done. 
+\end{proof}
