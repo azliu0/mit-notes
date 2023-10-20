@@ -8,12 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Create build folder
         run: |
-          mkdir dist
+          mkdir dist && cp -r notes/ dist && cd dist
       - name: Generate tree
         run: |
-          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > dist/index.html
+          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
       - name: Archive build folder
         uses: actions/upload-artifact@v3
         with:
