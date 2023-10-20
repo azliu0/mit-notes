@@ -14,12 +14,20 @@ jobs:
       - name: Generate tree
         run: |
           tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > dist/index.html
-  deploy:
+      - name: Archive build folder
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/
+deploy:
     permissions: 
       id-token: write
     runs-on: ubuntu-latest
     needs: build
     steps: 
+      - name: Download build folder
+        uses: actions/download-artifact@v3
+        with: 
+          path: dist/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5 
         with:
