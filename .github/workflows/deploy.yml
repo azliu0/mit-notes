@@ -15,7 +15,7 @@ jobs:
           mkdir dist && cp -r notes/ dist && cd dist
       - name: Generate tree
         run: |
-          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
+          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html && cd ..
       - name: Archive build folder
         uses: actions/upload-artifact@v3
         with:
