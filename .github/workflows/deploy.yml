@@ -13,12 +13,11 @@ jobs:
           sudo apt-get install tree
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Create build folder
+      - name: Generate tree and create build folder
         run: |
-          mkdir dist && cp -r notes/* dist 
-      - name: Generate tree
-        run: |
-          cd dist && tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html && cd .. 
+          tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
+          mkdir dist
+          cp -r notes/* dist
       - name: Archive build folder
         uses: actions/upload-artifact@v3
         with:
