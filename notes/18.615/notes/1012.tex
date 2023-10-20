@@ -1,0 +1,96 @@
+\section{October 12, 2023}
+
+Last time, we proved that positive/null recurrence is a class property. Therefore, we may say: 
+
+\begin{definition}
+\deflabel
+
+Irreducible Markov Chain $P$ is positive recurrent if it has a positive recurrent state. It is null recurrent if it has a null recurrent state. 
+\end{definition}
+
+\subsection{Stationary Measures}
+
+\begin{definition}
+\deflabel
+
+A \ac{measure} on countable set $\mathcal{X}$ is a function $\mu: \mathcal{X}\rightarrow \RR_{\geq 0}$. 
+\end{definition}
+
+We assume all of our measures are non-zero, i.e., there exists $x$ with $\mu(x) > 0$. Unlike a distribution, we do not require $\sum_{x\in \mathcal{X}}\mu(x) = 1$. 
+
+\begin{definition}
+\deflabel
+
+A \ac{stationary measure} on Markov Chain $P$ is a measure $\pi$ s.t. $\pi P = \pi$. 
+\end{definition}
+
+All stationary distributions are stationary measures, and so are all of their scalar multiples. However, even if $P$ is irreducible, stationary measures may not be unique. 
+
+\begin{theorem}
+\proplabel
+
+Given measure $\pi$, $P$ is said to be reversible wrt $\pi$ if $\pi(x)P(x,y) = \pi(y)P(y,x)$. All reversible measures are also stationary. 
+\end{theorem}
+
+\begin{proof}
+Same proof as for reversible distributions.
+\end{proof}
+
+\begin{theorem}
+\proplabel
+
+If $P$ has a recurrent state, it also has a stationary measure. 
+\end{theorem}
+
+\begin{proof}
+In the proof of stationary distribution with $\vert \mathcal{X}\vert < \infty$, we showed that $\pi(x) = \EE(N_x)/\EE(\tau_x^+)$ was a stationary distribution, where we defined $N_x$ as the number of visits to $x$ before returning to $z$. So, $\pi(x) = \EE(N_x)$ is a stationary measure, as long as $\EE(N_x) < \infty$. Suppose $z$ is a recurrent state. Then, $N_x$ is geometric with common ratio $\PP[\tau_x < \tau_z] < 1$, since $z$ is recurrent, so $\EE(N_x) < \infty$.
+\end{proof}
+
+\begin{theorem}
+\proplabel
+
+If $P$ is irreducible and recurrent, then all stationary measures are scalar multiples of each other. 
+\end{theorem}
+
+\begin{proof}
+Let $\mu(x)$ be a stationary measure. We will prove in HW that $\mu(x) > 0$ for all $x$. Scale $\mu$ so that $\mu(z) = 1$ for some $z\in \mathcal{X}$. By the previous proposition, we know that $\pi(x) = \EE[N_x]$ is also a stationary measure, and further, $\pi(z) = \EE[N_z] = 1 = \mu(z)$. We now show that $\pi(x) = \mu(x)$ for all $x$:
+\begin{align*}
+    \mu(x) &= P(z,x) + \sum_{y_0\neq z}\mu(y_0)P(y_0,x) \\
+    &= P(z,x) + \sum_{y_0\neq z}P(y_0,x)\left(P(z,y_0) + \sum_{y_1\neq z}\mu(y_1)P(y_1,y_0)\right) \\
+    &= P(z,x) + \sum_{y_0\neq z}P(z,y_0)P(y_0,x) + \sum_{y_0,y_1\neq z}\mu(y_1)P(y_1,y_0)P(y_0,x) \\
+    &= \hdots \\
+    &= P(z,x) + \sum_{y_0\neq z}P(z,y_0)P(y_0,x) + \hdots + \sum_{y_0, y_1, \hdots, y_k\neq z}\mu(y_k)P(y_k,y_{k-1})\hdots P(y_0,x) \\
+    &\geq \sum_{i=1}^k \PP(X_i=x, \tau_z^+\geq i | X_0=z),
+\end{align*}
+As $k\rightarrow \infty$, this final expression approaches $\EE[N_x]$, so $\nu(x) = \mu(x)-\EE[N_x] \geq 0$ is another stationary measure. Since we know $\nu(z) = 0$, and $P$ is irreducible, we must have $\nu(x) = 0$ for all $x$, so $\mu = \pi$ as desired.
+\end{proof}
+
+\begin{theorem}
+\proplabel
+
+If $P$ is irreducible and has a stationary distribution, it is positive recurrent. 
+\end{theorem}
+
+\begin{proof}
+$P$ must be recurrent, because 
+\[\sum_x \pi(x)G(x,z) = \sum_{i\geq 0}\sum_x \pi(x)P^i(x,z) = \sum_{i\geq 0}\pi(z) = \infty,\]
+implying at least one $x\in \mathcal{X}$ with $G(x,z)=\infty$. By Corollary $9.6$, this implies $P$ recurrent. 
+
+We show $\pi(x) = 1/\EE[\tau_x^+]$, which suffices because we know $\pi(x) > 0$. 
+\begin{align*}
+    \pi(x)\EE[\tau_x^+] &= \sum_i \PP[\tau_x^+\geq i, X_0=x | X_0\sim \pi] \\
+    &= \PP[\tau_x^+\geq 1, X_0=x | X_0\sim \pi] + \sum_{i\geq 2} \PP[X_{i-1}\neq x, \hdots, X_1\neq x, X_0=x | X_0\sim \pi] \\ 
+    &= \pi(x) + \sum_{i\geq 2} \left(\PP[X_{i-1}\neq x, \hdots, X_1\neq x | X_0\sim \pi]-\PP[X_{i-1}\neq x, \hdots, X_1\neq x, X_0\neq x | X_0\sim \pi]\right) \\
+    &= \pi(x) + \PP[X_1\neq x|X_0\sim \pi] \\
+    &\qquad + \sum_{i\geq 2}\left(\PP[X_{i}\neq x, \hdots, X_1\neq x | X_0\sim \pi]-\PP[X_{i-1}\neq x, \hdots, X_1\neq x, X_0\neq x | X_0\sim \pi]\right) \\
+    &= \pi(x) + \PP[X_1\neq x|X_0\sim \pi] \\
+    &= \pi(x) + \PP[X_0\neq x|X_0\sim \pi] = 1,
+\end{align*}
+where the second to last equality follows by the Markov property, and the last equality follows by the fact that $\pi$ is a stationary distribution. 
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+If $P$ is irreducible and positive recurrent, there exists a unique stationary distribution. 
+\end{theorem}

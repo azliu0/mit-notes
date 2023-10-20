@@ -1,0 +1,55 @@
+\section{April 11, 2023}
+
+\subsection{Classification}
+
+A set of images encoded as vectors $X = (x_1, \hdots, x_d)^T\in \RR^d$. Given an input set of data $\{(X_1, Cat), (X_2, Dog), \hdots\}$, the goal is to learn from this data and come up with a classification rule. 
+
+\begin{definition}
+\deflabel
+
+The classification rule is a function $h$ such that $h(x)\in \{0,1\}$. 
+\end{definition}
+
+Error/risk function for a classifier: 
+\[L(h) = \EE[\mathbbm{1}(h(x)\neq Y)] = \PP[h(x)\neq Y].\]
+
+The empirical risk function is 
+\[\hat{L}(h) = \frac{1}{n}\sum_{i=1}^n\mathbbm{1}(h(x_i)\neq Y_i).\]
+
+\begin{theorem}
+\thmlabel
+
+Define $h^*(X) = \mathbbm{1}(r(X) > 1/2)$ where $r(X) = \PP[Y=1 | X=x] = \EE[Y | X=x]$. The Bayes classifier $h^*$ minimizes the true error among all classifiers, i.e., 
+\[\PP(h^*(X)\neq y)\leq \PP(h(X)\neq y)\quad \forall h.\]
+\end{theorem}
+
+\begin{proof}
+Since $\PP[h(X)\neq y] = \EE_X[\EE[(h(X)\neq y)|X=x]]$, it suffices to show that 
+\[\PP[h^*(X)\neq y | X=x] - \PP[h(X)\neq y | X=x]\leq 0.\]
+
+Fix some hypothesis $h$. If $h^*(x) = h(x)$, then $\PP[h^*(X)\neq y|X=x]=\PP[h(X)\neq y|X=x]$, so the result holds. 
+
+So, assume $h^*(x)\neq h(x)$. Given that $h(x)\neq y$, we know that $h^*(x)=y$, since $y\in \{0,1\}$, so $\PP[h(X)\neq y | X=x] = \PP[h^*(X)=y|X=x]$, and it thus suffices to show that 
+\[\PP[h^*(X)\neq y | X=x]\leq \PP[h^*(X)=y | X=x].\]
+\begin{itemize}
+    \item If $r(x)\leq 1/2$, then $h^*(x)=0$, so we want to show $\PP[Y=1|X=x]\leq \PP[Y=0|X=x]\iff r(x)\leq 1-r(x)\iff r(x)\leq 1/2$, which we assumed to be true. 
+    \item If $r(x) > 1/2$, then $h^*(x)=1$, so we want $\PP[Y=0|X=x]\leq \PP[Y=1|X=x]\iff 1-r(x)\leq r(x)\iff r(x)\geq 1/2$, which we assumed to be true. 
+\end{itemize}
+\end{proof}
+
+How do we compute $r(x) = \PP[Y=1|X=x]$? Given: 
+\begin{itemize}
+    \item $Y\in \{0,1\}$, $Y\in \Bern(\pi_0)$
+    \item $f_X(X=x|Y=1) = f_1(x)$ is the conditional density of $X$ given $Y=1$
+    \item $f_X(X=x|Y=0) = f_0(x)$ is the conditional density of $X$ given $Y=0$. 
+\end{itemize}
+
+Then, by Bayes' formula, 
+\[r(x) = \frac{\pi_0f_1(x)}{\pi_0f_1(x)+(1-\pi_0)f_0(x)}.\]
+
+Given data, we need a way to estimate $\pi_0$, $f_1$, $f_0$, in order to compute $r(x)$ in this way. Estimator for $\hat{\pi}_0$:
+\[\hat{\pi}_0 = \frac{1}{n}\sum_{i=1}^n \mathbbm{1}(Y_i=1).\]
+
+We can estimate the density functions with \ac{Kernel Density Estimation}:
+\[\hat{f}(x) = \frac{1}{nh}\sum_{i=1}^nK\left(\frac{x_i-x}{h}\right),\]
+where $h$ can be thought of some sort of bandwidth, and $K(x) = e^{-x^2/2}/\sqrt{2\pi}$ is Gaussian. 

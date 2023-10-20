@@ -1,0 +1,98 @@
+\section{September 21, 2023}
+
+\subsection{Metropolis-Hastings}
+
+\begin{definition}
+\deflabelname{Ising Model}
+
+Let $G=(V,E)$ be graph. Let $\mathcal{X}=\{-1,1\}^{\vert V\vert}$. The \ac{Ising model} with inverse temperature $\beta$ is the distribution on $\mathcal{X}$ with 
+\[\mu(\sigma) = \frac{1}{Z_{\beta}}\exp\left(\beta \sum_{(v,w)\in E}\sigma(v)\sigma(w)\right),\]
+where $Z_{\beta}$ is a normalization constant. 
+\end{definition}
+
+Sampling from this distribution is very expensive; to compute the normalization constant, we have to sum over all $2^{\vert V\vert}$ possible $\sigma$. In general, suppose $\mu$ is a distribution on $\mathcal{X}$ which is computationally intractable. Can we find an algorithm to approximately sample from $\mu$? Basic idea: create a Markov chain $P$ whose stationary distribution is $\mu$, and then run the Markov chain for a long time, and hope that we are close to $\mu$. 
+
+\begin{definition}
+\deflabelname{Metropolis-Hastings} 
+
+Let $P$ be a markov chain and $\mu$ a distribution on $\mathcal{X}$. Assume $\mu(x) > 0$ for all $x$. The Metropolis MC wrt $P$ and $\mu$ has transition matrix 
+\[\hat{P}(x,y) = P(x,y)\min\left(1, \frac{\mu(y)P(y,x)}{\mu(x)P(x,y)}\right),\]
+whenever $x\neq y$, and $\hat{P}(x,x)$ is defined so that all the rows add to $1$. 
+\end{definition}
+First note that this is a valid transition matrix, since
+\[\sum_{y\neq x}\hat{P}(x,y) \leq \sum_{y\neq x}P(x,y) = 1 - P(x,x)\leq 1,\]
+so we can always choose $\hat{P}(x,x)$ so that the rows sum to $1$. 
+
+\begin{theorem}
+\proplabel
+
+Let $\hat{P}$ be the metropolis chain with respect to $P$ and $\mu$. $\hat{P}$ is reversible wrt $\mu$, which implies that $\mu$ is stationary. 
+\end{theorem}
+
+\begin{proof}
+We want to show that 
+\[\mu(x)\hat{P}(x,y) = \mu(y)\hat{P}(y,x).\]
+This is true when $x=y$, so assume $x\neq y$. Then, plugging in known values, we want to show
+\[\mu(x)P(x,y)\min\left(1,\frac{\mu(y)P(y,x)}{\mu(x)P(x,y)}\right) = \mu(y)P(y,x)\min\left(1,\frac{\mu(x)P(x,y)}{\mu(y)P(y,x)}\right).\]
+This is always true, since exactly one of the mins will be $1$. 
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+If $P$ is irreducible and $P(x,y)>0$ if and only if $P(y,x)>0$, then $\hat{P}$ is irreducible. 
+\end{theorem}
+
+\begin{proof}
+$\hat{P}(x,y)>0$ and $\hat{P}(y,x)>0$ given $P(x,y)>0$ and $P(y,x)>0$, meaning that $\hat{P}$ has the same communicating classes. 
+\end{proof}
+
+\subsection{Gibbs Sampling}
+
+Note that transition probabilities are much easier to compute now, since $\mu(x)/\mu(y)$ is generally much easier to compute than either of $\mu(x)$ or $\mu(y)$ individually. However, this still does not allow us to sample efficiently from the Ising model, since our MC would have $2^{\vert V\vert}$ nodes. We want an easier way to progress through large MCs given transition probabilities. 
+
+\begin{definition}
+\deflabelname{Gibbs Sampling}
+
+Let $\mathcal{X}=S^n$ for some set $S$ and $n>0$. Let $\mu$ be a distribution on $\mathcal{X}$. The \ac{Gibbs Sampler} associated with $\mu$ is the MC starting from $(x_1, \hdots, x_n)\in \mathcal{X}$ and moving randomly: 
+\begin{enumerate}
+    \item Pick $I\in [n]$ randomly 
+    \item Sample $X$ according to 
+    \[P(X=x) = \frac{\mu(x_1, \hdots, x, \hdots, x_n)}{\sum_y\mu(x_1, \hdots, y, \hdots, x_n)},\]
+    where $x$ and $y$ both appear in the $I$th coordinate.
+    \item Move to $(x_1, \hdots, X, \hdots, x_n)$, where $X$ replaces $x_i$. 
+\end{enumerate}
+\end{definition}
+
+In the example of the Ising model, $S=\{-1,1\}$, and we progress through the MC by randomly sampling a specific node, then flipping/keeping its value. 
+
+\begin{theorem}
+\proplabel
+
+Let $\hat{P}$ be the Gibbs sampler for $\mu$. Then $\hat{P}$ is reversible wrt $\mu$. 
+\end{theorem}
+
+\begin{proof}
+We want to show that 
+\[\mu(x_1,\hdots,x_n)\hat{P}((x_1,\hdots,x_n),(y_1,\hdots,y_n)) = \mu(y_1,\hdots,y_n)\hat{P}((y_1,\hdots,y_n),(x_1,\hdots,x_n)).\]
+
+If all coordinates are equal, both sides are the same. Otherwise, we only need to consider pairs of states who differ in exactly one coordinate, since otherwise the transition probabilities are zero. 
+
+Then WLOG $x_1\neq y_1$; both the LHS and RHS evaluate to
+\[\frac{1}{n}\frac{\mu(x_1,\hdots,x_n)\mu(y_1,\hdots,y_n)}{\sum_z\mu(z,x_2,\hdots,x_n)}.\]
+(the $1/n$ comes from the fact that we have choose the first coordinate randomly when we transition). Since LHS=RHS, we are done.
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Gibbs sampling on the Ising model is called \ac{Glauber dynamics}. 
+\end{example}
+
+To perform Gibbs sampling on the Ising model: 
+\begin{enumerate}
+    \item pick vertex $v\in V$ at random
+    \item $\mu(v_1,\hdots,v,\hdots,v_n)$ is a product of $\exp$s. since we only care about ratios of $\mu$ between two states, we can ignore the normalization constant and terms that do not involve $v$. this means we can replace $\sigma(v)$ with either $\pm 1$, equal to $1$ with probability 
+    \[\frac{\exp(\beta \sum_{(w,v)\in E} \sigma(w))}{\exp(-\beta \sum_{(w,v)\in E}\sigma(w)) + \exp(\beta \sum_{(w,v)\in E}\sigma(w))}.\]
+    \item transition to the new state. 
+\end{enumerate}

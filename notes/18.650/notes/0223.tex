@@ -1,0 +1,142 @@
+\section{February 23, 2023}
+
+\subsection{M-estimation}
+
+$X_1, \hdots, X_n$ i.i.d. from $\PP_{\theta}$ drawing from sample space $E$. In maximum likelihood estimation, we estimate $\theta$ with
+\[\hat{\theta} = \argmax_{\theta} \frac{1}{n}\sum_i \log L(X_i, \theta).\]
+
+In $M$-estimation, our goal is to find a function $\rho: E\times \mathcal{M}\rightarrow \RR$, where $\mathcal{M}$ is the set of all possible $\theta$, such that 
+\[\hat{\theta} = \argmin_{\theta}\EE[\rho(X_1, \theta)].\]
+Note that $\hat{\theta}_{MLE}$ is itself also an $M$-estimator, by setting $\rho(X, \theta) = -\log L(X,\theta)$. 
+
+\begin{example}
+\exlabel
+
+Given $X_1, \hdots, X_n$ i.i.d. from some unknown $\PP$ in sample space $E\subseteq \RR^d$. Estimate $\EE[X]$, where $X$ is also distributed as $\PP$. 
+\end{example}
+
+The sample mean $\ov{X}_n = (X_1 + \hdots + X_n)/n$ is a valid $M$-estimator.
+
+\begin{theorem}
+\claimlabel
+
+If $\rho(X_i, \theta) = (X_i-\theta)^2$, then 
+\[\argmin_{\theta} \frac{1}{n}\sum (X_i-\theta)^2 = \ov{X}_n.\]
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+Estimate the median of the distribution of $X$.
+\end{example}
+
+The sample median is also a valid $M$-estimator.
+
+\begin{theorem}
+\claimlabel
+
+If $\rho(X_i, \theta) = \vert X_i-\theta\vert$, then 
+\[\argmin_{\theta} \frac{1}{n}\sum \vert X_i-\theta\vert = \text{sample median}.\]
+\end{theorem}
+
+\subsection{Hypothesis Testing}
+
+Let $(\Omega, (\PP_{\theta})_{\theta\in \Theta})$ be a statistical model. For some partition $\{\Theta_0, \Theta_1\}$ of $\Theta$:
+\begin{itemize}
+    \item $H_0$: $\theta \in \Theta_0$ is the \ac{null hypothesis}
+    \item $H_1$: $\theta \in \Theta_1$ is the \ac{alternative hypothesis}
+\end{itemize}
+For $k\in \{0,1\}$, we say that $\Theta_k$ is a \ac{simple hypothesis} if $\Theta_k = \{\theta_k\}$. It is a \ac{composite hypothesis} if it takes the form $\Theta_k = \{\theta : \theta > \theta_k\}$, $\Theta_k = \{\theta : \theta < \theta_k\}$, or $\Theta_k = \{\theta : \theta \neq \theta_k\}$. 
+
+\begin{definition}
+\deflabel
+
+A \ac{test} is a function $\Psi : \Theta \rightarrow \{0,1\}$, where $\Psi = 1$ indicates that we reject the null hypothesis, and $\Psi=0$ means that we fail to reject the null hypothesis. 
+
+We can define a rejection region $R$. Then $\Psi = \mathbbm{1}(R)$.
+\end{definition}
+
+\begin{example}
+\exlabel
+
+The average waiting time in the emergency room is around $30$ minutes. Some people claim that the New-York Presbyterian hospital has a longer waiting time. 
+\end{example}
+
+Let $\omega$ be a random variable modeling the waiting time in the emergency room at the New-York Presbyterian hospital, in minutes. The null hypothesis $(H_0)$ says that $\EE[\omega]\leq 30$. The alternate hypothesis $(H_1)$ says that $\EE[\omega] > 30$. Both hypotheses in this case are composite hypotheses.
+
+Let $\widehat{\EE[\omega]}$ be some estimator that we come up with for $\EE[\omega]$ given some data. A typical test might look like 
+\[\Psi = \mathbbm{1}(\widehat{\EE[\omega]} > \varepsilon),\]
+where $\varepsilon$ is a threshold we set for deciding whether or not to reject $H_0$.
+
+\subsection{Errors}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{c|c|c|}
+    & Fail to Reject & Reject \\
+\hline
+    $H_0$ true ($\theta\in \Theta_0$) & Correct & Type I error \\
+\hline
+    $H_1$ true ($\theta\in \Theta_1$) & Type II error & Correct \\
+\hline
+\end{tabular}
+\end{figure}
+
+\begin{definition}
+\deflabel
+
+The \ac{power function} of a test is a function $\beta: \Theta\rightarrow [0,1]$ with 
+\[\beta(\theta) = \PP_{\theta}(\psi = 1).\]
+\end{definition}
+In words, the power of a test measures how likely it is to reject the null hypothesis. This function can be used to measure the likelihood of each error: if $\theta\in \Theta_0$, 
+\[\beta(\theta) = \PP_{\theta}[\text{type I error}].\]
+In this case, we want the power to be small. If $\theta\in \Theta_1$,
+\[\beta(\theta) = 1 - \PP_{\theta}[\text{type II error}].\]
+In this case, we want the power to be large. 
+
+\begin{example}
+\exlabel
+
+Back to the kissing example.
+\end{example}
+
+In this example, our test is $\Psi = \mathbbm{1}(\hat{p} > c)$, for some value of $c$. So, 
+\begin{align*}
+    \PP_{\theta}(\text{type I error}) = \PP(\hat{p} > c) = \PP\left(\sqrt{n}\left(\hat{p}-\frac{1}{2}\right) > \sqrt{n}\left(c-\frac{1}{2}\right)\right).
+\end{align*}
+(For a type I error to occur, we assume that $p=1/2$). If we let $c\rightarrow \infty$, the probability of a type I error goes to $0$. On the other hand,
+\begin{align*}
+    \PP_{\theta}(\text{type II error}) = \PP(\hat{p} < c) = \PP\left(\sqrt{n}\left(\hat{p}-p\right) < \sqrt{n}\left(c-p\right)\right).
+\end{align*}
+If we want the probability of a type II error to be $0$, we need $c\rightarrow -\infty$. We cannot do both at the same time.
+
+\begin{definition}
+\deflabel
+
+In the \ac{Neyman-Pearson paradigm},
+\begin{itemize}
+    \item First, make sure that $\PP_{\theta}[\text{type I error}]\leq \alpha$, where $\alpha$ determines the level of the test (i.e., $5\%$, $1\%$, etc.)
+    \item Then, choose $c$ such that $\PP_{\theta}[\text{type II error}]$ is minimized
+\end{itemize}
+\end{definition}
+In the kissing experiment, we therefore want 
+\[\PP_{\theta = 1/2}(\hat{p} > c)\leq \alpha.\]
+In this case, the test $\Psi = \mathbbm{1}(\hat{p} > c)$ said to have \ac{level $\alpha$}.
+More generally, if we require
+\[\lim_{n\rightarrow \infty}\PP_{\theta = 1/2}(\hat{p}_n > c)\leq \alpha,\]
+then $\Psi$ is an \ac{asymptotic level $\alpha$} test.
+
+\begin{align*}
+    \lim_{n\rightarrow \infty}\PP_{\theta=1/2}\left(\frac{\sqrt{n}(\hat{p}_n-1/2)}{\sqrt{\hat{p}_n(1-\hat{p}_n)}} > \frac{\sqrt{n}(c-1/2)}{\sqrt{\hat{p}_n(1-\hat{p}_n)}}\right) &= \PP\left(\Norm(0,1) \geq \frac{\sqrt{n}(c-1/2)}{\sqrt{\hat{p}_n(1-\hat{p}_n)}}\right) \\
+    &= 1-\Phi\left(\frac{\sqrt{n}(c-1/2)}{\sqrt{\hat{p}_n(1-\hat{p}_n)}}\right) = \alpha.
+\end{align*}
+This gives
+\[c = \frac{1}{2} + \frac{q_\alpha}{\sqrt{n}}.\]
+
+
+
+
+
+
+
+

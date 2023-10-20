@@ -1,0 +1,59 @@
+\section{February 15, 2023 (R)}
+
+\begin{example}
+\exlabel
+
+Let $X_1, \hdots, X_n\sim \Unif([\theta, 2\theta])$ be a sequence of i.i.d. random variables for some $\theta > 1$. Compute the quadratic risk of $\hat{\theta} = \min\{X_1, \hdots, X_n\}$.
+\end{example}
+
+This is order statistics. The minimum order is described by the \ac{beta distribution}, which we can use to check our work. (If we know the expected value and variance of the minimum order statistic over $U\sim \Unif[0,1]$, we could just plug it in, but we'll go through the whole derivation here anyways for fun). Recall the formula for quadratic risk: 
+\[R(\hat{\theta}_n) = \var[\hat{\theta}_n] + \text{bias}^2(\hat{\theta}_n).\]
+First, we compute $f_{\hat{\theta}}$. Note 
+\[\PP[\hat{\theta}\geq x] = \PP[X_i\geq x]^n = \left(\frac{2\theta-x}{\theta}\right)^n,\]
+so
+\[f_{\hat{\theta}} = \frac{\mathrm{d}}{\mathrm{d}\theta}\left[1-\left(\frac{2\theta - x}{\theta}\right)^n\right] = \frac{n}{\theta}\left(\frac{2\theta-x}{\theta}\right)^{n-1}.\]
+Now, 
+\begin{align*}
+    \EE[\hat{\theta}] &= \int_{\theta}^{2\theta}\frac{n}{\theta}\left(\frac{2\theta - x}{\theta}\right)^{n-1}x\ddd x\\
+    &= \left[-x\left(\frac{2\theta-x}{\theta}\right)^n\right]\Bigg|_{\theta}^{2\theta} + \int_{\theta}^{2\theta}\left(\frac{2\theta-x}{\theta}\right)^n\ddd x \\
+    &= \left[-x\left(\frac{2\theta-x}{\theta}\right)^n + \frac{-\theta}{n+1}\left(\frac{2\theta-x}{\theta}\right)^{n+1}\right]\Bigg|_{\theta}^{2\theta} = \left(\frac{n+2}{n+1}\right)\theta.
+\end{align*}
+Also,
+\begin{align*}
+    \EE[\hat{\theta}^2] &= \int_{\theta}^{2\theta}\frac{n}{\theta}\left(\frac{2\theta-x}{\theta}\right)^{n-1}x^2\ddd x \\
+    &= \left[-x^2\left(\frac{2\theta-x}{\theta}\right)^n - 2x\frac{\theta}{n+1}\left(\frac{2\theta-x}{\theta}\right)^{n+1}\right]\Bigg|_{\theta}^{2\theta} + \int_{\theta}^{2\theta}\frac{2\theta}{n+1}\left(\frac{2\theta-x}{\theta}\right)^{n+1}\ddd x \\
+    &= \left[-x^2\left(\frac{2\theta-x}{\theta}\right)^n - 2x\frac{\theta}{n+1}\left(\frac{2\theta-x}{\theta}\right)^{n+1} + \frac{-2\theta^2}{(n+1)(n+2)}\left(\frac{2\theta-x}{\theta}\right)^{n+2}\right]\Bigg|_{\theta}^{2\theta} \\
+    &= \left(\frac{n^2+5n+8}{(n+1)(n+2)}\right)\theta^2.
+\end{align*}
+Finally,
+\begin{align*}
+    \var[\hat{\theta}] = \EE[\hat{\theta}^2] - \EE[\hat{\theta}]^2 = \frac{\theta^2n}{(n+1)^2(n+2)}.
+\end{align*}
+So,
+\begin{align*}
+    R(\hat{\theta}) = \var[\hat{\theta}] + \text{bias}^2(\hat{\theta}) = \frac{\theta^2n}{(n+1)^2(n+2)} + \left(\frac{\theta}{n+1}\right)^2 = \frac{2\theta^2}{(n+1)(n+2)}.
+\end{align*}
+
+\begin{example}
+\exlabel
+
+Consider a sample of $n$ i.i.d. continuous random variables $X_1, \hdots, X_n$ with density 
+\[f(x) = e^{-(x-a)}1_{x\geq a}, x\in \RR,\]
+where $a$ is an unknown parameter. 
+\begin{enumerate}
+\setlength\itemsep{0cm}
+    \item [(1)] Compute $\EE[X_1]$.
+    \item [(2)] Determine whether $\ov{X}_n-1$ is a consistent estimator of $a$.
+    \item [(3)] Based on $\ov{X_n}$, propose a confidence interval for $a$ with asymptotic level $95\%$. 
+\end{enumerate}
+\end{example}
+
+\begin{enumerate}
+    \item [(1)] The given density function is the same density function as an exponentially distributed r.v. with parameter $1$, shifted by $a$. Therefore, $\EE[X_1] = \EE[\Exp(1)]+a = a+1$.
+    \item [(2)] By the strong law of large numbers, $\ov{X}_n\cas a+1$. Let $g(x) = x-1$. By the continuous mapping theorem, \[g(\ov{X}_n) = \ov{X}_n-1 \cas a = g(\EE[\ov{X}_n]),\] so $\ov{X}_n-1$ is a strongly consistent estimator of $a$. 
+    \item [(3)] By the central limit theorem, 
+    \[\lim_{n\rightarrow \infty}\PP\left[\left\vert \sqrt{n}\frac{(\ov{X}_n - a - 1)}{1}\right\vert \leq q_{0.025}\right] = \PP\left[\vert \Norm(0,1)\vert \leq q_{0.025}\right] = 95\%.\]
+    So, a valid asymptotic $95\%$ confidence interval for $a$ is given by
+    \[a\in \left[\ov{X}_n-1-\frac{q_{0.025}}{\sqrt{n}}, \ov{X}-1+\frac{q_{0.025}}{\sqrt{n}}\right].\]
+\end{enumerate}
+

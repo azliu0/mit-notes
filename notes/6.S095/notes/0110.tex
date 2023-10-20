@@ -1,0 +1,97 @@
+\section{January 10, 2023}
+
+\subsection{Basic Counting Principles}
+
+\begin{theorem}
+\lemlabelname{Addition Principle}
+
+For $n$ disjoint sets $S_1, S_2, \hdots, S_n$, the cardinality of their sum 
+\[\norm{S_1 + S_2 + \hdots + S_n} = \norm{S_1} + \hdots + \norm{S_n}.\]
+\end{theorem}
+
+\begin{definition}
+\deflabel
+
+Let $S_1, \hdots, S_n$ be finite sets. Their \ac{Cartesian Product} is defined 
+\[S_1\times \hdots \times S_n = \{(s_1, \hdots, s_n)\vert s_1\in S_1, \hdots, s_n\in S_n\}.\]
+\end{definition}
+
+\begin{theorem}
+\lemlabelname{Multiplication Principle}
+
+For $n$ disjoint sets $S_1, S_2, \hdots, S_n$, the cardinality of their cartesian product 
+\[\norm{S_1 \times \hdots \times S_n} = \norm{S_1} \cdot \hdots \cdot \norm{S_n}.\]
+\end{theorem}
+
+\begin{definition}
+\deflabel
+
+A function $f: A\rightarrow B$ between finite sets $A$ and $B$ is called a \ac{bijection} if $f(a)=f(b)\implies a=b$ (injectivity) and for all $b\in B$, there exists $a\in A$ such that $f(a) = b$ (surjectivity).
+\end{definition}
+
+\begin{theorem}
+\thmlabelname{Pascal's identity}
+
+For nonnegative integers $n,k$, 
+\[\binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1}.\]
+\end{theorem}
+
+\begin{proof}
+    The left hand side represents the number of ways to choose $k+1$ elements from a set of size $n+1$. Another way to count this is to consider whether or not to include the last element in the set. If this element is included, this contributes $\binom{n}{k}$. If this element is not included, this contributes $\binom{n}{k+1}$. Together, this forms the right hand side, so we are done. 
+\end{proof}
+
+\subsection{PIE}
+
+\begin{theorem}
+\lemlabelname{PIE}
+
+Let $A_1, A_2, \hdots, A_n$ be finite sets. Then 
+\[\norm{A_1\cup \hdots \cup A_n} = \sum_{j=1}^n(-1)^{j-1}\sum_{\{i_1, \hdots, i_j\}\subseteq [n]} \norm{A_{i_1}\cap \hdots \cap A_{i_n}}.\]
+\end{theorem}
+
+\begin{example}
+\exlabelname{Derangements}
+
+A permutation on $n$ elements $\pi_n$ is called a \ac{derangement} if $\pi(i)\neq i$ for all $i\in [n]$. Let $D(n)$ be the number of derangements in $S_n$. Then 
+\[D(n) = \sum_{k=0}^{n}(-1)^k\frac{n!}{k!}.\]
+\end{example}
+
+\begin{proof}
+$D(n)$ is equal to $n!$ minus the total number of permutations that have at least one fixed point. Let $A_i$ be the set of all permutations which fixes $i$. Then 
+\[D(n) = n! - \vert A_1\cup \hdots \cup A_n\vert.\]
+
+For any set of $k$ points which are fixed, there are $(n-k)!$ ways to permutate the remaining $(n-k)$ elements. Therefore, by PIE,
+\begin{align*}
+    \vert A_1\cup \hdots \cup A_n\vert &= \sum_{j=1}^n (-1)^{j-1} \sum_{\{i_1, \hdots, i_j\}\subseteq [n]} \vert A_{i_1}\cap \hdots \cap A_{i_n}\vert \\
+    &= \sum_{j=1}^n (-1)^{j-1} \binom{n}{j}(n-j)! = \sum_{j=1}^n (-1)^{j-1} \frac{n!}{j!}.
+\end{align*}
+
+Substituting this into our expression for $D(n)$ gives us the desired result. 
+\end{proof}
+
+Using the taylor series for $e$, it can be proven that $D(n) = \lfloor n!/e + 1/2\rfloor$.
+
+\begin{example}
+    \exlabelname{Euler Totient}
+
+    For any positive integer $m$, the euler totient $\varphi(m)$ is defined as the number of positive integers between $1$ and $m$ inclusive that are coprime to $n$. If the prime factorization of $m$ is $p_1^{a_1}p_2^{a_2}\hdots p_k^{a_k}$, then 
+    \[\varphi(m) = m\prod_{i=1}^k\left(1-\frac{1}{p_i}\right).\]
+\end{example}
+
+\begin{proof}
+    Consider instead the number of positive integers that are not coprime to $n$. These positive integers have at least $1$ prime power in common with $m$. Let $A_{i}$ denote the set of positive integers $\leq m$ with prime power $p_i$. Then 
+    \begin{align*}
+        \varphi(m) &= m - \vert A_{1}\cup \hdots \cup A_{k}\vert \\
+        &= m - \left(\sum_{j=1}^k (-1)^{j-1} \sum_{\{i_1, \hdots, i_j\}\subseteq [m]}\frac{m}{p_{i_1}\cdot \hdots \cdot p_{i_j}}\right) \\ 
+        &= m\left(1 + \sum_{j=1}^k \sum_{\{i_1, \hdots, i_j\}\subseteq [m]}\left(\frac{-1}{p_{i_1}}\right)\left(\frac{-1}{p_{i_2}}\right)\hdots \left(\frac{-1}{p_{i_j}}\right)\right) \\ 
+        &= m\prod_{i=1}^k \left(1 - \frac{1}{p_i}\right),
+    \end{align*}
+    where the last line follows by polynomial expansion.
+\end{proof}
+
+
+
+
+
+
+

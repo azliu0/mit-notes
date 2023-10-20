@@ -1,0 +1,68 @@
+\section{March 2, 2023}
+
+Review from last time: we want to create methods \textsc{Insert}, \textsc{Delete}, \textsc{Search}. The keys $k\in \mathcal{U}$, the number of objects is $n$, the size of the dictionary $T$ is $m$, and the load factor $\alpha = n/m$.
+
+\subsection{Open Addressing}
+
+Open addressing is another way to address collisions. In open addressing, we guarantee a different hash for every different element. In this case, we require $n\leq m\implies \alpha\leq 1$. 
+
+For each $k\in \mathcal{U}$, define a \ac{probing sequence} $\sigma(k)=\{i_0^{(k)}, i_1^{(k)}, \hdots, i_{m-1}^{(k)}\}$ that we look through to assign keys to different elements. The probing sequence is a permutation of $m$. Now, model this probing sequence as an output to a hash function $h: \mathcal{U} \times \{0,\hdots, m-1\}\rightarrow \{0,\hdots, m-1\}$:
+\[h(k,p)=i_p^{(k)},\]
+where $p$ is called the \ac{probe number}. 
+
+For each method, we still start with a normal hash function $h(k)=i_0^{(k)}$. To insert, keep incrementing $p$ until $T[h(k,p)]$ until it is empty or marked deleted, and insert the element. To delete, keep incrementing $p$ until $T[h(x.\textsc{Key},p)]=x.\textsc{Val}$, and mark it deleted. 
+
+\begin{itemize}
+    \item Linear probing: 
+    \[h(k,p) = (h(k)+c\cdot p)\pmod{m}.\]
+    Clustering is a problem with linear probing. For elements that hash to keys that are closer together, the searches start to overlap heavily. 
+    \item Double hashing: 
+    \[h(k,p) = (h_1(k) + p\cdot h_2(k))\pmod{m},\]
+    for two hash functions $h_1,h_2$. Double hashing gets us closest to the uniform hashing assumption.
+\end{itemize}
+
+\begin{definition}
+\deflabel
+
+The \ac{uniform hashing assumption} says that for all $k\in \mathcal{U}$, the probe sequence $\sigma(k)$ is a independent and uniformly random permutation.
+\end{definition}
+
+Let $X$ be the number of steps it takes before a hash is successful. Under the uniform hashing assumption, $\PP[X\geq k]=\alpha^{k-1}$, since each new part of the sequence is filled with probability $\alpha$. Therefore, the expected runtime for each hash is 
+\[O(1+\alpha+\hdots) \in O(1/(1-\alpha)).\] 
+
+\subsection{Perfect Hashing}
+
+\begin{definition}
+\deflabel
+
+A \ac{static dictionary} is a dictionary that only supports the \textsc{Search} method. All inserts are performed beforehand during a preprocessing phase. 
+\end{definition}
+
+A perfect hashing scheme is a hashing scheme that ensures no collisions, which guarantees $O(1)$ search time. One way to achieve this is to use solution zero (i.e., chaining with a list), but to implement the ``list'' as another dictionary with hashing. So, there are two levels of hashing:
+\begin{itemize}
+    \item $h_1(k)$ is a slot in $T$
+    \item If $h_1(k)=i$, the final location for $k$ is $h_{2,i}(k)$. 
+\end{itemize}
+
+\begin{theorem}
+\thmlabel
+
+Let $\mathcal{H}=\{h: \mathcal{U}\rightarrow M\}$ universal. If we pick $h\in_R\mathcal{H}$ and hash $n$ keys with $m\geq n^2$, then the probability of a collision is $<1/2$.
+\end{theorem}
+
+\begin{proof}
+Proof by union bound. The probability $P$ satisfies
+\[P\leq \binom{n}{2}\frac{1}{n^2} < \frac{1}{2}.\]
+\end{proof}
+
+In principle, we could use this fact to preprocess hash functions until there are no collisions; in expectation, this would only require two random choices. The problem with doing this is the requirement that $m\geq n^2$, leading to quadratic space complexity. Using chaining with a second hash function allows us to circumvent this.
+
+Let $h_1$ map $N_i$ keys to the $i$th mini dictionary. Our goal is to achieve
+\[\sum N_i^2 = O(n),\]
+so that our space is still linear. To compute the probability that this is true, we can compute its expected value, and then apply Markov's inequality. By linearity of expectation, 
+\begin{align*}
+    \EE\left[\sum N_i^2\right] &= \sum_{(k_1, k_2)\in \mathcal{U}^2} \PP(h_1(k_1) = h_2(k_2)) \\
+    &= n + \sum_{k_1\neq k_2} \PP(h_1(k_1) = h_2(k_2)) \\
+    &\leq n + \frac{n(n-1)}{m} < 2n,
+\end{align*}
+by the property of universal hashing, assuming that $m\geq n$. This implies that, $\PP[\sum N_i^2 > 4n] < 1/2$ by Markov's inequality. So, in expectation, we only need to try to pick $h_1$ twice before it is ``good enough''. 

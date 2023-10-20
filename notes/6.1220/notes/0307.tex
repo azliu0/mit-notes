@@ -1,0 +1,192 @@
+\section{March 7, 2023}
+
+\subsection{Spanning Trees}
+
+\begin{definition}
+\deflabel
+
+A \ac{spanning tree} of $G=(V,E)$ is a subgraph $(V, E_T)$ which is a connected tree. 
+\end{definition}
+
+Spanning trees are not necessarily unique! An easy way to find a spanning tree is to use DFS, which has linear runtime. 
+
+Observation about any spanning tree $T$ of $G$: for every non-tree edge $(x,y)$, there exists a unique path $P_{(x,y)}$ from $x$ to $y$ in $T$. $P_{(x,y)}\cup \{(x,y)\}$ forms a cycle, which is called the fundamental cycle of $(x,y)$. 
+
+\begin{theorem}
+\lemlabelname{Cut and Swap Property of Spanning Trees}
+
+For any $G=(V,E)$ and spanning tree $T$, non-tree edge $(x,y)$, and tree edge $e\in P_{(x,y)}$, the graph $T'=T\cup\{(x,y)\}-\{e\}$ is also a spanning tree. 
+\end{theorem}
+
+\begin{proof}
+Consider the unique path $P$ with endpoints $u,v$ in $T$. If $e\notin P$, then $P$ is in $T'$, so $P$ also connects $u,v$ in $T'$. 
+
+Otherwise, $e\in P$. Let $C_{(x,y)}=P_{(x,y)}\cup \{(x,y)\}$. WLOG, the distance from $u$ to $x$ is smaller than the distance from $u$ to $y$. Then $P_{(u,x)}\cup (C_{(x,y)}-e)\cup P_{(y,v)}$ is a path from $u$ to $v$ in $T'$. So, we are done. 
+\end{proof}
+
+Note that this operation preserves the number of edges, which makes sense, since trees always have $\vert V\vert - 1$ edges.
+
+\subsection{Minimal Spanning Trees (MST)}
+
+\begin{definition}
+\deflabel
+
+Given graph $G=(V,E)$ and weight function $w:E\rightarrow \RR$, a \ac{minimal spanning tree} of $G$ is a spanning tree of minimum weight. 
+\end{definition}
+
+Like the normal spanning tree, MSTs are not necessarily unique, due to the possibility of different edges having the same weights. But, given that all edges have different edges, it turns out that there is a unique MST. 
+
+A general greedy approach to finding a minimum spanning tree might look as follows. First, initialize a set of edges $A=\emptyset$. While $A$ is not a spanning tree, find a ``safe'' edge to add to $A$. 
+    
+When $A=\emptyset$, the min weight edge $e^*=(a,b)$ is safe. Let $T$ be a minimal spanning tree. If $e^*\in T$, then we are done. Otherwise, we can use the cut and swap property with another edge on the path $P_{(a,b)}$ to achieve another spanning tree $T'$ with $w(T')\leq w(T)\implies w(T')=w(T)$, and $T'$ is also an MST.
+
+\begin{definition}
+\deflabel
+
+A \ac{cut} of $G=(V,E)$ is a partition of $V$ into $(S, V-S)$. An edge $(x,y)\in E$ \ac{crosses cut} $(S, V-S)$ if $x\in S$ and $y\in V-S$. A cut $(S, V-S)$ \ac{respects} a set of edges $A\subseteq E$ if no edge of $A$ crosses the cut. An edge $(x,y)\in E$ is a \ac{light edge} for cut $(S, V-S)$ if it crosses the cut and has minimum weight among all edges crossing the cut. 
+\end{definition}
+
+\begin{theorem}
+\thmlabel
+
+Let $A\subseteq E$, where $A$ is a proper subset of the edges of some MST. Let $(S, V-S)$ be a cut that respects $A$. Let $e$ be a light edge for the cut. Then $e$ is safe for $A$. 
+\end{theorem}
+
+\begin{proof}
+We will prove this using the cut and swap property. Let $T$ be some MST containing $A$. 
+
+Say $e=(a,b)\notin T$. Let $P_{(a,b)}$ be path in $T$ from $a$ to $b$. Note that $T$ must cross the cut, since $a$ and $b$ are in different parts of the cut. Let $e'$ be an edge in $P$ that crosses the cut. By the cut and swap property, we can replace $e'$ with $e$ to obtain another spanning tree $T'$. Since $w(e')\leq w(e)$, $w(T')\leq w(T)\implies w(T')=w(T)$, so $T'$ is also a minimal spanning tree. 
+\end{proof}
+
+Now, we have a general approach for picking safe edges:
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetNoFillComment
+
+\caption{\textsc{Meta-Greedy MST}}\label{alg:mstgreedy}
+$A = \emptyset$\;
+\While{$A$ \text{is not a spanning tree}}{
+    Pick cut $(S, V-S)$ that respects $A$\;
+    Let $e$ be a light edge for the cut\;
+    $A = A\cup \{e\}$\;
+}
+\Return{$A$}\;
+\end{algorithm}\medskip
+
+Note that the loop should run exactly $\vert V\vert-1$ times, since this is the final size of $A$. There are many ways to pick these cuts efficiently: 
+\begin{itemize}
+    \item \ac{Prim's Algorithm}: $A$ is a tree of isolated vertices. Pick the cut $(V(T_A), V-V(T_A))$. The implementation for Prim's is very similar to Dijkstra, since we are essentially just adding the min-weight edge adjacent to $A$, which we can keep track using a priority queue. 
+    \item \ac{Kruskal's Algorithm}: $A$ is a forest of trees. Pick $e$ to get the min weight edge connecting $2$ different trees. This can be implemented using the union find data structure. 
+\end{itemize}
+
+\subsection{Implementation details Kruskal's}
+
+In Kruskal's we construct the MST by building up a forest of smaller trees and connecting them until they eventually become a single unified tree. First, we sort the edges by decreasing weight. Then, we add edges greedily as long as they cross cut, i.e., connect two different trees. Correctness comes from the previous facts that we proved about light edges (we always add light weight edges due to the sorting). \V
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetNoFillComment
+
+\caption{\textsc{Kruskal's MST}}\label{alg:kruskal}
+$A = \emptyset$\;
+For all $v\in V$, \textsc{Make-Set}$(v)$\;
+Sort $E$ in non-decreasing order\;
+\For{$e=(u,v)\in E$}{
+    \If{\textsc{Find}$(u)\neq $\textsc{Find}$(v)$}{
+        $A = A\cup{(u,v)}$\;
+        \textsc{Union}$(u,v)$\;
+    }
+}
+\Return{$A$}\;
+\end{algorithm}\medskip
+
+The runtime of this algorithm is dominated by the sorting, $O(\vert E\vert\log \vert E\vert)$. The cost of the loop is $O(\vert E\vert \alpha(\vert V\vert))$, since the number of union and finds is bounded by the number of edges. 
+
+\subsection{Implementation details Prim's}
+
+For Prim's, we construct our MST by maintaining a single smaller tree, and at each step adding a new edge until the tree eventually becomes an MST. The idea is that we should always add the lowest weight edge adjacent to our current tree, since this is a light edge (and hence correctness comes from the ideas we proved earlier). 
+
+There are a few different ways to implement Prim's. The naive way is to, for each step, iterate through all edges and choose the lowest weight available edge adjacent to our current tree. \V
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetNoFillComment
+
+\caption{\textsc{Prim's MST, slow}}\label{alg:primslow}
+$A = \emptyset$\;
+Pick starting vertex $s\in V$, set $V(A)=\{a\}$\;
+\While{$A$ is not a spanning tree}{
+    Initialize a min-weight edge $e^*$\;
+    \For{$e=(u,v)\in E$}{
+        \If{$w(e) < w(e^*)$ and $u\in V(A)$, $v\notin V(A)$}{
+            $e^*=e$\;
+        }
+    }
+    Add $e^*$ to $A$\;
+}
+\Return{$A$}\;
+\end{algorithm}\medskip
+
+The runtime is $O(\vert V\vert \vert E\vert)$, since the loop ``while $A$ is not a spanning tree'' runs $O(\vert V\vert)$ times (we add exactly $\vert V\vert-1$ edges until $A$ becomes a spanning tree). An easy way to speed this up is to iterate over vertices instead of edges, by keeping track of the distances to the tree: \medskip
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetNoFillComment
+
+\caption{\textsc{Prim's MST, dense graphs}}\label{alg:primdense}
+$A = \emptyset$\;
+Init $D$, set of distances from the tree\;
+Pick starting vertex $s\in V$, set $V(A)=\{a\}$\;
+\While{$A$ is not a spanning tree}{
+    Initialize a min-weight edge $e^*$
+    \For{$v\in V$}{
+        \If{$D[v].dist < w(e^*)$}{
+            $e^* = (D[v].parent, v)$\;
+        }
+    }
+    Add $e^*$ to $A$\;
+    \For{$v$ adjacent to the newly added vertex $v^*$ in $e^*$}{
+        \If{$w((v, v^*)) < D[v].dist$}{
+            $D[v].dist = w(v)$\;
+            $D[v].parent = v^*$\; 
+        }
+    }
+}
+\Return{$A$}\;
+\end{algorithm}\medskip
+
+The runtime is $O(\vert V\vert^2)$, since we make two linear traversals through the vertices for each added edge. Note that the runtime of Kruskal's is $O(\vert E\vert \log{\vert E\vert})$. \textbf{This version of Prim's is more desirable than Kruskal's for dense graphs, i.e., when $\vert E\vert \in O(\vert V\vert^2)$}. For example, see \href{http://www.usaco.org/current/data/sol_walk_gold_open19.html}{here (USACO)}. \V
+
+The last, most efficient but hardest to implement, version of Prim's is to implement it with a Min-Prio queue, like how we implement Dijkstras. This is similar in idea to the first version (Algorithm~\ref{alg:primslow}). Instead of iterating all edges, we keep track of the closest ones with a Min-Prio queue:\medskip
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetNoFillComment
+
+\caption{\textsc{Prim's MST, PQ}}\label{alg:primPQ}
+$A = \emptyset$\;
+Pick starting vertex $s\in V$\;
+Initialize Min-Prio Queue $PQ$\;
+\For{$v\in V$}{
+    $v.key=\infty$\;
+}
+$s.key=0$\;
+\While{$A$ is not a spanning tree}{
+    $v=PQ.top()$\;
+    Add $v$ to $V(A)$\;
+    If not the first iteration, add $(v, v.parent)$ to $E(A)$\;
+    \For{$u$ adjacent to $v$}{
+        \If{$w((u,v)) < u.key$}{
+            $u.key = w((u,v))$\;
+            $u.parent = u$\;
+        }
+    }
+}
+\Return{$A$}\;
+\end{algorithm}\medskip
+
+The outer loop runs $O(\vert V\vert)$ times. Extracting the minimum with a normal heap takes $O(\log \vert V\vert)$, while updating the queue in place can be done in $O(1)$ using fibonacci heap. The inner loop performs $O(\vert E\vert)$ of these updates (across the entire algorithm), so the final runtime is $O(\vert E\vert + \vert V\vert\log{\vert V\vert})$. 
+
+Without fibonacci heap, updates take $O(\log \vert V\vert)$, giving a final runtime of\\ $O(\vert E\vert\log \vert V\vert + \vert V\vert\log \vert V\vert)\in O(\vert E\vert\log \vert V\vert)$. This is the the same performance as Kruskal's algorithm. 
+

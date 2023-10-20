@@ -1,0 +1,301 @@
+\section{January 31, 2023}
+
+The goal of asymptotics is to study the limiting behavior of random variables. For example, does the mean of independent observations of the same random variable converge? What is the approximate distribution of sample means if we have a lot of different samples?
+
+\subsection{Modes of Convergence}
+
+\begin{definition}
+\deflabelname{Convergence in Distribution}
+
+Consider a sequence of random variables $X_1, \hdots, $ and another random variable $X$. Let $F(x)$ denote the cdf of $X$, and $F_n(x)$ for $X_n$. We say that $X_n$ converges in distribution to $X$ if, for every $x$ at which $F$ is continuous, 
+\[\lim_{n\rightarrow \infty}F_n(x) = F(x).\]
+Usually, this is denoted 
+\[X_n \overset{d}{\underset{n\rightarrow{\infty}}{\longrightarrow}}X.\]
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Let $Y_1, \hdots$ be a sequence of independent random variables distributed uniformly on $[0,1]$. Let $X_n = \max_{1\leq i\leq n}Y_i$. Then the random variable $n(1-X_n)$ converges in distribution to a random variable with distribution $\Exp(1)$. 
+\end{example}
+
+To show that this is true, we first compute the cdf of the random variable that is converging. 
+\begin{align*}
+    F_n(x) &= \PP[n(1-X_n) \leq x] \\
+    &= \PP[X_n\geq 1-x/n] \\
+    &= 1 - \PP[X_n\leq 1-x/n] \\
+    &= 1 - \left(1-\frac{x}{n}\right)^n.
+\end{align*}
+In the limit, this is equal to $1-e^{-x}$, which is the cdf for a random variable with distribution $\Exp(1)$, so we are done. 
+
+Convergence in distribution was only concerned about the long-run behavior of the cdf. Convergence in probability is stronger in the sense that the random variables must also get close to the target random variable. 
+
+\begin{definition}
+\deflabelname{Convergence in Probability}
+
+Consider a sequence of random variables $X_1, \hdots,$ and another random variable $X$. We say that $X_n$ converges in probability to $X$ if, for all $\varepsilon > 0$, 
+\[\lim_{n\rightarrow \infty}\PP(\vert X_n-X\vert > \varepsilon) = 0.\]
+Usually, this is denoted 
+\[X_n\overset{p}{\underset{n\rightarrow \infty}{\longrightarrow}} X.\]
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Consider the sequence of random variables $X_1, \hdots$ where $X_n\sim \Exp(n)$. Then, $X_n\overset{p}{\underset{n\rightarrow \infty}{\longrightarrow}} 0$. 
+\end{example}
+
+Note that $X_n$ is nonnegative, so
+\[\PP[\vert X_n - 0\vert > \varepsilon] = \int_{\epsilon}^{\infty}ne^{-nx}dx = e^{-n\varepsilon}.\]
+Taking the limit as $n$ goes to infinity, this approaches zero.
+
+\begin{example}
+\exlabel
+
+Convergence in distribution does not imply convergence in probability. Define $X_n$ with $X_0 = \Unif[0,1]$, and 
+\[X_n = \begin{cases}X_0 & n\text{ even} \\ 1-X_0 & n\text{ odd}.\end{cases}\]
+\end{example}
+
+This sequence converges in distribution to $X_0$, since they're all uniformly distributed. On the other hand, they don't converge in probability to any random variable $X$. Intuitively, this is because the sequence oscillates, whereas any random variable represents a function that outputs one value. 
+
+\begin{definition}
+\deflabelname{Almost sure convergence}
+
+A sequence of random variables $X_1, \hdots,$ converges almost surely to a random variable $X$ if 
+\[\PP\left(\lim_{n\rightarrow \infty}X_n=X\right) = 1.\]
+Usually, this is denoted 
+\[X_n\overset{a.s.}{\underset{n\rightarrow \infty}{\longrightarrow}} X.\]
+\end{definition}
+
+This is the strongest sense of convergence. Almost sure convergence implies convergence in probability, which implies convergence in distribution.
+
+\begin{example}
+\exlabel
+
+Consider the sequence of random variables $X_1, \hdots$ where $X_n=0$ with probability $1/n^2$ and $X_n=1$ otherwise. Then, $X_n\overset{a.s.}{\underset{n\rightarrow \infty}{\longrightarrow}} 1$. 
+\end{example}
+
+The Borel-Cantelli Lemma gives us that: if sum of the probabilities of an infinite number of events is infinite, then the probability of infinitely many of them occurring is $1$. On the other hand, if their sum is finite, then the probability of infinitely many of them \textit{not} occuring is $1$. In this case, since $\sum 1/n^2$ is finite, the probability that infinitely many $X_i$ are $0$ is $0$. This implies that, with probability $1$, there are infinitely many $X_i=1$, so $X_n$ converges almost surely to $1$. 
+
+\begin{example}
+\exlabel
+
+Almost sure convergence does not imply convergence in probability. Consider the previous example, modified so that $X_n=0$ with probability $1/n$ and $X_n=1$ otherwise. 
+\end{example}
+
+$X_n$ converges in probability to $0$, since $\lim_{n\rightarrow \infty}1/n = 0$. On the other hand, the Borel-Cantelli Lemma implies that $X_n$ does not converge almost surely to $0$. 
+
+\begin{definition}
+\deflabelname{Convergence in $L^p$ norm}
+
+A sequence of random variables $X_1, \hdots$ converges in the $L^p$-norm to a random variable $X$, for some $p\geq 1$, if 
+\[\lim_{n\rightarrow \infty}\EE[\vert X_n - X\vert^p] = 0,\]
+given that their respective $p$-th absolute moments exist. 
+\end{definition}
+
+\begin{theorem}
+\lemlabel
+
+Convergence in the $L^q$ norm implies convergence in the $L^p$ norm for $q > p$. 
+\end{theorem}
+
+\begin{proof}
+Note that $x^{p/q}$ is concave down. Therefore, by Jensen's, 
+\[\EE[\vert X_n-X\vert^p] = \EE[(\vert X_n-X\vert^q)^{p/q}] \leq \EE[(\vert X_n-X\vert)^q]^{p/q}.\]
+Taking the limit on both sides finishes. 
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+Convergence in the $L^p$ norm implies convergence in probability. 
+\end{theorem}
+
+\begin{proof}
+By Markov's inequality, 
+\begin{align*}
+    \PP[\vert X_n - X\vert > \varepsilon] &= \PP[\vert X_n - X\vert^p > \varepsilon^p] \leq \frac{\EE[\vert X_n - X\vert ^p]}{\varepsilon^p}.
+\end{align*}
+Taking the limit finishes. 
+\end{proof}
+
+There isn't a good way to compare convergence in the $L^p$ norm and convergence almost surely. (?)
+
+\subsection{Law of Large Numbers}
+
+Intuitively, when we are trying to determine the mean of a random variable $X$, taking more samples will generally give a better estimate for the mean. Why is this the case? 
+
+\begin{theorem}
+\thmlabelname{Weak Law of Large Numbers}
+
+Consider a sequence of independent and identically distributed random variables $X_1, \hdots$ with finite expectation $\EE[X]$. Denote the sample mean 
+\[\overline{X_n} = \frac{1}{n}\sum_{i=1}^nX_n.\]
+Then, $\overline{X_n} \cp \EE[X]$. This is equivalent to saying that for any $\varepsilon, \delta > 0$, there exists $n$ where 
+\[\PP[\vert \overline{X_n} - \EE[X]\vert > \varepsilon] < \delta.\]
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+Let $X_1, \hdots,$ be a sequence of independent random variables with $\EE[X_i] = \mu$ and the variance of each term is finite. Let $Y_k = X_kX_{k+1}$ for every $k$. Prove that 
+\[\frac{1}{n}\sum_{k=1}^n Y_k\cp \mu^2.\]
+\end{example}
+
+By the weak law of large numbers, 
+\begin{align*}
+    \frac{2}{n}(Y_1 + Y_3 + \hdots) &\cp \mu^2 \\
+    \frac{2}{n}(Y_2 + Y_4 + \hdots) &\cp \mu^2.
+\end{align*}
+Averaging gives the desired result. Note that splitting the sum like this is necessary, since we require every ``sample'' to be independent. 
+
+\begin{theorem}
+\thmlabelname{Strong Law of Large Numbers}
+
+Consider a sequence of independent and identically distributed random variables $X_1, \hdots$ with finite expectation $\EE[X]$. Then $\overline{X_n}\cas \EE[X]$. 
+\end{theorem}
+
+With probability one, the sample mean approaches the actual mean. 
+
+\subsection{Central Limit Theorem}
+
+\begin{theorem}
+\thmlabelname{Central Limit Theorem}
+
+For a sequence of independent, identically distributed random variables $X_1, \hdots,$ with finite expectation $\EE[X]$ and variance $\sigma^2$, it holds that 
+\[\frac{\sqrt{n}(\overline{X_n} - \EE[X])}{\sigma} \cd \Norm(0,1).\]
+\end{theorem}
+
+Important: this holds for any random variable. The sample means are normally distributed, always. Intuitively, the more samples you have, the variance decreases from the mean ($\sigma^2\rightarrow \sigma^2/n$). 
+
+\begin{example}
+\exlabel
+
+We roll a fair die $100$ times. What is the probability that the average roll is at most $3$?
+\end{example}
+
+By the central limit theorem, we can the sample means to be normally distributed. The variance of a dice roll is $35/12$, so $\sigma = \sqrt{35/12}$. The $z$-statistic is therefore given by 
+\[z = \frac{\overline{X_n} - \EE[X]}{\sigma/\sqrt{n}} \approx -2.9.\]
+Therefore,
+\[\PP[\overline{X}\leq 3] = \PP[z \leq -2.9] = 0.17\%.\]
+
+\begin{example}
+\exlabel
+
+Consider $10$ numbers $X_1, \hdots, X_{10}$ drawn independently and uniformly at random from $[0,100]$. Let $A$ be their sum, rounded. Let $B$ be the sum of their rounded values. Use the central limit theorem to approximate the probability that $A=B$. 
+\end{example}
+
+Write $X_i = K_i+\varepsilon_i$, where $K_i$ is $X_i$ rounded to the nearest integer. $\varepsilon_i$ is uniform, so 
+\[A=B \iff \varepsilon_1 + \hdots + \varepsilon_{10} \in [-0.5, 0.5].\]
+By the central limit theorem, 
+\[\sum_{i=1}^{n}\varepsilon_i\cd \Norm(0, n\sigma^2),\]
+so we may approximate our probability as 
+\[\PP[-0.5 \leq \Norm(0, 5/6)\leq 0.5] \approx 0.42.\]
+
+\subsection{Slutsky and Borel-Cantelli}
+
+\begin{theorem}
+\thmlabelname{Slutsky's Theorem}
+
+Consider two sequences of random variables $X_n$ and $Y_n$, where $X_n\cd X$ and $Y_n\cp c$, where $c$ is a constant. Then,
+\begin{enumerate}
+    \item [(1)] $X_n + Y_n \cd X + c$\\
+    \item [(2)] $X_nY_n\cd cX$ \\ 
+    \item [(3)] $X_n/Y_n \cd X_n/c$, if $c\neq 0$.
+\end{enumerate}
+\end{theorem}
+
+These results should feel intuitive. 
+
+\begin{example}
+\exlabel
+
+Let $X_i\sim \Unif[-1,1]$. Let 
+\[Z_n = \frac{\sqrt{n}\sum_{k=1}^nX_k}{\sum_{k=1}^n(X_k^2+X_k^3)}.\]
+Prove that $Z_n\cd \Norm(0,3)$.
+\end{example}
+
+By the central limit theorem, 
+\[\frac{1}{\sqrt{n}}\sum_{k=1}^nX_k\cd \Norm(0, \sigma^2).\]
+
+By the weak law of large numbers, 
+\[\frac{1}{n}\sum_{k=1^n}(X_k^2 + X_k^3)\cp \EE[X_k^2 + X_k^3] = 1/3.\]
+
+Therefore, by Slutsky, 
+\[Z_n\cd \Norm(0, 9\sigma^2) = \Norm(0, 3).\]
+
+\begin{theorem}
+\thmlabelname{Borel-Cantelli}
+
+Let $E_1, \hdots, $ be a sequence of events in some probability space. If 
+\[\sum_{i=1}^{\infty}\PP[E_i] < \infty,\]
+then, with probability $1$, only a finite number of events will occur. This is the same as saying 
+\[\PP\left(\bigcap_{i=1}^{\infty}\bigcup_{j=1}^{\infty}E_j\right) = 0.\]
+\end{theorem}
+
+\subsection{Bounding Methods}
+
+\begin{theorem}
+\lemlabelname{Union Bound}
+
+For events $A_1, \hdots, A_n,$
+\[\PP[A_1\cup \hdots \cup A_n]\leq \sum_{i=1}^n \PP[A_i].\]
+\end{theorem}
+
+\begin{proof}
+We show that this is true by inducting on $n$. For $n=2$, the result follows from PIE. Now, assume that it is true for $n=k-1$. 
+\begin{align*}
+    \PP\left[\bigcup_{i=1}^k A_i\right] &= \PP\left[\left(\bigcup_{i=1}^{k-1}A_i\right) \cup A_k\right] \\
+    &\leq \PP\left[\bigcup_{i=1}^{k-1}A_i\right] + \PP[A_k] \\
+    &\leq \sum_{i=1}^k \PP[A_i],
+\end{align*}
+by our inductive hypothesis. 
+\end{proof}
+
+\begin{theorem}
+\lemlabelname{Markov's Inequality}
+
+Consider a nonnegative random variable $X$ with finite expectation $\EE[X]$. Then, 
+\[\PP[X\geq k\cdot \EE[X]]\leq \frac{1}{k}.\]
+This is the same as saying 
+\[\PP[X\geq k] \leq \frac{\EE[X]}{k}.\]
+\end{theorem}
+
+As stated, this bound is usually not very good. The proof follows directly from the law of total expectation. 
+
+\begin{theorem}
+\lemlabelname{Chebyshev's inequality}
+
+Consider a random variable $X$ with finite expectation $\EE[X]$ and variance $\sigma^2$. Then for any $k > 0$, 
+\[\PP(\vert X - \EE[X]\vert \geq k\sigma) \leq \frac{1}{k^2}.\]
+\end{theorem}
+
+\begin{proof}
+This is a direct application of Markov's Inequality to the random variable $(X-\EE[X])^2$.
+\end{proof}
+
+The next bounds are very popular in Computer Science.
+
+\begin{theorem}
+\lemlabelname{Generic Chernoff Bounds}
+
+Consider a random variable $X$ and any $k\in \RR$, $t\in \RR_{\geq 0}$. Then, 
+\[\PP[X\geq k]\leq \frac{\EE[e^{tX}]}{e^{tk}}.\]
+\end{theorem}
+
+\begin{proof}
+This is a direct application of Markov's Inequality to the random variable $e^{tX}$. 
+\end{proof}
+
+Generally speaking, Chernoff bounds are stronger than bounds using Chebyshev, which are stronger than bounds using Markov. 
+
+\begin{example}
+\exlabel
+
+Let $X\sim \Bin(n, 1/2)$. Compute upper bounds on $\PP[X > 3n/4]$.
+\end{example}
+
+Using Markov, $\PP[X > 3n/4] = 2/3$, which is really weak. Using Chebyshev, $\PP[X > 3n/4] = 4/n$, which is weak, but decays. Noting that $\EE[e^{tX}] = \sum_{i=0}^n \binom{n}{i}\cdot 2^{-n}e^{ti} = (1+e^t)^n\cdot 2^{-n}$, the generic Chernoff bound gives us:
+\[\PP[X > 3n/4] \leq \exp{\left(n\log\left({\frac{1+e^t}{2}}\right) - \frac{3nt}{4}\right)}.\]
+This holds for any $t\in \RR_{\geq 0}$ (hence is the ``generic'' bound), so we may choose a specific $t$ to make the bound as tight as possible. Differentiating, the expression on the RHS is minimized when $t=\log{3}$, giving us
+\[\PP[X > 3n/4]\leq \left(\frac{16}{27}\right)^{n/4}.\]
+This is the tightest upper bound by far, since it decays exponentially.

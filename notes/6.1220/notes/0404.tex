@@ -1,0 +1,147 @@
+\section{April 4, 2023}
+
+Intractability I. 
+
+\subsection{P, NP, NP-Completeness}
+
+\comment{add motivating examples}
+
+\begin{itemize}
+    \item Optimization problem: on input $I$, find an object satisfying some property and having min/max weight
+    \item Search problem: on input $I$ and value $K$, find an object satisfying some property and having weight $\leq K$ or $\geq K$
+    \item Decision problem: on input $I$ and value $K$, decide if there exists an object satisfying some property and having weight $\leq K$ or $\geq K$
+\end{itemize}
+
+\begin{example}
+\exlabel
+
+Search for an $s-t$ shortest path.
+\end{example}
+
+\begin{itemize}
+    \item Search: given $K$, output a path from $s$ to $t$ of length $\leq K$, or output that one does not exist. 
+    \item Decision: output yes if there exists a path $\leq K$, and no otherwise. 
+\end{itemize}
+
+In general, decision $\leq$ search $\leq$ optimization. For example, we can deduce a solution to the decision problem above by using the search algorithm. Therefore, if the decision problem is ``hard'', it must be the case that all other instances of the problem are hard.  
+
+\begin{definition}
+\deflabelname{P Class}
+
+A decision problem $\pi$ is solvable in polynomial time $\pi\in P$ if there is an algorithm $A$ and constant $c$ s.t. for every input $x\in \pi$ of length $n$, $A(x)$ runs in $O(n^c)$ time and $A(x)$ returns the correct answer, i.e., $A(x)$ returns yes if and only if $\pi(x)$ returns yes. 
+\end{definition}
+
+NP does not mean ``non-polynomial''; instead, it means ``nondeterministic polynomial time''. A good wrong name to remember is ``nifty proofs''. 
+
+\begin{definition}
+\deflabelname{NP Class}
+
+A decision problem $\pi$ is in nondeterministic polynomial time $\pi \in NP$ if there is an algorithm $V_\pi$ (called the ``verifier'') and constants $c,c'$ s.t. 
+\begin{itemize}
+    \item $V_\pi$ takes two inputs, $x$ an instance of $\pi$, and $y$ a ``certificate'' or ``proof''
+    \item $V_\pi$ runs in $O((\vert x\vert + \vert y\vert)^c)$
+    \item for every instance $x$ of $\pi$ of size $n$, $\pi(x)$ is yes if and only if there exists $y$ of size $\vert y\vert \leq n^{c'}$ such that $V_{\pi}(x,y)$ is yes. conversely, if $\pi(x)$ is no, then $V_{\pi}(x,y)$ is no for all possible $y$. 
+\end{itemize}
+\end{definition}
+
+In other words, the class of NP problems is the class of problems for which there exists a ``nifty proof'', i.e., a polynomial certificate $y$ with length $\vert y\vert\leq n^{c'}$. 
+
+\begin{example}
+\exlabel
+
+The $s-t$ shortest path problem is in NP. 
+\end{example}
+
+Let $x = (G, s, t, k)$ be an instance of the shortest path problem. Let $y$ be any input (it does not necessarily have to mean anything). Then, let the verifier algorithm $V(x, y)$ return YES if and only if $y$ is a path in $G$ from $s$ to $t$ of length $\leq k$.
+
+\begin{itemize}
+    \item This verifier is linear in the inputs, since it just needs to check that $y$ is a valid path
+    \item If the answer to the problem is YES, then a path with length $\vert y\vert \leq k$ is polynomial. Otherwise, the algorithm will return NO for all possible $y$.
+\end{itemize}
+
+\begin{example}
+\exlabel
+
+The $3D$ matching problem is in NP. 
+\end{example}
+
+Let $x = (H, k)$ be an instance of the $3D$ matching problem, where $H=(V,E)$ is a hypergraph with $E\subseteq V^3$. The $3D$ matching problem seeks to find the maximum set of edges that do not share end points, i.e., that forms a \ac{matching}.  
+
+Let $y$ be any input. The verifier $V(x,y)$ returns YES if and only if $y$ is a set of hyperedges in $H$ of size $\geq k$ that do not share endpoints. This verifier is polynomial. On the other hand, the problem itself (i.e., finding the ``nifty proof'' $y$) currently does not have a known polynomial time algorithm, so it is not in $P$. 
+
+\begin{example}
+\exlabel
+
+SSSP. Given $G=(V,E)$ and $s\in V$, output $d(s,v)$ for all $v\in V$. 
+\end{example}
+
+As written, this problem is not in NP (or P), since P/NP are classes of decision problems, and this is not a decision problem. 
+
+\begin{example}
+\exlabel
+
+The no-shortest path problem: given $G=(V,E)$, $s,t\in v$, and $k$, output YES if no path from $s$ to $t$ has length $\leq k$ and NO otherwise.  
+\end{example}
+
+This problem is in NP because it is in P (for example, we can solve the $s-t$ shortest path in polynomial time, and check if the shortest path has length $\leq k$). Since we can solve the problem itself in polynomial time, the verifier can ignore any certificate and just solve the problem itself. This demonstrates the following theorem.
+
+\begin{theorem}
+\thmlabel
+
+$P\subseteq NP$.
+\end{theorem}
+
+\begin{proof}
+Let $\pi \in P$ be a decision problem with polynomial time algorithm $A$. Then, the verifier $V_\pi(x, y) = A(x)$ works. 
+\end{proof}
+
+\subsection{Current State of the World}
+
+\begin{center}
+\begin{asy}
+import graph; size(10cm); 
+pen dps = linewidth(0.7) + fontsize(10); defaultpen(dps);
+pen dotstyle = black;
+
+path A = xscale(2)*unitcircle;
+path B = xscale(1.5)*yscale(0.8)*unitcircle;
+path C = xscale(0.4)*yscale(0.4)*unitcircle;
+path D = xscale(0.3)*yscale(0.4)*unitcircle;
+D = shift(0.8,0)*D;
+draw(A); 
+draw(B);
+draw(C);
+draw(D);
+
+label("$EXP$", (1.75,0));
+label("$NP$", (-1.1,0));
+label("$P$", (0,0));
+label("$NPC$", (0.8,0));
+\end{asy}
+\end{center}
+
+\begin{itemize}
+    \item It is unknown whether $P=NP$
+    \item Equivalently, it is unkonwn whether $P$ and $NPC$ overlap. If the overlap is non-empty, then all problems in $NP$ can be reduced to $P$, implying that $P=NP$. Otherwise, there are $NPC\subseteq NP$ problems not in $P$, implying that $P\neq NP$. 
+    \item It is known that $P\neq EXP$. 
+    \item It is known that $NP\subseteq EXP$. Problems in $NP$ have polynomial time verifiers, so an $EXP$ algorithm for every problem in $NP$ is to bash through every possible certificate, which takes $O(2^{O(n^c)})$, and see if the verifier ever returns YES. This is $EXP$ because the length of each certificate is assumed to be polynomial. 
+\end{itemize}
+
+\begin{definition}
+\deflabelname{Many-one polynomial time reduction}
+
+Let $Q$ and $\pi$ be decision problems. A many-one polynomial time reduction from $Q$ to $\pi$ is an algorithm $R$ that takes in $x$, an instance of $Q$, and outputs $y$, an instance of $\pi$, such that 
+\begin{itemize}
+    \item $R$ runs in polynomial time
+    \item if $Q(x)$ is yes, then $\pi(y)$ is yes
+    \item if $Q(x)$ is no, then $\pi(y)$ is no
+\end{itemize}
+\end{definition}
+
+We say $Q\leq_p \pi$ to denote that $Q$ can be reduced to $\pi$. Note that $\pi$ is ``harder'', since if we can solve $\pi$ in polynomial time, this implies that we can solve $Q$ in polynomial time by the reduction. 
+
+\begin{definition}
+\deflabelname{NP-Complete}
+
+$\pi\in NP$-complete if and only if $\pi\in NP$ and $\pi$ is \ac{NP-hard}. Formally, $Q\leq_p\pi$ for all $Q\in NP$. Informally, $\pi$ is at least ``as hard'' as every other problem in NP. 
+\end{definition}

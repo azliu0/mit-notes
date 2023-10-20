@@ -1,0 +1,100 @@
+\section{March 7, 2023}
+
+\subsection{$t$-test}
+
+In a $t$-test, we have $X_1, \hdots, X_n\sim \Norm(\mu_1, \sigma^2)$ and $Y_1, \hdots, Y_m\sim \Norm(\mu_2, \sigma^2)$. We assume that everything is independent. Then,
+\begin{itemize}
+    \item $H_0$: $\mu_1=\mu_2$
+    \item $H_1$: Any of $\mu_1\neq \mu_2$, $\mu_1 > \mu_2$, $\mu_2 > \mu_1$
+\end{itemize}
+
+We use estimators $\hat{\mu_1} = \sum_{i=1}^nX_i/n$, and $\hat{\mu_2}=\sum_{i=1}^mY_i/m$. Then, consider
+\[\frac{\hat{\mu_1}-\hat{\mu_2}}{\sqrt{\var(\hat{\mu_1}-\hat{\mu_2})}},\]
+which, like the Wald test, is the quantity that we would like to use as our test statistic. By our independence assumption, $\var{(\hat{\mu_1}-\hat{\mu_2})} = \var{(\hat{\mu_1})}+\var{(\hat{\mu_1})} = \sigma^2/n + \sigma^2/m$. Since we do not explicitly know $\sigma$, we need an estimator:
+\[S_n^2 = \hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\ov{X}_n)^2.\]
+This is called the sample variance. 
+
+\begin{definition}
+\deflabelname{Chi-square distribution}
+
+Let $Z_1\sim \Norm(0,1)$. Then, we say that $Z_1^2\sim \chi_1^2$. More generally, we say that 
+\[Z_1^2+\hdots + Z_k^2\sim \chi_k^2.\]
+\end{definition}
+
+\begin{theorem}
+\thmlabelname{Cochran's Theorem}
+
+\[\frac{(n-1)S_n^2}{\sigma^2} \sim \chi^2_{n-1}.\]
+\end{theorem}
+
+\begin{proof} (intuition)
+\begin{align*}
+    \frac{(n-1)S_n^2}{\sigma^2} &= \sum_{i=1}^n\left(\frac{X_i-\ov{X}_n}{\sigma}\right)^2 \\
+    &= \frac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu-\ov{X}_n+\mu)^2 \\
+    &= \frac{1}{\sigma^2}\sum(X_i-\mu)^2 - \frac{n}{\sigma^2}(\ov{X}_n-\mu)^2.
+\end{align*}
+The term on the left is the sum of $n$ squared normal distributions, which is $\chi_k^2$. The term on the right subtracts just enough to turn the final distribution into $\chi_{n-1}^2$.
+\end{proof}
+
+\begin{definition}
+\deflabelname{$t$-distribution}
+
+For $Z\sim \Norm(0,1)$ and $S^2\sim \chi_k^2$, 
+\[\Upsilon = \frac{Z}{\sqrt{S^2/k}}\sim t_k.\]
+\end{definition}
+
+Our test statistic now looks something like this:
+\[\frac{\hat{\mu_1}-\hat{\mu_2}}{\sqrt{\frac{1}{n}\frac{1}{n-1}\sum(X_i-\ov{X}_n)^2 + \frac{1}{m}\frac{1}{m-1}\sum(Y_i-\ov{Y}_m)^2}}.\]
+Consider the case when $n=m$. Then, this distribution simplifies:
+\begin{align*}
+    \frac{(\hat{\mu_1}-\hat{\mu_2})/\sigma}{\sqrt{\frac{1}{n(n-1)}}\sqrt{\sum\left(\frac{X_i-\ov{X}_n}{\sigma}\right)^2 + \sum\left(\frac{Y_i-\ov{Y}_n}{\sigma}\right)^2}} &= \frac{(\hat{\mu_1}-\hat{\mu_2})/\sigma}{\sqrt{\frac{1}{n(n-1)}}\sqrt{\chi_{n-1}^2+\chi_{n-1}^2}}\\
+    &= \frac{(\hat{\mu_1}-\hat{\mu_2})/(\sigma \sqrt{2/n})}{\sqrt{\chi_{2n-2}^2/(2n-2)}}\sim t_{2n-2    }.
+\end{align*}
+
+\begin{example}
+\exlabel
+
+Conduct this test for one sample. 
+\end{example}
+For one sample, 
+\[\sqrt{n}\frac{\ov{X}_n-\mu}{S_n}\sim t_{n-1},\]
+so we can use this as our test statistic. Say we want to test against the null hypothesis $H_0: \mu=\mu_0$. Then, we use the test statistic 
+\[T = \sqrt{n}\frac{\ov{X}_n-\mu_0}{S_n}.\]
+\begin{itemize}
+    \item $H_1: \mu\neq \mu_0$, the T-Test $\Psi$ with level $\alpha$ is given by \[\Psi = \mathbbm{1}(\vert T\vert > q_{\alpha/2}^{t_{n-1}}).\]
+    \item The other alternative hypothesis tests have the same form as the Wald test (taken over $t_{n-1}$). 
+\end{itemize}
+
+\subsection{Goodness-of-fit Test}
+
+Define $(\PP_{p})_{p\in \Delta_K}$ to be the family of all probability distributions on some sample space $E=\{a_i\}_{i\leq K}$. In other words, 
+\[\Delta_k = \left\{(p_1, \hdots, p_K)\in (0,1)^K : \sum_{j=1}^K p_j=1\right\},\]
+where for any $p\in \Delta_K$ and $X\sim \PP_p$, 
+\[\PP_p[X=a_i]=p_i.\]
+
+The setup for the goodness-of-fit test is now as follows. We are given $X_1, \hdots, X_n\sim \PP_{\theta}$ for some $\theta\in \Delta_K$. The goal is to test whether $\theta$ is equal to some null hypothesis $\theta^0\in \Delta_K$, i.e.,
+\begin{itemize}
+    \item $H_0: \theta=\theta^0$.
+    \item $H_1: \theta\neq \theta^0$.
+\end{itemize}
+The pmf has support on $E$ (i.e., the original sample space), and is given by 
+\[p(x) = \prod_{j=1}^K p_j^{\mathbbm{1}(x=a_j)}.\]
+Let $\theta=(p_1, \hdots, p_K)$. The likelihood of the model is given by 
+\[L_n(X_1, \hdots, X_n; \theta) = p_1^{N_1}\hdots p_K^{N_K},\]
+where $N_i$ is the number of samples equal to $a_i$. By Jensen's, 
+\[\sum \frac{N_i}{n}\log p_i\leq \log\left(\sum \frac{N_i}{n}p_i\right).\]
+Note that the numerator in the right hand expression is $\vec{N}\cdot \vec{p}$, so it is maximized when they are parallel, i.e., when $N_i/p_i$ is constant. This shows that the MLE for $\theta$ is 
+\[\hat{\theta}=\left(\frac{N_1}{n}, \frac{N_2}{n}, \hdots, \frac{N_K}{n}\right).\]
+(This should intuitively make sense). 
+
+\begin{theorem}
+\thmlabelname{Goodness-of-fit convergence to chi-square}
+
+\[n\sum_{j=1}^K\frac{(\hat{\theta}_j-\theta^0_j)^2}{\theta^0_j}\cd \chi_{K-1}^2.\]
+\end{theorem}
+
+This gives us the $\chi^2$ test with level $\alpha$: $\Psi=\mathbbm{1}(T_n > q_{\alpha}^{\chi^2_{K-1}})$, where $T_n$ is the test statistic (the quantity on the left-hand-side), and $q_{\alpha}^{\chi^2_{K-1}}$ is the $\alpha$-quantile of $\chi^2_{K-1}$. The $p$-value is given by $\PP[\chi^2_{K-1}>T_{n}^{obs}]$. 
+
+
+
+

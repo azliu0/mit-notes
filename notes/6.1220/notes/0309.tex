@@ -1,0 +1,153 @@
+\section{March 9, 2023}
+
+\subsection{Max Flow Problem}
+
+The setup for this problem: 
+\begin{itemize}
+    \item directed graph $G = (V,E)$
+    \item a source vertex $s\in V$
+    \item a sink vertex $t\in V$
+    \item a max capacity for each edge, represented by a function $c: E\rightarrow \RR^{\geq 0}$. we additionally say that $c(u,v)=0$ for all $(u,v)\notin E$. 
+\end{itemize}
+
+The question we want to answer is approximately as follows. Each directed edge represents a one-way road from one place to another. The capacity of each edge represents the number of lanes that this road has. We want to find the maximum rate of traffic that can flow from $s$ to $t$. 
+
+\begin{definition}
+\deflabel
+
+\ac{Gross Flow}.
+\end{definition}
+Define the ``gross flow'' $g: E\rightarrow \RR^{\geq 0}$ be such that $g(u,v)$ denotes the amount of flow on the edge $(u,v)$. A valid flow satisfies
+\begin{itemize}
+    \item Feasability: \[0\leq g(u,v)\leq c(u,v)\forall (u,v)\in E\]
+    \item Flow conservation: \[\sum_u (g(u,v) - g(v,u)) = 0\forall v\neq s,t.\]
+    This quantity represents the net flow (in and out) from the vertex $v$. 
+\end{itemize}
+
+\begin{definition}
+\deflabel
+
+\ac{Net flow}. 
+\end{definition}
+This is the notation that we will primarily be using in this class. Define the ``net flow'' $f : V\times V\rightarrow \RR$ (note that this can be negative) be such that $f(u,v)$ denotes the flow from $u$ to $v$. A valid flow satisfies 
+\begin{itemize}
+    \item Feasability: \[f(u,v)\leq c(u,v)\forall u,v\in V\]
+    \item Flow conservation: \[\sum_u f(u,v) = 0\forall v\neq s,t\]
+    As before, this represents the net flow (in and out) from the vertex $v$. 
+    \item Flow symmetry: \[f(u,v) = -f(v,u)\forall v,u\]
+\end{itemize}
+
+\begin{definition}
+\deflabel
+
+The \ac{value} of a flow $f$ is given by 
+\[\vert f\vert = \sum_vf(s,v).\]
+\end{definition}
+
+Now, we can formally define the maximum flow problem. 
+\begin{definition}
+\deflabelname{Max Flow Problem}
+
+Given a network $G = (V,E,s,t,c)$, we want to find $f^*$ such that $\vert f^*\vert$ is maximal. 
+\end{definition}
+
+Observe that any flow can be decomposed into a collection of $s-t$ paths and cycles. We can think of these as the elementary ``building blocks'' of flows. 
+
+\begin{theorem}
+\lemlabelname{Flow decomposition lemma}
+
+Let $\text{supp}_f(G)$ be the subgraph of $G$ of edges $(u,v)$ with $f(u,v) > 0$. Then, $\text{supp}_f(G)$ can be decomposed into a collection of flow paths and cycles. 
+\end{theorem}
+
+\comment{include proof?}
+
+\begin{theorem}
+\lemlabel
+
+$\vert f^*\vert > 0$ if and only if there exists an $s-t$ path $P$ in $G^+$, where $G^+$ is the subgraph of edges with positive capacities.
+\end{theorem}
+
+\begin{proof}
+An $s-t$ path in $G^+$ implies positive flow from $s$ to $t$, hence $\vert f^*\vert = 0$. The other direction follows from the flow decomposition lemma; all cycles contributes $0$ flow, so positive net flow implies that there exists a positive path from $s$ to $t$. 
+\end{proof}
+
+Let
+\[\hat{S} = \{v\in V : \exists s-v\text{ path in }G^+\}.\]
+Note that $s\in \hat{S}$. If $\vert f^*\vert = 0$, meaning that there does not exist an $s-t$ path in $G^+$, then $t\notin \hat{S}$, i.e., $t\in V-\hat{S}$. This implies that $\hat{S}$ is an \ac{$s-t$ cut} $(\hat{S}, V-\hat{S})$ which separates $s$ and $t$. 
+
+\begin{definition}
+\deflabel
+
+The \ac{capacity} of a cut $(S, V-S)$ is
+\[c(S) = \sum_{u\in S}\sum_{v\in V-S}c(u,v).\]
+In other words, $c(S)$ is the total capacity of all edges that leaves $S$. 
+\end{definition}
+
+Given that $c(S) = 0$, there is no positive flow from $s$ to $t$, meaning that $(S, V-S)$ is an $s-t$ cut. In particular, $\hat{S}$ from above satisfies $c(\hat{S}) = 0$.
+
+\begin{definition}
+\deflabelname{Minimum $s-t$ cut problem}
+
+Given $G=(V,E,s,t,c)$, find an $s-t$ cut of minimum capacity. 
+\end{definition}
+
+Let
+\[f(S) = f(S, S-V) = \sum_{u\in S}\sum_{v\in V-S}f(u,v).\]
+In other words, $f(S)$ represents the net flow across the cut. Note that it must be true that 
+\[f(S)\leq c(S),\]
+by feasibility. 
+
+\begin{theorem}
+\claimlabel
+
+$f(S) = f(S')$ for any $S,S'$ which are $s-t$ cuts. 
+\end{theorem}
+
+\begin{proof}
+Using the flow decomposition lemma, $f$ is a collection of flow cycles and $s-t$ flow paths. The main idea is that each flow cycle contributes $0$ to $f(S)$ and $f(S')$, while each $s-t$ path contributes the same flow to both $f(S)$ and $f(S')$. 
+\end{proof}
+
+By this claim, $\vert f\vert = f(\{s\}) = f(S)$ for any $s-t$ cut $(S, V-S)$. Thus:
+\begin{theorem}
+\lemlabelname{Weak Duality Principle}
+
+The max flow is smaller than the minimum $s-t$ cut. 
+\[\vert f^*\vert = f^*(S^*) \leq c(S^*).\]
+\end{theorem}
+
+So, the max-flow algorithm: 
+\begin{itemize}
+    \item Start with $\vert f\vert = 0$
+    \item As long as there exists an $s-t$ path in $G^+$, keep increasing $\vert f\vert$ by the flow along this path. 
+\end{itemize}
+
+\begin{definition}
+\deflabelname{Residual Network}
+
+A \ac{residual network} $G_f = (V, E_f, s, t, c_f)$ of a flow $f$ in the network $G$ with residual capacities $c_f(u,v) = c(u,v) - f(u,v)$ and set of edges 
+\[E_f = \{(u,v) : c_f(u,v) > 0.\}\]
+\end{definition}
+We need the extra edge definition in the cases when $f$ completely saturates edges, i.e., they can no longer be used in the residual network $G_f$.
+
+Given that $f$ is a flow in $G$ and $f'$ is a flow in $G_f$, $f+f'$ is a flow in $G$. So, in order to improve a flow $f$ in $G$, it suffices to find a non-zero flow in $G_f$. If it is impossible to do so, this implies that there exists an $s-t$ cut $\hat{S}$ with $c_f(\hat{S}) = 0$. 
+
+\begin{theorem}
+\proplabel
+
+For any $s-t$ cut $S$, $c_f(S) = c(S) - f(S)$. 
+\end{theorem}
+
+\begin{proof}
+\[c_f(S) = \sum_{u\in S}\sum_{v\in V-S}c_f(u,v) = \sum_{u\in S}\sum_{v\in V-S}c(u,v)-f(u,v) = c(S) - f(S).\]
+\end{proof}
+
+Thus, if $c_f(\hat{S})=0$, we have $c(\hat{S})=\vert f\vert$. But, by weak duality, 
+\[c(\hat{S}) = \vert f\vert\leq \vert f^*\vert \leq c(S^*)\leq c(\hat{S}),\]
+implying that $f=f^*$, i.e., \textbf{$f$ is a max flow, and $\hat{S}$ is the min $s-t$ cut}. 
+
+\begin{theorem}
+\thmlabelname{Max Flow - Min Cut Theorem}
+\[\vert f^*\vert = c(S^*).\]
+\end{theorem}
+
+This is also known as the \ac{strong duality} of flows and $s-t$ cuts. 
