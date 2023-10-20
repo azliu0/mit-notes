@@ -1,0 +1,141 @@
+\section{February 14, 2023}
+
+\subsection{Statistical Models and Identifiability}
+
+\begin{definition}
+\deflabel
+
+Let $\Omega$ be a sample space. A \ac{statistical model} is given by 
+\[(\Omega, (\PP_{\theta})_{\theta\in \Theta}),\]
+where $\PP_{\theta}$ is a probability distribution on $\Theta$ for each $\theta\in \Theta$.
+\end{definition}
+
+The goal of the statistical model is to estimate the paramter $\theta$. $\Theta$ is called the parameter set; as an example, if we are trying to estimate a proportion, we say that the parameter set is $[0,1]$. If $\theta$ exists, we say that the model is \ac{well-specified}, and this particular value of $\theta$ is called the \ac{true parameter}.
+
+\begin{example}
+\exlabel
+
+Consider the kissing experiment from last time.
+\end{example}
+In this example,
+\begin{itemize}
+    \item $\Omega = \{0,1\}$. 
+    \item $R_i\sim \Bern(p)$, i.e., $\PP[R_i = 1] = p$, $\PP[R_i = 0] = 1-p$.
+    \item The statistical model given by each $R_i$ is $\left(\{0,1\}, \Bern(p)_{p\in [0,1]}\right)$.
+    \item The statistical model given by a pair $(R_1, R_2)$ is $\left(\Omega^{(1)}, \Bern(p)\otimes \Bern(p)\right)$, where $\Omega^{(1)}=\{(0,0), (0,1), (1,0), (1,1)\}$.
+\end{itemize}
+
+\begin{definition}
+\deflabel
+\begin{itemize}
+    \item \ac{Parametric} model: We assume $\Theta\subseteq \RR^d$ for finite $d$
+    \item \ac{Nonparametric} model: $\Theta$ can be infinite dimensional
+    \item \ac{Semiparametric} model: $\Theta = \Theta_1\times \Theta_2$, with one finite-dimensional and the other infinite-dimensional. We won't cover these models in this class. 
+\end{itemize}
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Common models for different distributions.
+\end{example}
+\noindent Gaussian Model: 
+\[\left(\RR, (\Norm(\mu, \sigma))_{(\mu, \sigma)\in \RR\times (0,\infty)}\right).\]
+Exponential model: 
+\[\left((0, \infty), (\Exp(\lambda))_{\lambda\in (0,\infty)}\right).\]
+Binomial model: 
+\[\left(\{0,1\}, (\Bern(p))_{p\in [0,1]}\right).\]
+Poisson model: 
+\[\left(\NN, (\Pois(\lambda))_{\lambda\in (0, \infty)}\right).\]
+
+\begin{definition}
+\deflabel
+
+The parameter $\theta$ is \ac{identifiable} if and only if $\theta\in \Theta\mapsto \PP_{\theta}$ is injective. 
+\end{definition}
+
+In other words, we can identify $\theta$ if and only if each $\theta$ maps to a unique distribution. As an example where this is not satisfied, suppose $X\sim \Norm(\mu, \sigma^2)$, and we observe the indicator $Y = 1_{X\geq 0}$. Since 
+\[\PP[Y = 1] = \Phi\left(-\frac{\mu}{\sigma}\right),\]
+$\mu$ and $\sigma^2$ are not identifiable, since there are many different combinations that produce the same observed distribution. On the other hand, $\theta = \mu/\sigma$ is identifiable. 
+
+\subsection{Estimation}
+
+Given a statistical model $(\Omega, (\PP_{\theta})_{\theta\in \Theta})$, and some sequence of i.i.d. $X_1, \hdots, X_n\sim \PP_{\theta}$, we generate some prediction $\hat{\theta}_n$ for $\theta$. We call $\hat{\theta}_n$ an \ac{estimator} for $\theta$.
+
+\begin{definition}
+\deflabel
+
+An estimator $\hat{\theta}_n$ of $\theta$ is called \ac{consistent} if 
+\[\hat{\theta}_n\cp \theta.\]
+This estimator is called \ac{strongly consistent} if 
+\[\hat{\theta}_n\cas \theta.\]
+This estimator is \ac{asymptotically normal} if 
+\[\sqrt{n}(\hat{\theta}_n-\theta)\cd \Norm(0,\sigma^2).\]
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+The \ac{bias} of an estimator $\hat{\theta}_n$ of $\theta$ is given by 
+\[\text{bias}(\hat{\theta}_n) = \EE[\hat{\theta}_n] - \theta.\]
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+The \ac{quadratic risk} of an estimator $\hat{\theta}_n\in \RR$ is given by 
+\[R(\hat{\theta_n}) = \EE[\vert \hat{\theta}_n-\theta\vert^2] = \var[\hat{\theta}_n] + \text{bias}^2(\hat{\theta}_n).\]
+\end{definition}
+
+Recall that $\theta$ is a constant, i.e., $\EE[\theta] = \theta$, so the secondary definition follows by expansion:
+\begin{align*}
+    \EE[\vert \hat{\theta}_n - \theta\vert^2] &= \EE[\hat{\theta}_n^2 - 2\theta\hat{\theta}_n + \theta^2] \\
+    &= (\EE[\hat{\theta}_n^2] - \EE[\hat{\theta}_n]^2) + (\EE[\hat{\theta}_n]^2 - 2\theta\EE[\hat{\theta}_n] + \theta^2) \\
+    &= \var[\hat{\theta}_n] + \text{bias}^2(\hat{\theta}_n).
+\end{align*}
+
+\subsection{More on Confidence Intervals}
+
+Let $(\Omega, (\PP_{\theta})_{\theta\in \Theta})$ be a statistical model with observations $X_1, \hdots, X_n$. Say $\Theta\subseteq \RR$ and let $\alpha\in (0,1)$. 
+\begin{itemize}
+    \item A ``confidence interval of level $1-\alpha$ for $\theta$'' is defined as a random interval (based on our observations) $\mathcal{I}$, \textbf{which does not depend on $\theta$}, such that
+    \[\PP_{\theta}[\theta \in \mathcal{I}] \geq 1-\alpha.\]
+    \item A ``confidence interval of asymptotic level $1-\alpha$ for $\theta$'' is defined as $\lim_{n\rightarrow \infty}\mathcal{I}_n$, where 
+    \[\lim_{n\rightarrow \infty}\PP_{\theta}(\theta \in \mathcal{I}_n) \geq 1-\alpha.\]
+\end{itemize}
+
+There are a few reasons why we define confidence intervals as inequalities, rather than equalities. The reality is that we can rarely get exact estimates (even in the asymptotic limit) without knowing more information about the true parameter. Consider the following example. 
+
+\begin{example}
+\exlabel
+
+Recall the kissing experiment from last lecture.
+\end{example}
+
+By the central limit theorem, we deduced
+\[\sqrt{n}\frac{\ov{R}_n-p}{\sqrt{p(1-p)}}\cd \Norm(0,1).\]
+
+Then, we said that 
+\[\lim_{n\rightarrow \infty}\PP\left(p\in \left[\ov{R}_n-\frac{q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt{n}}, \ov{R}_n+\frac{q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt{n}}\right]\right) = 1-\alpha.\]
+
+This interval by itself is not a confidence interval, since it depends on $p$. There are a few ways to resolve this issue. 
+
+\begin{itemize}
+    \item \ac{The Conservative Method}: this is the method that we used implicitly last lecture. We know that $p(1-p)\leq 1/4$, so we can remove the dependence on $p$ be relaxing the bounds of our interval. This gives us: 
+    \[\mathcal{I}_{\text{conservative}} = \left[\ov{R}_n - \frac{q_{\alpha/2}}{2\sqrt{n}}, \ov{R}_n + \frac{q_{\alpha/2}}{2\sqrt{n}}\right].\]
+    Indeed, 
+    \[\lim_{n\rightarrow \infty}\PP(p\in \mathcal{I}_{\text{conservative}})\geq 1-\alpha,\]
+    so this is a valid confidence interval (which is asymptotic). Note that our probability is no longer exact, since we had to relax our interval to account for all possible values of $p$. 
+    \item \ac{Solve for $p$}: we could also manually solve for $p$, since our interval is of the form
+    \[\ov{R}_n-\frac{q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt{n}} \leq p \leq \ov{R}_n+\frac{q_{\alpha/2}\sqrt{p(1-p)}}{\sqrt{n}}.\]
+    Rearranging both inequalities, we seek the roots 
+    \[\left(1 + \frac{q_{\alpha/2}^2}{n}\right)p^2 - \left(2\ov{R}_n + \frac{q_{\alpha/2}^2}{n}\right)p + \ov{R}_n^2 = 0.\]
+    Our desired interval is now: 
+    \begin{align*}
+        \mathcal{I}_{\text{solve}} = \left[\frac{1}{1+\frac{q_{\alpha/2}^2}{n}}\left(\ov{R}_n + \frac{q_{\alpha/2}^2}{2n}\right)\pm\frac{q_{\alpha/2}}{1+\frac{q_{\alpha/2}^2}{n}}\sqrt{\frac{(\ov{R}_n(1-\ov{R}_n))}{n} + \frac{q_{\alpha/2}^2}{4n^2}}\right].
+    \end{align*}
+    \item \ac{Slutsky}: $\hat{p}\cas p$, we can use Slutsky to substitute $p$ for $\hat{p}$, giving us
+    \[\mathcal{I} = \left[\hat{p} - \frac{q_{\alpha/2}\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}}, \hat{p} + \frac{q_{\alpha/2}\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}}\right].\]
+\end{itemize}
+
+

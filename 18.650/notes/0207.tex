@@ -1,0 +1,99 @@
+\section{February 7, 2023}
+
+\subsection{Introduction}
+
+General goal of this class is to get better at statistical methods, understand their applicability, and their limitations. 
+
+Midterm dates: March $3$rd, April $6$th, and May $4$th. They take place during class. There is no final. There is also on data presentation project. Grading is $(MT1+MT2+MT3+Project+HW)/5$. 
+
+\subsection{Review: Fundamental Theorems}
+
+Let $X_1, \hdots,$ be i.i.d. r.v. (independent and identically distributed random variables) with $\EE[X_i] = \mu$, $\var[X_i] = \sigma^2$. 
+
+\begin{theorem}
+\thmlabelname{Strong Law of Large Numbers}
+
+\[\overline{X_n} \coloneqq \frac{1}{n}\sum_{i=1}^n X_i \cas \mu.\]
+\end{theorem}
+
+The weak law of large numbers says the same thing, with convergence in probability (instead of almost sure convergence). 
+
+\begin{theorem}
+\thmlabelname{Central Limit Theorem}
+
+\[\sqrt{n}\frac{\overline{X_n} - \mu}{\sigma} = \frac{1}{\sigma \sqrt{n}}\sum_{i=1}^n(X_i - \mu)\cd \Norm(0,1)\]
+\end{theorem}
+
+\subsection{Review: Notions of Convergence}
+
+\begin{definition}
+\deflabelname{Almost Surely}
+
+We say that $Y_n\cas Y$ if 
+\[\PP[\omega : Y_n(\omega) \cinf Y(\omega)] = 1.\]
+\end{definition}
+
+\begin{definition}
+\deflabelname{In Probability}
+
+We say that $Y_n\cp Y$ if 
+\[\lim_{n\rightarrow \infty}\PP[\vert Y_n-Y\vert > \varepsilon] = 0,\]
+for all $\varepsilon > 0$.
+\end{definition}
+
+\begin{definition}
+\deflabelname{In $L^p$}
+
+We say that $Y_n\clp Y$ if 
+\[\lim_{n\rightarrow \infty}\EE[\vert Y_n-Y\vert^p] = 0.\]
+\end{definition}
+
+\begin{definition}
+\deflabelname{In Distribution}
+
+We say that $Y_n\cd Y$ if 
+\[\lim_{n\rightarrow \infty}\PP[Y_n\leq x] = \PP[Y\leq x],\]
+for all $x\in \RR$ where the CDF of $Y$ is continuous. 
+\end{definition}
+
+The following are equivalent to converging in distribution:
+\begin{itemize}
+    \item $\lim_{n\rightarrow \infty}\EE[f(Y_n)] = \EE[f(Y)]$ for all continuous bounded functions $f$.
+    \item $\lim_{n\rightarrow \infty}\EE[\exp(ixY_n)] = \EE[\exp(ixY)]$ for all $x\in \RR$. 
+\end{itemize}
+\textbf{Relationships between the types of convergence: }
+\[Y_n\cas Y \implies Y_n\cp Y \implies Y_n\cd Y.\]
+Also, if $q\geq p \geq 1$, 
+\[Y_n\clq Y \implies Y_n\clp Y.\]
+
+\noindent\textbf{Operations and Convergence:}
+\begin{itemize}
+    \item If $f$ is a continuous function, then 
+    \[Y_n\cinf Y \implies f(Y_n)\cinf f(Y)\]
+    holds for all three modes of convergence.
+    \item If $f$ is a continuous function, then 
+    \[(X_n, Y_n)\cinf (X,Y) \implies f(X_n, Y_n)\cinf f(X,Y)\]
+    holds for all three modes of convergence. For example, if $f(x,y) = ax+by$, or $f(x,y) = xy$, or $f(x,y) = x/y$ with $y\neq 0$. 
+    \item $X_n\cas X$ and $Y_n\cas Y$ implies $(X_n, Y_n)\cas (X,Y)$. The same holds for convergence in probability. In fact, any mix of convergences in probability or almost surely will work (i.e., two convergences in probability implies convergence almost surely, etc). However, the same cannot be said if at least one of the single distributions converges in distribution, with the only exception being Slutsky's Theorem.
+\end{itemize}
+
+\begin{theorem}
+\thmlabelname{Slutsky's Theorem}
+
+Suppose 
+\begin{itemize}
+    \setlength \itemsep{0cm}
+    \item $Y_n\cd Y$
+    \item $Z_n\cp c$, where $c$ is a real number.
+\end{itemize}
+Then, 
+\[(Y_n, Z_n)\cd (Y,c).\]
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+Slutsky's theorem implies $Y_n+Z_n\cd Y+c$, $Y_nZ_n\cd cY$, etc. 
+\end{example}
+
+This is equivalent to showing that $(Y_n, Z_n)\cd (Y,c)$ implies $Y_n+Z_n\cd Y+c$. To see this, take the result of the convergence operations listed above, with $f(X,Y) = X+Y$, $f(X,Y) = XY$, or whatever you want.  
