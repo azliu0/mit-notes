@@ -1,6 +1,6 @@
 # mit-notes
 
-A tree representation of this repo is deployed [here](https://yellowtomato98.github.io/mit-notes/). 
+See [here](https://yellowtomato98.github.io/mit-notes/). 
 
 ## credit
 
