@@ -1,6 +1,6 @@
 # mit-notes
 
-See [here](https://yellowtomato98.github.io/mit-notes/). 
+See [here](https://azliu0.github.io/mit-notes/). 
 
 ## credit
 
