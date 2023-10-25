@@ -93,4 +93,20 @@ $d_{TV}(\mu, \nu) \leq \inf\{\PP[X\neq Y] : (X,Y)\text{ is a coupling of }\mu, \
 
 This is always an inequality; there always exists coupling $(X,Y)$ such that $\PP[X\neq Y] = d_{TV}(\mu, \nu)$. We will not prove this, but one such example is to take $p\leq q$, $U\sim \Unif[0,1]$, $X=\mathbbm{1}_{u\leq p}$, $Y=\mathbbm{1}_{u\leq q}$. 
 
+\begin{theorem}
+\thmlabelname{Convergence Theorem using Coupling}
 
+$P$ irreducible, aperiodic, $\vert \mathcal{X}\vert < \infty$. Then, we know there exists unique $\pi$ stationary, and 
+\[X_i \cd \pi\]
+for any starting distribution $X_0\sim \mu$. In other words, 
+\[\lim_{i\rightarrow \infty}\PP[X_i=x|X_0\sim \mu] = \pi(x)\forall x.\]
+\end{theorem}
+
+\begin{proof}
+	This is equivalent to showing that $d_{TV}(\mu P^i, \pi)\rightarrow 0$ as $i\rightarrow \infty$. Construct coupling $(X_i,Y_i)$ with $X_0\sim \mu$ and $Y_i\sim \pi$. Then, consider independently $X_i'$ and $Y_i'$ starting from $\mu, \pi$ respectively, and let $T$ be the first time that $X_i'=Y_i'$. Let $X_i=X_i'$ and $Y_i=Y_i'$ for all $i\leq T$ and $X_i=Y_i=X_i'$ for all $i > T$. This pairing has the correct marginal distributions, so it is a coupling. 
+
+Now, we have 
+\[d_{TV}(\mu P^i, \pi)\leq \PP[X_i\neq Y_i] = \PP[T > i].\]
+
+Note that $(X_i,Y_i)$ is an MC on $\mathcal{X}\times \mathcal{X}$ with $(x,x)$ its only closed class. Therefore, $\PP[T>i]$ is the probability that we have not entered this closed class by time $i$, which approaches $0$ as $i\rightarrow \infty$, hence done. 
+\end{proof}

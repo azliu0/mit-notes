@@ -1,2 +1,51 @@
 \section{October 17, 2023}
 
+\subsection{Convergence theorem on countable MCs}
+
+\begin{theorem}
+\thmlabel
+
+Let $P$ be an irreducible, aperiodic MC, with $\mathcal{X}$ countable. 
+
+\begin{itemize}
+	\item If $P$ is positive recurrent and $\pi$ is its unique stationary distribution, then $d_{TV}(P^i(x,\cdot),\pi)\rightarrow 0$ as $i\rightarrow \infty$. 
+	\item If $P$ is null recurrent, then $P^i(x,y)\rightarrow 0$ for all $i$. 
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	Let $(X_i,Y_i)\in \mathcal{X}\times \mathcal{X}$ be a Markov Chain with transition matrix $\tilde{P}((x,y),(x',y')) = P(x,x')P(y,y')$. Since $P$ is aperiodic and irreducible, so is $\tilde{P}$. Also, $\tilde{\pi}(x,y) = \pi(x)\pi(y)$ is a stationary distribution, since 
+\begin{align*}
+	\sum_{(x,y)\in \mathcal{X}\times \mathcal{X}}\tilde{\pi}(x,y)\tilde{P}((x,y),(x',y')) &= \sum_{(x,y)\in \mathcal{X}\times \mathcal{X}}\pi(x)\pi(y)P(x,x')P(y,y') \\
+&= \pi(x')\pi(y')=\tilde{\pi}((x',y')).
+\end{align*}
+This implies $\tilde{P}$ positive recurrent, so the first time $T$ that $X_i=Y_i$ is finite almost surely. Therefore, we can construct coupling $(X_i,Y_i)$ with $X_0=x,Y_0\sim \pi$ such that they move independently until $i=T$, and then move together thereafter. Then, 
+\[d_{TV}(P^i(x, \cdot), x)\leq \PP[T > i],\] 
+which goes to $0$ as $i\rightarrow \infty$, which proves the first part of the theorem. 
+
+Now, let $\mu$ be a stationary measure. Since $P$ is irreducible, $\mu(x)>0$ is a class property, so $\mu$ is non-zero everywhere. Rescale so that $\mu(y) = 1$.
+
+Define $\tilde{P}$ in the same way as before. If $\tilde{P}$ is transient, $\tilde{G}((x,x),(y,y)) = \sum_{i=0}^{\infty}\tilde{P}^i((x,x),(y,y)) = \sum_{i=0}^{\infty}P^i(x,y)^2 < \infty$, implying $P^i(x,y)=0$ as $i\rightarrow \infty$, so we're done. 
+
+Therefore, let $\tilde{P}$ be recurrent. Since $P$ is null recurrent, $\mu(\mathcal{X}) = \infty$, so fix some large $M$ and let $A\subseteq \mathcal{X}$ such that $\mu(A) > M$. Define $\mu_A(z) = \mu(z) / \mu(A)$ if $z\in A$ and $0$ otherwise; note that $\mu_A$ is a distribution. 
+
+Now, use the same coupling as in the first part of the proof, where $X_0 = x$ and $Y_0\sim \mu_A$. Then, $P^i(x,y) = \PP[\tau_{(x,x)} > i]\PP[X_i=y | \tau_{(x,x)} > i] + \PP[\tau_{(x,x)}\leq i]\PP[X_i = y | \tau_{(x,x)} \leq i] \leq \PP[\tau_{(x,x)} > i] + \PP[Y_i = y]$. Since $P$ is recurrent, $\PP[\tau_{(x,x)} > i]$ as $i\rightarrow \infty$. Moreover, $P^i[Y_i = y] = \mu_AP^i(y) \leq \mu P^i(y) / \mu(A) \leq 1 / M$. Since this holds for all $M > 0$, $\lim_{i\rightarrow \infty}P^i(x,y) = 0$, as desired.  
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+For transient $P$, the second statement of the above theorem holds. 
+\end{theorem}
+
+\begin{proof}
+If $P$ is transient, $G(x,y) = \sum P^i(x,y) < \infty$, so $P^i(x,y)\rightarrow 0$ as $i\rightarrow \infty$. 
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Random walks on $\ZZ^d$ are either transient or null recurrent, since the uniform measure always works. Therefore, the convergence theorem for countable MCs gives $P^i(x,y)\rightarrow 0$. 
+\end{example}
+
+One way to think about this intuitively is that mass escapes to infinity on $\ZZ^d$. 
