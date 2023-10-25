@@ -32,7 +32,25 @@ and for any function $f: \mathcal{X}\rightarrow \RR$,
 where $\ov{f} = \sum_x \pi(x)f(x)$.
 \end{theorem}
 
-\comment{omitting proof. add later?}
+\begin{proof}
+	Fix $z\in \mathcal{X}$. Let $T_i$ be the $i$th time that $z$ is visited. Then, $T_{i+1}-T_i$ are independent and identically distributed by the Strong Markov property. Since $T_{V_z(n)}\leq n$ and $T_{V_z(n)+1}\geq n$, 
+
+\[\frac{T_{V_z(n)}}{V_z(n)}\leq \frac{n}{V_z(n)} \leq \frac{T_{V_z(n)+1}}{V_z(n)}.\]
+
+Let $S_n = 1/(n-1) \cdot \sum_{i=1}^{n-1}(T_{i+1} - T_i)$. By SLLN, $S_n\cas \EE[\tau_z^+]$. But note that 
+\[S_{V_z(n)+1} = \frac{(T_{V_z(n) + 1}-T_1)}{V_z(n)} \rightarrow \frac{T_{V_z(n) + 1}}{V_z(n)} \geq \frac{n}{V_z(n)},\] 
+while 
+\[S_{V_z(n)} = \frac{(T_{V_z(n)} - T_1)}{(V_z(n) - 1)}\rightarrow \frac{T_{V_z(n)}}{V_z(n)} \leq \frac{n}{V_z(n)},\] 
+so $n / V_z(n)\cas \EE[\tau_z^+]$, as desired.
+
+For the second part,
+\begin{align*}
+	\frac{1}{n}\sum_{i=0}^{n-1}f(X_i) &= \frac{1}{n}\sum_{x\in \mathcal{X}}V_x(n)f(x) \\
+																		&= \sum_{x\in \mathcal{X}}\left(\frac{V_x(n)}{n} - \frac{1}{\EE[\tau_x^+]}\right)f(x)  + \sum_{x\in \mathcal{X}} \frac{f(x)}{\EE[\tau_x^+]} \\
+																		&\cas \ov{f},
+\end{align*}
+by the first part. 
+\end{proof}
 
 
 
