@@ -2,7 +2,7 @@
 
 # generate tree
 cd notes
-tree -H . -I 'index.html' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
+tree -H . -I 'index.html|*.fdb_latexmk|*.aux|*.fls|*.out|*.pre|*.synctex*|*.toc' -D --timefmt='%b %d %Y %R' --charset utf-8 -T 'mit-notes' > index.html
 
 # make urls clickable
 sed '$d' index.html > temp.html
