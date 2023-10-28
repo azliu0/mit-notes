@@ -1,3 +1,132 @@
-\section{October 27, 2023 (R7)}
+\section{October 27, 2023}
 
+\subsection{K-Means Clustering}
 
+Place $k$ centroids at random $c_1, \hdots, c_k$. Then, repeat until convergence: 
+\begin{enumerate}
+	\item For each $x_i$, locate the nearest centroid $c_j = \argmin_{j=1}^k \mathcal{D}(x_i, c_i)$ for some distance metric $\mathcal{D}$. 
+	\item For each cluster $c_j$, update the position $c_j = \sum_{x_i\in c_j} x_i / n$. 
+\end{enumerate}
+
+Using $\mathcal{D} = \Vert \cdot \Vert_2^2$, the objective function being minimized here is 
+\[C = \sum_{j=1}^{K}\sum_{x_i\in c_j}\Vert x_i - c_j\Vert_2^2\]
+
+There are other ways to choose the centroids. For example, the $k$-mediods algorithm places the center of each cluster at 
+\[x_m = \argmin_{x\in \{x_1, \hdots, x_n\}}\sum_{i=1}^n\Vert x_i-x\Vert^2.\]
+This is better for outliers. 
+
+\subsection{PCA Intuition}
+
+Say we have some data about football players and their different attributes: speed, scoring, height, weight. If we were to plot this data on a graph with each axis representing an attribute, we know that these axes would not all be orthogonal; for example, height and weight are strongly correlated. The idea of PCA is to try to decouple the data space into orthogonal vectors; then, we can more easily select the vectors that ``matter'', which allows us to reduce the dimensionality of the data while keeping its most important aspects.
+
+\subsection{PCA with Encoder/Decoder framework}
+
+We have $x_1,\hdots, x_n$ as $d$-dimensional data in $\RR^d$. In PCA, we want to reduce the dimensionality to $m < d$, which we can do with an encoder matrix $W\in \RR^{m\times d}$. We can also use a decoder matrix $U\in \RR^{d\times m}$ to try to retrieve the original data from its low-dimensional representation. Our goal is to minimize the distance between the approximated output $x' = UWx$, and its original vector, i.e., we want to find the ``best'' encoder/decoder pair 
+\[W^*, U^* = \argmin_{W\in \RR^{m\times d}, U\in \RR^{d\times m}}\sum_{i=1}^n \Vert x_i - UWx_i\Vert_2^2.\]
+
+First, fix $(U,W)$ and consider the set of all condensed representations $R = \{UWx : x\in \RR^d\}$. This is an $m$-dimensional linear subspace of $\RR^d$, and there exists some $V\in \RR^{d\times m}$ whose columns form an orthonormal basis of $R$. So, we may use $V^TV=I_m$ (but not the other way around). 
+
+For all $x_i$, there exists $y_i\in \RR^m$ s.t. $Vy_i = UWx_i$, so our objective function becomes
+\begin{align*}
+	\sum_{i=1}^n \Vert x_i - Vy_i\Vert_2^2 &= \sum_{i=1}^n (x_i-Vy_i)^T(x_i-Vy_i) \\
+																				 &= \sum_{i=1}^n x_i^Tx_i + y_i^TV^TVy - 2y_i^T(V^Tx_i) \\
+																				 &= \sum_{i=1}^n \Vert x_i\Vert^2 + \Vert y_i\Vert^2 - 2y_i^T(V^Tx_i)
+\end{align*}
+since $V$ is orthonormal. Differentiating each summed term, we have 
+\[0 = \frac{\ddd}{\ddd y_i}(\Vert x_i\Vert^2 + \Vert y_i\Vert^2 - 2y_i^T(V^Tx_i)) = -2V^Tx_i + 2y_i \implies y_i = V^Tx_i.\]
+This bound is achieved when $U=V,W=V^T$, so we can now reformulate our objective: 
+\begin{align*}
+	&\argmin_{U\in \RR^{d\times m}, U^TU=I_m}\Vert x_i - UU^Tx_i\Vert^2 \\
+			&= \argmin_{U\in \RR^{d\times m}, U^TU=I_m}x_i^Tx_i + x_i^TUU^TUU^Tx_i - 2x_i^TUU^Tx_i \\
+			&= \argmax_{U\in \RR^{d\times m}, U^TU=I_m} x_i^TUU^Tx_i
+\end{align*}
+Recall that this expression is not the same as $x_i^Tx_i$, since we can't say that $VV^T$ is the identity. Finally, summing over all elements, 
+\[U^* = \argmax_{U\in \RR^{d\times m}, U^TU=I_m} \Tr\left(U^T\sum_{i=1}^n x_ix_i^T U\right)\] 
+
+Define $S=\sum_{i=1}^nx_ix_i^T\in \RR^{d\times d}$; we want to maximize $\Tr(U^TSU)$. $S$ is positive semi-definite and symmetric, so by the spectral decomposition theorem we have $S=P \Lambda P^T$, where $\Lambda$ is diagonal with elements the eigenvalues of $S$ and $P$ is the corresponding orthonormal eigenbasis. Choose $P,\Lambda$ so that $\Lambda_{i,i}\geq \Lambda_{j,j}$ for all $i\leq j$, i.e., order eigenvalues decreasing from left to right. 
+
+Now,
+\[\Tr(U^TSU) = \Tr(U^TP\Lambda P^TU) = \Tr\left((P^TU)^T\Lambda(P^TU)\right).\]
+Denoting $B = P^TU$, then 
+\[\Tr(U^TSU) = \sum_{i=1}^m \sum_{j=1}^d B_{ji}^2\Lambda_{j,j} = \sum_{i=1}^d\Lambda_{i,i}\sum_{j=1}^mB_{ij}^2\leq \sum_{i=1}^m\Lambda_{i,i}.\]
+This bound is tight when $U$ has columns equal to the first $m$ eigenvectors in the eigenbasis of $S$, since these leads to $B$ with identity values along the diagonal. More explicitly, 
+\[B_{ij} = \sum_{k=1}^d P^T_{ik}U_{kj} = P_i\cdot P_j,\]
+where $P_i$ is the $i$th eigenvector in $S$, i.e., the $i$th column of $P$. By orthonormality, this is $0$ when $i\neq j$ and $1$ when $i=j$, so $B = I_{d\times m}$. Finally, plugging this construction into the above trace formula gives the exact bound, so this works. This shows that the optimal $U^*,W^*$ is given by the eigenbasis of $S$, and the corresponding error for this construction is 
+\[\Tr\left(\sum_{i=1}^nx_ix_i^T + U^T\sum_{i=1}^nx_ix_i^TU\right) = \sum_{i=1}^d \Lambda_{i,i} - \sum_{i=1}^m\Lambda_{i,i} = \sum_{i=m+1}^d \Lambda_{i,i}.\]
+
+\subsection{Probabilistic PCA}
+
+We have observation $x\in \RR^d$ generated in latent space by some $z\in \RR^m$, $m < d$, via 
+\[x = Wz + \mu + \varepsilon,\]
+where $\varepsilon \sim \Norm(0, \sigma^2I)$ is noise. $\mu$ represents the ``mean'' latent space representation of $x$. If we let $z\sim \Norm(0, I)$, then $Wz\sim \Norm(0, WW^T)$, and $x \sim \Norm(\mu, WW^T + \sigma^2 I)$. Thus, the log likelihood of a full dataset is 
+\[NLL(\mathcal{X}|\mu, \mathcal{W}, \sigma^2) = -\frac{nd}{2}\ln{2\pi} - \frac{n}{2}\ln{\det{\Sigma}} - \frac{1}{2}\sum_{i=1}^n (x_n - \mu)^T\Sigma^{-1}(x_n - \mu).\]
+The maximum likelihood PCA satisfies 
+\[0 = \frac{\partial NLL(\mathcal{X}|\mu, \mathcal{W}, \sigma^2)}{\partial \mu} = \sum_{i=1}^n\Sigma^{-1}(x_n - \mu) \implies \mu = \ov{x}.\]
+
+\subsection{Gaussian Mixture Model Intuition}
+
+Gaussian mixture models are an extension of $K$-means clustering. In these models, the model is parameters by some $M$ components, each of which generates a distribution of points according to some model, e.g., multivariate normal. The likelihood of the model can then be evaluated according to some priors placed on how likely each point is to be in each of the $M$ components, and then a max likelihood can be solved for using techniques like gradient ascent. We will show in the next problem that this unfortunately does not always work as we expect it to. 
+
+\subsection{Arbitrarily Bad Local Maxima in GMMs}
+
+(This problem was sourced from Chi Jin, et. al. 2016).
+
+Consider a GMM with $M=3$ on the number line and true centers generated by $\mu_1^*=-R$, $\mu_2^*=R$, and $\mu_3^*=\gamma R$, where $R>0$ and $\gamma \gg 1$, and all with variance $1$. The idea here is for $\mu_1^*,\mu_2^*$ to be close to the origin and $\mu_3^*$ to be very far away.
+
+Assuming uniform prior on each of the three clusters, the likelihood of a model $\mu = (\mu_1, \mu_2, \mu_3)$ on $n$ observations is given by
+\[\mathcal{L}_n(\mu) = \frac{1}{n}\sum_{i=1}^n \log\left(\frac{1}{3}\sum_{j=1}^3 \frac{1}{\sqrt{2\pi}}e^{-(x_i - \mu_j)^2/2}\right).\] 
+
+With infinite data, we can take the loss as an expected value over all possible data: 
+\begin{align*}
+	\mathcal{L}(\mu) &= \EE_x\left[\log\left(\sum_{i=1}^3e^{-(x-\mu_i)^2/2}\right) - \log(3\sqrt{2\pi})\right]. \\
+									 &= \sum_{V\in \{A,B,C\}}\frac{1}{3}\EE_V\left[\log\left(\sum_{i=1}^3 e^{-(V-\mu_i)^2/2}\right)\right] - \log(3\sqrt{2\pi}), 
+\end{align*}
+where the expected value is decomposed (by the law of total expectation) based on the assumption of uniform priors between the three clusters. $A$, $B$, and $C$ are random variables that follow the true generating distribution $\mu^*$, since this is what we should observe with infinite data.
+
+\begin{example}
+\exlabel
+
+Consider the set of points $\mathcal{D} = \{(\mu_1,\mu_2,\mu_3)\in \RR^3 | \mu_1\leq \gamma R/3, \mu_2 \geq 2\gamma R/3, \mu_3 \geq 2\gamma R / 3\}$. In the limit as $\gamma\rightarrow \infty$, compute: 
+\begin{itemize}
+	\item the loss on the three borders of this region, i.e., when $\mu_1=\gamma R/3$, when $\mu_2 = 2\gamma R/3$, or when $\mu_3 = 2\gamma R / 3$.
+	\item the loss on the model $\tilde{\mu} = (0, \gamma R, \gamma R)$. 
+\end{itemize}
+\end{example}
+
+Starting with $\tilde{\mu}$, first expand the entire definition: 
+\begin{align*}
+	\mathcal{L}(\tilde{\mu}) &= \frac{1}{3}\EE_A\left[\log \left(e^{-(A-0)^2/2} + e^{-(A-\gamma R)^2/2} + e^{-(A - \gamma R)^2/2}\right) \right] \\
+													 &\quad + \frac{1}{3}\EE_B\left[\log \left(e^{-(B-0)^2/2} + e^{-(B-\gamma R)^2/2} + e^{-(B - \gamma R)^2/2}\right) \right] \\
+													 &\quad + \frac{1}{3}\EE_C\left[\log \left(e^{-(C-0)^2/2} + e^{-(C-\gamma R)^2/2} + e^{-(C - \gamma R)^2/2}\right) \right] - \log(3\sqrt{2\pi}).  
+\end{align*}
+Taking the limit,
+\begin{align*}
+	\lim_{\gamma\rightarrow \infty}\mathcal{L}(\tilde{\mu}) = \frac{1}{3}\EE_A \left[\log(e^{-A^2/2})\right] + \frac{1}{3}\EE_B \left[\log(e^{-B^2/2})\right] + \frac{1}{3}\EE_C \left[\log(2e^{-(C-\gamma R)^2/2})\right] - \log(3\sqrt{2\pi}).  
+\end{align*}
+Doing a bit more algebra, 
+\begin{align*}
+	\EE[A^2] = \var[A] + \EE[A]^2 = 1 + R^2\\
+	\EE[B^2] = \var[B] + \EE[B]^2 = 1 + R^2\\
+	\EE[(C - \gamma R)^2] = \EE[C^2 - 2C\gamma R + \gamma^2R^2] = 1,
+\end{align*}
+so 
+\[\lim_{\gamma\rightarrow \infty}\mathcal{L}(\tilde{\mu}) = -\frac{2R^2 + 3 - 2\log 2}{6} - \log(3\sqrt{2\pi}).\]
+
+Repeating the same algebra for the borders, it can be shown that the loss is strictly less on the borders than it is for $\tilde{\mu}$. This is significant because it shows that there is a local maxima in $\mathcal{D}$. 
+
+\begin{example}
+\exlabel
+
+Show that this local maximum can be arbitrarily bad compared to the global maximum, i.e., that the log likelihood can be arbitrarily worse in the limit $R\rightarrow \infty$.  
+\end{example}
+
+Repeating the same calculation as above, we can compute the global loss by plugging in $\mu^*=(-R,R,\gamma R)$: 
+\[\lim_{R\rightarrow \infty}\mathcal{L}(\mu^*) = \frac{1}{3}\left( -(A+R)^2/2 - (B-R)^2/2 - (C - \gamma R)^2/2 \right) - \log(3\sqrt{2\pi}),\]
+where 
+\begin{align*}
+	\EE[(A+R)^2] = \EE[(B-R)^2] = \EE[(C-\gamma R)^2] = 1,
+\end{align*}
+so 
+\[\lim_{R\rightarrow \infty}\mathcal{L}(\mu^*) = -\frac{1}{2} - \log(3\sqrt{2\pi}).\] 
+
+We can show that $\lim_{R\rightarrow \infty}\mathcal{L}(\mu') = -\infty$ as follows. $\mathcal{L}(\mu')$ is bounded above by the $\mu_2$ term, since $A$ and $C$ grow arbitrarily far from the center $R$; but, the contribution of loss from the $\mu_2$ term is $-\infty$ since all three of $\mu_1', \mu_2', \mu_3'$ grow arbitrarily far from center. Therefore, in the limit, global loss is constant, while our local maximum can achieve arbitrarily bad loss. Since loss is continuous in $R$, this shows that we can grow the gap between our local and global maxima arbitrarily large by increasing $R$. The significance of this result is that gradient ascent does not always work as expected!
