@@ -33,3 +33,5 @@
 \contentsline {subsection}{\numberline {11.1}Convergence theorem on countable MCs}{35}{subsection.11.1}%
 \contentsline {section}{\numberline {12}October 19, 2023}{37}{section.12}%
 \contentsline {subsection}{\numberline {12.1}Ergodic theorem on countable MCs}{37}{subsection.12.1}%
+\contentsline {section}{\numberline {13}October 31, 2023}{37}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Martingales}{38}{subsection.13.1}%
