@@ -1,0 +1,55 @@
+\section{October 26, 2023}
+
+\subsection{Gaussian Mixture Models}
+
+Each component or ``cluster'' is a Gaussian. A $k$ component GMM in $\RR^d$ has parameters 
+\[\theta=\{p_1, \hdots, p_k, \mu_1, \hdots, \mu_k, \sigma_1^2, \hdots, \sigma_k^2\},\]where $x\in \RR^d$ (data), $\mu_j\in \RR^d$, and $\sigma_j^2 \in \RR^+$. We want to maximize 
+\[\log P(x|\theta) = \log\left(\sum_{z=1}^k P(z|\theta)\cdot P(x|z,\theta)\right),\]
+where $P(z|\theta) = p_z$ is our prior mixing proportion, and 
+\[P(x|z,\theta) = \frac{1}{(2\pi \sigma_z^2)^{d/2}}\exp\left(-\frac{1}{2\sigma_z^2}\lVert x-\mu_z\rVert^2\right)\] 
+is Gaussian. We can maximize the log likelihood with gradient ascent, where the gradient is given by:
+\begin{align*}
+	\nabla_{\theta}\log P(x|\theta) &= \nabla_{\theta}\log\left(\sum_{z=1}^k P(z|\theta)P(x|z,\theta)\right) \\
+																	&= \frac{1}{\sum_{z=1}^k P(z|\theta)P(x|z,\theta)}\nabla_{\theta}\sum_{z=1}^k P(z|\theta)P(x|z,\theta) \\
+																	&= \sum_{z=1}^k\frac{P(z|\theta)P(x|z,\theta)}{P(x|\theta)} \nabla_{\theta}\log\left(P(z|\theta)P(x|z,\theta)\right) \\
+																	&= \sum_{z=1}^k P(z|x,\theta)\nabla_{\theta}\log\left(P(z|\theta)P(x|z,\theta)\right) \\
+																	&= \sum_{z=1}^k P(z|x,\theta)\nabla_{\theta} \left(\log p_z - \frac{1}{2\sigma_z^2}\lVert x-\mu_z\rVert^2 - \frac{d}{2}\log(2\pi \sigma_z^2)\right)
+\end{align*}
+
+Now we can perform our gradient ascent as an EM algorithm on the posterior probabilities $Q(z|x) = P(z|x,\theta)$:
+\begin{itemize}
+	\item E-step: assign data points $x$ according to $Q(z|x)$. 
+	\item M-step: update the model based on the generated data, 
+		\[\theta \leftarrow \theta + \eta \sum_{z=1}^kQ(z|x)\nabla_{\theta}\log\left(P(z|\theta)P(x|z,\theta)\right). \] 
+\end{itemize}
+
+\subsection{ELBO lower bound}
+
+The above works, but we can converge faster by using the ELBO lower bound: 
+\[\log P(x|\theta) \geq \sum_{z=1}^k Q(z|x)\log \left(P(z|\theta)P(x|z,\theta)\right),\]
+which holds for all $Q,\theta$. Proof that this works: 
+\begin{align*}
+	\sum_{z=1}^k Q(z|x)\log \left(P(z|\theta)P(x|z,\theta)\right) &\leq \max_z \log \left(P(z|\theta)P(x|z,\theta)\right) \\
+																																&= \log \left(\sum_{z=1}^k P(z|\theta) P(x|z,\theta)\right) \\
+																																&= \log P(x|\theta). 
+\end{align*}
+The idea here is that instead of trying to optimize $P(x|\theta)$, we can directly optimize the ELBO lower bound to make larger steps during each iteration of our algorithm. We can make this bound tight by adding an entropy term so that ELBO is the same as the true log likelihood if and only if $Q$ is equal to the true posterior: 
+\[\log P(x|\theta) \geq \sum_{z=1}^k Q(z|x)\log \left(P(z|\theta)P(x|z,\theta)\right) + H(Q_{z|x}), \]
+where 
+\[H(Q_{z|x}) = -\sum_{z=1}^kQ(z|x)\log Q(z|x).\]
+We can show that this works as follows: 
+\begin{align*}
+	&\sum_z Q(z|x)\log \left(P(x|\theta)P(x|z,\theta)\right) + \sum_z Q(z|x) \log \frac{1}{Q(z|x)} \\
+	&\quad = \sum_z Q(z|x)\log \left(\frac{P(z|\theta)P(x|z,\theta)}{Q(z|x)}\right) \\
+	&\quad = \sum_z Q(z|x)\log \left(P(x|\theta) \frac{P(z|\theta)P(x|z,\theta)}{P(x|\theta)Q(z|x)}\right) \\
+	&\quad = \log P(x|\theta) + \sum_z Q(z|x) \log \left(\frac{P(z|\theta)P(x|z,\theta)}{P(x|\theta)Q(z|x)}\right) \\
+	&\quad = \log P(x|\theta) - \sum_z Q(z|x) \log \left(\frac{Q(z|x)}{P(z|x,\theta)}\right) \\
+	&\quad = \log P(x|\theta) - KL(Q_{z|x} | P_{z|x,\theta}).
+\end{align*}
+The KL-divergence of $Q_{z|x}$,$P_{z|x,\theta}$ is guaranteed to be non-zero and equal to zero if and only if $Q_{z|x} = P_{z|x,\theta}$, so this works. 
+
+Finally, the ELBO lower bound is a function of both $Q$ and $\theta$, so we can modify the original EM algorithm to take turns maximizing this lower bound by fixing one or the other:
+\begin{itemize}
+	\item E-step: fix $\theta$ and compute $\hat{Q}(z|x)$ that maximizes ELBO
+	\item M-step: fix $\hat{Q}$ and update $\theta$ to maximize ELBO (e.g. with gradient ascent)
+\end{itemize}
