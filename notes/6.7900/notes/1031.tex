@@ -1,0 +1,26 @@
+\section{October 31, 2023}
+
+\subsection{Variational Autoencoders}
+
+Generative models specify a mechanism for creating objects. Latent variables represent some of the underlying choices that generate these objects. To optimize mixtures of latent variables, we can use the ELBO lower bound discussed previously: 
+\[\log P(x|\theta) \geq \int Q(z|x)\log \left(P(x|z)P(z)\right) \ddd z + H(Q_{z|x}).\] 
+At a high level, VAEs map input data into a lower dimensional latent space, which can then be remapped to data that should closely resemble the original data. Mapping data into the latent space is done by the \ac{inferential model}, or encoder, and mapping from the latent space back into the data space is done by the \ac{generative model}, or decoder. 
+
+The role of the encoder is to take in data and produce a posterior distribution $Q(z|x)$ approximating the true $P(z|x,\theta)$. In particular, given $x$, it might produce $\mu(x;\phi)$ and $\sigma(x;\phi)$ specifying the posterior distribution, from which we can produce samples $z\sim Q(z|x,\phi) = \Norm(z; \mu(x;\phi), \text{diag}(\sigma(x;\phi)^2))$. These sampled values can then be used to update both the encoder and decoder: 
+\begin{itemize}
+	\item decoder: 
+		\[\theta = \theta + \eta \nabla_{\theta}\log P(x|z_{\phi}, \theta).\]
+	\item encoder: 
+		\[\phi = \phi + \eta \nabla_{\phi}\left(\log P(x|z_{\phi},\theta) - KL(Q_{z|x,\phi} | P_z)\right).\] 
+\end{itemize}
+where gradient ascent updates are made according to the ELBO criterion.
+
+\comment{fix this i think something is wrong}
+
+%\begin{itemize}
+%	\item E-step: compute a $Q(z|x)$ that approximates $P(z|x,\theta)$ by maximizing ELBO$(Q,\theta)$. then, update the encoder network: 
+%		\[\phi \leftarrow \phi + \eta \nabla_{\phi}ELBO(Q_{\phi}, \theta).\] 
+%	\item M-step: update the decoder network: 
+%		\[\theta\leftarrow \theta + \eta \nabla_{\phi}ELBO(Q_{\phi}, \theta).\] 
+%\end{itemize}
+

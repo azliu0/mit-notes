@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1698484099 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1698484102 0
+["pdflatex"] 1699785427 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1699785430 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -287,11 +287,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "6_7900_Notes.aux" 1698484101 1610 65a91b30cb562ae15a0609f110bb5f48 "pdflatex"
-  "6_7900_Notes.out" 1698484101 1397 906ffad7a13c615f9549c3013d30662e "pdflatex"
-  "6_7900_Notes.pre" 1698484100 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "6_7900_Notes.tex" 1698420141 511 db7b2b9caf11ceaabf92785fc7cf6c6f ""
-  "6_7900_Notes.toc" 1698484101 691 c490293d9c5bdf9078b04882cb911e1d "pdflatex"
+  "6_7900_Notes.aux" 1699785430 2337 0554eac166cad1563a8672a7865c6318 "pdflatex"
+  "6_7900_Notes.out" 1699785430 2290 f71d4c63edf227373ce4f0bba9932298 "pdflatex"
+  "6_7900_Notes.pre" 1699785428 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "6_7900_Notes.tex" 1699764981 511 db7b2b9caf11ceaabf92785fc7cf6c6f ""
+  "6_7900_Notes.toc" 1699785430 1171 bb2f41f771d89baf6d3b9acc1b97da1a "pdflatex"
   "_andrew.sty" 1698347890 24463 61df5a466a767664454a74bdeb86c33c ""
   "notes/0908.tex" 1698475343 29 b78acda81d64783d9e3b3e6a6e309108 ""
   "notes/0915.tex" 1698349999 0 d41d8cd98f00b204e9800998ecf8427e ""
@@ -299,7 +299,10 @@
   "notes/1006.tex" 1698350093 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1013.tex" 1698350111 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1020.tex" 1698350120 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "notes/1027.tex" 1698484098 10884 ad25cfa6557ff3a98b80fe710f78945e ""
+  "notes/1026.tex" 1699785425 3965 c1da4cca4e1c30852f62b83f8cda6596 ""
+  "notes/1027.tex" 1698563074 10884 ad25cfa6557ff3a98b80fe710f78945e ""
+  "notes/1031.tex" 1699782570 1913 8cd6f3c25a548db86b693a6be78e533e ""
+  "notes/1103.tex" 1699756533 29 10641d7c9b6727d11616f010fef23da4 ""
   (generated)
   "6_7900_Notes.aux"
   "6_7900_Notes.log"

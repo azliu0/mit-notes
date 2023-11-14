@@ -1,8 +1,14 @@
 \contentsline {section}{\numberline {1}September 8, 2023}{3}{section.1}%
-\contentsline {section}{\numberline {2}October 27, 2023}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}K-Means Clustering}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}PCA Intuition}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}PCA with Encoder/Decoder framework}{4}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Probabilistic PCA}{6}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Gaussian Mixture Model Intuition}{6}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Arbitrarily Bad Local Maxima in GMMs}{6}{subsection.2.6}%
+\contentsline {section}{\numberline {2}October 26, 2023}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Gaussian Mixture Models}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}ELBO lower bound}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}October 27, 2023}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}K-Means Clustering}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}PCA Intuition}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}PCA with Encoder/Decoder framework}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Probabilistic PCA}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Gaussian Mixture Model Intuition}{9}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Arbitrarily Bad Local Maxima in GMMs}{9}{subsection.3.6}%
+\contentsline {section}{\numberline {4}October 31, 2023}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Variational Autoencoders}{11}{subsection.4.1}%
+\contentsline {section}{\numberline {5}November 3, 2023}{12}{section.5}%

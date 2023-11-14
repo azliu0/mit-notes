@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  28 OCT 2023 05:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  12 NOV 2023 05:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1589,7 +1589,7 @@ LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <10.95> not available
 \tf@toc=\write7
 \openout7 = `6_7900_Notes.toc'.
 
- [2] (./notes/0908.tex) (./notes/0915.tex) (./notes/0929.tex) (./notes/1006.tex) (./notes/1013.tex) (./notes/1020.tex) (./notes/1027.tex
+ [2] (./notes/0908.tex) (./notes/0915.tex) (./notes/0929.tex) (./notes/1006.tex) (./notes/1013.tex) (./notes/1020.tex) (./notes/1026.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1597,7 +1597,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[3{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}]
+[3]
+LaTeX Font Info:    Trying to load font information for TS1+jkp on input line 21.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
+)
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1605,7 +1609,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4]
+[4]) (./notes/1027.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1621,15 +1625,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6]
-LaTeX Font Info:    Trying to load font information for TS1+jkp on input line 91.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
-File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
-)
-Overfull \hbox (11.24115pt too wide) detected at line 105
-[]
- []
-
+[6{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1637,11 +1633,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[7])
-Overfull \hbox (87.96631pt too wide) in paragraph at lines 132--20
-\T1/jkp/m/n/10.95 pected!                                                                                                                                            
- []
-
+[7]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1657,23 +1649,51 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[9] (./6_7900_Notes.aux)
+[9]
+Overfull \hbox (11.24115pt too wide) detected at line 105
+[]
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10]) (./notes/1031.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]) (./notes/1103.tex)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12] (./6_7900_Notes.aux)
 Package rerunfilecheck Info: File `6_7900_Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 906FFAD7A13C615F9549C3013D30662E;1397.
+(rerunfilecheck)             Checksum: F71D4C63EDF227373CE4F0BBA9932298;2290.
  ) 
 Here is how much of TeX's memory you used:
- 54108 strings out of 476025
- 1218503 string characters out of 5790016
- 1866388 words of memory out of 5000000
- 73412 multiletter control sequences out of 15000+600000
- 597838 words of font info for 142 fonts, out of 8000000 for 9000
+ 54131 strings out of 476025
+ 1218790 string characters out of 5790016
+ 1865388 words of memory out of 5000000
+ 73420 multiletter control sequences out of 15000+600000
+ 607946 words of font info for 144 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,12n,118p,1047b,706s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_7900_Notes.pdf (9 pages, 138593 bytes).
+Output written on 6_7900_Notes.pdf (12 pages, 153409 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 133 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 219 PDF objects out of 1000 (max. 8388607)
+ 179 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 125 words of extra memory for PDF output out of 10000 (max. 10000000)
 
