@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1698776513 "18_615_Notes.tex" "18_615_Notes.pdf" "18_615_Notes" 1698776516 0
+["pdflatex"] 1699948786 "18_615_Notes.tex" "18_615_Notes.pdf" "18_615_Notes" 1699948789 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -303,11 +303,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "18_615_Notes.aux" 1698776516 5163 6aff53c51c4258b7894b98a634878965 "pdflatex"
-  "18_615_Notes.out" 1698776516 5660 d07fa79b90ef1a592d067fa36208087c "pdflatex"
-  "18_615_Notes.pre" 1698776514 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "18_615_Notes.aux" 1699948789 6144 86f4481782fd491542e54484b63665e5 "pdflatex"
+  "18_615_Notes.out" 1699948789 6824 a27981efd1163a5ef758b3958c89dec8 "pdflatex"
+  "18_615_Notes.pre" 1699948787 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "18_615_Notes.tex" 1697642904 1014 bb6beb5f4a7f148d77f03743e47df13e ""
-  "18_615_Notes.toc" 1698776516 3054 fc1d096e8f2776e363594670548e89ea "pdflatex"
+  "18_615_Notes.toc" 1699948789 3707 11436e58a4e093bdda01a3a157081316 "pdflatex"
   "_andrew.sty" 1697568118 23609 a997241e932ca7b929f42eefde684151 ""
   "notes/0907.tex" 1697568118 5717 7d22c61dec66446d7e9e51a6bace53ba ""
   "notes/0912.tex" 1697568118 7285 8921c71a8359b312737e9fbb8a65e7eb ""
@@ -320,8 +320,13 @@
   "notes/1005.tex" 1697568118 6079 0784b258bd528c0a2ecebb293895c678 ""
   "notes/1012.tex" 1697643012 4564 717e0968a5705653ea9e386964c05da7 ""
   "notes/1017.tex" 1698205238 3170 1e375db101559691fa5376fd4c537d1c ""
-  "notes/1019.tex" 1698208278 772 4dd7c677e80c09419bed7ab6bb268d62 ""
-  "notes/1031.tex" 1698776513 5144 fdf8a493ced2d92db1b1f137c0336365 ""
+  "notes/1019.tex" 1699925765 1642 5432d1b3bfae90905a4ee346b9830399 ""
+  "notes/1024.tex" 1699925200 42 463b7d51d5cea9c3ce1e433aa7e9a3ed ""
+  "notes/1031.tex" 1699925909 5146 c1db42a65b8a300faae8a8ef8305c983 ""
+  "notes/1102.tex" 1699938133 3654 812531d48dcc99e9651235ba213175bb ""
+  "notes/1107.tex" 1699948730 3665 21b29a5089ad533f87f76e475a901c27 ""
+  "notes/1109.tex" 1699948781 66 23219b9c72403d3584125c54fd27f1b5 ""
+  "notes/1114.tex" 1699925131 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "18_615_Notes.aux"
   "18_615_Notes.log"

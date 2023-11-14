@@ -1,0 +1,70 @@
+\section{November 2, 2023}
+
+\subsection{Optional stopping theorem}
+
+Let the notation ``$\wedge$'' mean min.
+
+\begin{theorem}
+\lemlabel
+
+Let $M_i$ be a martingale wrt $X_i$, and $T$ a stopping time wrt $X_i$. Then $M_{i\wedge T}$ is a martingale wrt $X_i$. 
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+	\EE[M_{(i+1)\wedge T}|X_1,\hdots,X_i] &= \EE[M_{i+1}\mathbbm{1}(T\geq i+1)|X_1,\hdots, X_i] + \EE[M_T\mathbbm{1}(T\leq i)|X_1,\hdots,X_i] \\
+																				&= M_i\mathbbm{1}(T\geq i+1) + M_T\mathbbm{1}(T\leq i) = M_{i\wedge T},
+\end{align*}
+which works since $T,M_T$ are by definition functions of $X_1,\hdots, X_i$. 
+\end{proof}
+
+\begin{theorem}
+	\thmlabelname{Optional Stopping Theorem}
+
+Let $M_i$ be a martingale with respect to $X_i$, and $T$ a stopping time wrt $X_i$. $\EE[M_T] = \EE[M_1]$ if any of the following conditions are satisfied: 
+\begin{itemize}
+	\item $T\leq c$ almost surely for some $c < \infty$. 
+	\item $\EE[T] < \infty$ and $\vert M_{i+1}-M_i\vert \leq c$ almost surely for some $i < T$ and $c < \infty$
+	\item $\vert M_{i\wedge T}\vert \leq c$ almost surely for all $i$. 
+\end{itemize}
+\end{theorem}
+
+The third statement could have $T=\infty$; however, given that the martingale $M_{i\wedge T}$ is bounded by a finite constant, the martingale convergence theorem tells us that its limit exists almost surely, and we can take $M_T$ to be this limit. 
+
+\begin{proof}
+Proof of the first bullet point: 
+\[\EE[M_T] = \EE[M_1] + \sum_{i=2}^c \EE[(M_i-M_{i-1})\mathbbm{1}(T\geq i)].\]We can rewrite
+\begin{align*}
+	\EE[(M_i-M_{i-1})\mathbbm{1}(T\geq i)] &= \EE[\EE[(M_i-M_{i-1})\mathbbm{1}_{T\geq i} | X_1,\hdots, X_{i-1}]] \\
+																				 &= \EE[\EE[(M_i-M_{i-1})|X_1,\hdots, X_{i-1}]\mathbbm{1}_{T\geq i}] = 0.
+\end{align*}
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Let $S_n=X_1+\hdots+X_n$ with $X_i=\pm 1$ be a martingale. If we start the random walk at $0$, what is the probability that we hit $a$ before $b$ given $a < 0 < b$? How long does it take? 
+\end{example}
+
+This is a classic. We can use the optional stopping theorem with the third criterion, since $\vert S_{i\wedge T}\vert \leq \max(\vert a\vert, b)$. This gives $0 = \EE[S_1] = \EE[S_T] = pa + (1-p)b$, so the probability of hitting $a$ first is $p = b / (b-a)$.  
+
+To compute the expected amount of time this takes, consider the martingale $S_n^2 - n$. Since reaching $a,b$ amounts to hitting a state in a finite, irreducible Markov chain, $\EE[T]<\infty$, so the second criterion holds and we can apply the optional stopping theorem. We thus have $\EE[S_T^2-T] = \EE[S_1^2-1] = 0$, and we know $\EE[S_T^2] = b/(b-a)\cdot a^2 + (-a)/(b-a)\cdot b^2 = -ab$,  so $\EE[T] = -ab$. 
+
+\begin{example}
+\exlabel
+
+Same walk as before, but biased. Let $p,q$ be the probabilities of moving left,right, respectively. 
+\end{example}
+
+Let $M_i = (p/q)^{S_i}$. We can show that this is a Martingale. Also, $\vert M_{i\wedge T}\vert$ is bounded, so we can apply the optional stopping theorem to get 
+\[P = \frac{(p/q)^b - 1}{(p/q)^b - (p/q)^a}.\] 
+We can also show that $S_i-i(p-q)$ is a martingale, which gives 
+\[\EE[T] = \frac{Pa + (1-P)b}{p-q}.\]
+
+\begin{example}
+\exlabel
+
+Consider a random walk $(X_i,Y_i)$ on $\ZZ^2$. How long does it take to travel distance $R$ away from the origin? 
+\end{example}
+
+Here, we can show that $M_i = X_i^2 + Y_i^2 - i$ is a martingale. Note that this is essentially the same martingale that we used in one dimension. By optional stopping, $\EE[X_i^2+Y_i^2-T] = 0$, so $\EE[T] = \EE[X_i^2+Y_i^2]$, which is somewhere between $R^2$ and $(R+1)^2$. We can use this same argument to show that this will be the same for walks on $\ZZ^d$.   
