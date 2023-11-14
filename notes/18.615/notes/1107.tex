@@ -1,0 +1,93 @@
+\section{November 7, 2023}
+
+\subsection{Harmonic functions}
+
+\begin{definition}
+\deflabel
+
+Let $P$ be a Markov chain on $\mathcal{X}$. A \ac{harmonic function} is a function $f: \mathcal{X}\rightarrow \RR$ s.t. $\EE[f(X_1)|X_0=x] = f(x)$.  
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+Let $X_i$ be a Markov Chain and $f$ a harmonic function. $f(X_i)$ is a martingale wrt $X_i$.
+\end{theorem}
+
+\begin{proof}
+	\[\EE[f(X_{i+1})|X_1,\hdots,X_i] = \EE[f(X_{i+1})|X_i] = f(X_i).\] 
+\end{proof}
+
+\begin{theorem}
+\proplabel
+
+If $P$ is irreducible and recurrent, the only bounded harmonic functions are constant.
+\end{theorem}
+
+\begin{proof}
+If $f$ is a bounded harmonic function, then $f(X_i)$ is a bounded martingale. So, by the martingale convergence theorem, $f(X_i)$ converges to a value almost surely. On the other hand, since $P$ is irreducible, $X_i$ visits every state i.o., so $f(X_i)$ must be the same for every state, otherwise it would take on at least two distinct values i.o. 
+\end{proof}
+
+\begin{example}
+\exlabel
+
+Consider the random biased walk on $\ZZ$ from last lecture. 
+\end{example}
+
+Finding the martingale $(p/q)^{S_i}$ can be motivated by harmonic functions. In particular, harmonic functions for this martingale satisfy 
+\[f(x) = pf(x-1) + qf(x+1),\]
+which gives $f(x) = a + b(p/q)^x$ for $a,b\in \RR$.
+
+\begin{example}
+\exlabel
+
+Consider Markov chain on $\ZZ$ defined by moving $-2,-1,0,1,2$ with probabilities $p_i$ for $i\in [5]$. How many harmonic functions are there?  
+\end{example}
+
+We have 
+\[f(x) = p_0f(x-2) + p_1f(x-1) + p_2f(x) + p_3f(x+1) + p_4f(x+2),\] 
+which has characteristic equation 
+\[x^2 = p_0+p_1x+p_2x^2+p_3x^3+p_4x^4.\]
+This gives four roots, one of which is always $1$, so all harmonic functions are of the form 
+\[f(x) = a_1+a_2\lambda_2^x+a_3\lambda_3^x+a_4\lambda_4^x.\]
+
+\subsection{Harmonic extensions}
+
+\begin{theorem}
+\proplabel
+
+Let $P$ be a Markov chain and $S\subseteq \mathcal{X}$. Assume $P(x,x)=1$ for all $x\in S$ and $X_i\in S$ for some $i$ a.s. Any bounded function $f : S\rightarrow \RR$ has a unique extension to a harmonic function 
+\[\tilde{f}(x) = \EE[f(X_t)|X_0=x],\]
+where $T$ is the first time that $X_i$ enters $S$. 
+\end{theorem}
+
+Recall that ``extending'' a function means to replace it with another function whose values are the same on the domain on the original function. 
+
+\begin{proof}
+The function is harmonic, since 
+\begin{align*}
+	\EE[\tilde{f}(X_1)|X_0=x] &= \EE[\EE[f(X_T)|X_0=X_1]|X_0=x] \\
+														&= \EE[f(X_T)|X_1=x] = \EE[f(X_T)|X_0=x] = \tilde{f}(x).
+\end{align*}
+To show uniqueness, let $g$ be any harmonic function that extends $f$. Since we must end up in $S$ a.s. for any starting $x\in \mathcal{X}$, and $f$ is bounded, we must $g$ bounded. Therefore, the martingale $g(X_{T\wedge i})$ is bounded, so we can apply the optional stopping theorem to get $\EE[g(X_T)|X_0=x] = \EE[f(X_T)|X_0=x] = g(x)$, so $g=\tilde{f}$.
+
+\begin{theorem}
+\corlabel
+
+The harmonic extension $\tilde{f}$ satisfies 
+\[\sup_{x\in \mathcal{X}}\tilde{f}(x) = \sup_{x\in S}f(x).\] 
+\end{theorem}
+
+\begin{proof}
+	$\tilde{f}$ is an expected value of $f(y)$ for all $y\in S$, so is bounded above by its values. 
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+Let $P$ be an irreducible Markov chain on a finite state space, and let $A,B\subseteq \mathcal{X}$ be two disjoint subsets. Let $T$ be the first time that $X_i$ enters $A$ or $B$. Then, $\PP[X_T\in A|X_0]$ is harmonic for $\tilde{P}$, which is equal to $P$ except that $\tilde{P}(x,x)=1$ for $x\in A,B$. 
+\end{theorem}
+
+\begin{proof}
+	This is the unique extension for function $f(x)=\mathbbm{1}(x\in A)$ over the subset $S=A\cup B$. 
+\end{proof}

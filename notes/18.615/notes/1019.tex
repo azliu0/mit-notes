@@ -17,4 +17,36 @@ Let $P$ be irreducible. For any starting distribution $\mu$,
 
 Remember that $V_x(n)$ is the number of visits to $x$ up to but not including time $n$. This is the exact same as the normal Ergodic theorem. 
 
-\comment{write down the proof later}. 
+\begin{proof}
+\comment{write down the proof later}.
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+If $P$ is null recurrent or transient, and $\EE[\tau_x^+] = \infty$, then $V_x(n)/n\rightarrow 0$ almost surely. 
+\end{theorem}
+
+\subsection{Expected values}
+
+\begin{definition}
+\deflabel
+
+Let $X$,$Y$ by random variables with $X$ in $\RR$. Then 
+\[\EE[X|Y] = \sum_y \EE[X|Y=y]\mathbbm{1}(Y=y).\] 
+\end{definition}
+
+Note that $\EE[X|Y]$ is a function (with respect to the random variable $Y$), and not a single value.
+
+\begin{theorem}
+\proplabel
+
+\begin{itemize}
+	\item If $X = f(Y), \EE[X|Y] = X$.
+	\item If $X$,$Y$ are independent, $\EE[X|Y] = \EE[X]$. 
+	\item $\EE[\EE[X|Y]] = \EE[X]$. 
+	\item If $X$ is jointly independent of $Y$, $Z$, then $\EE[XY|Z] = \EE[X]\EE[Y|Z]$. 
+	\item If $Y=f(Z)$, $\EE[XY|Z] = \EE[X|Z]Y$.
+	\item If $Y=f(Z)$, $\EE[\EE[X|Y]|Z] = \EE[\EE[X|Z]|Y] = \EE[X|Y]$. 
+\end{itemize}
+\end{theorem}
