@@ -1,3 +1,42 @@
 \section{November 3, 2023}
 
+\subsection{Forward Diffusion}
+
+In diffusion, we fix a forward process that adds Gaussian noise to an image. We then use a reverse de-noising process to reverse this process and generate images from noise. 
+
+More specifically, we start with some data $x_0$ sampled from distribution $q(x)$. Then, we define a forward diffusion process 
+\[q(x_t|x_{t-1}) = \Norm(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I),\]
+where the probability of the entire process up to time $T$ is 
+\[q(x_{1:T}|x_0) = \prod_{t=1}^T q(x_t|x_{t-1}).\]
+At each time step, we're injecting a bit of noise into the image. By the end of the forwards process, $x_T$ is isotropic (pure noise). Usually, $\beta_1 < \beta_2 <\hdots < \beta_T$ with some scheduling process (linear, cosine) to ensure that this is true. Using nice properties of Gaussians, we can sample any timestep directly instead of having to simulate the entire process each time. 
+
+\begin{theorem}
+\claimlabel
+
+Let $\alpha_t = 1-\beta_t$ and $\ov{\alpha}_t = \prod_{i=1}^t \alpha_i$, and $\varepsilon\sim \Norm(0,I)$. Then, 
+\[x_t = \sqrt{\ov{\alpha}_t} x_0 + \sqrt{1-\ov{\alpha}_t}\varepsilon.\] 
+\end{theorem}
+
+\begin{proof}
+We can do this with induction. This clearly holds for $t=1$. Now, for arbitrary $t>1$, 
+    \begin{align*}
+        x_t &= \sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t}\varepsilon_t \\
+        &= \sqrt{\alpha_t}\sqrt{\ov{\alpha}_{t-1}}x_0 + \sqrt{\alpha_t - \alpha_t \ov{\alpha}_{t-1}}\varepsilon + \sqrt{1-\alpha_t}\varepsilon_t \\
+        &= \sqrt{\ov{\alpha}_t}x_0 + \sqrt{1-\ov{\alpha}_t}\varepsilon,
+    \end{align*}
+    where the last equality comes from linearity of variance for independent gaussian noise. This completes the induction.   
+\end{proof}
+
+This result shows that we can think of the image at timestep $t$ as a linear combination of pure noise and the original image, where the proportion assigned to pure noise approaches $1$ as $t\rightarrow T$. Here is a graph visualizing linear vs cosine scheduling: 
+
+\input{figures/betascheduling.tex}
+
+where the $y$-axis is $\ov{\alpha}_t$, $x$-axis is time, and the green and red schedules are linear and cosine schedules, respectively. The cosine schedule is more gradual and has been shown to generally produce better results for smaller image sizes, e.g., $32x32$ pixels. 
+
+\subsection{Backwards Diffusion}
+
+
+
+\subsection{Turning diffusion models into classifiers}
+
 

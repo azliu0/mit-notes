@@ -12,3 +12,7 @@
 \contentsline {section}{\numberline {4}October 31, 2023}{11}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Variational Autoencoders}{11}{subsection.4.1}%
 \contentsline {section}{\numberline {5}November 3, 2023}{12}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Forward Diffusion}{12}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Backwards Diffusion}{14}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Turning diffusion models into classifiers}{14}{subsection.5.3}%
+\contentsline {section}{\numberline {6}November 7, 2023}{14}{section.6}%
