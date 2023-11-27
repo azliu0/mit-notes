@@ -27,16 +27,91 @@ We can do this with induction. This clearly holds for $t=1$. Now, for arbitrary 
     where the last equality comes from linearity of variance for independent gaussian noise. This completes the induction.   
 \end{proof}
 
-This result shows that we can think of the image at timestep $t$ as a linear combination of pure noise and the original image, where the proportion assigned to pure noise approaches $1$ as $t\rightarrow T$. Here is a graph visualizing linear vs cosine scheduling: 
+This result shows that we can think of the image at timestep $t$ as a linear combination of pure noise and the original image, where the proportion assigned to pure noise approaches $1$ as $t\rightarrow T$. The graph below visualizes linear vs cosine scheduling: 
 
 \input{figures/betascheduling.tex}
 
-where the $y$-axis is $\ov{\alpha}_t$, $x$-axis is time, and the green and red schedules are linear and cosine schedules, respectively. The cosine schedule is more gradual and has been shown to generally produce better results for smaller image sizes, e.g., $32x32$ pixels. 
+where the $y$-axis is $\ov{\alpha}_t$ (i.e., the proportion of the original image that we are preserving), $x$-axis is time, and the green and red schedules are linear and cosine schedules, respectively. The cosine schedule is more gradual and has been shown to generally produce better results for smaller image sizes, e.g., $32x32$ pixels. 
 
-\subsection{Backwards Diffusion}
+\subsection{Going Backwards}
 
+The more difficult step in diffusion models is figuring out how to generate data in the complex data space (i.e., an image) from pure noise. When $\beta_t$ is small, $q(x_{t-1}|x_t)$ is essentially a gaussian, so we can attempt to learn $p_{\theta}(x_{t-1}|x_t) = \Norm(x_{t-1}; \mu_{\theta}(x_t,t), \Sigma_{\theta}(x_t,t))$. 
 
+Unfortunately, $q(x_{t-1}|x_t)$ is intractable, but $q(x_{t-1}|x_t,x_0)$ can be calculated by flipping everything to the forwards direction with Bayes. Per the normal distribution for multivariate distributions, we want something that looks like this: 
+\[q(x_{t-1}|x_t,x_0) = \frac{1}{\sqrt{(2\pi)^k \det \Sigma_{\theta}(x_t,t)}}\exp\left(-\frac{\lVert x_{t-1} - \mu_{\theta}(x_t,t) \rVert^2}{2\det \Sigma_{\theta}(x_t,t)}\right),\] 
+where we implicitly assume $\Sigma_{\theta}(x_t,t) = \tilde{\beta}_tI$ for some derived value of $\tilde{\beta}_t$ (our noise is independent). Recall that $q(x_t|x_{t-1}) = \Norm(x_t; \sqrt{\alpha_t}x_{t-1}, \beta_t I)$ and $q(x_{t}|x_{0})\sim \Norm(x_t; \sqrt{\ov{\alpha}_t}x_0, \sqrt{1-\ov{\alpha}_t}I)$, so we have 
+\begin{align*}
+	&q(x_{t-1}|x_t,x_0) = q(x_t|x_{t-1},x_0)\frac{q(x_{t-1}|x_0)}{q(x_t|x_0)}\\
+	&\quad= \frac{1}{\sqrt{(2\pi)^k\beta_t^k}}\frac{\sqrt{(2\pi)^k(1-\ov{\alpha}_t)^k}}{\sqrt{(2\pi)^k(1-\sqrt{\ov{\alpha}_{t-1}})^k}}\exp\left(-\frac{\lVert x_{t-1} - \mu_{\theta}(x_t,t)\rVert^2)}{2\Sigma_{\theta}(x_t,t)}\right).
+\end{align*}
+Therefore,
+\[\tilde{\beta} = \frac{1-\sqrt{\ov{\alpha}_{t-1}}}{1-\sqrt{\ov{\alpha}_t}}\beta_t.\]
+To compute the mean, we continue expanding inside of the exp: 
+\begin{align*}
+	&q(x_{t-1}|x_t,x_0) = q(x_t|x_{t-1},x_0)\frac{q(x_{t-1}|x_0)}{q(x_t|x_0)} \\
+	&\quad = \frac{1}{\sqrt{(2\pi\tilde{\beta})^k}}\exp\left(-\frac{1}{2}\left(\frac{(x_t - \sqrt{\alpha}_tx_{t-1})^2}{\beta_t} + \frac{(x_{t-1} - \sqrt{\ov{\alpha}_{t-1}}x_0)^2}{1-\ov{\alpha}_{t-1}} - \frac{(x_t-\sqrt{\ov{\alpha}_t}x_0)^2}{(1-\ov{\alpha}_t)}\right)\right) \\
+	&\quad= \frac{1}{\sqrt{(2\pi\tilde{\beta})^k}}\exp\left(-\frac{1}{2}\left(x_{t-1}^2\left(\frac{\alpha_t}{\beta_t} + \frac{1}{1-\ov{\alpha}_{t-1}}\right)\right.\right. \\
+	&\qquad\qquad\qquad \left.\left. -x_{t-1}\left(\frac{2\sqrt{\alpha_t}}{\beta_t}x_t + \frac{2\sqrt{\ov{\alpha}_{t-1}}}{1-\ov{\alpha}_{t-1}}x_0\right) + \frac{x_t^2}{\beta_t} + \frac{\ov{\alpha}_{t-1}x_0^2}{1-\ov{\alpha}_{t-1}} - \frac{(x_t-\sqrt{\ov{\alpha}_t}x_0)^2}{1-\ov{\alpha}_t}\right)\right),
+\end{align*}
+where matrix multiplications are handwaved. We can verify 
+\[\frac{\alpha_t}{\beta_t} + \frac{1}{1-\ov{\alpha}_{t-1}} = \frac{\alpha_t-\ov{\alpha}_t + 1-\alpha_t}{\beta_t(1-\ov{\alpha}_{t-1})} = \frac{1}{\tilde{\beta_t}},\]
+so we have
+\begin{align*}
+q(x_{t-1}|x_t,x_0) &= \frac{1}{\sqrt{(2\pi\tilde{\beta}^k)}}\exp\left(-\frac{\lVert x_{t-1} - \mu_{\theta}(x_t,t)\rVert^2}{2\tilde{\beta}_t^k}\right). 
+\end{align*}
+(the exponents don't quite match up because we are handwaving away all the matrix logic). Comparing coefficients gives 
+\begin{align*}
+	\mu_{\theta}(x_t,t) &= \left(\frac{\sqrt{\alpha}_t}{\beta_t}x_t + \frac{\sqrt{\ov{\alpha}_{t-1}}}{1-\ov{\alpha}_{t-1}}x_0\right)\tilde{\beta} \\
+											&= \frac{\sqrt{\alpha_t}(1-\ov{\alpha}_{t-1})}{1-\ov{\alpha}_t}x_t + \frac{\sqrt{\ov{\alpha}_{t-1}}\beta_t}{1-\ov{\alpha}_t}x_0 \\
+											&= \frac{\sqrt{\alpha_t}(1-\ov{\alpha}_{t-1})}{1-\ov{\alpha}_t}x_t + \frac{\sqrt{\ov{\alpha}_{t-1}}\beta_t}{1-\ov{\alpha}_t}\frac{1}{\sqrt{\ov{\alpha}_t}}(x_t - \sqrt{1-\ov{\alpha}_t}\varepsilon_t) \\
+											&= \frac{1}{\sqrt{\alpha_t}}\frac{\alpha_t-\ov{\alpha}_t}{1-\ov{\alpha}_t}x_t + \frac{1}{\sqrt{\alpha_t}}\frac{1-\alpha_t}{1-\ov{\alpha}_t}(x_t - \sqrt{1-\ov{\alpha}_t}\varepsilon_t) \\
+											&= \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{1-\alpha_t}{\sqrt{1-\ov{\alpha}_t}}\varepsilon_t\right). 
+\end{align*}
+
+\subsection{Theoretical Loss}
+
+We can now explicitly compute $q(x_{t-1}|x_t,x_0)\sim \Norm(x_{t-1};\mu_{\theta}(x_t,t), \Sigma_{\theta}(x_t,t))$, so we can compute the backwards diffusion step at any timestep conditioned on knowing $x_0$. To find the best possible $x_0$, we can optimize log likelihood use the same ELBO lower bound used to optimize VAEs and gaussian mixtures: 
+
+\begin{align*}
+	\log p_{\theta}(x_0) \geq \EE_q\left(\frac{p_{\theta}(x_0,x_{1:T})}{q(x_{1:T}|x_0)}\right) = \EE_q\left(\frac{p_{\theta}(x_{0:T})}{q(x_{1:T}|x_0)}\right). 
+\end{align*}
+To turn this into a minimization problem, we optimize $L_{VLB} = -\log p_{\theta}(x_0)$, where VLB stands for variational lower bound. With a bit of algebra, we can simplify this expression:
+\begin{align*}
+	L_{VLB} &= \EE_q\left(\log \frac{q(x_{1:T}|x_0)}{p_{\theta}(x_{0:T})}\right) \\
+					&= \EE_q\left(\log \frac{\prod_{t=1}^T q(x_t|x_{t-1})}{p_{\theta}(x_T)\prod_{t=1}^Tp_{\theta}(x_{t-1}|x_t)}\right) \\
+					&= \EE_q\left(-\log p_{\theta}(x_T) + \left(\sum_{t=1}^T \log \frac{q(x_t|x_{t-1})}{p_{\theta}(x_{t-1}|x_t)}\right) + \log \frac{q(x_1|x_0)}{p_{\theta}(x_0|x_1)}\right) \\
+					&= \EE_q \left(-\log p_{\theta}(x_T) + \left(\sum_{t=2}^T \log \frac{q(x_{t-1}|x_t,x_0)q(x_t|x_0)}{p_{\theta}(x_{t-1}|x_t)q(x_{t-1}|x_0)}\right) + \log \frac{q(x_1|x_0)}{p_{\theta}(x_0|x_1)}\right) \\
+					&= \EE_q \left(-\log p_{\theta}(x_T) + \left(\sum_{t=2}^T \log \frac{q(x_{t-1}|x_t,x_0)}{p_{\theta}(x_{t-1}|x_t)}\right) + \log \frac{q(x_T|x_0)}{q(x_1|x_0)} + \log \frac{q(x_1|x_0)}{p_{\theta}(x_0|x_1)}\right) \\
+					&= \EE_q \left(\log \frac{q(x_T|x_0)}{p_{\theta}(x_T)} + \left(\sum_{t=2}^T \log \frac{q(x_{t-1}|x_t,x_0)}{p_{\theta}(x_{t-1}|x_t)}\right) - \log p_{\theta}(x_0|x_1)\right) \\
+					&= D_{KL}(q(x_T|x_0)\Vert p_{\theta}(x_T)) + \sum_{t=2}^T D_{KL}(q(x_{t-1}|x_t,x_0)\Vert p_{\theta}(x_{t-1}|x_t)) - \log p_{\theta}(x_0|x_1) \\
+					&= L_T + \sum_{t=2}^T L_{t-1} + L_0.
+\end{align*}
+
+\subsection{Training Loss}
+
+In practice, $L_T$ can be ignored, since $x_T$ is always pure gaussian noise. There are some things we can do for $L_0$ that are not that important here. Therefore, we care about optimizing $L_t$ for $t=1$ to $T-1$.  
+
+The \href{https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Kullback%E2%80%93Leibler_divergence}{KL divergence for multivariate normal distributions} is given by 
+	\[D_{KL}(\Norm_0 || \Norm_1) = \frac{1}{2}\left(\Tr(\Sigma_1^{-1}\Sigma_0) + \frac{1}{\det \Sigma_1}\lVert \mu_1-\mu_0\rVert^2 - k + \ln \frac{\det \Sigma_1}{\det \Sigma_0}\right).\]
+To minimize $L_{t}$, we only care about terms that depend on $\theta$. Our expression for posterior variance 
+\[\tilde{\beta_t} = \frac{1-\ov{\alpha}_{t-1}}{1-\ov{\alpha}_t}\cdot \beta_t\]
+does not depend on $\theta$, since all of our $\alpha$,$\beta$ are predetermined, so the only terms we care about in the expression for KL divergence are the terms with $\mu_0,\mu_1$, i.e., 
+\[\frac{1}{\det \Sigma_1}\lVert \mu_1 - \mu_0\rVert^2,\]
+in the notation of the above expression. We know $q(x_{t-1}|x_t,x_0) = \Norm(x_{t-1}; \tilde{\mu}(x_t,x_0), \tilde{\beta}_tI)$, and we want our model $p_{\theta}(x_{t-1}|x_t)$ to learn $\Norm(x_{t-1}; \mu_{\theta}(x_t,t), \Sigma_{\theta}(x_t,t))$, where $\mu_{\theta}(x_t,t)\approx \tilde{\mu}(x_t,x_0)$ and $\Sigma_{\theta}(x_t,t)\approx \tilde{\beta}_t I$. Since we are ultimately trying to minimize log loss across all possible $x_0$, we minimize the EV across $x_0$. Also, like the reparamaterization trick for VAEs, we don't want to sample directly from each gaussian when computing values like $\tilde{\mu}_t(x_t,x_0)$; instead, we first sample $\varepsilon_t\sim \Norm(0,1)$, and let $\tilde{\mu}$ take it as a parameter, so that we can backprop through the function properly. In sum, our goal is to now minimize EV across both $x_0$ and $\varepsilon_t$, which gives us
+\[L_{t} - C = \EE_{x_0, \varepsilon_t}\left(\frac{1}{2\lVert\Sigma_{\theta}(x_t,t)\rVert_2^2}\lVert \tilde{\mu}_t(x_t, x_0) - \mu_{\theta}(x_t,t)\rVert^2\right)\] 
+with $C$ independent of $\theta$. Plugging in known values, this simplifies: \begin{align*}
+	L_t - C &= \EE_{x_0,\varepsilon_t}\left(\frac{1}{2\lVert\Sigma_{\theta}(x_t,t)\rVert_2^2}\left\lVert\frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{1-\alpha_t}{\sqrt{1-\ov{\alpha}_t}}\varepsilon_t\right) - \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{1-\alpha_t}{\sqrt{1-\ov{\alpha}_t}}\varepsilon_{\theta}(x_t,t)\right)\right\rVert^2\right) \\
+					&= \EE_{x_0,\varepsilon_t}\left(\frac{(1-\alpha_t)^2}{2\alpha_t(1-\ov{\alpha}_t) \lVert\Sigma_{\theta}(x_t,t)\rVert^2}\lVert\varepsilon_t - \varepsilon_{\theta}(\sqrt{\ov{\alpha}_t}x_0 + \sqrt{1-\ov{\alpha}_t}\varepsilon_t, t)\rVert^2\right). 
+\end{align*} 
+In practice, it has been shown that total loss $L$ given by  
+\[L - C = \EE_{t,x_0,\varepsilon_t}(\lVert\varepsilon_t - \varepsilon_{\theta}(\sqrt{\ov{\alpha}_t}x_0 + \sqrt{1-\ov{\alpha}_t}\varepsilon_t,t)\rVert^2)\] 
+gives better results (note that we have added $t$ to the expected value, so this represents a total loss objective over all timesteps). This is really convenient for training, because this is just the expected mean squared error between the actual noise added to an image at time $t$, $\varepsilon_t$, and the error predicted by the backwards diffusion process. We can therefully usually train by randomly selecting a batch of images, timesteps, and noise to add to each image, and then incurring loss equal to the MSE of the noise predicted by the unet and the actual noise that was added to each image. 
 
 \subsection{Turning diffusion models into classifiers}
 
+In addition to normal diffusion models that learn $p_{\theta}(x_{0:T})$, there are also conditional diffusion models that learn $p_{\theta}(x_{0:T}|c_i)$. The only difference between class conditional models and normal models is that the neural network learned during the backwards diffusion process takes the class as an additional parameter. It turns out that we can also use these models as classifiers. 
 
+\[p_{\theta}(c_i|x) = \frac{p(c_i)p_{\theta}(x|c_i)}{\sum_j p(c_j)p_{\theta}(x|c_j)}.\]
+The learned UNet produces $\mathcal{L}_{\theta}(x|c_i)\leq \log p_{\theta}(x|c_i)$. In principle, our learned ELBO should be the same as the actual log likelihood, so we may say $\mathcal{L}_{\theta}(x|c_i)\approx \log p_{\theta}(x|c_i)$. Assuming uniform priors on all of the classes, we thus have 
+\[p_{\theta}(c_i|x) = \frac{\exp(-\EE_{t,\varepsilon}\lVert \varepsilon - \varepsilon_{\theta}(x_t,c_i) \rVert^2)}{\sum_j \exp(-\EE_{t,\varepsilon}\lVert \varepsilon-\varepsilon_{\theta}(x_t,c_j)\rVert^2)}.\] 
+ELBO values can be approximated via Monte Carlo by sampling $(t,\varepsilon)$ pairs, using the trained UNet to predict $\varepsilon_{\theta}(x_i,c_i)$, and computing the expected mean squared loss of the errors over all samples. This is an overkill but interesting way to classify things that has shown decent results. 

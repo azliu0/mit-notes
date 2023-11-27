@@ -9,7 +9,7 @@ settings.toolbar=false;
 viewportmargin=(2,2);
 
 /* Geogebra to Asymptote conversion, documentation at artofproblemsolving.com/Wiki go to User:Azjps/geogebra */
-import graph; size(8cm,8cm,keepAspect=false);
+import graph; size(6cm,6cm,keepAspect=false);
 real labelscalefactor = 0.5; /* changes label-to-point distance */
 pen dps = linewidth(0.7) + fontsize(15); defaultpen(dps); /* default pen style */
 pen dotstyle = black; /* point style */

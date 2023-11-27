@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  25 NOV 2023 03:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  27 NOV 2023 03:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1669,7 +1669,104 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[11]) (./notes/1103.tex
+[11]
+Overfull \hbox (70.40799pt too wide) in paragraph at lines 15--16
+[]\T1/jkp/m/n/10.95 We showed pre-vi-ously that $[] \OML/jkp/m/it/10.95 P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) = \OMS/jkp/m/n/10.95 L[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) + \OML/jkp/m/it/10.95 KL\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 , where $\OML/jkp/m/it/10.95 KL\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )) \OMS/jkp/m/n/10.95 ^^U
+ []
+
+./notes/1031.tex:21: Undefined control sequence.
+<argument> \diag 
+                 
+l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
+                                                  (\sigma(x;\phi)^2))$, wher...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:21: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
+                                                  (\sigma(x;\phi)^2))$, wher...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:21: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
+                                                  (\sigma(x;\phi)^2))$, wher...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:21: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
+                                                  (\sigma(x;\phi)^2))$, wher...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (19.48952pt too wide) in paragraph at lines 21--22
+[]\T1/jkp/m/n/10.95 It is com-mon to repara-ma-ter-ize the la-tent space $\OML/jkp/m/it/10.95 z \OMS/jkp/m/n/10.95 ^^X \OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 z\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x; ^^^\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; []\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 ^^[\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^^\OT1/jkp/m/n/10.95 )[]))$\T1/jkp/m/n/10.95 ,
+ []
+
+./notes/1031.tex:25: Undefined control sequence.
+<argument> \diag 
+                 
+l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
+                                                 (\sigma))$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:25: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
+                                                 (\sigma))$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:25: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
+                                                 (\sigma))$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./notes/1031.tex:25: Undefined control sequence.
+<argument> \firstchoice@false \diag 
+                                    
+l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
+                                                 (\sigma))$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1677,14 +1774,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12] (./figures/betascheduling.tex
+[12]) (./notes/1103.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[13] (./figures/betascheduling.tex
 \openout4 = `6_7900_Notes-1.asy'.
 
-<6_7900_Notes-1.pdf, id=180, 227.62239pt x 227.62239pt>
+<6_7900_Notes-1.pdf, id=197, 170.7168pt x 170.75995pt>
 File: 6_7900_Notes-1.pdf Graphic file (type pdf)
 <use 6_7900_Notes-1.pdf>
 Package pdftex.def Info: 6_7900_Notes-1.pdf  used on input line 1222.
-(pdftex.def)             Requested size: 227.62183pt x 227.62183pt.
+(pdftex.def)             Requested size: 170.71637pt x 170.75952pt.
+)
+Overfull \hbox (31.24454pt too wide) in paragraph at lines 38--39
+\T1/jkp/m/n/10.95 is es-sen-tially a gaus-sian, so we can at-tempt to learn $\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; \U/jkpmia/m/it/10.95 ^^F[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 . 
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1693,7 +1802,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[13])) (./notes/1107.tex)
+[14 <./6_7900_Notes-1.pdf>]
+Overfull \hbox (50.03809pt too wide) in paragraph at lines 41--43
+\T1/jkp/m/n/10.95 in-de-pen-dent). Re-call that $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; []\OML/jkp/m/it/10.95 x[]; ^^L[]I\OT1/jkp/m/n/10.95 )$ \T1/jkp/m/n/10.95 and $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^X []\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; []\OML/jkp/m/it/10.95 x[]; []I\OT1/jkp/m/n/10.95 )$\T1/jkp/m/n/10.95 ,
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1701,23 +1814,64 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[14 <./6_7900_Notes-1.pdf>] (./6_7900_Notes.aux)
+[15]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[16]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[17]
+Overfull \hbox (9.05246pt too wide) in paragraph at lines 99--101
+\T1/jkp/m/n/10.95 in the no-ta-tion of the above ex-pres-sion. We know $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]; x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; [](\OML/jkp/m/it/10.95 x[]; x[]\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; []I\OT1/jkp/m/n/10.95 )$\T1/jkp/m/n/10.95 ,
+ []
+
+
+Overfull \hbox (11.24663pt too wide) in paragraph at lines 99--101
+\T1/jkp/m/n/10.95 and we want our model $\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 )$ \T1/jkp/m/n/10.95 to learn $[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; \U/jkpmia/m/it/10.95 ^^F[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 , where $\OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^Y
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[18]) (./notes/1107.tex)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[19] (./6_7900_Notes.aux)
 Package rerunfilecheck Info: File `6_7900_Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 0C17F9987E2FBF227D436CD2F13E137A;2997.
+(rerunfilecheck)             Checksum: 40B323E1D5A49409B2214E64C5873228;3244.
  ) 
 Here is how much of TeX's memory you used:
- 54165 strings out of 476025
- 1219404 string characters out of 5790016
- 1865388 words of memory out of 5000000
- 73437 multiletter control sequences out of 15000+600000
+ 54175 strings out of 476025
+ 1219503 string characters out of 5790016
+ 1873388 words of memory out of 5000000
+ 73440 multiletter control sequences out of 15000+600000
  613337 words of font info for 147 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 116i,12n,118p,1047b,706s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,13n,118p,1047b,723s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_7900_Notes.pdf (14 pages, 197102 bytes).
+Output written on 6_7900_Notes.pdf (19 pages, 215956 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 226 compressed objects within 3 object streams
- 35 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 314 PDF objects out of 1000 (max. 8388607)
+ 258 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 178 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,25 +2,38 @@
 
 \subsection{Variational Autoencoders}
 
-Generative models specify a mechanism for creating objects. Latent variables represent some of the underlying choices that generate these objects. To optimize mixtures of latent variables, we can use the ELBO lower bound discussed previously: 
-\[\log P(x|\theta) \geq \int Q(z|x)\log \left(P(x|z)P(z)\right) \ddd z + H(Q_{z|x}).\] 
-At a high level, VAEs map input data into a lower dimensional latent space, which can then be remapped to data that should closely resemble the original data. Mapping data into the latent space is done by the \ac{inferential model}, or encoder, and mapping from the latent space back into the data space is done by the \ac{generative model}, or decoder. 
+Another generative model is the variational autoencoder. The high level goal of VAEs is to compress a complex data distribution into a smaller latent space, and then be able to regenerate the distribution from latent space. 
 
-The role of the encoder is to take in data and produce a posterior distribution $Q(z|x)$ approximating the true $P(z|x,\theta)$. In particular, given $x$, it might produce $\mu(x;\phi)$ and $\sigma(x;\phi)$ specifying the posterior distribution, from which we can produce samples $z\sim Q(z|x,\phi) = \Norm(z; \mu(x;\phi), \text{diag}(\sigma(x;\phi)^2))$. These sampled values can then be used to update both the encoder and decoder: 
+In particular, the \ac{inference model}, or \ac{encoder}, or \ac{recognition model} attempts to learn $q_{\phi}(z|x)\approx P_{\theta}(z|x)$, where $z$ is some data in the latent space, and $x\sim P_{\theta}$ is the true data distribution. 
+
+This encoding process is very similar to the encoding we use for GMMs. In particular, we can learn $q_{\phi}$ by minimizing log likelihood $\log P_{\theta}(x)$, which we can do with the ELBO lower bound (we quickly derive another way to write this expression):
+\begin{align*}
+	&\mathcal{L}_{\theta, \phi}(x) = \sum_z q_{\phi}(z|x)\log(P_{\theta}(x)P_{\theta}(x|z)) + \sum_z q_{\phi}(z|x)\log\frac{1}{q_{\phi}(z|x)} \\
+	&\quad= \sum_z q_{\phi}(z|x)\log\left(\frac{P_{\theta}(z)P(x|z)}{q_{\phi}(z|x)}\right) = \EE_{q_{\phi}(z|x)}\left(\log\frac{P_{\theta}(x,z)}{q_{\phi}(z|x)}\right). 
+\end{align*}
+
+We showed previously that $\log P_{\theta}(x) = \mathcal{L}_{\theta,\phi}(x) + KL(q_{\phi}(z|x), P_{\theta}(z|x))$, where $KL(q_{\phi}(z|x),P_{\theta}(z|x))\geq 0$ with equality iff our model correctly predicts $q_{\phi} = P_{\theta}$. In other words,  
+\begin{align*}
+	\log P_{\theta}(x) &\geq \int q_{\phi}(z|x)\log \left(\frac{P_{\theta}(x,z)}{q_{\phi}(z|x)}\right) \ddd z + H(q_{\phi}(z|x))
+\end{align*}
+with equality iff we predict correctly, so we can try optimizing the ELBO lower bound instead of the log likelihood directly.
+
+It is common to reparamaterize the latent space $z\sim q_{\phi}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}(\sigma(x;\phi)^2))$, where $\mu(x;\phi)$ and $\sigma(x;\phi)$ completely specifies the posterior distribution. These can be learned with a neural net, e.g., 
+
+\begin{center}
+	$(\mu, \log \sigma) = \text{EncoderNeuralNet}_{\phi}(x)$ \\
+	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}(\sigma))$.
+\end{center}
+
+During learning, it is common to represent $q_{\phi}$ as a function of some externally chosen noise; for example, we might sample $\varepsilon\sim \Norm(0,1)$, and then take $z_{\phi} = \mu(x;\phi) + \sigma(x;\phi)\odot \varepsilon$. This way, we can backprop from the final prediction through the latent space and back to $\phi$. If we sample directly from the latent space, we can't backprop (we can compute the gradient when $\varepsilon$ is an input to the function, but we can't when we have to sample $\varepsilon$ as part of the function). 
+
+The \ac{generative model}, or \ac{decoder}, remaps data from the latent space into the complex data space. This part of the model attempts to learn $P_{\theta}(x|z)$, which is also commonly reparamaterized as a collection of gaussians $\Norm(z;g_{\theta}(z), \sigma^2I)$. Parameters $g,\sigma$ can again be learned with a neural net, $\text{DecoderNeuralNet}_{\theta}(z)$. Lastly, training can be done with EM, similar to the EM from Gaussian mixtures: 
 \begin{itemize}
 	\item decoder: 
-		\[\theta = \theta + \eta \nabla_{\theta}\log P(x|z_{\phi}, \theta).\]
+		\[\theta = \theta + \eta \nabla_{\theta}\log P_{\theta}(x|z_{\phi}).\]
 	\item encoder: 
-		\[\phi = \phi + \eta \nabla_{\phi}\left(\log P(x|z_{\phi},\theta) - KL(Q_{z|x,\phi} | P_z)\right).\] 
+		\[\phi = \phi + \eta \nabla_{\phi}\left(\log P_{\theta}(x|z_{\phi}) - KL(q_{\phi}(z|x) | P_{\theta}(z))\right).\] 
 \end{itemize}
 where gradient ascent updates are made according to the ELBO criterion.
 
-\comment{fix this i think something is wrong}
-
-%\begin{itemize}
-%	\item E-step: compute a $Q(z|x)$ that approximates $P(z|x,\theta)$ by maximizing ELBO$(Q,\theta)$. then, update the encoder network: 
-%		\[\phi \leftarrow \phi + \eta \nabla_{\phi}ELBO(Q_{\phi}, \theta).\] 
-%	\item M-step: update the decoder network: 
-%		\[\theta\leftarrow \theta + \eta \nabla_{\phi}ELBO(Q_{\phi}, \theta).\] 
-%\end{itemize}
 
