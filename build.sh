@@ -7,10 +7,11 @@ tree -H . -I 'index.html|*.fdb_latexmk|*.aux|*.fls|*.out|*.pre|*.synctex*|*.toc'
 # make urls clickable
 sed '$d' index.html > temp.html
 echo "<script>
+	const displayTypes = ['tex', 'sty', 'asy'];
 	let btns = document.querySelectorAll('a');
 	for (let i = 0; i < btns.length; ++i) {
 		let type = btns[i].href.slice(btns[i].href.length-3);
-		if (type === 'tex' || type === 'sty') {
+		if (displayTypes.includes(type)) {
 			let path = btns[i].href.slice(btns[i].href.indexOf('/', btns[i].href.indexOf('mit-notes')));
 			btns[i].href = 'https://raw.githubusercontent.com/azliu0/mit-notes/gh-pages' + path;
 		}
