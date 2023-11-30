@@ -1,0 +1,82 @@
+\section{November 16, 2023}
+
+\subsection{Continuous time Markov Chains (CTMCs)}
+
+\begin{definition}
+\deflabel
+
+Let $\mathcal{X}$ be a finite state space. A \ac{generator} is a matrix $Q$ whose rows and columns are indexed by $\mathcal{X}$ s.t. $Q(x,y)\geq 0$ if $x\neq y$ and whose rows sum to $0$. 
+\end{definition}
+
+\begin{theorem}
+\lemlabel
+
+If $Q$ is a generator and $D$ is a matrix consisting of the diagonal entries of $Q$, then the matrix $K = -D^{-1}(Q-D)$ is a transition matrix. If $D$ has any $0$s on the diagonal then we interpret the corresponding row in $K$ to be $1$ on the diagonal and $0$ everywhere else. 
+\end{theorem}
+
+\begin{proof}
+	Since diagonal elements are $\leq 0$, all entries in $K$ are nonnegative. Further, the $x$th row of $Q-D$ sums to $-D(x,x)$, so multiplying by $D^{-1}$ forces each row sum to $1$. 
+\end{proof}
+
+\begin{definition}
+\deflabel
+
+A \ac{continuous time Markov chain} (CTMC) with state space $\mathcal{X}$ and generator $Q$ is a stochastic process $X_t$ defined inductively as follows. Given $X_s=x$, we wait for $\exp(-Q(x,x))$ distributed amount of time, and then take a step according to $K = -D^{-1}(Q-D)$. If $Q(x,x)=0$, we stay at $x$ forever. We call $K$ the \ac{emedded discrete time Markov chain}, and the entries of $Q$ the \ac{transition rates}.
+\end{definition}
+
+Another way to view this definition: given $X_s=x$, we have $T_y\sim \exp(Q(x,y))$ random variable for each $y$ and then move the $y$ with the minimum $T_y$ after $T_y$ time. Remember that for generator $Q$ the rows sum to $0$, so $\sum_{z\neq x}Q(x,z) = Q(x,x)$. It can be shown that choosing the waiting for $\exp(-Q(x,x))$ time, and then moving according to $K$, gives the same distribution as choosing the waiting time and step along the MC at the same time (by taking the minimum waiting time). 
+
+\begin{theorem}
+\proplabel
+
+A continuous time MC $X_t$ satisfies the Markov property in the following way: conditioned on $X_t$, future $X_s$ for $s > t$ is distributed as if the MC started from $X_t$, and is thus independent from past $X_{s'}$ for $s' < t$. 
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+We define another continuous time random walk on graph $G$ with generator $Q(x,y) = 1$ if $(x,y)\in E$ and $Q(x,x) = -\deg(x)$. 
+\end{example}
+
+\subsection{Kolmogorov Equations}
+
+\begin{theorem}
+\thmlabelname{Kolmogorov backwards and forwards equations}
+
+Let $P^t$ be a CTMC with generator $Q$. Then $P^t$ is the unique solution to the equations 
+\[\frac{\ddd}{\ddd t}P^t = QP^t,\]
+and 
+\[\frac{\ddd}{\ddd t}P^t = P^tQ,\]
+with initial condition $P^0 = I$.
+\end{theorem}
+
+\begin{theorem}
+\corlabel
+
+Let $X_i$ be a CTMC with generator $Q$. Then $P^t = \exp(tQ)$. 
+\end{theorem}
+
+\begin{proof}
+$\exp(tQ)$ satisfies the forwards and backwards equations (with the initial condition). By the theorem, this is unique, so it is $P^t$. 
+\end{proof}
+
+Now we prove the main theorem.
+\begin{proof}
+First, 
+\begin{align*}
+	\frac{\ddd}{\ddd t} P^t = \lim_{h\rightarrow 0}\frac{P^{t+h} - P^t}{h} = \lim_{h\rightarrow 0} P^t\frac{P^h - I}{h} = \lim_{h\rightarrow 0} \frac{P^h - I}{h}P^t,
+\end{align*}
+where we are allowed to commute by memorylessness. Therefore, it suffices to show that 
+\begin{align*}
+	\lim_{h\rightarrow 0}\frac{P^h-I}{h} = Q.
+\end{align*}
+First we consider diagonal entries. We can stay at state $x$ by taking no jumps, or at least two jumps and landing back at $x$. Recall each jump is exponential $T\sim \Exp(-Q(x,x))$, so the probability that we take at least two timesteps (and land in the same place) is bounded above by $\PP[T\leq h]^2 = h^2e^{2Q(x,x)h}\in O(h^2)$. Thus,
+\[\frac{P^h(x,x) - 1}{h} = \frac{\PP[(T > h)] - 1 + O(h^2)}{h} = \frac{e^{hQ(x,x)} - 1}{h} + O(h),\]
+which has limit $\lim_{h\rightarrow 0}e^{hQ(x,x)}/h = Q(x,x)$. 
+
+Next we do non-diagonal entries. We can jump from $x$ to $y$, $x\neq y$, only by taking at least one jump with correct transition probability. As before, taking at least two jumps is $O(h^2)$, so
+\[\frac{P^h(x,y)}{h} = \frac{\PP[T < h]K(x,y) + O(h^2)}{h} = \frac{(1-e^{hQ(x,x)}K(x,y))}{h} + O(h).\]
+By definition, $K(x,y) = -Q(x,x)^{-1}Q(x,y)$, so the limit is $\lim_{h\rightarrow 0}(1-e^{hQ(x,x)})K(x,y)/h = -Q(x,x)K(x,y) = Q(x,y)$. 
+\end{proof}
+
+

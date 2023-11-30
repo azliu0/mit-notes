@@ -1,0 +1,126 @@
+\section{November 14, 2023}
+
+\subsection{Continuous Time MCs}
+
+Now we shift focus from MCs in a discrete state space and discrete time space, to MCs in a discrete state space and a continuous time space. We can intuitively think about MCs in a continuous time space as waiting some time in the current state before jumping to another state, where the waiting time is a real random variable. 
+
+We still want the normal Markov property to hold, i.e., 
+\[\PP[T > t | T > s] = \PP[T > t-s],\]
+where $T$ is the total amount of time that we have to wait. 
+
+\begin{theorem}
+\lemlabel
+
+If $T\sim \exp(\lambda)$, then $\PP[T > t | T > s] = \PP[T > t-s]$. 
+\end{theorem}
+
+\begin{proof}
+	Recall that $T\sim \exp(\lambda)$ has pdf $\PP[T\leq t] = 1 - e^{-\lambda t}$.
+\end{proof}
+
+\subsection{Poisson processes}
+
+\begin{definition}
+\deflabel
+
+A continuous time stochastic process is a family of jointly defined r.v.s $\{X_t\}_{t\in \RR}$ where all $X_t\in \mathcal{X}$.
+\end{definition}
+
+\begin{definition}
+\deflabel
+
+Let $T_i\sim \Exp(\lambda)$ be independent. The \ac{poisson process} of rate $\lambda$ is the continuous time stochastic process $N_t$ taking values in $\NN$ defined by 
+\[N_t = \max\{i : T_1 + \hdots + T_i\leq t\}.\] 
+\end{definition}
+
+In words, given that we have to wait $T_i$ time per jump, $N_t$ is the stochastic process representing the amount of jumps we take before time $t$. 
+
+\begin{theorem}
+\thmlabel
+
+Let $N_t$ be a Poisson process of rate $\lambda$. Then $(N_{t+s}-N_s)_{t\geq 0}$ is also a Poisson process of rate $\lambda$. 
+\end{theorem}
+
+\begin{proof}
+	The key here is to fix $N_s$, and then show that the amount of time taken to get to $N_{t+s}$ is also a Poisson process with rate $\lambda$. In particular, let $N_s = n$, and fix $T_1 = t_1, \hdots, T_n = t_n$. The nonnegative time between $s$ and the end of the first $n$ jumps is $s - (t_1 + \hdots + t_n)$. The positive time between the end of the first $n+1$ jumps and $s$ is $T'_1 = T_{n+1} - (s - (t_1 + \hdots + t_n))$. By the memoryless property of $T_{n+1}$, $T'_1$ is exponential with parameter $\lambda$. Now, if we define $T'_i = T_{n+i}$, we have that 
+	\[(N_{t+s}-N_s) = \max\{i : T'_1 + \hdots + T'_i \leq t\},\]
+	since we only care about the number of steps after $N_s$ it takes before reaching time $t+s$, which is exactly $t$ away from the point at which $T'_1$ starts counting from. Since all $\{T'_i\}_{i\geq 1}$ are exponential with parameter $\lambda$, this shows that $(N_{t+s}-N_s)_{t\geq 0}$ is too.  
+\end{proof}
+
+\begin{theorem}
+\lemlabel
+
+If $X_1, \hdots, X_k\sim \Exp(\lambda)$, then $X_1+\hdots+X_k\sim \Gamma(k,\lambda)$ and has density 
+\[\frac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda x}. \] 
+\end{theorem}
+
+\begin{proof}
+There are many ways to prove this, but we'll use induction. Let $Y\sim \Gamma(k, \lambda)$ and $X\sim \Exp(\lambda)$. When $k=1$, $Y\sim \Exp(\lambda)$, so the base case holds. Now, assume the lemma holds for all $1,\hdots,k$, and let $Z = X + Y$. Then, 
+\begin{align*}
+	f_Z(z) &= \int_{y=0}^z f_Y(y)f_X(z-y)\ddd y \\
+				 &= \int_0^z \frac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda y}\lambda e^{-\lambda(z-y)}\ddd y\\
+				 &= \int_0^z \frac{\lambda^{k+1}}{(k-1)!}x^{k-1}e^{-\lambda z}\ddd y\\
+				 &= \frac{\lambda^{k+1}}{k!}z^ke^{-\lambda z},
+\end{align*}
+so $Z\sim \Gamma(k+1,\lambda)$, and we are finished. 
+\end{proof}
+
+Next, we show why we call these processes \textit{poisson} processes. 
+
+\begin{theorem}
+\proplabel
+
+For all $t$, $N_t\sim \Pois(\lambda t)$. 
+\end{theorem}
+
+\begin{proof}
+Let $X = T_1 + \hdots + T_n$. By the previous lemma, $X\sim \Gamma(n, \lambda)$, so 
+\begin{align*}
+	\PP[N_t=n] &= \PP[X\leq t, X + T_{n+1} > t] \\
+						 &= \int_0^t \PP[T_{n+1} > t-x]p_X(x) \ddd x \\
+						 &= \int_0^t e^{-\lambda(t-x)} \frac{\lambda^n}{(n-1)!}x^{n-1}e^{-\lambda x}\ddd x \\
+						 &= \frac{(\lambda t)^n}{n!}e^{-\lambda t}.
+\end{align*}
+\end{proof}
+
+\subsection{More definitions for continuous time MCs}
+ 
+Let $X_i$ be a discrete time MC with transition matrix $K$, and $N_t$ be a Poisson process with rate $\lambda$. Then, $X_{N_t}$ can be viewed as a continuous time MC with transitions in exponentially distributed intervals, since $N_t$ (as $t$ increases) jumps only in exponentially distributed intervals.
+
+For continuous time MCs, we define $P^t(x,y) = \PP[X_t=t | X_0=x]$. For this specific MC, we have 
+\[P^t(x,y) = \sum_n \frac{(\lambda t)^n}{n!}e^{-t\lambda}K^n(x,y),\] 
+by conditioning on $N_t$.
+
+\begin{definition}
+\deflabel
+
+Let $K$ be an $N\times N$ matrix. The \ac{matrix exponential}
+
+\[\exp(K) = \sum_{i\geq 0}\frac{K^i}{i!}.\] 
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+The matrix exponential satisfies: 
+
+\begin{itemize}
+	\item The matrix function $F(t) = \exp(tX)$ is the unique solution to the system of differential equations defined by $\ddd / \ddd t F(t) = XF(t)$. 
+	\item If $X = ADA^{-1}$, $\exp(X) = A\exp(D)A^{-1}$.
+	\item If $X$ and $Y$ commute, $\exp(X)\exp(Y) = \exp(X+Y)$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+homework.
+\end{proof}
+
+From the proposition, $\exp(-\lambda t I) = e^{-t\lambda}$, so
+\[P^t = \exp(-\lambda t I)\exp(\lambda t K) = \exp(-\lambda t(I-K)).\] 
+
+This leads to the natural extension of a random walk: 
+\begin{example}
+\exlabel
+
+Let $G$ be a graph. The continuous time random walk on $G$ of rate $\lambda$ is the continuous time MC $X_{N_t}$, where $X_i$ is a random walk on $G$ and $N_t$ is a poisson process of rate $\lambda$. 
+\end{example}
