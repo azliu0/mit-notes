@@ -43,3 +43,12 @@
 \contentsline {subsection}{\numberline {16.1}Harmonic functions}{45}{subsection.16.1}%
 \contentsline {subsection}{\numberline {16.2}Harmonic extensions}{46}{subsection.16.2}%
 \contentsline {section}{\numberline {17}November 9, 2023}{47}{section.17}%
+\contentsline {section}{\numberline {18}November 14, 2023}{47}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Continuous Time MCs}{47}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Poisson processes}{48}{subsection.18.2}%
+\contentsline {subsection}{\numberline {18.3}More definitions for continuous time MCs}{50}{subsection.18.3}%
+\contentsline {section}{\numberline {19}November 16, 2023}{51}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Continuous time Markov Chains (CTMCs)}{51}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Kolmogorov Equations}{53}{subsection.19.2}%
+\contentsline {section}{\numberline {20}November 21, 2023}{54}{section.20}%
+\contentsline {subsection}{\numberline {20.1}Stationary distributions on CTMC}{54}{subsection.20.1}%
