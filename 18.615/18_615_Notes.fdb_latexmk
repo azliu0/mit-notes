@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1701330281 "18_615_Notes.tex" "18_615_Notes.pdf" "18_615_Notes" 1701330286 0
+["pdflatex"] 1701337683 "18_615_Notes.tex" "18_615_Notes.pdf" "18_615_Notes" 1701337687 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -309,11 +309,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "18_615_Notes.aux" 1701330286 7320 ff36d1f74fac68e5fd85252c64598094 "pdflatex"
-  "18_615_Notes.out" 1701330286 8471 6517ae4c661a4e3bdfb93d41b49b3606 "pdflatex"
-  "18_615_Notes.pre" 1701330283 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "18_615_Notes.aux" 1701337687 7320 ff36d1f74fac68e5fd85252c64598094 "pdflatex"
+  "18_615_Notes.out" 1701337687 8471 6517ae4c661a4e3bdfb93d41b49b3606 "pdflatex"
+  "18_615_Notes.pre" 1701337684 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "18_615_Notes.tex" 1701324815 1408 f1d9cfe8efc08aa562918f866d285df1 ""
-  "18_615_Notes.toc" 1701330286 4514 de0db8fb075865a833755ff824bf7bbe "pdflatex"
+  "18_615_Notes.toc" 1701337687 4514 de0db8fb075865a833755ff824bf7bbe "pdflatex"
   "_andrew.sty" 1697568118 23609 a997241e932ca7b929f42eefde684151 ""
   "notes/0907.tex" 1697568118 5717 7d22c61dec66446d7e9e51a6bace53ba ""
   "notes/0912.tex" 1697568118 7285 8921c71a8359b312737e9fbb8a65e7eb ""
@@ -332,9 +332,9 @@
   "notes/1102.tex" 1699938133 3654 812531d48dcc99e9651235ba213175bb ""
   "notes/1107.tex" 1699948730 3665 21b29a5089ad533f87f76e475a901c27 ""
   "notes/1109.tex" 1699948790 66 23219b9c72403d3584125c54fd27f1b5 ""
-  "notes/1114.tex" 1701323285 5446 c431cc7dc3b5eb7cae236c575b9ea3ea ""
-  "notes/1116.tex" 1701330205 4220 ccbab67800bb9f64d3d1f0e8edf0474e ""
-  "notes/1121.tex" 1701330277 79 46d64c378125ce0d24349ac9a08f0248 ""
+  "notes/1114.tex" 1701337682 5748 a7b09bec1bed1e2d0d833d9add8a7feb ""
+  "notes/1116.tex" 1701330294 4222 60296bc1b6a93edb3bc67f0fe399d64a ""
+  "notes/1121.tex" 1701330291 79 46d64c378125ce0d24349ac9a08f0248 ""
   "notes/1128.tex" 1701324226 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "18_615_Notes.aux"
