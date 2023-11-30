@@ -38,11 +38,19 @@ In words, given that we have to wait $T_i$ time per jump, $N_t$ is the stochasti
 \begin{theorem}
 \thmlabel
 
-Let $N_t$ be a Poisson process of rate $\lambda$. Then $(N_{t+s}-N_s)_{t\geq 0}$ is also a Poisson process of rate $\lambda$. 
+Let $N_t$ be a Poisson process of rate $\lambda$. Then: 
+\begin{itemize}
+	\item $M_t = (N_{t+s}-N_s)_{t\geq 0}$ is also a Poisson process of rate $\lambda$. 
+	\item $M_t$ is independent of $N_t$ for all $t\leq s$. 
+\end{itemize}
+
 \end{theorem}
 
 \begin{proof}
-	The key here is to fix $N_s$, and then show that the amount of time taken to get to $N_{t+s}$ is also a Poisson process with rate $\lambda$. In particular, let $N_s = n$, and fix $T_1 = t_1, \hdots, T_n = t_n$. The nonnegative time between $s$ and the end of the first $n$ jumps is $s - (t_1 + \hdots + t_n)$. The positive time between the end of the first $n+1$ jumps and $s$ is $T'_1 = T_{n+1} - (s - (t_1 + \hdots + t_n))$. By the memoryless property of $T_{n+1}$, $T'_1$ is exponential with parameter $\lambda$. Now, if we define $T'_i = T_{n+i}$, we have that 
+For the second bullet point, say we fix $N_s = n$; then, $N_t$ is a function of $T_1, \hdots, T_n$ for all $t\leq s$. On the other hand, $M_t$ relies on timesteps $n+1,\hdots,$ so they are independent.  
+
+
+For the first bullet point, we will keep $N_s$ fixed and then show that the amount of time taken to get to $N_{t+s}$ is also a Poisson process with rate $\lambda$. Also fix $T_1 = t_1, \hdots, T_n = t_n$. The nonnegative time between $s$ and the end of the first $n$ jumps is $s - (t_1 + \hdots + t_n)$. The positive time between the end of the first $n+1$ jumps and $s$ is $T'_1 = T_{n+1} - (s - (t_1 + \hdots + t_n))$. By the memoryless property of $T_{n+1}$, $T'_1$ is exponential with parameter $\lambda$. Now, if we define $T'_i = T_{n+i}$, we have that 
 	\[(N_{t+s}-N_s) = \max\{i : T'_1 + \hdots + T'_i \leq t\},\]
 	since we only care about the number of steps after $N_s$ it takes before reaching time $t+s$, which is exactly $t$ away from the point at which $T'_1$ starts counting from. Since all $\{T'_i\}_{i\geq 1}$ are exponential with parameter $\lambda$, this shows that $(N_{t+s}-N_s)_{t\geq 0}$ is too.  
 \end{proof}
