@@ -1,10 +1,10 @@
 # Fdb version 4
-["cusdep asy pdf 6_7900_Notes-1"] 1701041428 "6_7900_Notes-1.asy" "6_7900_Notes-1.pdf" "6_7900_Notes-1" 1701077865 0
-  "6_7900_Notes-1.asy" 1701077865 121186 9aa8c1526625fadb845c801e12feba86 "pdflatex"
+["cusdep asy pdf 6_7900_Notes-1"] 1701041428 "6_7900_Notes-1.asy" "6_7900_Notes-1.pdf" "6_7900_Notes-1" 1702896731 0
+  "6_7900_Notes-1.asy" 1702896730 121186 9aa8c1526625fadb845c801e12feba86 "pdflatex"
   (generated)
   "6_7900_Notes-1.pdf"
   (rewritten before read)
-["pdflatex"] 1701077861 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1701077865 2
+["pdflatex"] 1702896728 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1702896731 2
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -59,6 +59,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb" 1201048802 25860 1e4d17fc7bf1d0b47e9b47e6099f1971 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb" 1201048802 30452 9ecaa7ccc78b5d3e23f0e8f870dd5088 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb" 1240420913 29290 5f42ab27c55cdf1c35d41e42b8861898 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb" 1255129361 97408 f595704ec2a07246c2d6f7b602587452 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb" 1255129361 119663 e82fa1a58f98ccd89bdbd77311ac9cf1 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpbn8t.vf" 1240420913 1800 bde6e91770b65baf214fcc34f4229391 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmit8t.vf" 1240420913 1804 fe65055d8ef06903d74a3f6f34728152 ""
@@ -306,15 +307,15 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "6_7900_Notes-1.pdf" 1701041431 27829 3ad9b35e247cf843b99b2998902ff20e "cusdep asy pdf 6_7900_Notes-1"
-  "6_7900_Notes.aux" 1701077865 3093 f60505fcc9b7a2feaf6313fb24de9213 "pdflatex"
-  "6_7900_Notes.out" 1701077865 3244 40b323e1d5a49409b2214e64c5873228 "pdflatex"
-  "6_7900_Notes.pre" 1701077865 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
-  "6_7900_Notes.tex" 1701076320 751 fb3402552450b0fe9e36f610464f8850 ""
-  "6_7900_Notes.toc" 1701077865 1681 49ee807b17674838a16a92dc865fd7cf "pdflatex"
+  "6_7900_Notes.aux" 1702896730 3480 eb1379fc3350b77c745de4c4d12fabfe "pdflatex"
+  "6_7900_Notes.out" 1702896730 3728 f5002e463554a89793a5cac5f8ce7486 "pdflatex"
+  "6_7900_Notes.pre" 1702896730 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
+  "6_7900_Notes.tex" 1702896195 751 fb3402552450b0fe9e36f610464f8850 ""
+  "6_7900_Notes.toc" 1702896730 1945 c3fcdf080d3bbd83710258f550f0ffa4 "pdflatex"
   "_andrew.sty" 1701074396 24463 42bb1cc8a7794d6edd0774837fec7cc4 ""
   "figures/betascheduling.tex" 1701041421 120976 088f1b3a3b63ab51887cc5f392c92e15 ""
-  "notes/0908.tex" 1698475343 29 b78acda81d64783d9e3b3e6a6e309108 ""
   "notes/0915.tex" 1698349999 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "notes/0919.tex" 1702896728 6097 f6dfdfbdc822d1ba5d107ba761261428 ""
   "notes/0929.tex" 1698350002 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1006.tex" 1698350093 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1013.tex" 1698350111 0 d41d8cd98f00b204e9800998ecf8427e ""

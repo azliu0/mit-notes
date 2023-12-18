@@ -1,0 +1,113 @@
+\section{September 19, 2023}
+
+\subsection{ERM Definition}
+
+As a reminder, \ac{empirical risk} is the average loss over a dataset: 
+
+\[\hat{R}(\beta) = \frac{1}{n}\sum L(Y_i, f_{\beta}(X_i)),\]
+where $\beta\in \Theta$ paramaterizes our hypothesis class $f_{\beta}: \RR^d\rightarrow \RR$. For linear models, squared loss is common. A standard approach is Empirical Risk Minimization (ERM): 
+
+\[\argmin_{\beta\in \Theta} \hat{R}(\beta) = \argmin_{\beta\in \Theta}\sum (Y_i - f_{\beta}(X_i))^2,\] 
+possibly with a regularizer of some sort. 
+
+\subsection{Linear Models}
+
+In linear models, our hypothesis class $f_{\beta}: \RR^p\rightarrow \RR$, and $\beta\in \RR^{p+1}$, where 
+\[f_{\beta}(x) = \beta_0 + \beta_1x_1 + \hdots + \beta_px_p.\]
+Recall that $\XX\in \RR^{n\times p}$ is a data matrix with $n$ $p$-dimensional data points $X_i\in \RR^{p}$; the $i$th row of $\XX$ is $X_i^T$. Our set of labels is $Y\in \RR^n$. Our ERM solution should satisfy
+\[\hat{\beta} = \argmin_{\beta\in \Theta}\sum (Y_i - f_{\beta}(X_i))^2 = \argmin_{\beta\in \Theta}\lVert Y-\XX \beta\rVert^2.\] 
+\begin{theorem}
+\thmlabel
+
+There is a fixed ERM solution for linear models: 
+\[\hat{\beta} = (\XX^T\XX)^{-1}\XX^TY,\]
+assuming that $\XX^T\XX$ is invertible.
+\end{theorem}
+\begin{proof}
+	Set $\nabla \hat{R}(\beta) = 0$. 
+\end{proof}
+
+With ridge regression, 
+\[\hat{\beta}_{\lambda} = \argmin_{\beta\in \Theta}\sum_{i=1}^n (Y_i-f_{\beta}(X_i))^2 + \lambda \lVert \beta\rVert^2,\] 
+which has unique solution 
+\[\hat{\beta}_{\lambda} = (\XX^T\XX + \lambda I)^{-1}\XX^TY.\]
+
+\subsection{Bias/Variance for Linear Models}
+
+How good is this estimator? Let $\beta^*$ be the true data generator, i.e., 
+\[\beta^* = \argmin_{\beta\in \Theta}\EE[(Y_i - X_i^T\beta)^2],\]
+and $Y = \XX \beta^* + \varepsilon$, with $\varepsilon \sim (0, \sigma^2 I)$. Then we have 
+\begin{align*}
+	\hat{\beta} &= (\XX^T\XX)^{-1}\XX^TY \\
+							&= (\XX^T\XX)^{-1}\XX^T(\XX \beta^* + \varepsilon) \\
+							&= \beta^* + (\XX^T\XX)^{-1}\XX^T\varepsilon,
+\end{align*}
+so $\EE[\hat{\beta}] = \beta^*$, so this is an unbiased estimator. The covariance is 
+\begin{align*}
+	\cov[\hat{\beta}] &= \EE[((\XX^T\XX)^{-1}\XX^T\varepsilon)^2] \\
+										&= \sigma^2 I (\XX^T\XX)^{-1}((\XX^T\XX)^{-1}\XX^T)^T \\
+										&= \sigma^2 I (\XX^T\XX)^{-1}\XX^T\XX(\XX^T\XX)^{-1} \\
+										&= \sigma^2 I (\XX^T\XX)^{-1}.
+\end{align*}
+It turns out we cannot do better than this: 
+\begin{theorem}
+\thmlabelname{Gauss-Markov}
+
+Any other linear unbiased estimator has worse covariance. 
+\end{theorem}
+
+We can do a similar analysis for the regularized problem, where
+\[\hat{\beta}_{\lambda} = (\XX^T\XX + \lambda I)^{-1}\XX^TY = (\XX^T\XX + \lambda I)^{-1}\XX^T(\XX \beta^* + \varepsilon)\] 
+where $\varepsilon$ is again Gaussian with variance $\sigma^2$. Then, 
+\[\EE[\hat{\beta}_{\lambda}] = (\XX^T\XX + \lambda I)^{-1}\XX^T\XX\beta^*,\] 
+so the bias is 
+\[\EE[\hat{\beta}_{\lambda}] - \beta^* = (\XX^T\XX + \lambda I)^{-1}\XX^T\XX\beta^* - \beta^*.\]
+Using SVD, $\XX = UDV^T$ for some orthogonal $U$, $V$, and $D$ diagonal with eigenvalues on the diagonal. We have $\XX^T\XX = VD^TDV^T$ and   
+\begin{align*}
+	\EE[\hat{\beta}_{\lambda}] - \beta^* &= ((VD^TDV^T + \lambda I)^{-1}VD^TDV^T - I)\beta^* \\
+																			 &= (V(D^TD + \lambda I)^{-1}D^TDV^T - I)\beta^* \\
+																			 &= V((D^TD + \lambda I)^{-1}D^TD - I)V^T\beta^*.
+\end{align*}
+The dimensionality of the middle term is $n\times n$ and completely diagonal, where the $j$th element is 
+\[\frac{d_j^2}{d_j^2 + \lambda} - 1 = -\frac{\lambda}{d_j^2 + \lambda},\]
+thus 
+\[\EE[\hat{\beta}_{\lambda}] - \beta^* = \sum_{j=1}^n \frac{-\lambda (v_j\cdot \beta^*)}{d_j^2 + \lambda}v_j,\]
+where $\cdot$ is dot product. For variance, 
+\[\hat{\beta}_{\lambda} = \EE[\hat{\beta}_{\lambda}] + (\XX^T\XX + \lambda I)^{-1}\XX^T\varepsilon,\]
+so 
+\begin{align*}
+	\cov[\hat{\beta}] &= \EE[((\XX^T\XX + \lambda I)^{-1}\XX^T\varepsilon)^2] \\
+										&= \sigma^2((VD^TDV^T+\lambda I)^{-1}VD^TU^T)^2 \\
+										&= \sigma^2(V(D^TD+\lambda I)^{-1}D^TU^T)^2 \\
+										&= \sigma^2V(D^TD+\lambda I)^{-1}D^TU^T (V(D^TD+\lambda I)^{-1}D^TU^T)^T \\
+										&= \sigma^2V(D^TD+\lambda I)^{-2}D^TDV^T.
+\end{align*}
+Since $V$ is orthogonal, 
+\[ \var[\hat{\beta}] = \Tr(\cov{\hat{\beta}}) = \sigma^2\sum_{j=1}^n \frac{d_j^2}{(d_j^2 + \lambda)^2}.\]
+
+\begin{example}
+\exlabel
+
+A sufficiently small constant of regularization produces smaller average error. 
+\end{example}
+
+Consider data $y^{(i)} = (\beta^*)^Tx^{(i)} + \varepsilon^{(i)}$, where $\varepsilon^{(i)}$ i.i.d. Gaussian with variance $\sigma^2$. We know that the best ridge estimator is given by 
+\[\hat{\beta}_{\lambda} = (X^TX + \lambda I)^{-1}X^TY = (X^TX + \lambda I)^{-1}X^T(X\beta^* + \varepsilon),\]
+and define $f(\lambda) = \EE[\lVert \hat{\beta}_{\lambda} - \beta^*\rVert^2]$ to be the average error of the best ridge estimator and $\beta^*$. Then, we can employ bias-variance decomposition: 
+\begin{align*}
+	f(\lambda) &= \EE[\lVert \hat{\beta}_{\lambda} - \beta^*\rVert^2] \\
+						 &= \EE[\lVert ((X^TX+\lambda I)^{-1}X^TX\beta^* - \beta^*) + ((X^TX + \lambda I)^{-1}X^T\varepsilon) \rVert^2] \\
+						 &= \lVert (X^TX+\lambda I)^{-1}X^TX\beta^* - \beta^* \rVert^2 + \EE[\lVert (X^TX + \lambda I)^{-1}X^T\varepsilon\rVert^2], 
+\end{align*}
+which is bias$^2$ plus variance. We can show that smaller constants of regularization produce smaller average error by showing that $f'(\lambda) < 0$. For the variance term, we already showed that 
+\[\var[\hat{\beta}] = \sigma^2\sum \frac{d_j^2}{(d_j^2 + \lambda)^2},\]
+so the derivative is 
+\[-2\sigma^2\sum \frac{d_j^2}{(d_j^2 + \lambda)^3} < 0\]
+when $\lambda = 0$. We previously showed that 
+\[\EE[\hat{\beta}_{\lambda}] - \beta^* = V((D^TD+\lambda I)^{-1}D^TD - I)V^T\beta^*,\]
+so 
+\begin{align*}
+	\lVert \EE[\hat{\beta}_{\lambda}] - \beta^*\rVert^2 &= \lVert (\beta^*)^T V ((D^TD + \lambda I)^{-1}D^TD - I)^2 V^T \beta^*\rVert^2 \\
+																											&= \sum \frac{\lambda^2}{(d_j^2+\lambda)^2} \cdot (v_j\cdot \beta^*)^2.
+\end{align*}
+The derivative at $\lambda=0$ is $0$, thus $f'(0) < 0$. 

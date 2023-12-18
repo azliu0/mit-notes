@@ -32,6 +32,8 @@ Another way to view this definition: given $X_s=x$, we have $T_y\sim \exp(Q(x,y)
 A continuous time MC $X_t$ satisfies the Markov property in the following way: conditioned on $X_t$, future $X_s$ for $s > t$ is distributed as if the MC started from $X_t$, and is thus independent from past $X_{s'}$ for $s' < t$. 
 \end{theorem}
 
+\comment{there is some connection between the original CTMC that was introduced last time. what is the generator for that or smth.}
+
 \begin{example}
 \exlabel
 
@@ -44,9 +46,9 @@ We define another continuous time random walk on graph $G$ with generator $Q(x,y
 \thmlabelname{Kolmogorov backwards and forwards equations}
 
 Let $P^t$ be a CTMC with generator $Q$. Then $P^t$ is the unique solution to the equations 
-\[\frac{\ddd}{\ddd t}P^t = QP^t,\]
+\[\frac{d}{dt}P^t = QP^t,\]
 and 
-\[\frac{\ddd}{\ddd t}P^t = P^tQ,\]
+\[\frac{d}{dt}P^t = P^tQ,\]
 with initial condition $P^0 = I$.
 \end{theorem}
 

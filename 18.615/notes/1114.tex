@@ -95,7 +95,7 @@ Let $X = T_1 + \hdots + T_n$. By the previous lemma, $X\sim \Gamma(n, \lambda)$,
  
 Let $X_i$ be a discrete time MC with transition matrix $K$, and $N_t$ be a Poisson process with rate $\lambda$. Then, $X_{N_t}$ can be viewed as a continuous time MC with transitions in exponentially distributed intervals, since $N_t$ (as $t$ increases) jumps only in exponentially distributed intervals.
 
-For continuous time MCs, we define $P^t(x,y) = \PP[X_t=t | X_0=x]$. For this specific MC, we have 
+For continuous time MCs, we define $P^t(x,y) = \PP[X_t=y | X_0=x]$. For this specific MC, we have 
 \[P^t(x,y) = \sum_n \frac{(\lambda t)^n}{n!}e^{-t\lambda}K^n(x,y),\] 
 by conditioning on $N_t$.
 
@@ -121,6 +121,8 @@ The matrix exponential satisfies:
 
 \begin{proof}
 homework.
+
+\comment{add this here}. 
 \end{proof}
 
 From the proposition, $\exp(-\lambda t I) = e^{-t\lambda}$, so

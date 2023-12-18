@@ -2,4 +2,81 @@
 
 \subsection{Stationary distributions on CTMC}
 
-Hi
+\begin{theorem}
+\proplabel
+
+For a CTMC, $P^t(x,x) > 0$ for all $t$ and $P^t(x,y) > 0$ for all $t > 0$ if and only if $K^i(x,y) > 0$ for some $i$, where $K$ is the embedded discrete time chain. 
+\end{theorem}
+
+\begin{proof}
+For any $t$, $\PP[T > t] = e^{tQ(x,x)}$ is the probability that we don't move, so $P^t(x,x)\geq e^{tQ(x,x)} > 0$. 
+
+If $K^i(x,y) > 0$, there is some chance to take $i$ steps from $x$ to $y$ within time $t$, so $P^t(x,y) > 0$. Conversely, if $P^t(x,y) > 0$, then there must exist some path in the MC leading from $x$ to $y$, so $K^i(x,y)>0$ for some $i$. 
+\end{proof}
+
+\begin{definition}
+\deflabel
+
+$\pi$ is a stationary distribution if $\pi P^t = \pi$ for all $t$. 
+\end{definition}
+
+\begin{theorem}
+\proplabel
+
+The following are equivalent: 
+
+\begin{itemize}
+	\item $\pi P^t = \pi$ for all $t > 0$. 
+	\item $\pi Q = 0$.
+	\item $\mu K = \mu$, where $\mu(x) = \pi(x) Q(x,x) / \sum_y \pi(y) Q(y,y)$. 
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+If $\pi P^t = \pi$ for all $t$, then Kolmogorov gives 
+\[\frac{d}{dt} \pi P^t = \pi P^t Q = 0\implies \pi Q = 0.\]
+Conversely, if $\pi Q = 0$, 
+\[\pi P^t = \pi \sum \frac{t^nQ^n}{n!} = \pi,\] 
+since everything in the sum dies. 
+
+For the third bullet point, $\mu K = \mu \iff \mu (I - K) = 0$, which is equivalent to $\mu D^{-1}(D + Q - D) = 0$. But $\mu D^{-1} = \pi$, so $\pi Q = 0$. \comment{huh}.  
+\end{proof}
+
+Note that this implies that the stationary distribution for a CTMC and its embedded discrete time chain are not the same.
+
+\begin{theorem}
+\corlabel
+
+All CTMC on finite state spaces have a stationary distribution. It's unique if the Markov Chain is irreducible. 
+\end{theorem}
+
+\begin{proof}
+The embedded discrete time chain has a stationary distribution, and therefore so does the CTMC. If the CTMC is irreducible, so is $K$. Then, the mapping from $\mu$ to $\pi$ is unique, since irreducible implies $Q(x,x) > 0$ for all $x$.  
+\end{proof}
+
+\begin{definition}
+\deflabel
+
+$Q$ is reversible with respect to $\pi$ if $\pi(x)Q(x,y) = \pi(y)Q(y,x)$. 
+\end{definition}
+
+\begin{theorem}
+\lemlabel
+
+The following are equivalent: 
+
+\begin{itemize}
+	\item $Q$ is reversible with respect to $\pi$
+	\item $P^t$ is reversible with respect to $\pi$ for all $t$. 
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+If $Q$ is reversible wrt $\pi$, then 
+\[\pi(x) P^t(x,y) = \sum_i t^i \frac{\pi(x)Q^i(x,y)}{i!} = \sum_i t^i \frac{\pi(y) Q^i(y,x)}{i!} = \pi(y) P^t(y,x).\] 
+Conversely, if $\pi(x) P^t(x,y) = \pi(y)P^t$, then Kolmogorov gives
+\[\frac{d}{dt}\pi(x) P^t(x,y) = \pi(x) P^t(x,y) Q(x,y) = \pi(y) P^t(y,x) Q(y,x) = \frac{d}{dt}\pi(y) P^t(y,x).\]
+Setting $t=0$ gives the desired result.
+\end{proof}
+
+\comment{finish this up}. 
