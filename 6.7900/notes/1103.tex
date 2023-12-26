@@ -42,10 +42,10 @@ Unfortunately, $q(x_{t-1}|x_t)$ is intractable, but $q(x_{t-1}|x_t,x_0)$ can be 
 where we implicitly assume $\Sigma_{\theta}(x_t,t) = \tilde{\beta}_tI$ for some derived value of $\tilde{\beta}_t$ (our noise is independent). Recall that $q(x_t|x_{t-1}) = \Norm(x_t; \sqrt{\alpha_t}x_{t-1}, \beta_t I)$ and $q(x_{t}|x_{0})\sim \Norm(x_t; \sqrt{\ov{\alpha}_t}x_0, \sqrt{1-\ov{\alpha}_t}I)$, so we have 
 \begin{align*}
 	&q(x_{t-1}|x_t,x_0) = q(x_t|x_{t-1},x_0)\frac{q(x_{t-1}|x_0)}{q(x_t|x_0)}\\
-	&\quad= \frac{1}{\sqrt{(2\pi)^k\beta_t^k}}\frac{\sqrt{(2\pi)^k(1-\ov{\alpha}_t)^k}}{\sqrt{(2\pi)^k(1-\sqrt{\ov{\alpha}_{t-1}})^k}}\exp\left(-\frac{\lVert x_{t-1} - \mu_{\theta}(x_t,t)\rVert^2)}{2\Sigma_{\theta}(x_t,t)}\right).
+	&\quad= \frac{1}{\sqrt{(2\pi)^k\beta_t^k}}\frac{\sqrt{(2\pi)^k(1-\ov{\alpha}_t)^k}}{\sqrt{(2\pi)^k(1-\ov{\alpha}_{t-1}})^k}\exp\left(-\frac{\lVert x_{t-1} - \mu_{\theta}(x_t,t)\rVert^2)}{2\det \Sigma_{\theta}(x_t,t)}\right).
 \end{align*}
 Therefore,
-\[\tilde{\beta} = \frac{1-\sqrt{\ov{\alpha}_{t-1}}}{1-\sqrt{\ov{\alpha}_t}}\beta_t.\]
+\[\tilde{\beta} = \frac{1-\ov{\alpha}_{t-1}}{1-\ov{\alpha}_t}\beta_t.\]
 To compute the mean, we continue expanding inside of the exp: 
 \begin{align*}
 	&q(x_{t-1}|x_t,x_0) = q(x_t|x_{t-1},x_0)\frac{q(x_{t-1}|x_0)}{q(x_t|x_0)} \\

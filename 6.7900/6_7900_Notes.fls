@@ -1719,12 +1719,6 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpbn8t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbne.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
-INPUT ./notes/0915.tex
-INPUT notes/0915.tex
-INPUT ./notes/0915.tex
-INPUT notes/0915.tex
-INPUT ./notes/0915.tex
-INPUT notes/0915.tex
 INPUT ./notes/0919.tex
 INPUT notes/0919.tex
 INPUT ./notes/0919.tex
