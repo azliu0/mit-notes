@@ -1,10 +1,10 @@
 # Fdb version 4
-["cusdep asy pdf 6_7900_Notes-1"] 1701041428 "6_7900_Notes-1.asy" "6_7900_Notes-1.pdf" "6_7900_Notes-1" 1702896731 0
-  "6_7900_Notes-1.asy" 1702896730 121186 9aa8c1526625fadb845c801e12feba86 "pdflatex"
+["cusdep asy pdf 6_7900_Notes-1"] 1701041428 "6_7900_Notes-1.asy" "6_7900_Notes-1.pdf" "6_7900_Notes-1" 1703553511 0
+  "6_7900_Notes-1.asy" 1703553511 121186 9aa8c1526625fadb845c801e12feba86 "pdflatex"
   (generated)
   "6_7900_Notes-1.pdf"
   (rewritten before read)
-["pdflatex"] 1702896728 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1702896731 2
+["pdflatex"] 1703553509 "6_7900_Notes.tex" "6_7900_Notes.pdf" "6_7900_Notes" 1703553511 2
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -307,15 +307,14 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "6_7900_Notes-1.pdf" 1701041431 27829 3ad9b35e247cf843b99b2998902ff20e "cusdep asy pdf 6_7900_Notes-1"
-  "6_7900_Notes.aux" 1702896730 3480 eb1379fc3350b77c745de4c4d12fabfe "pdflatex"
-  "6_7900_Notes.out" 1702896730 3728 f5002e463554a89793a5cac5f8ce7486 "pdflatex"
-  "6_7900_Notes.pre" 1702896730 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
+  "6_7900_Notes.aux" 1703553511 3480 eb1379fc3350b77c745de4c4d12fabfe "pdflatex"
+  "6_7900_Notes.out" 1703553511 3728 f5002e463554a89793a5cac5f8ce7486 "pdflatex"
+  "6_7900_Notes.pre" 1703553511 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
   "6_7900_Notes.tex" 1702896195 751 fb3402552450b0fe9e36f610464f8850 ""
-  "6_7900_Notes.toc" 1702896730 1945 c3fcdf080d3bbd83710258f550f0ffa4 "pdflatex"
+  "6_7900_Notes.toc" 1703553511 1945 c3fcdf080d3bbd83710258f550f0ffa4 "pdflatex"
   "_andrew.sty" 1701074396 24463 42bb1cc8a7794d6edd0774837fec7cc4 ""
   "figures/betascheduling.tex" 1701041421 120976 088f1b3a3b63ab51887cc5f392c92e15 ""
-  "notes/0915.tex" 1698349999 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "notes/0919.tex" 1702896728 6097 f6dfdfbdc822d1ba5d107ba761261428 ""
+  "notes/0919.tex" 1702897277 6097 f6dfdfbdc822d1ba5d107ba761261428 ""
   "notes/0929.tex" 1698350002 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1006.tex" 1698350093 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/1013.tex" 1698350111 0 d41d8cd98f00b204e9800998ecf8427e ""
@@ -323,7 +322,7 @@
   "notes/1026.tex" 1699816995 3965 c1da4cca4e1c30852f62b83f8cda6596 ""
   "notes/1027.tex" 1698563074 10884 ad25cfa6557ff3a98b80fe710f78945e ""
   "notes/1031.tex" 1701042247 3409 abe91deee65eb02aa5319fca96feb8db ""
-  "notes/1103.tex" 1701073959 13166 37cfe3fbcf581b48bf004668bab59560 ""
+  "notes/1103.tex" 1703553509 13150 bf47792d4e5f647269756fdf4f9ae829 ""
   "notes/1107.tex" 1700889680 31 33a5e3e2fce533163e259a3671c612be ""
   (generated)
   "6_7900_Notes-1.asy"
