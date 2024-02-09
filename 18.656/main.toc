@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}February 8, 2024}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Recap}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}More on sub-Gaussians}{4}{subsection.1.2}%
