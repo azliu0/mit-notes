@@ -1,0 +1,115 @@
+\section{February 8, 2024}
+
+\subsection{Recap}
+
+\begin{definition}
+\deflabel
+
+A random variable $X$ with mean $\mu = \EE[X]$ is \ac{$\sigma$-sub-Gaussian} if $\EE[e^{\lambda(X - \mu)}] \leq e^{\lambda^2\sigma^2 / 2}$ for all $\lambda\in \RR$. 
+
+Equality if and only if $X\sim \Norm(\mu, \sigma^2)$. 
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Given r.v. $X\in [a,b]$, $\EE[X] = \mu$. Then, $X$ is sub-Gaussian with $\sigma=(b-a)$.
+\end{example}
+
+It turns out that we can also show $\sigma = (b-a)/2$, but we won't show this during lecture, since the technique used to show the weaker result is more interesting. 
+
+\begin{proof}
+Let $\tilde{X}$ be i.i.d. to $X$. Then,
+\begin{align*}
+	\EE_X[e^{\lambda(X-\mu)}] &= \EE_X[e^{\lambda(X - \EE_{\tilde{X}}[\tilde{X}])}] \\
+														&\leq \EE_{X, \tilde{X}}[e^{\lambda(X-\tilde{X})}],
+\end{align*}
+by Jensen's inequality. Since $X,\tilde{X}$ are i.i.d., $(X-\tilde{X})$ has a distribution symmetric around $0$. Now, we also have that
+\[(X-\tilde{X}) \overset{\text{dist}}{=} \varepsilon(X-\tilde{X}),\] 
+where $\varepsilon \in \{\pm 1\}$ with equal probability (also called a \ac{Rademacher} random variable). Therefore, 
+\begin{align*}
+	\EE_{\tilde{X}}[e^{\lambda(X-\mu)}]&\leq \EE_{\tilde{X},X}[\EE_{\varepsilon}[e^{\lambda\varepsilon(X-\tilde{X})}]] \\
+																		 &\leq \EE_{X, \tilde{X}}[e^{\lambda^2(X-\tilde{X})^2/2}],
+\end{align*}
+since $\varepsilon$ is $1$-sub-gaussian. Finally, since $X$ is bounded, 
+\begin{align*}
+	\EE_{X, \tilde{X}}[e^{\lambda^2(X-\tilde{X})^2/2}] \leq e^{\lambda^2(b-a)^2/2}.
+\end{align*}
+\end{proof}
+
+\subsection{More on sub-Gaussians}
+
+\begin{definition}
+\deflabelname{Addition property of Gaussians}
+
+Given $X_1\sim \Norm(0,\sigma_1^2)$ and $X_2\sim \Norm(0,\sigma_2^2)$, 
+\[X_1+X_2\sim \Norm(0, \sigma_1^2+\sigma_2^2).\] 
+\end{definition}
+
+\begin{theorem}
+\claimlabelname{Addition property of sub-Gaussians}
+
+Given $X_i\sim \sigma_i$-sub-Gaussian, $i\in \{1,2\}$, then $X_1+X_2$ is $\sqrt{\sigma_1^2+\sigma_2^2}$-sub-Gaussian. 
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+	\EE_{X_1,X_2}[e^{\lambda(X_1+X_2)}] &= \EE_{X_1,X_2}[e^{\lambda X_1}e^{\lambda X_2}] \\
+																			&= \EE_{X_1}[e^{\lambda X_1}]\EE_{X_2}[e^{\lambda X_2}] \\
+																			&\leq e^{\lambda^2\sigma_1^2/2}e^{\lambda^2\sigma_2^2/2} = e^{\lambda^2(\sigma_1^2+\sigma_2^2)/2}.
+\end{align*}
+\end{proof}
+
+A consequence of this fact is that given $X_i\sim \sigma$-sub-Gaussian, i.i.d. with zero-mean, then 
+
+\[\frac{1}{\sqrt{n}}\sum_{i=1}^n X_i\sim \sigma\text{-sub-Gaussian},\] 
+or equivalently 
+\[\frac{1}{n}\sum_{i=1}^n X_i\sim \frac{\sigma}{\sqrt{n}}\text{-sub-Gaussian}.\] 
+
+\begin{example}
+\exlabelname{Survey sampling}
+
+Two candidates for an election $A$ and $B$.
+\end{example}
+
+Sample people $i=1, \hdots, n$, giving responses $X_i = 1$ if $A$ or $0$ if $B$. Let $\mu^*$ be the actual fraction of people who will vote $A$. Let $\hat{\mu}$ be our estimator for $\mu^*$: 
+
+\[\hat{\mu} = \sum_{i=1}^n X_i.\] 
+
+We can construct a confidence interval $\hat{\mathcal{I}}$ for our estimator, and we would like to know at what point we can say
+
+\[\PP[\hat{\mathcal{I}}\ni \mu^{*}] \geq 1-\delta.\] 
+For example, with $\delta=0.02$, interval width of $0.03$, we require $n\approx 10000$ to make this guarantee.  
+
+We can model $X_i\sim \Bern(\mu^*)$. Since $X_i\in [0,1]$, our earlier result shows that $X_i$ is $1/2$-sub-Gaussian. Using additivity and i.i.d., our sample mean $\hat{\mu}$ is $1/(2\sqrt{n})$-sub-Gaussian. Thus, 
+
+\[\EE[e^{\lambda(\hat{\mu}-\mu^*)}] \leq e^{\lambda^2/2\cdot 1/(4n)} = e^{\lambda^2/(8n)}.\]
+Using Chernoff,
+
+\[\PP[\vert \hat{\mu}-\mu^*\vert \geq s] \leq 2e^{2ns^2},\] 
+for some $s > 0$. So for some fixed $\delta$, we can make a guarantee about interval width $s = \sqrt{\log(2/\delta) / (2n)}$. 
+
+\begin{theorem}
+\thmlabelname{Hoeffding bound}
+
+Let $X_i\sim \sigma_i$-sub-Gaussian, with $\EE[X_i]=\mu_i$ and all independent. Then
+
+\[\PP\left[\sum_{i=1}^n (X_i-\mu_i)\geq t\right] \leq e^{-t^2 / (2\sum_{i=1}^n\sigma_i^2)}.\] 
+\end{theorem}
+
+\begin{example}
+\exlabel
+
+$X\sim \Norm(0,1)$ is $1$-sub-Gaussian. Let $Y=X^2$ is not sub-Gaussian. 
+\end{example}
+
+\begin{align*}
+	\EE[e^{\lambda X^2}] = \frac{1}{\sqrt{1-\lambda}},
+\end{align*}
+$\lambda\in (0,1)$.
+
+Despite not being sub-Gaussian, it is close. Consider an $n$-dimensional Gaussian, $X = (X_1, \hdots, X_n)$, where each $X_i\sim \Norm(0,1)$. Then $\EE[\lVert X\rVert_2^2 / n] = \EE[\sum X_i^2 / n] = 1$, and we can further show that 
+
+\[\PP\left[ \left\vert\frac{\lVert X\rVert^2}{n^2} - 1\right\vert \geq \delta\right] \leq 2e^{-cn\delta^2},\] 
+for all $\delta\in (0,1)$. This looks very similar to the sub-gaussian tail bound from earlier, but will only hold for small delta. For larger delta, the tail bound becomes linear in $\delta$ (because $X$ is not truly sub-Gaussian).
+
