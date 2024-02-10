@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  25 DEC 2023 19:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  10 FEB 2024 17:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**6_7900_Notes.tex
-(./6_7900_Notes.tex
+**6_780_Notes.tex
+(./6_780_Notes.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (/usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
@@ -773,24 +773,37 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \sift@deathcycles=\count325
 \@vwid@loff=\dimen277
 \@vwid@roff=\dimen278
-)) (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
+)) (/usr/local/texlive/2023/texmf-dist/tex/latex/lipsum/lipsum.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-02-22 L3 programming layer (loader) 
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count326
+\l__pdf_internal_box=\box73
+))
+Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
+)
+Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
+\g__lipsum_par_int=\count327
+\l__lipsum_a_int=\count328
+\l__lipsum_b_int=\count329
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex)) (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
  (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count326
-\calc@Bcount=\count327
+\calc@Acount=\count330
+\calc@Bcount=\count331
 \calc@Adimen=\dimen279
 \calc@Bdimen=\dimen280
 \calc@Askip=\skip97
 \calc@Bskip=\skip98
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count328
+\calc@Ccount=\count332
 \calc@Cskip=\skip99
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count329
+\g_MT_multlinerow_int=\count333
 \l_MT_multwidth_dim=\dimen281
 \origjot=\skip100
 \l_MT_shortvdotswithinadjustabove_dim=\dimen282
@@ -799,7 +812,7 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_intertext_sep=\dimen285
 \l_MT_above_shortintertext_sep=\dimen286
 \l_MT_below_shortintertext_sep=\dimen287
-\xmathstrut@box=\box73
+\xmathstrut@box=\box74
 \xmathstrut@dim=\dimen288
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -1048,38 +1061,30 @@ Package: amsthm 2020/05/29 v2.20.6
 \dth@everypar=\toks50
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/empheq.sty
 Package: empheq 2017/03/31 v2.15 Emphasizing equations
-\l_EQ_equationtype_int=\count330
-\l_EQ_alignmentmode_int=\count331
+\l_EQ_equationtype_int=\count334
+\l_EQ_alignmentmode_int=\count335
 \l_EQ_totalwidth_dim=\dimen289
 \l_EQ_displaywidth_dim=\dimen290
 \l_EQ_temp_linewidth_dim=\dimen291
 \l_EQ_linewidth_dim=\dimen292
 \EmphEqdelimitershortfall=\dimen293
-\EmphEqdelimiterfactor=\count332
+\EmphEqdelimiterfactor=\count336
 \g_EQ_toptag_height_dim=\dimen294
 \g_EQ_bottomtag_depth_dim=\dimen295
 \g_EQ_toprow_height_dim=\dimen296
 \g_EQ_bottomrow_depth_dim=\dimen297
 \g_EQ_widesttag_dim=\dimen298
-\EQ_mathdisplay_box=\box74
-\EQ_tag_box=\box75
-\g_EQ_temprow_int=\count333
-) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xfrac/xfrac.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-02-22 L3 programming layer (loader) 
- (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count334
-\l__pdf_internal_box=\box76
-)) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
-) (/usr/local/texlive/2023/texmf-dist/tex/latex/base/textcomp.sty
+\EQ_mathdisplay_box=\box75
+\EQ_tag_box=\box76
+\g_EQ_temprow_int=\count337
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xfrac/xfrac.sty (/usr/local/texlive/2023/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2023-02-02 L3 Experimental document command parser
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
 Package: xtemplate 2023-02-02 L3 Experimental prototype document functions
 \l__xtemplate_tmp_dim=\dimen299
-\l__xtemplate_tmp_int=\count335
+\l__xtemplate_tmp_int=\count338
 \l__xtemplate_tmp_muskip=\muskip17
 \l__xtemplate_tmp_skip=\skip104
 )
@@ -1099,25 +1104,24 @@ Package xtemplate Info: Declaring object type 'xfrac' taking 3 argument(s) on
 
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2021/12/29 v1.37 Asymptote style file for LaTeX
- (./6_7900_Notes.pre)
+ (./6_780_Notes.pre)
 \ASYbox=\box79
 \ASYdimen=\dimen305
-\c@asy=\count336
+\c@asy=\count339
 \AsyStream=\write4
 \AsyPreStream=\write5
  (/usr/local/texlive/2023/texmf-dist/tex/generic/iftex/ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/catchfile/catchfile.sty
 Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
- (/usr/local/texlive/2023/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+(/usr/local/texlive/2023/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-(/usr/local/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 ))
-\openout5 = `6_7900_Notes.pre'.
+\openout5 = `6_780_Notes.pre'.
 
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/mathdots/mathdots.sty
 Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in math.
@@ -1164,11 +1168,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count337
+\c@section@level=\count340
 )
 \@linkdim=\dimen307
-\Hy@linkcounter=\count338
-\Hy@pagecounter=\count339
+\Hy@linkcounter=\count341
+\Hy@pagecounter=\count342
  (/usr/local/texlive/2023/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2023-02-07 v7.00v Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -1176,7 +1180,7 @@ Now handling font encoding PD1 ...
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count340
+\Hy@SavedSpaceFactor=\count343
  (/usr/local/texlive/2023/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2023-02-07 v7.00v Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -1189,7 +1193,7 @@ Package hyperref Info: Plain pages OFF on input line 4192.
 Package hyperref Info: Backreferencing OFF on input line 4197.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4425.
-\c@Hy@tempcnt=\count341
+\c@Hy@tempcnt=\count344
  (/usr/local/texlive/2023/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip23
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -1201,7 +1205,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count342
+\Fld@menulength=\count345
 \Field@Width=\dimen309
 \Fld@charsize=\dimen310
 Package hyperref Info: Hyper figures OFF on input line 6042.
@@ -1215,9 +1219,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6072.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count343
-\c@Item=\count344
-\c@Hfootnote=\count345
+\Hy@abspage=\count346
+\c@Item=\count347
+\c@Hfootnote=\count348
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -1226,12 +1230,12 @@ File: hpdftex.def 2023-02-07 v7.00v Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count346
-\c@bookmark@seq@number=\count347
- (/usr/local/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+\Fld@listcount=\count349
+\c@bookmark@seq@number=\count350
 
-(/usr/local/texlive/2023/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+(/usr/local/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
@@ -1243,7 +1247,7 @@ Package: tikz-cd 2021/05/04 v1.0 Commutative diagrams with TikZ
 Package: tikz 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count348
+\pgf@plot@mark@count=\count351
 \pgfplotmarksize=\dimen311
 )
 \tikz@lastx=\dimen312
@@ -1258,17 +1262,17 @@ File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \tikz@figbox@bg=\box82
 \tikz@tempbox=\box83
 \tikz@tempbox@bg=\box84
-\tikztreelevel=\count349
-\tikznumberofchildren=\count350
-\tikznumberofcurrentchild=\count351
-\tikz@fig@count=\count352
+\tikztreelevel=\count352
+\tikznumberofchildren=\count353
+\tikznumberofcurrentchild=\count354
+\tikz@fig@count=\count355
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count353
-\pgfmatrixcurrentcolumn=\count354
-\pgf@matrix@numberofcolumns=\count355
+\pgfmatrixcurrentrow=\count356
+\pgfmatrixcurrentcolumn=\count357
+\pgf@matrix@numberofcolumns=\count358
 )
-\tikz@expandcount=\count356
+\tikz@expandcount=\count359
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))) (/usr/local/texlive/2023/texmf-dist/tex/generic/tikz-cd/tikzlibrarycd.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
@@ -1302,9 +1306,9 @@ File: pgflibrarycurvilinear.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
 \pgf@arrows@the@rigidity=\dimen330
 )) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfpu.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirc.defines.tex
-\pgf@circ@count@a=\count357
-\pgf@circ@count@b=\count358
-\pgf@circ@count@c=\count359
+\pgf@circ@count@a=\count360
+\pgf@circ@count@b=\count361
+\pgf@circ@count@c=\count362
 \pgf@circ@res@up=\dimen331
 \pgf@circ@res@down=\dimen332
 \pgf@circ@res@zero=\dimen333
@@ -1318,9 +1322,9 @@ File: pgflibrarycurvilinear.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfstartlinewidth=\dimen341
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircutils.tex
 \ctikz@scratchbox=\box85
-) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircpath.tex)
-(/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircshapes.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircmonopoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircbipoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirctripoles.tex
-\pgf@circ@res@count=\count360
+)
+(/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircpath.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircshapes.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircmonopoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircbipoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirctripoles.tex
+\pgf@circ@res@count=\count363
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircquadpoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircmultipoles.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirclabel.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircvoltage.tex
 \pgfcirc@labelshift=\dimen342
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirccurrent.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircflow.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
@@ -1374,22 +1378,22 @@ File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count361
+\lst@mode=\count364
 \lst@gtempboxa=\box106
 \lst@token=\toks51
-\lst@length=\count362
+\lst@length=\count365
 \lst@currlwidth=\dimen344
-\lst@column=\count363
-\lst@pos=\count364
+\lst@column=\count366
+\lst@pos=\count367
 \lst@lostspace=\dimen345
 \lst@width=\dimen346
-\lst@newlines=\count365
-\lst@lineno=\count366
+\lst@newlines=\count368
+\lst@lineno=\count369
 \lst@maxwidth=\dimen347
  (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count367
-\lst@skipnumbers=\count368
+\c@lstnumber=\count370
+\lst@skipnumbers=\count371
 \lst@framebox=\box107
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -1397,7 +1401,7 @@ File: listings.cfg 2023/02/27 1.9 listings configuration
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
  (/usr/local/texlive/2023/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count369
+\c@AlgoLine=\count372
 \algocf@hangindent=\skip106
  (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
@@ -1434,20 +1438,20 @@ Package: relsize 2013/03/29 ver 4.1
 \algoheightrule=\skip122
 \algotitleheightruledefault=\skip123
 \algotitleheightrule=\skip124
-\c@algocfline=\count370
-\c@algocfproc=\count371
-\c@algocf=\count372
+\c@algocfline=\count373
+\c@algocfproc=\count374
+\c@algocf=\count375
 \algocf@algoframe=\box114
 \algocf@algobox=\box115
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 185.
-\c@cnt=\count373
+Package hyperref Info: Option `colorlinks' set `true' on input line 186.
+\c@cnt=\count376
 )
 LaTeX Font Info:    Trying to load font information for T1+jkp on input line 5.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/t1jkp.fd
 File: t1jkp.fd 2007/01/24 Fontinst v1.928 font definitions for T1/jkp.
-) (./6_7900_Notes.aux)
-\openout1 = `6_7900_Notes.aux'.
+) (./6_780_Notes.aux)
+\openout1 = `6_780_Notes.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 5.
 LaTeX Font Info:    Trying to load font information for OML+jkp on input line 5.
@@ -1485,16 +1489,16 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
  (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count374
+\scratchcounter=\count377
 \scratchdimen=\dimen354
 \scratchbox=\box116
-\nofMPsegments=\count375
-\nofMParguments=\count376
+\nofMPsegments=\count378
+\nofMParguments=\count379
 \everyMPshowfont=\toks52
-\MPscratchCnt=\count377
+\MPscratchCnt=\count380
 \MPscratchDim=\dimen355
-\MPnumerator=\count378
-\makeMPintoPDFobject=\count379
+\MPnumerator=\count381
+\makeMPintoPDFobject=\count382
 \everyMPtoPDFconversion=\toks53
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1546,11 +1550,11 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 File: fc-english.def 2016/01/12
 )
 Package hyperref Info: Link coloring ON on input line 5.
- (./6_7900_Notes.out) (./6_7900_Notes.out)
+ (./6_780_Notes.out) (./6_780_Notes.out)
 \@outlinefile=\write6
-\openout6 = `6_7900_Notes.out'.
+\openout6 = `6_780_Notes.out'.
 
-\c@lstlisting=\count380
+\c@lstlisting=\count383
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 10.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1559,7 +1563,7 @@ LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <17.28> not available
 (Font)              Font shape `T1/lmss/bx/n' tried instead on input line 10.
 LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <20.74> not available
 (Font)              Font shape `T1/lmss/bx/n' tried instead on input line 10.
-LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <12> not available
+LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <14.4> not available
 (Font)              Font shape `T1/lmss/bx/n' tried instead on input line 10.
 LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 10.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
@@ -1580,28 +1584,16 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 10.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
-)
-LaTeX Font Info:    Trying to load font information for T1+jkptt on input line 11.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/t1jkptt.fd
-File: t1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for T1/jkptt.
-)
-Overfull \hbox (7.06377pt too wide) in paragraph at lines 11--12
-\T1/jkp/m/n/10.95 ([][]$\T1/jkptt/m/n/10.95 https : / / shenshen . mit . edu/$[][]\T1/jkp/m/n/10.95 ), Pulkit Agrawal ([][]$\T1/jkptt/m/n/10.95 https : / / people . csail . mit . edu /
- []
-
-[1
+) [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
 LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <10.95> not available
 (Font)              Font shape `T1/lmss/bx/n' tried instead on input line 17.
- (./6_7900_Notes.toc)
+ (./6_780_Notes.toc)
 \tf@toc=\write7
-\openout7 = `6_7900_Notes.toc'.
+\openout7 = `6_780_Notes.toc'.
 
- [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}] (./notes/0919.tex
-LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <14.4> not available
-(Font)              Font shape `T1/lmss/bx/n' tried instead on input line 3.
-
+ [2] (./notes/0206.tex) (./notes/0208.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1610,6 +1602,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+[]\T1/jkp/m/n/10.95 Given a pri-ori prob-a-bil-i-ties $\OML/jkp/m/it/10.95 P[]; P[]$\T1/jkp/m/n/10.95 , data $\OML/jkp/m/it/10.95 y$\T1/jkp/m/n/10.95 , ob-ser-va-tion mod-els
+ []
+
+
+Underfull \hbox (badness 1715) in paragraph at lines 52--53
+\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OMS/jkp/m/n/10.95 ^^Aj\OML/jkp/m/it/10.95 H[]\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; p[]\OT1/jkp/m/n/10.95 (\OMS/jkp/m/n/10.95 ^^Aj\OML/jkp/m/it/10.95 H[]\OT1/jkp/m/n/10.95 )$\T1/jkp/m/n/10.95 , and costs $\OML/jkp/m/it/10.95 C[]; C[]; C[]; C[]$\T1/jkp/m/n/10.95 , the Bayesian de-ci-sion
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1625,7 +1626,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5]
+[5{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}])
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1633,299 +1634,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6]) (./notes/0929.tex) (./notes/1006.tex) (./notes/1013.tex) (./notes/1020.tex) (./notes/1026.tex
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[7]
-LaTeX Font Info:    Trying to load font information for TS1+jkp on input line 21.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
-File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
-)
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[8]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[9]) (./notes/1027.tex
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[10]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[11]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[12]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[13]
-Overfull \hbox (11.24115pt too wide) detected at line 105
-[]
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[14]) (./notes/1031.tex
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[15]
-Overfull \hbox (70.40799pt too wide) in paragraph at lines 15--16
-[]\T1/jkp/m/n/10.95 We showed pre-vi-ously that $[] \OML/jkp/m/it/10.95 P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) = \OMS/jkp/m/n/10.95 L[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) + \OML/jkp/m/it/10.95 KL\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 , where $\OML/jkp/m/it/10.95 KL\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; P[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 )) \OMS/jkp/m/n/10.95 ^^U
- []
-
-./notes/1031.tex:21: Undefined control sequence.
-<argument> \diag 
-                 
-l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
-                                                  (\sigma(x;\phi)^2))$, wher...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:21: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
-                                                  (\sigma(x;\phi)^2))$, wher...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:21: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
-                                                  (\sigma(x;\phi)^2))$, wher...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:21: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.21 ...}(z|x) = \Norm(z; \mu(x,\phi),\text{\diag}
-                                                  (\sigma(x;\phi)^2))$, wher...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (19.48952pt too wide) in paragraph at lines 21--22
-[]\T1/jkp/m/n/10.95 It is com-mon to repara-ma-ter-ize the la-tent space $\OML/jkp/m/it/10.95 z \OMS/jkp/m/n/10.95 ^^X \OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 z\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 z\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x; ^^^\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; []\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 ^^[\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^^\OT1/jkp/m/n/10.95 )[]))$\T1/jkp/m/n/10.95 ,
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[16]
-./notes/1031.tex:25: Undefined control sequence.
-<argument> \diag 
-                 
-l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
-                                                 (\sigma))$.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:25: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
-                                                 (\sigma))$.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:25: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
-                                                 (\sigma))$.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./notes/1031.tex:25: Undefined control sequence.
-<argument> \firstchoice@false \diag 
-                                    
-l.25 	$q_{\phi}(z|x) = \Norm(z; \mu, \text{\diag}
-                                                 (\sigma))$.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-) (./notes/1103.tex
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[17] (./figures/betascheduling.tex
-\openout4 = `6_7900_Notes-1.asy'.
-
-<6_7900_Notes-1.pdf, id=239, 170.7168pt x 170.75995pt>
-File: 6_7900_Notes-1.pdf Graphic file (type pdf)
-<use 6_7900_Notes-1.pdf>
-Package pdftex.def Info: 6_7900_Notes-1.pdf  used on input line 1222.
-(pdftex.def)             Requested size: 170.71637pt x 170.75952pt.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[18])
-Overfull \hbox (31.24454pt too wide) in paragraph at lines 38--39
-\T1/jkp/m/n/10.95 is es-sen-tially a gaus-sian, so we can at-tempt to learn $\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; \U/jkpmia/m/it/10.95 ^^F[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 . 
- []
-
-
-Overfull \hbox (50.03809pt too wide) in paragraph at lines 41--43
-\T1/jkp/m/n/10.95 in-de-pen-dent). Re-call that $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; []\OML/jkp/m/it/10.95 x[]; ^^L[]I\OT1/jkp/m/n/10.95 )$ \T1/jkp/m/n/10.95 and $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^X []\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; []\OML/jkp/m/it/10.95 x[]; []I\OT1/jkp/m/n/10.95 )$\T1/jkp/m/n/10.95 ,
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[19 <./6_7900_Notes-1.pdf>]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[20]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[21]
-Overfull \hbox (9.05246pt too wide) in paragraph at lines 99--101
-\T1/jkp/m/n/10.95 in the no-ta-tion of the above ex-pres-sion. We know $\OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]; x[]\OT1/jkp/m/n/10.95 ) = [](\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; [](\OML/jkp/m/it/10.95 x[]; x[]\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; []I\OT1/jkp/m/n/10.95 )$\T1/jkp/m/n/10.95 ,
- []
-
-
-Overfull \hbox (11.24663pt too wide) in paragraph at lines 99--101
-\T1/jkp/m/n/10.95 and we want our model $\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 )$ \T1/jkp/m/n/10.95 to learn $[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]\OT1/jkp/m/n/10.95 ; \OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 ; \U/jkpmia/m/it/10.95 ^^F[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ))$\T1/jkp/m/n/10.95 , where $\OML/jkp/m/it/10.95 ^^V[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 x[]; t\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^Y
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[22]) (./notes/1107.tex)
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[23]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[24] (./6_7900_Notes.aux)
-Package rerunfilecheck Info: File `6_7900_Notes.out' has not changed.
-(rerunfilecheck)             Checksum: F5002E463554A89793A5CAC5F8CE7486;3728.
+[6] (./6_780_Notes.aux)
+Package rerunfilecheck Info: File `6_780_Notes.out' has not changed.
+(rerunfilecheck)             Checksum: B5CF8AF98D4E3D056FCB8F592792076E;594.
  ) 
 Here is how much of TeX's memory you used:
- 54221 strings out of 476025
- 1220207 string characters out of 5790016
- 1874388 words of memory out of 5000000
- 73474 multiletter control sequences out of 15000+600000
- 617008 words of font info for 151 fonts, out of 8000000 for 9000
+ 54430 strings out of 476025
+ 1226732 string characters out of 5790016
+ 1900708 words of memory out of 5000000
+ 73750 multiletter control sequences out of 15000+600000
+ 597106 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 116i,13n,118p,1047b,704s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_7900_Notes.pdf (24 pages, 252089 bytes).
+ 116i,14n,118p,1046b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on 6_780_Notes.pdf (6 pages, 145109 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 50 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 127 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 45 words of extra memory for PDF output out of 10000 (max. 10000000)
 
