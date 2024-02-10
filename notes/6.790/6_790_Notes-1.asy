@@ -1,6 +1,6 @@
 if(!settings.multipleView) settings.batchView=false;
 settings.tex="pdflatex";
-defaultfilename="6_7900_Notes-1";
+defaultfilename="6_790_Notes-1";
 if(settings.render < 0) settings.render=4;
 settings.outformat="";
 settings.inlineimage=true;
