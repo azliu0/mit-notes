@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1707420127 "main.tex" "main.pdf" "main" 1707420128 0
+["pdflatex"] 1707602934 "18_656_Notes.tex" "18_656_Notes.pdf" "18_656_Notes" 1707602936 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -294,18 +294,18 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
+  "18_656_Notes.aux" 1707602936 944 6882b717c54d948e2aae2f349659eb73 "pdflatex"
+  "18_656_Notes.out" 1707602936 379 bd73e19a43b681c014b88de513dcf50c "pdflatex"
+  "18_656_Notes.pre" 1707602935 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "18_656_Notes.tex" 1707415609 514 dba298b84ea2859023a27e05c24affcf ""
+  "18_656_Notes.toc" 1707602936 230 f125436dafd93941e4c5f3c95a99f935 "pdflatex"
   "_andrew.sty" 1707415515 24556 8be0b1119dbe13cce3386e764b0262a2 ""
-  "main.aux" 1707420128 944 6882b717c54d948e2aae2f349659eb73 "pdflatex"
-  "main.out" 1707420128 379 bd73e19a43b681c014b88de513dcf50c "pdflatex"
-  "main.pre" 1707420128 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1707415609 514 dba298b84ea2859023a27e05c24affcf ""
-  "main.toc" 1707420128 230 f125436dafd93941e4c5f3c95a99f935 "pdflatex"
-  "notes/0208.tex" 1707420126 4838 b0edfcee706d99f8bd7dc09f7a24fed6 ""
+  "notes/0208.tex" 1707430422 4838 b0edfcee706d99f8bd7dc09f7a24fed6 ""
   (generated)
-  "main.aux"
-  "main.log"
-  "main.out"
-  "main.pdf"
-  "main.pre"
-  "main.toc"
+  "18_656_Notes.aux"
+  "18_656_Notes.log"
+  "18_656_Notes.out"
+  "18_656_Notes.pdf"
+  "18_656_Notes.pre"
+  "18_656_Notes.toc"
   (rewritten before read)
