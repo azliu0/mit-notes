@@ -5,45 +5,46 @@ Model family $\mathcal{H}\in \{H_0, H_1, \hdots, H_{M-1}\}$. We can think of $\m
 \subsection{Bayesian Binary Hypothesis Testing}
 
 In this case, $M=2$, so there are only two hypotheses. Our model has two major components. The first is some a priori information 
-
 \begin{align*}
 	P_0 &= \PP[H=H_0] \\
 	P_1 &= \PP[H=H_1] = 1 - P_0.
 \end{align*}
-
 We also have the observation model, which is given by likelihood functions
-
 \begin{align*}
 	&H_0: p_{Y|H}(\cdot | H_0) \\
 	&H_1: p_{Y|H}(\cdot | H_1).
 \end{align*}
+Our goal is to create a \ac{decision rule}, a.k.a. a \ac{classifier}, which maps every $y\in \mathcal{Y}$ to some hypothesis $H_i\in \mathcal{H}=\{H_0, H_1\}$. This is somewhat confusing with the standard terminology of a hypothesis class being the set of possible solutions to a model, but we accept it for now.
 
-Bayes risk:
-\[\varphi(f) \triangleq \EE[C(H, f(y))]\] 
+\begin{definition}
+\deflabelname{Cost}
 
-The optimal decision rule takes form 
-\[\hat{H}(\cdot) = \argmin_{f(\cdot)}\varphi(f).\] 
+In its most general form, we let
+\[C(H_j, H_i)\triangleq C_{ij}\]
+denote the cost of predicting $H_j$ when the correct class is $H_i$. 
+\end{definition}
 
+Using cost to drive the notion of ``best'', our best possible decision rule takes the form 
+\[\hat{H}(\cdot) = \argmin_{f}\EE_{Y,H}[C(H,f(Y))].\] 
+The expected cost on the RHS is called \ac{Bayes risk}, which we denote as $\varphi(f)$ for any decision rule $f$.
+
+We can explicitly calculate this quantity: 
 \begin{align*}
-	\varphi(f) &= \EE_{p_{y,H}}[C(H, f(y))] \\
-						 &= \EE_{p_y}[\EE_{p_{H|y}}[C(H, f(y)) | Y=y]] \\
-						 &= \int p_Y(y) \EE[C(H, f(y)) | Y=y] \ddd y.
+	\varphi(f) &= \EE_{Y,H}[C(H, f(Y))] \\
+						 &= \EE_{Y}[\EE_{H|Y}[C(H, f(Y)) | Y=y]] \\
+						 &= \int p_Y(y) \EE[C(H, f(Y)) | Y=y] \ddd y.
 \end{align*}
-
-Notice that we have control over the expected risk for each point, so to minimize $\varphi(f)$, we only have to solve a solution for individual points. 
-
-Given $y=y^*$, there are two possibilities; if $f(y^*) = H_0$, then 
+Notice that we have control over the expected risk for each point, so to minimize $\varphi(f)$, we only have to solve a solution for individual points. For a fixed $y*\in \mathcal{Y}$, there are two possibilities; if $f(y^*) = H_0$, then 
 \[\EE[C(H,f(y^*)) | y=y^*] = C_{00}\PP[H=H_0 | y=y^*] + C_{01}\PP[H=H_1 | y=y^*],\] 
 otherwise
-\[\EE[C(H, f(y^*)) | y=y^*] = C_{10}\PP[H=H_0 | y=y^*] + C_{11}\PP[H=H_1 | y=y^*].\] 
-
-For any $y$, we can compare both and choose as $\hat{H}$ the hypothesis that corresponds to the smaller one. Since 
-\[\PP[H=H_i | Y=y] = \frac{P_{Y|H}(y|H_i)p_{H}(H_i)}{p_Y(y)},\]
+\[\EE[C(H, f(y^*)) | y=y^*] = C_{10}\PP[H=H_0 | y=y^*] + C_{11}\PP[H=H_1 | y=y^*].\]
+This already technically gives us the optimal decision rule; for any given input $y$, we can explicitly compute both values, and return the hypothesis that gives the lesser of the two values. We can also express this in a simpler form. Since
+\[\PP[H=H_i | Y=y] = \frac{p_{Y|H}(y|H_i)p_{H}(H_i)}{p_Y(y)},\]
 we can substitute into the above expressions: 
-\[C_{00}p_{Y|H}(y|H_0)P_0 + C_{01}p_{Y|H}(y|H_1)P_1\gtreqless C_{10}p_{Y|H}(y|H_0)P_0 + C_{11}p_{Y|H}(y|H_1)P_1\] 
+\[C_{00}p_{Y|H}(y|H_0)P_0 + C_{01}p_{Y|H}(y|H_1)P_1 \overunderset{\hat{H}=H_1}{\hat{H}=H_0}{\gtreqless} C_{10}p_{Y|H}(y|H_0)P_0 + C_{11}p_{Y|H}(y|H_1)P_1\] 
 We can rewrite this expression in terms of the ratios 
-\[L(y) \triangleq \frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y|H_0)} \gtreqless \frac{P_0(C_{10}-C_{00})}{P_1(C_{01}-C_{11})} \triangleq \eta,\] 
-where we say that $L(y)$ is the \ac{likelihood ratio}. 
+\[L(y) \triangleq \frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y|H_0)} \overunderset{\hat{H}=H_1}{\hat{H}=H_0}{\gtreqless} \frac{P_0(C_{10}-C_{00})}{P_1(C_{01}-C_{11})} \triangleq \eta.\] 
+We call $L(y)$ the \ac{likelihood ratio}. 
 
 \begin{theorem}
 \thmlabelname{Likelihood Ratio Test}
@@ -55,14 +56,35 @@ Given a priori probabilities $P_0,P_1$, data $y$, observation models $p_{Y|H}(\c
 meaning that the decision is $\hat{H}(y) = H_1$ when $L(y) > \eta$, $\hat{H}(y) = H_0$ when $L(y) < \eta$, and it is indifferent when $L(y)=\eta$. 
 \end{theorem}
 
-Note that the optimal rule is simple and deterministic.
+Note that the optimal rule is simple and deterministic. Prof. makes a point about $L(y)$ being a scalar that we can always calculate. This is the heart of classification models; in larger neural nets, like ImageNet, ultimately what the large network of weights allows us to do is to express the intractable probabilities and compute a scalar value. 
 
-\subsection{Special Cases}
+\subsection{0-1 Loss}
 
 In the case of ``0-1 loss'', i.e., $C_{00} = C_{11} = 0$, $C_{01} = C_{10} = 1$, in which case our test simplifies to 
-\[p_{H|Y}(H_1|y) \gtreqless p_{H|Y}(H_0|y).\]
-This is the \ac{maximum a posteriori} (MAP) decision rule. 
+\[p_{H|Y}(H_1|y) \overunderset{\hat{H_1}}{\hat{H_0}}{\gtreqless} p_{H|Y}(H_0|y).\]
+This is the \ac{maximum a posteriori} (MAP) decision rule.
 
 If we additionally assume that $P_0=P_1$, i.e., that our prior belief is indifferent, then our test further simplifies to 
-\[p_{Y|H}(y|H_1) \gtreqless p_{Y|H}(y|H_0).\] 
-This is the \ac{maximum likelihood} (MLE) decision rule. 
+\[p_{Y|H}(y|H_1) \overunderset{\hat{H_1}}{\hat{H_0}}{\gtreqless} p_{Y|H}(y|H_0).\] 
+This is the \ac{maximum likelihood} (MLE) decision rule. In either case, the expected rate of error is given by 
+
+\[\varphi(\hat{H}) = \PP[\hat{H}(Y) = H_0, H = H_1] + \PP[\hat{H}(Y) = H_1, H = H_0].\]
+
+\begin{example}
+\exlabelname{Communicating a Bit}
+
+We have a signal $y$, randomly distributed with variance $\sigma^2$, and with two possible sources $s_0,s_1$.
+\end{example}
+
+The likelihood ratio test gives 
+\[\ln{L(y)} = \ln\left(\frac{e^{-(y-s_1)^2/(2\sigma^2)}}{e^{-(y-s_0)^2/(2\sigma^2)}}\right) = \frac{1}{2\sigma^2}((y-s_0)^2 - (y-s_1)^2).\] 
+Assuming $0-1$ loss, $\ln{L(y)}=0$, so the decision boundary is 
+\[y\overunderset{\hat{H_1}}{\hat{H_0}}{\gtreqless}\frac{s_0+s_1}{2}.\]
+We could compute the expected rate of error as follows: 
+\begin{align*}
+	\varphi(\hat{H}) &= \frac{1}{2}\left(\PP[\hat{H}(Y)=H_0|H=H_1] + \PP[\hat{H}(Y)=H_1|H=H_0]\right) \\
+									 &= \frac{1}{2}\left(\PP\left[y < \frac{s_0+s_1}{2}\bigg|H=H_1\right] + \PP\left[y \geq \frac{s_0+s_1}{2}\bigg|H=H_0\right]\right) \\
+									 &= \frac{1}{2}\left(\PP\left[\frac{y-s_1}{\sigma} < \frac{s_0-s_1}{2\sigma}\bigg|H=H_1\right] + \PP\left[\frac{y-s_0}{\sigma} \geq \frac{s_1-s_0}{2\sigma}\bigg|H=H_0\right]\right) \\
+									 &= Q\left(\frac{s_1-s_0}{2\sigma}\right).
+\end{align*}
+The quantity $(s_1-s_0)/\sigma$ is a measure of signal-to-noise; the larger the SNR, the more uncertain we are about our prediction, i.e., the higher our expected rate of error. 
