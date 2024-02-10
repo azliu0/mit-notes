@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1707407761 "main.tex" "main.pdf" "main" 1707407762 0
+["pdflatex"] 1707565316 "main.tex" "main.pdf" "main" 1707565318 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -286,12 +286,12 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "_andrew.sty" 1707404272 24556 8be0b1119dbe13cce3386e764b0262a2 ""
-  "main.aux" 1707407762 965 7df47304dff206b808ab085b645c6727 "pdflatex"
-  "main.out" 1707407762 490 362df50a106776ccb9078527a255fbc3 "pdflatex"
-  "main.pre" 1707407761 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1707404336 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
-  "main.toc" 1707407762 251 c369e68f1a578df31783e000163d889d "pdflatex"
-  "notes/0208.tex" 1707407758 3080 00aac4ef159d22cc0a6ee7bc35817518 ""
+  "main.aux" 1707565318 960 4d02f29b3384c346c68f52b20a47b1ad "pdflatex"
+  "main.out" 1707565318 465 14ef9f4fee9f0700a0cc9fda95ea3c94 "pdflatex"
+  "main.pre" 1707565317 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1707408528 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
+  "main.toc" 1707565318 246 0545831498c6f2e46187bd425ca8aeab "pdflatex"
+  "notes/0208.tex" 1707565315 5690 e40937a96b78ff744842c008f1b6519b ""
   (generated)
   "main.aux"
   "main.log"
