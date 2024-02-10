@@ -1,6 +1,6 @@
 # mit-notes
 
-See [here](https://azliu0.github.io/mit-notes/). 
+Notes are visualized [here](https://azliu0.github.io/mit-notes/). 
 
 ## explanation of build.sh
 
