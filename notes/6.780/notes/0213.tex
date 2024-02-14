@@ -1,0 +1,106 @@
+\section{February 13, 2023}
+
+Bad weather day today. Prof. Wornell tells us about how this is the first time he's given a lecture over zoom since the pandemic. He was hoping that he would never have had to give a zoom lecture again, but here we are. 
+
+\subsection{Review: Bayesian Hypothesis Testing}
+
+Overarching goal: optimize the expected cost of choosing one hypothesis over another. This can be accomplished with the Likelihood Ratio Test: 
+
+\[L(y) \overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \eta \] 
+
+Some issues with this solution: we require some notion of costs, as well as priors $P_i = P_{H}(H_i)$. It can be difficult to assign probabilities to abstract concepts, like $\PP[\text{patient has disease}]$.
+
+\subsection{Non-Bayesian Hypothesis Testing}
+
+The ``folk theorem'' that we will be proving today is that all optimum decision rules takes the form of a Likelihood Ratio Test:
+
+\[\frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y_H_0)}\overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \eta,\]
+for some $\eta$. This is largely true, but not always.
+
+\subsection{General Performance Measures}
+Let $\hat{H}(\cdot)$ be any rule. An equivalent characterization of this rule is some partition of the observation space $Y$: 
+\begin{align*}
+	y_0 &= \{y\in Y : \hat{H}(y) = H_0\} \\
+	y_1 &= y\backslash y_0
+\end{align*}
+
+Then $P_D = \PP[\hat{H}=H_1|H=H_1] = \int_{y_1}p_{Y|H}(y|H_1)\ddd y$ is called the \ac{detection probability}, and $P_F = \PP[\hat{H}=H_1|H=H_0] = \int_{y_1}p_{Y|H}(y|H_0)\ddd y$ is called the \ac{``false alarm'' probability}. Some related terminology: $P_M = 1-P_D$ is called the ``miss'' probability. 
+
+\begin{itemize}
+	\item Statistics terminology: $P_E^1 = P_F$, $P_E^2 = P_M$, ``probability of error of each kind''. The probability of error of the first kind is called the ``size'' of the test, while the probability of error the second kind is called the ``power'' of the test. 
+	\item Medical terminology: $P_F$ is the false positive rate, while $P_M$ is the false negative rate. 
+	\item Learning / pattern classification: $P_R = P_D$ is the ``recall'' or ``sensitivity''. The ``precision'' is defined as $P_P = \PP[H=H_1|\hat{H}=H_1] = 1 / (1 + P_F/P_D\cdot P_0/P_1)$. 
+\end{itemize}
+
+In general, $P_D$ and $P_F$ are conflicting objectives. We seek large $P_D$ and small $P_F$. The bayesian approach to this ``multi-objective'' optimization is to choose the rule that satisfies: 
+\[\min_{\hat{H}(\cdot)}(\alpha P_F - \beta P_D).\]
+
+\subsection{Operating Characteristic of the LRT (OC-LRT)}
+Other tradeoffs are possible. Consider the family of ratio tests: 
+\[\{\hat{H}(\cdot) = \text{LRT}, \text{for some }\eta\}.\] 
+
+\begin{example}
+\exlabel
+
+Consider two hypotheses
+\begin{align*}
+	H_0 &: y\sim \Norm(0,\sigma^2) \\
+	H_1 &: y\sim \Norm(m,\sigma^2)
+\end{align*} 
+\end{example}
+
+The LRT is given by 
+\[y \overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \frac{m}{2} + \frac{\sigma^2\ln \eta}{m} \overset{\Delta}{=}\gamma.\] 
+
+\comment{add images!}
+
+This curve is called the \ac{OC-LRT}: Operating Characteristic of the Likelihood Ratio Test. 
+
+\[\text{OC-LRT}: \{(P_F, P_D): \hat{H}(\cdot)\text{ is LRT for some }\eta\}.\] 
+
+\begin{theorem}
+\claimlabel
+
+OC-LRT is monotonic and non-decreasing. 
+\end{theorem}
+
+\begin{proof}
+If $\eta_2 > \eta_1$, then $P_D(\eta_2)\leq P_D(\eta_1)$ and $P_F(\eta_2)\leq P_F(\eta_1)$.
+\end{proof}
+
+\subsection{Neyman-Pearson Criterion}
+
+To avoid the problem of costs and priors, choose a rule subject to
+
+\[\max_{\hat{H}(\cdot)}P_D \text{ s.t. }P_F\leq \alpha.\] 
+
+\begin{theorem}
+\thmlabelname{Neyman-Pearson Lemma, Special Case}
+
+For deterministic $\hat{H}(\cdot)$, the solution to the NP-Criterion is an LRT when the LRT is continuous. In other words, 
+\[\hat{H}(y) = H_{\mathbbm{1}_{L(y)\geq \eta}},\] 
+where $\eta$ is the smallest threshold s.t. 
+\[P_F = \PP(L(y)\geq \eta | H=H_0)\leq \alpha.\] 
+\end{theorem}
+
+\begin{proof}
+We can prove this with lagrange multipliers. Fix $P_F = \alpha' \leq \alpha$. Then, we want to optimize
+\begin{align*}
+	min_{\hat{H}(\cdot)} \varphi(\hat{H}) &= (1-P_D) + \lambda(P_F-\alpha') \\
+	&= \int_{y_0}p_{Y|H}(y|H_1)\ddd y + \lambda \left( \int_{y_1}p_{Y|H}(y|H_0)\ddd y - \alpha' \right) \\
+	&= \lambda(1-\alpha') + \int_{y_0}\left(p_{Y|H}(y|H_1) - \lambda p_{Y|H}(y|H_0)\right) \ddd y.
+\end{align*}
+The min $\varphi$ occurs when we assign $y$ to $y_0$ whenever the the integrand is $\leq 0$, as this minimizes the cost. For the same reason, we want $\alpha'$ to be as large as possible. Therefore, 
+\[\frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y|H_0)}\overunderset{\hat{H_1}}{\hat{H_0}}{\gtreqless}\lambda,\]
+where $\alpha'$ is chosen to be the largest threshold achievable by LRT. 
+\end{proof}
+
+This falls apart slightly when $L(y)$ has discrete components. 
+
+\begin{example}
+\exlabelname{OC-LRT falls apart under discrete likelihood}
+
+\comment{draw some graphs}.
+\end{example}
+
+
