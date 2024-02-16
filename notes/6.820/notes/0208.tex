@@ -1,0 +1,38 @@
+\section{February 8, 2024}
+
+\subsection{Simple Decision Making}
+
+Classic Exploration Exploitation setup 
+
+The goal is to learn a policy $\pi(s_{0:t};\theta)$ that maps all the previous information into a best possible action. The objective in reinforcement learning is most generally the maximal sum of rewards over time: 
+\[\max_{\theta}r_t.\] 
+Compare this to the objective in normal supervised learning, which is to choose actions by maximizing a probability distribution: 
+\[\max_{\theta}p(a^{gt}, s_t).\] 
+If the reward function is unknown and/or not differentiable, then we have to use a different approach to attack these problems. 
+
+\subsection{Multi-Arm Bandits}
+
+The setup here is that we have $N$ arms corresponding to actions $a_1, \hdots, a_N$. The goal is to maximize rewards 
+\[\sum_{i=1}^T r(a_i^t),\] 
+where at each timestep we choose an action $a_i$ and receive reward $r(a_i)$ according to some unknown reward function. 
+
+To measure performance, we want to know how well our model performs relative to the best possible outcome. Therefore, we are interesting in minimizing \ac{regret}: 
+\[\left\lVert \sum_i r(a_i^*) - \sum_i r(a_i)\right\rVert.\] 
+
+\subsubsection{Explore-First}
+
+The Explore-First strategy is pretty straightforward. Up to time $K$, explore the reward function by sampling each arm equally $K/N$ times. Afterwards, choose the arm with highest average reward $\mu_i = (1/k_i)\sum_{k_i}r(a_i)$. 
+
+Under the assumption that $r\in [0,1]$, the worst regret that this could achieve is $T$. It turns out that the asymptotic performance of this algorithm is $T^{2/3}O(N\log T)^{1/3}$. 
+
+\subsubsection{Upper Confidence Bound (UCB)}
+
+The idea with this algorithm is to instead create some confidence intervals about the reward function, and give an exploration bonus to actions whose confidence intervals are large. We choose actions with policy
+\[a_{t+1} = \argmax_i \mu_i(t) + \sqrt{\frac{4\log t}{k_i}},\] 
+where the exploration bonus here is scaling with $\sqrt{(1/k_i)}$. Where does this come from? Let's investigate ...
+
+\begin{theorem}
+\thmlabelname{Hoeffding's Inequality}
+
+Let $X$ be a r.v. in the domain 
+\end{theorem}
