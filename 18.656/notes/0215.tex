@@ -1,0 +1,134 @@
+\section{February 15, 2024}
+
+\subsection{Randomized dimension reduction}
+
+\begin{example}
+\exlabel
+
+Dataset is a set of $N$ points $\{u^1, \hdots, u^N\}$ where $u^j\in \RR^{d}$. 
+\end{example}
+
+Storing the entire dataset gets very expensive very quickly when $N,d$ are large. Is there a lower-dimensional representation of this dataset that is still useful? 
+
+Things that might be useful to preservere: 
+\begin{itemize}
+	\item pairwise distances 
+		\[\lVert u_i - u_j\rVert_2^2\quad \forall i\neq j\] 
+		useful for estimating clustering algorithms, densities (computing neighborhoods of points)
+	\item  
+\end{itemize}
+
+Dimension reduction, formally: 
+\[\mathcal{F} : \RR^d\rightarrow \RR^m\] 
+We call $m$ the \ac{sketch dimension}, or the \ac{embedding dimension}. The goal is for us to find a ``useful" representation where $m \ll d$, which, using the distance metric as our notion of usefulness, we can bound w.r.t. a new parameter $\varepsilon$:  
+
+\[1 - \varepsilon \leq \frac{\lVert \mathcal{F}(u_i) - \mathcal{F}(u_j)\rVert_2^2}{\lVert u^i - u^j\rVert_2^2} \leq 1 + \varepsilon.\]
+
+We'll solve this from the perspective of a fixed $\epsilon$, so that our goal is to minimize $m$ while preserving some notion of distance. We'll also introduce another parameter $\delta$, so that this equation holds w.p. $1-\delta$.
+
+\begin{example}
+\exlabelname{Motivating Bernstein's Condition}
+
+Given $X_i\sim \Bern(p)$ for $i\in \{1,\hdots,n\}$. We have $\EE[X_i]=p$, $\var[X_i]=p(1-p)$, and $\vert X_i\vert\leq b:=1$. 
+\end{example}
+
+\[\PP\left(\left\vert\frac{1}{n}\sum_i X_i - p\right\vert\geq t \right) \leq 2e^{-nt^2 / (2p(1-p)+2t)}\]
+
+If $t$ is small, then we get a sub-Gaussian tail bound. If $t$ is large, then our bound converges to $e^{-nt/2}$, which are sub-Exponential.  
+
+\begin{definition}
+\deflabelname{Bernstein's Condition}
+
+Given random variable with parameters $\mu=\EE[X]$, $\sigma^2=\var[X]$, and $b$ satisfying
+
+\[\vert \EE[(X-\mu)^k]\vert \leq \frac{1}{2}k!\sigma^2 b^{k-2}\] 
+
+for $k=2,3,\hdots$. Then, 
+\end{definition}
+
+\begin{example}
+\exlabel
+
+Bounded random variables satisfy the Bernstein condition. Let's say $\vert X-\mu\vert \leq b$. We can show that this satisfies the Condition in a pretty strong sense; we won't need the extra factor of $k!$ on the RHS. 
+\end{example}
+
+\begin{proof}
+\begin{align*}
+	\vert\EE[(X-\mu)^k]\vert &\leq \EE\vert X-\mu\vert^2 \vert X-\mu\vert^{k-2} \\
+													 &\leq \sigma^2b^{k-2}\ll \frac{1}{2}k!\sigma^2b^{k-2}. 
+\end{align*}
+\end{proof}
+
+\begin{example}
+\exlabel
+
+The Bernstein Condition also implies a nice bound on MGFs. Prof emphasizes that the fact that bounds on the polynomial moments of a r.v. can imply bounds on the MGF is quite a deep idea.
+
+\[\EE[e^{\lambda(X-\mu)}] \leq e^{(\lambda^2\sigma^2/2)/(1 - b\vert \lambda\vert)},\]
+for all $\vert\lambda\vert b < 1$. 
+\end{example}
+
+\begin{proof}
+\begin{align*}
+	\EE[e^{\lambda(X-\mu)}] &= 1 + \lambda \EE[X-\mu] + \frac{\lambda^2}{2} + \sum_{k\geq 3}\frac{\lambda^k \EE[(X-\mu)^k]}{k!} \\
+													&\leq 1 + \frac{\lambda^2}{2}\sigma^2 + \sum_{k\geq 3} \frac{\vert \lambda\vert^k k!/2\cdot \sigma^2 b^{k-2}}{k!} \\
+													&\leq 1 + \frac{\lambda^2}{2}\sigma^2 + \frac{\lambda^2}{2}\sigma^2 \sum_{k\geq 3} \vert \lambda\vert^{k-2}b^{k-2} \\
+													&\leq 1 + \frac{\lambda^2}{2}\sigma^2\left(\sum_{k\geq 0}\vert \lambda\vert^k b^k\right) \\
+													&= 1 + \frac{\lambda^2\sigma^2/2}{1 - b\vert \lambda\vert},
+\end{align*}
+as long as $\vert \lambda\vert b < 1$. Now we are done by the fact that $1 + a\leq e^a$.  
+\end{proof}
+
+We will leave as an exercise :skull: that this result can be used to show that 
+\[\PP\left[\left\vert\frac{1}{n}\sum_{i=1}^n X_i - \mu\right\vert\geq t\right]\leq 2e^{-nt^2/(2\sigma^2 + 2bt)}.\] 
+
+\begin{definition}
+\deflabel
+
+$X$ is $(\nu, \alpha)$-sub-exponential if $\EE[e^{\lambda(x-\mu)}] \leq e^{\nu^2\lambda^2/2}$ for all $\vert \lambda\vert < 1/\alpha$.   
+\end{definition}
+
+This is a relaxation on sub-Gaussianness. For example, $(\nu, 0)$-sub-exponentials are sub-Gaussian.
+
+\begin{example}
+\exlabel
+
+If the previous Example holds, then $\vert \lambda\vert < 1/(2b)$ implies $1-\vert \lambda\vert b > 1/2$ implies $\EE[e^{\lambda(x-\mu)}]\leq e^{\lambda^2(\sqrt{2}\sigma^2)^2 / 2}$, which is $(\sqrt{2}\sigma, 2b)$-sub-exponential. 
+\end{example}
+
+\begin{example}
+\exlabel
+
+\Let $X\sim \Norm(0,1)$ and $Z=X^2$. 
+\end{example}
+
+Then $\EE[Z] = 1$, and we can also show that 
+\[\EE[e^{\lambda(X^2-1)}] = \frac{e^{-\lambda}}{\sqrt{1-2\lambda}}\] 
+as long as $\vert \lambda\vert < 1/2$. It can further be shown that 
+\[\frac{e^{-\lambda}}{\sqrt{1-2\lambda}} \leq e^{2\lambda^2} = e^{\frac{\lambda^2(2)^2}{2}}\]
+for all $\vert \lambda\vert < 1/4$. So, this r.v. is $(2,4)$-sub-exponential. 
+
+\begin{theorem}
+\proplabel
+
+If $X$ is $(\nu, \alpha)$-sub-exponential, then 
+\[\PP[X-\mu\geq t] \leq \begin{cases}
+	e^{-t^2/(2\nu^2)} & t\in [0, \nu^2/\alpha] \\
+	e^{-t/(2\alpha)} & t > \nu^2/\alpha.
+\end{cases}\] 
+\end{theorem}
+
+A more compact way of writing this: 
+\[\PP[X-\mu\geq t] \leq e^{\frac{-t^2}{2\nu^2 + 2\alpha t}}. \] 
+
+\begin{proof}
+Using Markov, 
+\begin{align*}
+\PP[X-\mu\geq t] &\leq \EE[e^{\lambda(X-\mu)}]e^{-\lambda t} \\
+								 &\leq e^{\lambda^2\nu^2/2 - \lambda t}\quad \forall 0 < \lambda < \frac{1}{\alpha}. 
+\end{align*}
+
+Let $g(\lambda)$ be the exponent. $g'(\lambda) = \lambda\nu^2 - t$, so the unconstrained optimum occurs at $\lambda^* = t / \nu^2$. This unconstrained optimum is achievable precisely when $t\in [0, \nu^2/\alpha]$; plugging in this value gives the first bound. When $t > \nu^2/\alpha$, we can choose the boundary point closest to this unconstrained optimum, giving the second bound.  
+\end{proof}
+
+
