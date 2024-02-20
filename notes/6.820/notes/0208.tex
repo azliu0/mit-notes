@@ -29,10 +29,19 @@ Under the assumption that $r\in [0,1]$, the worst regret that this could achieve
 
 The idea with this algorithm is to instead create some confidence intervals about the reward function, and give an exploration bonus to actions whose confidence intervals are large. We choose actions with policy
 \[a_{t+1} = \argmax_i \mu_i(t) + \sqrt{\frac{4\log t}{k_i}},\] 
-where the exploration bonus here is scaling with $\sqrt{(1/k_i)}$. Where does this come from? Let's investigate ...
+where the exploration bonus here is scaling with $\sqrt{(1/k_i)}$. Roughly speaking, this upper bound on the confidence of the mean value comes from the \ac{Hoeffding Inequality}. See $18.656$ notes for details.
 
-\begin{theorem}
-\thmlabelname{Hoeffding's Inequality}
+\subsubsection{Linear UCB}
 
-Let $X$ be a r.v. in the domain 
-\end{theorem}
+The previous algorithm is good, but assumes that rewards are purely a function of action taken. In reality, rewards are oftentimes also a function of surrounding context; 
+\[\mu(a|s) = x_a^T\theta_a\]
+for some context vector $x_a$. The general approach for solving Linear UCB is as follows: 
+\begin{itemize}
+	\item choose a reward $\hat{r}_t^a = x_t\theta_t^a$
+	\item choose the best action according to estimates $a_t\leftarrow max_a \hat{r}_t^a$
+	\item repeat until timestep $t$ $\hat{R}_{0:t}^a = X_{0:t}\theta^a$
+	\item solve for the best possible parameters $\min_{\theta_a}\lVert R_{0:t}^a - \hat{R}_{0:t}^a\rVert_2^2$.
+\end{itemize}
+The last step is a simple ridge regression, i.e., 
+\[\theta_t^a = (X_{0:t}^TX_{0:t}+\lambda I)^{-1}X_{0:t}^TR_{0:t}^a.\] 
+

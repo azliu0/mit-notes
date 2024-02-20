@@ -1735,6 +1735,13 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmn7t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmne.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmn8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmn7c.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmn7c.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmnc.tfm
 INPUT ./notes/0213.tex
 INPUT notes/0213.tex
 INPUT ./notes/0213.tex
@@ -1745,6 +1752,7 @@ INPUT 6_820_Notes.aux
 INPUT ./6_820_Notes.out
 INPUT ./6_820_Notes.out
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbne.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb
