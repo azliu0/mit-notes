@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1708025098 "18_656_Notes.tex" "18_656_Notes.pdf" "18_656_Notes" 1708025100 2
+["pdflatex"] 1708454946 "18_656_Notes.tex" "18_656_Notes.pdf" "18_656_Notes" 1708454948 2
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1240420913 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
@@ -299,15 +299,16 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "18_656_Notes.aux" 1708025100 1196 50dc230bcbb1a7b0f09e9b9afa66aa0c "pdflatex"
-  "18_656_Notes.out" 1708025100 726 e69f5162d02cd00b74141158cce0ada8 "pdflatex"
-  "18_656_Notes.pre" 1708025099 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "18_656_Notes.tex" 1708021006 514 dba298b84ea2859023a27e05c24affcf ""
-  "18_656_Notes.toc" 1708025100 399 f729215e6849b3fb43575637b2267f47 "pdflatex"
+  "18_656_Notes.aux" 1708454948 1451 026f3e3734def9f137de1ad2f6337ec7 "pdflatex"
+  "18_656_Notes.out" 1708454948 1096 64800dbe206990fb16e9fc53d19ae7d2 "pdflatex"
+  "18_656_Notes.pre" 1708454947 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "18_656_Notes.tex" 1708101318 514 dba298b84ea2859023a27e05c24affcf ""
+  "18_656_Notes.toc" 1708454948 572 2fe2fabd549f6781b883b8152fb5d364 "pdflatex"
   "_andrew.sty" 1707415515 24556 8be0b1119dbe13cce3386e764b0262a2 ""
-  "notes/0208.tex" 1707430422 4838 b0edfcee706d99f8bd7dc09f7a24fed6 ""
-  "notes/0213.tex" 1708020890 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "notes/0215.tex" 1708025098 5710 813d4bc1549425a078482aa1c9c91eee ""
+  "notes/0206.tex" 1708101286 38 ff3777085a195b829e418154c8e192f2 ""
+  "notes/0208.tex" 1708454945 9272 d4c4e54a71b1485d451357711c1d463c ""
+  "notes/0213.tex" 1708101344 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "notes/0215.tex" 1708101356 5756 b3ef030e4f52ebe429faf10c6d0d6e8a ""
   (generated)
   "18_656_Notes.aux"
   "18_656_Notes.log"

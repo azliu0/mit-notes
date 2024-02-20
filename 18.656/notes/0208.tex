@@ -1,22 +1,56 @@
 \section{February 8, 2024}
 
-\subsection{Recap}
+\subsection{Tail Bounds}
+
+Some important tail bounds that we'll use in this class.
+
+\begin{theorem}
+\thmlabelname{Markov's Inequality}
+
+\[\PP[X \geq t]\leq \frac{\EE[X]}{t}, \quad t > 0.\] 
+\end{theorem}
+
+\begin{theorem}
+\thmlabelname{Chebyshev's Inequality}
+
+For any real-valued r.v. $X$ with mean $\mu$, 
+\[\PP[\vert X-\mu\vert \geq t]\leq \frac{\sigma^2}{t^2}.\] 
+\end{theorem}
+
+Some useful applications of Markov's inequality: 
+\begin{itemize}
+	\item higher moments: 
+		\[\PP[\vert X-\mu\vert\geq t] = \PP[\vert X-\mu\vert^p \geq t^p] \leq \min_{p\geq 1}\frac{\EE[\vert X-\mu\vert]^p}{t^p}\] 
+	\item exponentiated r.v.s: 
+	\[\PP[X - \mu\geq t] = \PP[e^{\lambda(X-\mu)}\geq e^{\lambda t}] \leq \inf_{\lambda > 0}e^{-t\lambda} \EE[e^{\lambda(X-\mu)}].\] 
+\end{itemize}
+The second expression shows us that deducing tail bounds for means is intimately related to better understanding \ac{moment generating functions} (MGFs), i.e., 
+\[\text{MGF}_X(\lambda) = \EE[e^{\lambda X}].\] 
+
+\subsection{Sub-Gaussian Random Variables}
 
 \begin{definition}
 \deflabel
 
 A random variable $X$ with mean $\mu = \EE[X]$ is \ac{$\sigma$-sub-Gaussian} if $\EE[e^{\lambda(X - \mu)}] \leq e^{\lambda^2\sigma^2 / 2}$ for all $\lambda\in \RR$. 
-
-Equality if and only if $X\sim \Norm(\mu, \sigma^2)$. 
 \end{definition}
 
-\begin{example}
-\exlabel
+We can show that this holds when $X\sim \Norm(\mu, \sigma^2)$, hence motivating the definition, by directly deriving the MGF for $X$.
+\begin{align*}
+	\text{MGF}_X(\lambda) = \EE[e^{\lambda X}] &= \frac{1}{\sigma \sqrt{2\pi}}\int_{-\infty}^{\infty}e^{\lambda x}e^{-\frac{1}{2}\left(\frac{(x-\mu)^2}{\sigma^2}\right)}\ddd x \\
+																						 &= \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}\exp\left[-\frac{1}{2\sigma^2}\left(x^2-2\mu x+\mu^2 - 2\sigma^2\lambda x\right)\right] \ddd x\\
+																						 &= \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty}\exp\left[-\frac{1}{2\sigma^2}\left(x - (\mu + \sigma^2\lambda)\right)^2 - 2\mu\sigma^2\lambda - \sigma^4\lambda^2\right]\ddd x \\
+																						 &= e^{\mu\lambda + \sigma^2\lambda^2/2}.
+\end{align*}
+The key is the quadratic exponential tail decay; this is generally what we use to characterize Gaussian / sub-Gaussian behavior. 
+
+\begin{theorem}
+	\claimlabelname{Bounded r.v.s are sub-Gaussian}
 
 Given r.v. $X\in [a,b]$, $\EE[X] = \mu$. Then, $X$ is sub-Gaussian with $\sigma=(b-a)$.
-\end{example}
+\end{theorem}
 
-It turns out that we can also show $\sigma = (b-a)/2$, but we won't show this during lecture, since the technique used to show the weaker result is more interesting. 
+It turns out that we can also show $\sigma = (b-a)/2$, but we won't show this during lecture, since the technique used to show the weaker result is more interesting.
 
 \begin{proof}
 Let $\tilde{X}$ be i.i.d. to $X$. Then,
@@ -90,13 +124,62 @@ Using Chernoff,
 for some $s > 0$. So for some fixed $\delta$, we can make a guarantee about interval width $s = \sqrt{\log(2/\delta) / (2n)}$. 
 
 \begin{theorem}
-\thmlabelname{Hoeffding bound}
+\lemlabelname{Hoeffding's Lemma}
+
+For any zero-mean r.v. X with values in $[a,b]$, the MGF satisfies 
+\[\EE[e^{\lambda X}] \leq e^{\lambda^2 (b-a)^2 / 8}.\]
+for all $\lambda$. 
+\end{theorem}
+
+The following proof is taken from \href{https://courses.cs.washington.edu/courses/cse521/21au/521-lecture-3.pdf}{these lecture notes}.
+
+\begin{proof}
+Since $e^{sx}$ is convex, 
+\[e^{sX}\leq \frac{b-X}{b-a}e^{sa} + \frac{X-a}{b-a}e^{sb},\] 
+so 
+\[\EE[e^{sX}]\leq \frac{b-\EE[X]}{b-a}e^{sa} + \frac{\EE[X]-a}{b-a}e^{sb} = \frac{b}{b-a}e^{sa}-\frac{a}{b-a}e^{sb}.\] 
+Make the substitution $p = -a/(b-a)$ so that the above expression simplifies to
+\[(1-p+pe^{s(b-a)})e^{-sp(b-a)},\] 
+and again substitute $u=s(b-a)$ so that it further simplifies to
+\[\varphi(u) := (1-p+pe^u)e^{pu}.\]
+Now we can bound $\varphi(u)$. Taking derivatives, 
+\begin{align*}
+	\varphi'(u) := -p+\frac{pe^u}{1-p+pe^u} \\
+	\varphi''(u) := \frac{p(1-p)e^u}{(1-p+pe^u)^2}. 
+\end{align*}
+By Taylor's theorem (see \href{https://math.stackexchange.com/questions/3238111/application-of-taylors-theorem-find-upper-bound-for-remainder}{here}), we have for some $z\in [0,u]$
+\[\varphi(u) = \phi(0) + u\phi'(0) + \frac{1}{2}u^2\phi''(z)\leq \phi(0) + u\phi'(0) + \sup_z \frac{1}{2}u^2\phi''(z),\]
+so substituting in the expressions from above 
+\[\varphi(u) \leq \sup_z \frac{1}{2}u^2 \varphi''(z).\] 
+Bashing critical points eventually gives the upper bound $1/4$, from which we get 
+\[\EE[e^{sX}]\leq e^{\varphi(u)} \leq e^{u^2/8} \leq e^{s^2(b-a)^2/8},\]
+as desired.
+\end{proof}
+
+\begin{theorem}
+\thmlabelname{Hoeffding's Inequality}
 
 Let $X_i\sim \sigma_i$-sub-Gaussian, with $\EE[X_i]=\mu_i$ and all independent. Then
 
 \[\PP\left[\sum_{i=1}^n (X_i-\mu_i)\geq t\right] \leq e^{-t^2 / (2\sum_{i=1}^n\sigma_i^2)}.\] 
 \end{theorem}
 
+We also present an alternate statement of the inequality, which should be equivalent. \comment{is there a typo somewhere in these statements?}
+
+\begin{theorem}
+\thmlabelname{Hoeffding's Inequality}
+
+Let $X_1,\hdots,X_m$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and independent. Then, 
+\[\PP\left[\sum_{i=1}^m(X_i-\mu_i)\geq t\right]\leq e^{-2t^2m^2/(\sum_i (b_i-a_i)^2)}.\] 
+\end{theorem}
+
+\begin{proof}
+	Define $Z_i = X_i-\EE[X_i]$, so that $\EE[Z_i] = 0$. By Chernoff, for any $s>0$, we have 
+	\[\PP[\sum_i Z_i\geq t] = \PP[\exp\left(s\sum_i Z_i\right)\geq e^{st}] \leq \frac{\EE[\prod_{i=1}^m e^{sZ_i}]}{e^{st}}.\] 
+	Since $Z_i$ are independent, we can move the expectation inside of the product. Applying the Hoeffding Lemma then gives
+	\[\frac{\EE[\prod_i e^{sZ_i}]}{e^{st}} = \frac{\prod_i \EE[e^{sZ_i}]}{e^{st}}\leq \exp\left(-st + \frac{s^2}{8}\sum_i (b_i-a_i)^2.\right)\] 
+	Substituting $s = \frac{4t}{\sum_i (b_i-a_i)^2}$ gives the result.
+\end{proof}
 \begin{example}
 \exlabel
 
