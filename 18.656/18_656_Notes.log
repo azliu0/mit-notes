@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  20 FEB 2024 13:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  23 FEB 2024 05:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1671,14 +1671,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [11]
-./notes/0215.tex:104: Undefined control sequence.
-l.104 \Let
-           $X\sim \Norm(0,1)$ and $Z=X^2$.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12]
+Overfull \hbox (7.85474pt too wide) in paragraph at lines 125--126
+[]\T1/jkp/m/n/10.95 This shows that []\T1/jkp/b/n/10.95 ran-dom vari-ables sat-is-fy-ing the Bern-stein con-di-tion are $\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 ^^[[]; b\OT1/jkp/m/n/10.95 )$\T1/jkp/b/n/10.95 -
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1687,7 +1690,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12])
+[13]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1695,23 +1698,120 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[13] (./18_656_Notes.aux)
+[14]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[15]
+./notes/0215.tex:187: Missing delimiter (. inserted).
+<to be read again> 
+                   {
+l.187 ...frac{\lVert Fu\rVert^2}{\lVert u\rVert^2}
+                                                   \not\in [1-t,1+t] \right]...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+./notes/0215.tex:187: Missing \right. inserted.
+<inserted text> 
+                \right .
+l.187 ...\in [1-t,1+t] \right]\leq 2e^{-mt^2/8}.\]
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./notes/0215.tex:189: Missing delimiter (. inserted).
+<to be read again> 
+                   {
+l.189 ...- Fu_j\rVert^2}{\lVert u_i - u_j\rVert^2}
+                                                   \not\in [1-t,1+t] \right]...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+./notes/0215.tex:189: Missing \right. inserted.
+<inserted text> 
+                \right .
+l.189 ...\in [1-t,1+t] \right]\leq 2e^{-mt^2/8},\]
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./notes/0215.tex:191: Missing delimiter (. inserted).
+<to be read again> 
+                   {
+l.191 ...- Fu_j\rVert^2}{\lVert u_i - u_j\rVert^2}
+                                                   \not\in [1-t,1+t] \right]...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+./notes/0215.tex:191: Missing \right. inserted.
+<inserted text> 
+                \right .
+l.191 ...t] \right]\leq 2e^{-mt^2/8}\binom{N}{2}\]
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[16])
+Underfull \hbox (badness 10000) in paragraph at lines 193--20
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[17] (./18_656_Notes.aux)
 Package rerunfilecheck Info: File `18_656_Notes.out' has not changed.
-(rerunfilecheck)             Checksum: 64800DBE206990FB16E9FC53D19AE7D2;1096.
+(rerunfilecheck)             Checksum: 3CBA470F339B941EF14B0897E455A3A3;1660.
  ) 
 Here is how much of TeX's memory you used:
- 54524 strings out of 476025
- 1228074 string characters out of 5790016
- 1903722 words of memory out of 5000000
- 73819 multiletter control sequences out of 15000+600000
+ 54534 strings out of 476025
+ 1228192 string characters out of 5790016
+ 1902721 words of memory out of 5000000
+ 73822 multiletter control sequences out of 15000+600000
  631510 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 116i,12n,118p,1047b,698s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 116i,12n,118p,1047b,703s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmsc8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 18_656_Notes.pdf (13 pages, 186421 bytes).
+Output written on 18_656_Notes.pdf (17 pages, 200016 bytes).
 PDF statistics:
- 191 PDF objects out of 1000 (max. 8388607)
- 146 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 69 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 226 PDF objects out of 1000 (max. 8388607)
+ 177 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

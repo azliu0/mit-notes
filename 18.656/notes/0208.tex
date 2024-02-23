@@ -159,16 +159,6 @@ as desired.
 \begin{theorem}
 \thmlabelname{Hoeffding's Inequality}
 
-Let $X_i\sim \sigma_i$-sub-Gaussian, with $\EE[X_i]=\mu_i$ and all independent. Then
-
-\[\PP\left[\sum_{i=1}^n (X_i-\mu_i)\geq t\right] \leq e^{-t^2 / (2\sum_{i=1}^n\sigma_i^2)}.\] 
-\end{theorem}
-
-We also present an alternate statement of the inequality, which should be equivalent. \comment{is there a typo somewhere in these statements?}
-
-\begin{theorem}
-\thmlabelname{Hoeffding's Inequality}
-
 Let $X_1,\hdots,X_m$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and independent. Then, 
 \[\PP\left[\sum_{i=1}^m(X_i-\mu_i)\geq t\right]\leq e^{-2t^2m^2/(\sum_i (b_i-a_i)^2)}.\] 
 \end{theorem}
@@ -185,14 +175,19 @@ Let $X_1,\hdots,X_m$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and i
 
 $X\sim \Norm(0,1)$ is $1$-sub-Gaussian. Let $Y=X^2$ is not sub-Gaussian. 
 \end{example}
-
+First compute the MGF:
 \begin{align*}
-	\EE[e^{\lambda X^2}] = \frac{1}{\sqrt{1-\lambda}},
+	M_{X}(\lambda) = \EE[e^{\lambda X^2}] = \frac{1}{\sqrt{2\pi}}\int e^{\lambda z^2}e^{-(z-1)^2/2}\ddd z = \frac{1}{\sqrt{1-\lambda}}
 \end{align*}
-$\lambda\in (0,1)$.
+for $\lambda\in (0,1)$. Despite not being sub-Gaussian, it is close, which we will show in more detail next time. 
 
-Despite not being sub-Gaussian, it is close. Consider an $n$-dimensional Gaussian, $X = (X_1, \hdots, X_n)$, where each $X_i\sim \Norm(0,1)$. Then $\EE[\lVert X\rVert_2^2 / n] = \EE[\sum X_i^2 / n] = 1$, and we can further show that 
 
-\[\PP\left[ \left\vert\frac{\lVert X\rVert^2}{n^2} - 1\right\vert \geq \delta\right] \leq 2e^{-cn\delta^2},\] 
-for all $\delta\in (0,1)$. This looks very similar to the sub-gaussian tail bound from earlier, but will only hold for small delta. For larger delta, the tail bound becomes linear in $\delta$ (because $X$ is not truly sub-Gaussian).
+\begin{example}
+\exlabel
+
+Consider an $n$-dimensional Gaussian, $X = (X_1, \hdots, X_n)$, where each $X_i\sim \Norm(0,1)$. 
+\end{example}
+Then $\EE[\lVert X\rVert_2^2 / n] = \EE[\sum X_i^2 / n] = 1$, it turns out that 
+\[\PP\left[ \left\vert\frac{\lVert X\rVert^2}{n^2} - 1\right\vert \geq \delta\right] \leq 2e^{-cn\delta^2}\] 
+holds for all $\delta\in (0,1)$. This looks very similar to the sub-gaussian tail bound from earlier, but will only hold for small delta. For larger delta, the tail bound becomes linear in $\delta$, i.e., exponential. This is example is just to provide some intuition on tail bounds. We will show this in more detail in the next lecture. 
 
