@@ -2,73 +2,114 @@
 
 Class was cancelled on Tuesday due to snow. 
 
+\subsection{Exponential Random Variables}
+
+Here we discuss another interesting and useful class of random variables. Consider the chi-square random variable $\chi^2$, which follows distribution $X=Z^2$ where $Z\sim \Norm(0,1)$. Note that $\EE[X] = \EE[Z^2] = \var[Z] = 1$, so its zero-mean moment generating function is given by 
+
+\[M_X(\lambda) = \EE[e^{\lambda(Z^2-1)}] = \frac{1}{\sqrt{2\pi}}\int e^{\lambda(z^2-1)}e^{-z^2/2}\ddd z.\]
+Force $\lambda < 1/2$ so that this is finite. Then, 
+\[M_X(\lambda) = \frac{1}{e^{\lambda}\sqrt{1-2\lambda}}. \] 
+over the domain $0 < \lambda < 1/2$. We can show that this is sub-Gaussian for bounded $\vert \lambda\vert$ in the following way. Take Taylor expansions: 
+\begin{align*}
+	e^{-\lambda} &= 1 - \lambda + \frac{\lambda^2}{2} + o(\lambda^2) \\
+	\frac{1}{\sqrt{1-2\lambda}} &= 1 + \lambda + \frac{3}{2}\lambda^2 + o(\lambda^2),
+\end{align*} 
+so 
+\[\frac{e^{-\lambda}}{\sqrt{1-2\lambda}} = (1-\lambda + \frac{\lambda^2}{2} + o(\lambda^2))(1 + \lambda + \frac{3}{2}\lambda^2 + o(\lambda^2)) = 1 + \lambda^2 + o(\lambda^2).\]
+The sub-Gaussian bound is 
+\[e^{\lambda^2\sigma^2/2} = 1 + \frac{\lambda^2\sigma^2}{2} + o(\lambda^2),\] 
+so we can choose a suitable $\sigma$ to have some region around $0$ where the MGF is sub-Gaussian. By graphing we can see that $\sigma=2$ works for all $\vert \lambda\vert < 1/4$, so in this range $Z^2$ is sub-Gaussian.
+
+\begin{definition}
+\deflabel
+
+Random variable $X$ with mean $\mu = \EE[X]$ is \ac{sub-exponential} if there are non-negative parameters $(s^2,\alpha)$ such that 
+\[\EE[e^{\lambda(X-\mu)}]\leq e^{s^2\lambda^2/2}\]
+for all $\vert \lambda\vert < 1/\alpha$. 
+\end{definition}
+The naming is motivated by the linear exponential tail bound outside of this special region. 
+\begin{theorem}
+\lemlabel
+
+Given r.v. $X$ is $(\nu^2,\alpha)$-sub-exponential, 
+\[\PP[X-\mu\geq t]\leq \begin{cases}
+	e^{-t^2/(2\nu^2)}, & 0\leq t\leq \nu^2/\alpha \\
+	e^{-t/(2\alpha)}, & t\geq \nu^2/\alpha.
+\end{cases}\] 
+\end{theorem}
+This is equivalent to writing 
+\[\PP[X-\mu\geq t]\leq \exp\left(-\min\left\{\frac{t^2}{2\nu^2}, \frac{t}{2\alpha}\right\}\right).\]
+
+\begin{proof}
+	By Markov, for some $\lambda\in [0, 1/\alpha)$, 
+\[\PP[X-\mu\geq t]= \PP[e^{\lambda(X-\mu)}\leq e^{\lambda t}]\leq \inf_{\lambda\in [0,1/\alpha)} e^{-t\lambda}\EE e^{\lambda(X-\mu)}\leq \inf_{\lambda\in [0, 1/\alpha)} e^{-t\lambda}e^{\nu^2\lambda^2/2}.\] 
+By taking a derivative, the critical point lands at $\lambda = t/\nu^2$. If this is between $t/\nu^2\in [0,1/\alpha)$, then our bound is
+\[e^{\nu^2/2\cdot t^2/\nu^4 - t^2 / \nu^2} = e^{-t^2/(2\nu^2)},\] 
+which is the first case. Else, the critical point is larger than $1/\alpha$, so we take the endpoint $\lambda = 1/\alpha$ and get the bound 
+\[e^{\nu^2/2\cdot 1/\alpha^2 - t/\alpha} \leq e^{-t/(2\alpha)},\] 
+where this last inequality uses $\nu^2\leq \alpha t$. 
+\end{proof}
+
 \subsection{Randomized dimension reduction}
 
 \begin{example}
 \exlabel
 
-Dataset is a set of $N$ points $\{u^1, \hdots, u^N\}$ where $u^j\in \RR^{d}$. 
+Consider a dataset of $N$ points $\{u^1, \hdots, u^N\}$ where $u^j\in \RR^{d}$. 
 \end{example}
 
-Storing the entire dataset gets very expensive very quickly when $N,d$ are large. Is there a lower-dimensional representation of this dataset that is still useful? 
-
-Things that might be useful to preservere: 
-\begin{itemize}
-	\item pairwise distances 
-		\[\lVert u_i - u_j\rVert_2^2\quad \forall i\neq j\] 
-		useful for estimating clustering algorithms, densities (computing neighborhoods of points)
-	\item  
-\end{itemize}
-
-Dimension reduction, formally: 
+Storing the entire dataset gets very expensive very quickly when $N,d$ are large. Is there a lower-dimensional representation of this dataset that is still useful? We would like to accomplish this while preserving pairwise distances:
+\[\lVert u_i - u_j\rVert_2^2\quad \forall i\neq j\] 
+This is useful for estimating clustering algorithms, densities (computing neighborhoods of points), and more. A more formal representation of this problem: 
 \[\mathcal{F} : \RR^d\rightarrow \RR^m\] 
 We call $m$ the \ac{sketch dimension}, or the \ac{embedding dimension}. The goal is for us to find a ``useful" representation where $m \ll d$, which, using the distance metric as our notion of usefulness, we can bound w.r.t. a new parameter $\varepsilon$:  
+\[1 - \varepsilon \leq \frac{\lVert \mathcal{F}(u_i) - \mathcal{F}(u_j)\rVert_2^2}{\lVert u_i - u_j\rVert_2^2} \leq 1 + \varepsilon.\]
+We'll solve this from the perspective of a fixed $\epsilon$, so that our goal is to minimize $m$ while preserving some notion of distance. We'll also introduce another parameter $\delta$, so that we want 
+\[\frac{\lVert \mathcal{F}(u_i) - \mathcal{F}(u_j)\rVert_2^2}{\lVert u_i - u_j\rVert_2^2}\in [1-\varepsilon, 1+\varepsilon]\] 
+w.p. $1-\delta$.
 
-\[1 - \varepsilon \leq \frac{\lVert \mathcal{F}(u_i) - \mathcal{F}(u_j)\rVert_2^2}{\lVert u^i - u^j\rVert_2^2} \leq 1 + \varepsilon.\]
+\subsection{Bernstein's condition}
 
-We'll solve this from the perspective of a fixed $\epsilon$, so that our goal is to minimize $m$ while preserving some notion of distance. We'll also introduce another parameter $\delta$, so that this equation holds w.p. $1-\delta$.
-
+We begin with some motivation for Bernstein's condition: 
 \begin{example}
-\exlabelname{Motivating Bernstein's Condition}
+\exlabelname{Motivating Bernstein's condition}
 
-Given $X_i\sim \Bern(p)$ for $i\in \{1,\hdots,n\}$. We have $\EE[X_i]=p$, $\var[X_i]=p(1-p)$, and $\vert X_i\vert\leq b:=1$. 
+Given $X_i\sim \Bern(p)$ for $i\in \{1,\hdots,n\}$. Say we have $\EE[X_i]=p$, $\var[X_i]=p(1-p)$, and $\vert X_i\vert\leq b:=1$. 
 \end{example}
-
-\[\PP\left(\left\vert\frac{1}{n}\sum_i X_i - p\right\vert\geq t \right) \leq 2e^{-nt^2 / (2p(1-p)+2t)}\]
-
-If $t$ is small, then we get a sub-Gaussian tail bound. If $t$ is large, then our bound converges to $e^{-nt/2}$, which are sub-Exponential.  
+Then, it turns out that
+\[\PP\left(\left\vert\frac{1}{n}\sum_i X_i - p\right\vert\geq t \right) \leq 2e^{-nt^2 / (2p(1-p)+2t)}.\]
+The behavior of this bound is interesting. When $t$ is small, we get a sub-Gaussian tail bound. If $t$ is large, then it converges to $e^{-nt/2}$, which is only sub-Exponential. 
 
 \begin{definition}
-\deflabelname{Bernstein's Condition}
+\deflabelname{Bernstein's condition}
 
-Given random variable with parameters $\mu=\EE[X]$, $\sigma^2=\var[X]$, and $b$ satisfying
-
+Given random variable with parameters $\mu=\EE[X]$, $\sigma^2=\var[X]$, we say that it satisfies Bernstein's condition with parameter $b$ if
 \[\vert \EE[(X-\mu)^k]\vert \leq \frac{1}{2}k!\sigma^2 b^{k-2}\] 
-
-for $k=2,3,\hdots$. Then, 
+for $k=2,3,\hdots$.
 \end{definition}
 
 \begin{example}
 \exlabel
 
-Bounded random variables satisfy the Bernstein condition. Let's say $\vert X-\mu\vert \leq b$. We can show that this satisfies the Condition in a pretty strong sense; we won't need the extra factor of $k!$ on the RHS. 
+Bounded random variables satisfy the Bernstein condition. Let's say $\vert X-\mu\vert \leq B$. We can show that this satisfies the condition with $b=B$ in a pretty strong sense; we won't need the extra factor of $k!$ on the RHS. 
 \end{example}
 
 \begin{proof}
 \begin{align*}
 	\vert\EE[(X-\mu)^k]\vert &\leq \EE\vert X-\mu\vert^2 \vert X-\mu\vert^{k-2} \\
-													 &\leq \sigma^2b^{k-2}\ll \frac{1}{2}k!\sigma^2b^{k-2}. 
+													 &\leq \sigma^2B^{k-2}\ll \frac{1}{2}k!\sigma^2B^{k-2}. 
 \end{align*}
 \end{proof}
+Note that this works with $b=B/3$ as well, because the bound is so loose. 
 
-\begin{example}
-\exlabel
+Next, we show that the Bernstein condition also implies a nice bound on MGFs.
+\begin{theorem}
+\lemlabelname{Bernstein's Inequality}
 
-The Bernstein Condition also implies a nice bound on MGFs. Prof emphasizes that the fact that bounds on the polynomial moments of a r.v. can imply bounds on the MGF is quite a deep idea.
-
+For r.v. $X$ satisfying the Bernstein condition with parameter $b>0$,
 \[\EE[e^{\lambda(X-\mu)}] \leq e^{(\lambda^2\sigma^2/2)/(1 - b\vert \lambda\vert)},\]
 for all $\vert\lambda\vert b < 1$. 
-\end{example}
+\end{theorem}
 
 \begin{proof}
 \begin{align*}
@@ -81,56 +122,73 @@ for all $\vert\lambda\vert b < 1$.
 as long as $\vert \lambda\vert b < 1$. Now we are done by the fact that $1 + a\leq e^a$.  
 \end{proof}
 
-We will leave as an exercise :skull: that this result can be used to show that 
-\[\PP\left[\left\vert\frac{1}{n}\sum_{i=1}^n X_i - \mu\right\vert\geq t\right]\leq 2e^{-nt^2/(2\sigma^2 + 2bt)}.\] 
-
-\begin{definition}
-\deflabel
-
-$X$ is $(\nu, \alpha)$-sub-exponential if $\EE[e^{\lambda(x-\mu)}] \leq e^{\nu^2\lambda^2/2}$ for all $\vert \lambda\vert < 1/\alpha$.   
-\end{definition}
-
-This is a relaxation on sub-Gaussianness. For example, $(\nu, 0)$-sub-exponentials are sub-Gaussian.
-
-\begin{example}
-\exlabel
-
-If the previous Example holds, then $\vert \lambda\vert < 1/(2b)$ implies $1-\vert \lambda\vert b > 1/2$ implies $\EE[e^{\lambda(x-\mu)}]\leq e^{\lambda^2(\sqrt{2}\sigma^2)^2 / 2}$, which is $(\sqrt{2}\sigma, 2b)$-sub-exponential. 
-\end{example}
-
-\begin{example}
-\exlabel
-
-\Let $X\sim \Norm(0,1)$ and $Z=X^2$. 
-\end{example}
-
-Then $\EE[Z] = 1$, and we can also show that 
-\[\EE[e^{\lambda(X^2-1)}] = \frac{e^{-\lambda}}{\sqrt{1-2\lambda}}\] 
-as long as $\vert \lambda\vert < 1/2$. It can further be shown that 
-\[\frac{e^{-\lambda}}{\sqrt{1-2\lambda}} \leq e^{2\lambda^2} = e^{\frac{\lambda^2(2)^2}{2}}\]
-for all $\vert \lambda\vert < 1/4$. So, this r.v. is $(2,4)$-sub-exponential. 
-
+This shows that \ac{random variables satisfying the Bernstein condition are $(\sigma^2,b)$-sub-Exponential}. Using the bound we established earlier on sub-Exponential random variables, we can choose $\lambda = t/(bt+\sigma^2)\in [0,1/b)$ to establish tail bound
+\[\PP[\vert X-\mu\vert \geq t]\leq 2e^{-(t^2/2) / (\sigma^2 + tb)}.\] 
+Let's see what happens when we try to use the strictest bound possible.
 \begin{theorem}
-\proplabel
+\thmlabel
 
-If $X$ is $(\nu, \alpha)$-sub-exponential, then 
-\[\PP[X-\mu\geq t] \leq \begin{cases}
-	e^{-t^2/(2\nu^2)} & t\in [0, \nu^2/\alpha] \\
-	e^{-t/(2\alpha)} & t > \nu^2/\alpha.
-\end{cases}\] 
+Suppose it holds for some $v,b$ that 
+\[\EE[e^{\lambda(X-\mu)}]\leq e^{(\lambda^2v^2/2)/(1-b\lambda)}\] 
+for all $\lambda\in (0,1/b)$. Then, 
+\[\PP(X-\mu \geq t) \leq \frac{v^2}{b^2}\left(\sqrt{1 + \frac{2bt}{v^2}} - \frac{bt}{v^2} - 1\right),\] 
+and equivalently
+\[\PP[X-\mu\geq \sqrt{2v^2t}+bt]\leq e^{-t}.\] 
 \end{theorem}
 
-A more compact way of writing this: 
-\[\PP[X-\mu\geq t] \leq e^{\frac{-t^2}{2\nu^2 + 2\alpha t}}. \] 
-
 \begin{proof}
-Using Markov, 
-\begin{align*}
-\PP[X-\mu\geq t] &\leq \EE[e^{\lambda(X-\mu)}]e^{-\lambda t} \\
-								 &\leq e^{\lambda^2\nu^2/2 - \lambda t}\quad \forall 0 < \lambda < \frac{1}{\alpha}. 
-\end{align*}
+By Markov, 
+\[\EE[X-\mu\geq t] = \EE[e^{\lambda(X-\mu)}\leq e^{\lambda t}] \leq \inf_{\lambda \in (0,1/b)}e^{-\lambda t}\EE[e^{\lambda(X-\mu)}] \leq \inf_{\lambda\in (0,1/b)}e^{-\lambda t}e^{(\lambda^2 v^2/2)/(1-b\lambda)}.\] 
+So we'll have to optimize
+\[-\lambda t + \frac{\lambda^2 v^2}{2(1-b\lambda)}.\] 
+Taking the derivative gives 
+\[-t + \frac{\lambda v^2 - \lambda^2 v^2 b/2}{(1-b\lambda)^2},\] 
+so we want 
+\[\lambda^2\left(-\frac{v^2b}{2} - b^2t\right) + \lambda(v^2+2bt) - t = 0.\] 
+Here, we can make the convenient substitution $s=v^2+2bt$, whence
+\[\lambda^2\left(-\frac{sb}{2}\right) + \lambda s - t = 0,\] 
+and solving the quadratic gives 
+\[\lambda = \frac{-s + \sqrt{s}\sqrt{s-2bt}}{-sb} = \frac{1}{b}(1-p),\]
+for $p := v/\sqrt{s} = \sqrt{v^2 / (v^2 + 2bt)}$. Now, plugging back into the original expression gives 
+\[\frac{1/b^2\cdot (1-p)^2\cdot v^2/2}{1 - b\cdot (1/b)\cdot (1-p)} - \frac{t}{b}(1-p) = \frac{v^2}{b^2}(1-p)\left(\frac{(1-p)}{2p} - \frac{bt}{v^2}\right).\]
+We make one final substitution $x:=bt/v^2$, so that $p=\sqrt{1/(1+2x)}$, which gives
+\[\frac{v^2}{b^2}\left(\frac{\sqrt{1+2x}-1}{\sqrt{1+2x}}\right)\left(\frac{\sqrt{1+2x}-1-2x}{2}\right) = \frac{v^2}{b^2}(\sqrt{1+2x}-1-x).\]
+This is the same as the first expression that we are trying to prove, so we're done with the first part.
 
-Let $g(\lambda)$ be the exponent. $g'(\lambda) = \lambda\nu^2 - t$, so the unconstrained optimum occurs at $\lambda^* = t / \nu^2$. This unconstrained optimum is achievable precisely when $t\in [0, \nu^2/\alpha]$; plugging in this value gives the first bound. When $t > \nu^2/\alpha$, we can choose the boundary point closest to this unconstrained optimum, giving the second bound.  
+To show that the second part is the same, we have to invert this expression. We have 
+\[\sqrt{1+2x}-x-1 = -\frac{b^2}{v^2}t,\]
+where simplifying a bit gives
+\[x^2 + x\cdot \frac{-2b^2}{v^2}t + \left(-\frac{b^2}{v^2}t+1\right)^2-1=0\] 
+and thus 
+\[\left(x - \frac{b^2}{v^2}t\right)^2 = \frac{2b^2}{v^2}t\implies x = \frac{b^2}{v^2}t + \sqrt{\frac{2b^2}{v^2}t}.\]
+Finally, since $x = bt^{-1}/v^2$, we have 
+\[t^{-1} = bt + \sqrt{2v^2t},\]
+as desired.
 \end{proof}
 
+\subsection{Johnson-Lindenstrauss Lemma}
 
+We have the tools we need to tackle the problem of dimensionality reduction. First consider the problem we introduced last lecture: 
+\begin{example}
+\exlabel
+
+Consider an $n$-dimensional Gaussian, $X=(X_1, \hdots, X_n)$ where each $X_i\sim \Norm(0,1)$. 
+\end{example}
+
+We showed earlier that $\lVert X_i\rVert^2$ is $(2^2,4)$-sub-Exponential, hence $\lVert X\rVert$ is $(4n,4)$-sub-Exponential. Therefore, 
+\[\PP\left(\left\vert \frac{1}{n}\sum_{i=1}^n \lVert X_i^2\rVert - 1\right\vert\geq t\right) = \PP[\vert\lVert X\rVert - n\vert \geq nt] \leq 2e^{-nt^2/8}\] 
+for $t\in (0,1)$. 
+
+\hrulebar
+
+In the dimensionality reduction setup, we had map $\mathcal{F}: \RR^d\rightarrow \RR^m$. We analyze the specific mapping \[\mathcal{F}(u) = \frac{Fu}{\sqrt{m}}\] where $F\in \RR^{m\times d}$ and $F_{i,j}\sim \Norm(0,1)$. Consider some $v\in \RR^d$ with $\lVert v\rVert = 1$. Then, $\langle F_i, v\rangle \sim \Norm(0,1)$, so $\sum_i \langle F_i,v\rangle = \lVert Fv\rVert^2\sim \chi_m^2$. Thus, by our above result, 
+\[\PP\left[\left\vert\frac{1}{m}\lVert Fv\rVert^2 - 1\right\vert\geq t \right]\leq 2e^{-mt^2/8}.\] 
+Thus, for arbitrary $u\in \RR^d$, 
+\[\PP\left[\left\frac{\lVert Fu\rVert^2}{\lVert u\rVert^2} \not\in [1-t,1+t] \right]\leq 2e^{-mt^2/8}.\] 
+The same logic holds for pairwise distances, i.e., 
+\[\PP\left[\left\frac{\lVert Fu_i - Fu_j\rVert^2}{\lVert u_i - u_j\rVert^2} \not\in [1-t,1+t] \right]\leq 2e^{-mt^2/8},\] 
+so union bounding gives 
+\[\PP\left[\left\frac{\lVert Fu_i - Fu_j\rVert^2}{\lVert u_i - u_j\rVert^2} \not\in [1-t,1+t] \right]\leq 2e^{-mt^2/8}\binom{N}{2}\] 
+over all pairs of distinct $i,j\in [N]$. Thus, as long as 
+\[m > \frac{8}{t^2}\ln \frac{N(N-1)}{\delta},\]
+there is a guarantee of no pairwise distances escaping ratio $[1-t,1+t]$ w.p. $(1-\delta)$. 
