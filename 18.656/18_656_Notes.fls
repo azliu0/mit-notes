@@ -1723,6 +1723,7 @@ OUTPUT 18_656_Notes.toc
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpbn8t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbne.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
 INPUT ./notes/0206.tex
 INPUT notes/0206.tex
 INPUT ./notes/0206.tex
@@ -1763,7 +1764,6 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmsc8t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsce.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
 INPUT ./notes/0213.tex
 INPUT notes/0213.tex
 INPUT ./notes/0213.tex
