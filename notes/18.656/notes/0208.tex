@@ -50,7 +50,7 @@ The key is the quadratic exponential tail decay; this is generally what we use t
 Given r.v. $X\in [a,b]$, $\EE[X] = \mu$. Then, $X$ is sub-Gaussian with $\sigma=(b-a)$.
 \end{theorem}
 
-It turns out that we can also show $\sigma = (b-a)/2$, but we won't show this during lecture, since the technique used to show the weaker result is more interesting.
+It turns out that we can also show $\sigma = (b-a)/2$, but the technique used to show the weaker result is more interesting.
 
 \begin{proof}
 Let $\tilde{X}$ be i.i.d. to $X$. Then,
@@ -70,9 +70,6 @@ since $\varepsilon$ is $1$-sub-gaussian. Finally, since $X$ is bounded,
 	\EE_{X, \tilde{X}}[e^{\lambda^2(X-\tilde{X})^2/2}] \leq e^{\lambda^2(b-a)^2/2}.
 \end{align*}
 \end{proof}
-
-\subsection{More on sub-Gaussians}
-
 \begin{definition}
 \deflabelname{Addition property of Gaussians}
 
@@ -93,7 +90,6 @@ Given $X_i\sim \sigma_i$-sub-Gaussian, $i\in \{1,2\}$, then $X_1+X_2$ is $\sqrt{
 																			&\leq e^{\lambda^2\sigma_1^2/2}e^{\lambda^2\sigma_2^2/2} = e^{\lambda^2(\sigma_1^2+\sigma_2^2)/2}.
 \end{align*}
 \end{proof}
-
 A consequence of this fact is that given $X_i\sim \sigma$-sub-Gaussian, i.i.d. with zero-mean, then 
 
 \[\frac{1}{\sqrt{n}}\sum_{i=1}^n X_i\sim \sigma\text{-sub-Gaussian},\] 
@@ -103,17 +99,14 @@ or equivalently
 \begin{example}
 \exlabelname{Survey sampling}
 
-Two candidates for an election $A$ and $B$.
+Consider a race where two candidates $A$ and $B$ are up for election, and a survey is distributed to the population for their preferred candidate.
 \end{example}
 
-Sample people $i=1, \hdots, n$, giving responses $X_i = 1$ if $A$ or $0$ if $B$. Let $\mu^*$ be the actual fraction of people who will vote $A$. Let $\hat{\mu}$ be our estimator for $\mu^*$: 
-
-\[\hat{\mu} = \sum_{i=1}^n X_i.\] 
-
-We can construct a confidence interval $\hat{\mathcal{I}}$ for our estimator, and we would like to know at what point we can say
-
+Say that we sample $i=1, \hdots, n$ who give responses $X_i = 1$ if $A$ or $0$ if $B$. Let $\mu^*$ be the theoretical fraction of people who will vote $A$. Let $\hat{\mu}$ be our estimator for $\mu^*$: 
+\[\hat{\mu} = \sum_{i=1}^n X_i.\]
+During a typical analysis, we would like to construct a confidence interval $\hat{\mathcal{I}}$, and know the probability that the true proportion falls outside of this confidence interval. More formally, given $\delta$ and $\hat{\mathcal{I}}$, we would like to know the $n$ at which we could say 
 \[\PP[\hat{\mathcal{I}}\ni \mu^{*}] \geq 1-\delta.\] 
-For example, with $\delta=0.02$, interval width of $0.03$, we require $n\approx 10000$ to make this guarantee.  
+For example, with $\delta=0.02$, interval width of $0.03$, we would require $n\approx 10000$ to make this guarantee.  
 
 We can model $X_i\sim \Bern(\mu^*)$. Since $X_i\in [0,1]$, our earlier result shows that $X_i$ is $1/2$-sub-Gaussian. Using additivity and i.i.d., our sample mean $\hat{\mu}$ is $1/(2\sqrt{n})$-sub-Gaussian. Thus, 
 
@@ -121,17 +114,18 @@ We can model $X_i\sim \Bern(\mu^*)$. Since $X_i\in [0,1]$, our earlier result sh
 Using Chernoff,
 
 \[\PP[\vert \hat{\mu}-\mu^*\vert \geq s] \leq 2e^{2ns^2},\] 
-for some $s > 0$. So for some fixed $\delta$, we can make a guarantee about interval width $s = \sqrt{\log(2/\delta) / (2n)}$. 
+for some $s > 0$. So, for any fixed $\delta$, if our interval has width $s \geq \sqrt{\log(2/\delta) / (2n)}$, then we could say that the probability that our true mean lies outside of the interval is less than $\delta$.
+
+\subsection{Hoeffding}
 
 \begin{theorem}
 \lemlabelname{Hoeffding's Lemma}
 
 For any zero-mean r.v. X with values in $[a,b]$, the MGF satisfies 
 \[\EE[e^{\lambda X}] \leq e^{\lambda^2 (b-a)^2 / 8}.\]
-for all $\lambda$. 
+for all $\lambda$.
 \end{theorem}
-
-The following proof is taken from \href{https://courses.cs.washington.edu/courses/cse521/21au/521-lecture-3.pdf}{these lecture notes}.
+In other words, this shows that bounded random variables are sub-Gaussian with $\sigma=(b-a)/2$, which we have already mentioned earlier. We'll present two proofs. The first proof is taken from \href{https://courses.cs.washington.edu/courses/cse521/21au/521-lecture-3.pdf}{these lecture notes}. The second proof is a more slick argument. 
 
 \begin{proof}
 Since $e^{sx}$ is convex, 
@@ -156,11 +150,26 @@ Bashing critical points eventually gives the upper bound $1/4$, from which we ge
 as desired.
 \end{proof}
 
+\noindent Now the cleaner argument: 
+\begin{proof}
+Let $\psi(\lambda) = \log \EE[e^{\lambda X}]$. We have 
+\[\EE[e^{\lambda X}] = \EE[e^{\psi(\lambda)}],\]
+so it suffices to bound $\psi(\lambda)$. Similar to the previous proof, we use Taylor's theorem: 
+\[\psi(\lambda) \leq 1 + \lambda \psi'(0) + \sup_{z\in (0,\lambda)}\frac{\lambda^2}{2}\psi''(z).\]
+We have 
+\[\psi'(\lambda) = \frac{\EE[Xe^{\lambda X}]}{\EE[e^{\lambda X}]}\quad\text{and}\quad \psi''(\lambda) = \frac{\EE[X^2e^{\lambda X}]}{\EE[e^{\lambda X}]} - \left(\frac{\EE[Xe^{\lambda X}]}{\EE[e^{\lambda X}]}\right)^2.\] 
+Notice that if we sample from a new distribution with density 
+\[f_{Y}(y) = \frac{e^{\lambda y}f_X(y)}{\EE[e^{\lambda X}]},\] 
+then $\psi''(\lambda) = \var[Y]$. Since variance is maximized when points are clustered at the endpoints, this is bounded by $(b-a)^2/4$, which gives
+\[\psi(\lambda)\leq \lambda^2\frac{(b-a)^2}{8},\] 
+finishing the proof.
+\end{proof}
+
 \begin{theorem}
 \thmlabelname{Hoeffding's Inequality}
 
-Let $X_1,\hdots,X_m$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and independent. Then, 
-\[\PP\left[\sum_{i=1}^m(X_i-\mu_i)\geq t\right]\leq e^{-2t^2m^2/(\sum_i (b_i-a_i)^2)}.\] 
+Let $X_1,\hdots,X_n$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and independent. Then, 
+\[\PP\left[\sum_{i=1}^n(X_i-\mu_i)\geq t\right]\leq e^{-2t^2/(\sum_i (b_i-a_i)^2)}.\] 
 \end{theorem}
 
 \begin{proof}
@@ -168,8 +177,17 @@ Let $X_1,\hdots,X_m$ be r.v. with $\EE[X_i]=\mu_i$, $a_i\leq X_i\leq b_i$, and i
 	\[\PP[\sum_i Z_i\geq t] = \PP[\exp\left(s\sum_i Z_i\right)\geq e^{st}] \leq \frac{\EE[\prod_{i=1}^m e^{sZ_i}]}{e^{st}}.\] 
 	Since $Z_i$ are independent, we can move the expectation inside of the product. Applying the Hoeffding Lemma then gives
 	\[\frac{\EE[\prod_i e^{sZ_i}]}{e^{st}} = \frac{\prod_i \EE[e^{sZ_i}]}{e^{st}}\leq \exp\left(-st + \frac{s^2}{8}\sum_i (b_i-a_i)^2.\right)\] 
-	Substituting $s = \frac{4t}{\sum_i (b_i-a_i)^2}$ gives the result.
+	Substituting carefully chosen $s = \frac{4t}{\sum_i (b_i-a_i)^2}$ gives the bound that we want.
 \end{proof}
+
+This statement is a bit specialized. A more general statement in terms of sub-Gaussian coefficients is as follows: 
+\begin{theorem}
+\thmlabelname{Hoeffding's Inequality}
+
+Let $X_1,\hdots,X_n$ be r.v. with $\EE[X_i]=\mu_i$, and $X_i$ sub-Gaussian with parameter $\sigma_i$. Then, 
+\[\PP\left[\sum_{i=1}^n(X_i-\mu_i)\geq t\right]\leq e^{-t^2/(2\sum_i \sigma_i^2)}.\] 
+\end{theorem}
+\noindent We already showed that bounded r.v.s have parameters $\sigma=(b-a)/2$, so we can plug this into the above to arrive at the more specific version of the inequality.
 \begin{example}
 \exlabel
 
