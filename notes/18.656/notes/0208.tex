@@ -7,6 +7,7 @@ Some important tail bounds that we'll use in this class.
 \begin{theorem}
 \thmlabelname{Markov's Inequality}
 
+For nonnegative real-valued r.v. $X$,
 \[\PP[X \geq t]\leq \frac{\EE[X]}{t}, \quad t > 0.\] 
 \end{theorem}
 
@@ -17,7 +18,7 @@ For any real-valued r.v. $X$ with mean $\mu$,
 \[\PP[\vert X-\mu\vert \geq t]\leq \frac{\sigma^2}{t^2}.\] 
 \end{theorem}
 
-Some useful applications of Markov's inequality: 
+\noindent Some useful applications of Markov's inequality: 
 \begin{itemize}
 	\item higher moments: 
 		\[\PP[\vert X-\mu\vert\geq t] = \PP[\vert X-\mu\vert^p \geq t^p] \leq \min_{p\geq 1}\frac{\EE[\vert X-\mu\vert]^p}{t^p}\] 
@@ -123,9 +124,9 @@ for some $s > 0$. So, for any fixed $\delta$, if our interval has width $s \geq 
 
 For any zero-mean r.v. X with values in $[a,b]$, the MGF satisfies 
 \[\EE[e^{\lambda X}] \leq e^{\lambda^2 (b-a)^2 / 8}.\]
-for all $\lambda$.
+for all $\lambda$. In other words, bounded random variables are sub-Gaussian with parameter $\sigma=(b-a)/2$.
 \end{theorem}
-In other words, this shows that bounded random variables are sub-Gaussian with $\sigma=(b-a)/2$, which we have already mentioned earlier. We'll present two proofs. The first proof is taken from \href{https://courses.cs.washington.edu/courses/cse521/21au/521-lecture-3.pdf}{these lecture notes}. The second proof is a more slick argument. 
+We'll present two proofs. The first proof is taken from \href{https://courses.cs.washington.edu/courses/cse521/21au/521-lecture-3.pdf}{these lecture notes}. The second proof is a more slick argument. 
 
 \begin{proof}
 Since $e^{sx}$ is convex, 
