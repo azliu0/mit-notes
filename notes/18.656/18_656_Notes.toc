@@ -8,3 +8,8 @@
 \contentsline {subsection}{\numberline {3.2}Randomized dimension reduction}{12}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Bernstein's condition}{13}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Johnson-Lindenstrauss Lemma}{17}{subsection.3.4}%
+\contentsline {section}{\numberline {4}February 27, 2024}{18}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Recap}{19}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Idk}{19}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Noise Complexities}{20}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Rademacher and Gaussian complexities}{22}{subsection.4.4}%
