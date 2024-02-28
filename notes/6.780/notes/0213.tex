@@ -70,14 +70,13 @@ If $\eta_2 > \eta_1$, then $P_D(\eta_2)\leq P_D(\eta_1)$ and $P_F(\eta_2)\leq P_
 
 \subsection{Neyman-Pearson Criterion}
 
-To avoid the problem of costs and priors, choose a rule subject to
-
+To avoid the problem of costs and priors, a common alternate criteria choose a rule subject is the \ac{Neyman-Pearson Criterion}: 
 \[\max_{\hat{H}(\cdot)}P_D \text{ s.t. }P_F\leq \alpha.\] 
-
+In words, choose the hypothesis with largest detection power given a fixed upper bound on the false alarm size.
 \begin{theorem}
 \thmlabelname{Neyman-Pearson Lemma, Special Case}
 
-For deterministic $\hat{H}(\cdot)$, the solution to the NP-Criterion is an LRT when the LRT is continuous. In other words, 
+For deterministic $\hat{H}(\cdot)$, a solution to the Neyman-Pearson Criterion is an LRT when the LRT is continuous. In other words, 
 \[\hat{H}(y) = H_{\mathbbm{1}_{L(y)\geq \eta}},\] 
 where $\eta$ is the smallest threshold s.t. 
 \[P_F = \PP(L(y)\geq \eta | H=H_0)\leq \alpha.\] 
@@ -95,12 +94,28 @@ The min $\varphi$ occurs when we assign $y$ to $y_0$ whenever the the integrand 
 where $\alpha'$ is chosen to be the largest threshold achievable by LRT. 
 \end{proof}
 
-This falls apart slightly when $L(y)$ has discrete components. 
+\noindent We also present an alternate proof below.
 
-\begin{example}
-\exlabelname{OC-LRT falls apart under discrete likelihood}
+\begin{proof}
+	We compare the LRT decision region with an arbitrary decision region, and show that we cannot do better than the LRT decision region. Let $\mathcal{Y}_1^{\eta}$ be the set of points for which $\hat{H}^{\eta}(y)=H_1$, and $\mathcal{Y}_1$ be the set of points for which $\hat{H}(y)=H_1$ for an arbitrary decision rule. We have 
+	\[(\mathbbm{1}(L(y)\geq \eta) - \mathbbm{1}(y\in \mathcal{Y}_1))(L(y)-\eta)\geq 0,\] 
+which can be verified with casework. Then, 
+\begin{align*}
+	&\int_{\mathcal{Y}} (\mathbbm{1}(L(y)\geq \eta) - \mathbbm{1}(y\in \mathcal{Y}_1))(L(y)-\eta)p_{Y|H}(y|H_0) \ddd y \\
+	&= \int_{\mathcal{Y}} (\mathbbm{1}(L(y)\geq \eta) - \mathbbm{1}(y\in \mathcal{Y}_1))(p_{Y|H}(y|H_1) - \eta p_{Y|H}(y|H_0))\ddd y\geq 0.
+\end{align*}
+Some expansion and rearranging gives 
+\[\int_{\mathcal{Y}_1^{\eta}}p_{Y|H}(y|H_1)\ddd y - \int_{\mathcal{Y}_1}p_{Y|H}(y|H_1)\ddd y\geq \eta\left(\int_{\mathcal{Y}_1^{\eta}}p_{Y|H}(y|H_0)\ddd y - \int_{\mathcal{Y}_1}p_{Y|H}(y|H_0)\ddd y\right),\]
+which (term-by-term) is just 
+\[P^{\eta}_D - P_D \geq \eta(P_F^{\eta} - P_F).\] 
+When $P_F^{\eta}$ is fixed at $\alpha$, the constraints of the problem force us to pick $P_F\leq P_F^{\eta}$, so $P^{\eta}_D-P_D\geq 0$. But this implies that any hypothesis that is not the LRT can only have worse detection power, hence $\hat{H}^{\eta}_1$ is a valid solution.
+\end{proof}
 
-\comment{draw some graphs}.
-\end{example}
+\subsection{Hypothesis Testing in the LRT framework}
 
+The typical LRT criteria:
+\[L(y)\overunderset{\hat{H}=H_1}{\hat{H}=H_0}{\gtreqless} \eta.\] 
+When we apply a monotonic function to both sides, the criteria remains the same. In particular, when we apply $P_F$, we get
+\[p_*(y)\overset{\Delta}{=}P_F(L(y)) \overunderset{\hat{H}=H_0}{\hat{H}=H_1}{\gtreqless} P_F(\eta) = \alpha.\] 
+Note that the direction of the hypothesis changed, since $P_F$ is monotonically decreasing in $\eta$. The RHS is the significance level of the test, while $p_*$ is a function that maps each data point to a $p$-value. Roughly speaking, if $p_*$ is large, this means $L$ was small, so the data was not very significant. If $p_*$ is small, this means $L$ was large, so the data was significant. The threshold of "significant" is determined by our threshold $\alpha$. 
 
