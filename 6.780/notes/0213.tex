@@ -14,7 +14,7 @@ Some issues with this solution: we require some notion of costs, as well as prio
 
 The ``folk theorem'' that we will be proving today is that all optimum decision rules takes the form of a Likelihood Ratio Test:
 
-\[\frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y_H_0)}\overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \eta,\]
+\[\frac{p_{Y|H}(y|H_1)}{p_{Y|H}(y_{H_0})}\overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \eta,\]
 for some $\eta$. This is largely true, but not always.
 
 \subsection{General Performance Measures}
@@ -35,7 +35,7 @@ Then $P_D = \PP[\hat{H}=H_1|H=H_1] = \int_{y_1}p_{Y|H}(y|H_1)\ddd y$ is called t
 In general, $P_D$ and $P_F$ are conflicting objectives. We seek large $P_D$ and small $P_F$. The bayesian approach to this ``multi-objective'' optimization is to choose the rule that satisfies: 
 \[\min_{\hat{H}(\cdot)}(\alpha P_F - \beta P_D).\]
 
-\subsection{Operating Characteristic of the LRT (OC-LRT)}
+\subsection{Operating Characteristic of the LRT} 
 Other tradeoffs are possible. Consider the family of ratio tests: 
 \[\{\hat{H}(\cdot) = \text{LRT}, \text{for some }\eta\}.\] 
 
@@ -51,9 +51,13 @@ Consider two hypotheses
 
 The LRT is given by 
 \[y \overunderset{\hat{H}_1}{\hat{H}_0}{\gtreqless} \frac{m}{2} + \frac{\sigma^2\ln \eta}{m} \overset{\Delta}{=}\gamma.\] 
+The false positive rate
+\[P_F = \int_{\gamma}^{\infty}p_{Y|H}(y|H_0)\ddd y = Q\left(\frac{\gamma}{\sigma}\right),\] 
+and the detection probability 
+\[P_D = \int_{\gamma}^{\infty}p_{Y|H}(y|H_1)\ddd y = Q\left(\frac{\gamma - m}{\sigma}\right).\]
+Graphing a plot of $(P_F, P_D)$ over different values of $\mu = m/\sigma$ gives 
 
-\comment{add images!}
-
+\input{figures/oclrt_mu.txt}
 This curve is called the \ac{OC-LRT}: Operating Characteristic of the Likelihood Ratio Test. 
 
 \[\text{OC-LRT}: \{(P_F, P_D): \hat{H}(\cdot)\text{ is LRT for some }\eta\}.\] 
@@ -67,6 +71,13 @@ OC-LRT is monotonic and non-decreasing.
 \begin{proof}
 If $\eta_2 > \eta_1$, then $P_D(\eta_2)\leq P_D(\eta_1)$ and $P_F(\eta_2)\leq P_F(\eta_1)$.
 \end{proof}
+\noindent A few other key properties here: 
+\begin{itemize}
+	\item All of the frontiers are concave-down, i.e., we should always be ``better'' at maximizing $P_D$ than minimizing $P_F$
+	\item As $\mu\rightarrow \infty$, we approach the optimal curve, which is when $P_D$ is $1$ everywhere and $P_F$ is $0$ everywhere. This makes sense intuitively, since $\mu$ large separates the two hypotheses. 
+	\item Similarly, when $\mu = 0$, the two hypotheses are indistinguishable, so the frontier is as good as random guessing. 
+	\item When $P_F = P_D = 1$ when $\gamma = 0$ and $P_F = P_D = 0$ when $\gamma\rightarrow \infty$. Therefore, as $\gamma$ increases to infinity, we travel from top-right to bottom-left along each of the curves (this will always be the case for any OC-LRT, for this reason). 
+\end{itemize}
 
 \subsection{Neyman-Pearson Criterion}
 
@@ -74,13 +85,15 @@ To avoid the problem of costs and priors, a common alternate criteria choose a r
 \[\max_{\hat{H}(\cdot)}P_D \text{ s.t. }P_F\leq \alpha.\] 
 In words, choose the hypothesis with largest detection power given a fixed upper bound on the false alarm size.
 \begin{theorem}
-\thmlabelname{Neyman-Pearson Lemma, Special Case}
+\thmlabelname{Neyman-Pearson Lemma, Specialized}
 
 For deterministic $\hat{H}(\cdot)$, a solution to the Neyman-Pearson Criterion is an LRT when the LRT is continuous. In other words, 
 \[\hat{H}(y) = H_{\mathbbm{1}_{L(y)\geq \eta}},\] 
 where $\eta$ is the smallest threshold s.t. 
 \[P_F = \PP(L(y)\geq \eta | H=H_0)\leq \alpha.\] 
 \end{theorem}
+
+This statement of NP is considered `specialized' because we are not employing randomization in our hypotheses. We will see and prove the full version next lecture. 
 
 \begin{proof}
 We can prove this with lagrange multipliers. Fix $P_F = \alpha' \leq \alpha$. Then, we want to optimize

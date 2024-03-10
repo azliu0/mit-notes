@@ -1,5 +1,10 @@
 # Fdb version 4
-["pdflatex"] 1709126838 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1709126840 2
+["cusdep asy pdf 6_780_Notes-1"] 1710091736 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710092301 0
+  "6_780_Notes-1.asy" 1710092301 2288 de5515064a4b03e91e820bba59d23600 "pdflatex"
+  (generated)
+  "6_780_Notes-1.pdf"
+  (rewritten before read)
+["pdflatex"] 1710092299 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710092301 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk" 1707837390 5580 ebaa3251c9106e56012994d5139c2710 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -41,6 +46,9 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/ec-lmss10.tfm" 1254269338 11176 53ebf7a171df1f9447b387b178768bb5 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/ec-lmss17.tfm" 1254269338 11252 57c8b53a3aeebba8c17658d4221d47ec ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/ec-lmssbx10.tfm" 1254269338 11168 06d87f5698fd1b642d96449b7c8d90b0 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb" 1215737283 108594 1a08a22405bc37650b977f219cc3597d ""
@@ -301,20 +309,23 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1697562812 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "6_780_Notes.aux" 1709126840 2032 e0a7791569b0cf422c5ac58c93e22fab "pdflatex"
-  "6_780_Notes.out" 1709126840 2137 8b45bac57c35c7928c6b5b2193f204cf "pdflatex"
-  "6_780_Notes.pre" 1709126839 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "6_780_Notes.tex" 1707834989 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
-  "6_780_Notes.toc" 1709126840 989 34f5ee80b84b324e7a93884f55140723 "pdflatex"
+  "6_780_Notes-1.pdf" 1710091737 29600 c2df49acb7b810d0cee4e63ae34cfd1d "cusdep asy pdf 6_780_Notes-1"
+  "6_780_Notes.aux" 1710092301 2024 8d1fa267b45635980cccebdae41d6893 "pdflatex"
+  "6_780_Notes.out" 1710092301 2083 f42b80a109136770815f31a88d971ce1 "pdflatex"
+  "6_780_Notes.pre" 1710092301 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
+  "6_780_Notes.tex" 1710091258 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
+  "6_780_Notes.toc" 1710092301 981 88a857676922ca080d82922c3cdd41f6 "pdflatex"
   "_andrew.sty" 1707404272 24556 8be0b1119dbe13cce3386e764b0262a2 ""
+  "figures/oclrt_mu.txt" 1710091760 2123 c1d6278c653115eecc4ecd5f74e44ea9 ""
   "notes/0206.tex" 1707601850 29 bc4941ef09b3d7534eddae3f6226978f ""
   "notes/0208.tex" 1707835082 5767 f5fe7e699db0cdc459975e64ee3e88bb ""
-  "notes/0213.tex" 1709126836 7130 01a33823f9946daa9e08775c1320215c ""
+  "notes/0213.tex" 1710092298 8430 954b2f008442462a7f6af12e11fe881c ""
   "notes/0215.tex" 1709124586 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0220.tex" 1709124594 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0222.tex" 1709124597 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0227.tex" 1709124603 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
+  "6_780_Notes-1.asy"
   "6_780_Notes.aux"
   "6_780_Notes.log"
   "6_780_Notes.out"
