@@ -6,6 +6,6 @@
 \contentsline {subsection}{\numberline {3.1}Review: Bayesian Hypothesis Testing}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Non-Bayesian Hypothesis Testing}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}General Performance Measures}{7}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Operating Characteristic of the LRT (OC-LRT)}{8}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Neyman-Pearson Criterion}{9}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Hypothesis Testing in the LRT framework}{10}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.4}Operating Characteristic of the LRT}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Neyman-Pearson Criterion}{10}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Hypothesis Testing in the LRT framework}{12}{subsection.3.6}%
