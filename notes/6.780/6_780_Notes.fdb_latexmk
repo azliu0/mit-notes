@@ -1,10 +1,15 @@
 # Fdb version 4
-["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710093287 0
-  "6_780_Notes-1.asy" 1710093287 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
+["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710105441 0
+  "6_780_Notes-1.asy" 1710105441 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
   (generated)
   "6_780_Notes-1.pdf"
   (rewritten before read)
-["pdflatex"] 1710093286 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710093287 0
+["cusdep asy pdf 6_780_Notes-2"] 1710105437 "6_780_Notes-2.asy" "6_780_Notes-2.pdf" "6_780_Notes-2" 1710105441 0
+  "6_780_Notes-2.asy" 1710105441 2318 2356db44033af8f53caf73188f4a39ef "pdflatex"
+  (generated)
+  "6_780_Notes-2.pdf"
+  (rewritten before read)
+["pdflatex"] 1710105440 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710105441 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk" 1707837390 5580 ebaa3251c9106e56012994d5139c2710 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -49,6 +54,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb" 1215737283 108594 1a08a22405bc37650b977f219cc3597d ""
@@ -310,22 +316,25 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "6_780_Notes-1.pdf" 1710093284 29616 7a0eee4a99ac333a1d57f85e101f890b "cusdep asy pdf 6_780_Notes-1"
-  "6_780_Notes.aux" 1710093287 2024 8d1fa267b45635980cccebdae41d6893 "pdflatex"
-  "6_780_Notes.out" 1710093287 2083 f42b80a109136770815f31a88d971ce1 "pdflatex"
-  "6_780_Notes.pre" 1710093287 41 aadfc92db9d246f05f82bb3355ee7f37 "pdflatex"
-  "6_780_Notes.tex" 1710091258 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
-  "6_780_Notes.toc" 1710093287 981 88a857676922ca080d82922c3cdd41f6 "pdflatex"
+  "6_780_Notes-2.pdf" 1710105438 36354 bdc1819dcb0e5ac07e2925fa8e4fec0b "cusdep asy pdf 6_780_Notes-2"
+  "6_780_Notes.aux" 1710105441 2273 6015c05181f5df4613ee266219430ad4 "pdflatex"
+  "6_780_Notes.out" 1710105441 2409 831369845b2135b330bc68fc2e2b818d "pdflatex"
+  "6_780_Notes.pre" 1710105441 82 2085988704c78000e4a8d1b1c9ada1e4 "pdflatex"
+  "6_780_Notes.tex" 1710105188 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
+  "6_780_Notes.toc" 1710105441 1148 ff56dcfc9c8f3890664fc43fddcb43eb "pdflatex"
   "_andrew.sty" 1707404272 24556 8be0b1119dbe13cce3386e764b0262a2 ""
+  "figures/oclrt_1.txt" 1710105314 2132 d60308cc2f34ca7b75c43a2ae69e28ba ""
   "figures/oclrt_mu.txt" 1710093266 2122 a93c3b24a40574a64ef6cfa7d8793bf5 ""
   "notes/0206.tex" 1707601850 29 bc4941ef09b3d7534eddae3f6226978f ""
   "notes/0208.tex" 1707835082 5767 f5fe7e699db0cdc459975e64ee3e88bb ""
-  "notes/0213.tex" 1710093285 8430 954b2f008442462a7f6af12e11fe881c ""
-  "notes/0215.tex" 1709124586 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "notes/0213.tex" 1710094005 8472 e62f26f5f9a59153e095af4a50984b7c ""
+  "notes/0215.tex" 1710105439 890 31487ed4d2bce86dba8c9e0ba5d2c1ff ""
   "notes/0220.tex" 1709124594 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0222.tex" 1709124597 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0227.tex" 1709124603 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "6_780_Notes-1.asy"
+  "6_780_Notes-2.asy"
   "6_780_Notes.aux"
   "6_780_Notes.log"
   "6_780_Notes.out"

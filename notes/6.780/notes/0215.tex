@@ -1,0 +1,23 @@
+\section{February 15, 2024}
+
+\subsection{Randomizing Neyman-Pearson}
+
+First, some intuition on why randomizing can be beneficial. Imagine any scenario involving a discrete process such as a Poisson process. In this case, the points on the OC-LRT are discontinuous, such as in the following diagram: 
+
+\input{figures/oclrt_1.txt}
+
+\begin{theorem}
+\thmlabelname{Neyman-Pearson Lemma}
+
+Given hypotheses $p_{Y|H}(y|H_0)$,$p_{Y|H}(y|H_1)$ and $\alpha\in [0,1]$, for some $\eta$ and $p\in [0,1]$ there exists rule of the form 
+
+\[
+q(y) = \begin{cases}
+	0 & L(y) < \eta \\
+	p & L(y) = \eta \\
+	1 & L(y) > \eta
+\end{cases},
+\] 
+where $P_F(q_*) = \alpha$ and $P_D(q_*)\geq P_D(q)$ for any decision rule $q$ satisfying $P_F(q)\leq \alpha$.
+\end{theorem}
+Note that this is essentialy the same as the deterministic statement, except that we have generalized to randomize the decision in case of ties. 

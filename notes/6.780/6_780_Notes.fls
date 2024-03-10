@@ -1788,6 +1788,18 @@ INPUT ./notes/0215.tex
 INPUT notes/0215.tex
 INPUT ./notes/0215.tex
 INPUT notes/0215.tex
+INPUT ./figures/oclrt_1.txt
+INPUT figures/oclrt_1.txt
+INPUT ./figures/oclrt_1.txt
+INPUT figures/oclrt_1.txt
+OUTPUT 6_780_Notes-2.asy
+INPUT ./6_780_Notes-2.pdf
+INPUT 6_780_Notes-2.pdf
+INPUT ./6_780_Notes-2.pdf
+INPUT ./6_780_Notes-2.pdf
+INPUT 6_780_Notes-2.pdf
+INPUT ./6_780_Notes-2.pdf
+INPUT ./6_780_Notes-2.pdf
 INPUT ./notes/0220.tex
 INPUT notes/0220.tex
 INPUT ./notes/0220.tex
@@ -1814,6 +1826,7 @@ INPUT /Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb
