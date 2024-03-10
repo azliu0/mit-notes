@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  10 MAR 2024 13:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  10 MAR 2024 13:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1649,11 +1649,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [7] (./figures/oclrt_mu.txt
 \openout4 = `6_780_Notes-1.asy'.
 
-<6_780_Notes-1.pdf, id=115, 285.06601pt x 284.38246pt>
+<6_780_Notes-1.pdf, id=115, 228.1604pt x 227.61336pt>
 File: 6_780_Notes-1.pdf Graphic file (type pdf)
 <use 6_780_Notes-1.pdf>
 Package pdftex.def Info: 6_780_Notes-1.pdf  used on input line 33.
-(pdftex.def)             Requested size: 285.06529pt x 284.38176pt.
+(pdftex.def)             Requested size: 228.15984pt x 227.6128pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1711,7 +1711,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  116i,14n,118p,1046b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk> </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_780_Notes.pdf (12 pages, 215142 bytes).
+Output written on 6_780_Notes.pdf (12 pages, 215167 bytes).
 PDF statistics:
  243 PDF objects out of 1000 (max. 8388607)
  189 compressed objects within 2 object streams
