@@ -1,15 +1,20 @@
 # Fdb version 4
-["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710105441 0
-  "6_780_Notes-1.asy" 1710105441 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
+["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710173178 0
+  "6_780_Notes-1.asy" 1710173178 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
   (generated)
   "6_780_Notes-1.pdf"
   (rewritten before read)
-["cusdep asy pdf 6_780_Notes-2"] 1710105437 "6_780_Notes-2.asy" "6_780_Notes-2.pdf" "6_780_Notes-2" 1710105441 0
-  "6_780_Notes-2.asy" 1710105441 2318 2356db44033af8f53caf73188f4a39ef "pdflatex"
+["cusdep asy pdf 6_780_Notes-2"] 1710171967 "6_780_Notes-2.asy" "6_780_Notes-2.pdf" "6_780_Notes-2" 1710173178 0
+  "6_780_Notes-2.asy" 1710173178 2338 31c8672d3c6424221716086f8776db66 "pdflatex"
   (generated)
   "6_780_Notes-2.pdf"
   (rewritten before read)
-["pdflatex"] 1710105440 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710105441 0
+["cusdep asy pdf 6_780_Notes-3"] 1710173174 "6_780_Notes-3.asy" "6_780_Notes-3.pdf" "6_780_Notes-3" 1710173178 0
+  "6_780_Notes-3.asy" 1710173178 2756 e565b226639fd1eedef3c7658abb7863 "pdflatex"
+  (generated)
+  "6_780_Notes-3.pdf"
+  (rewritten before read)
+["pdflatex"] 1710173177 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710173178 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk" 1707837390 5580 ebaa3251c9106e56012994d5139c2710 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -316,25 +321,28 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697562617 7883458 04c2bf91bec792c57c70d12eca60aa59 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "6_780_Notes-1.pdf" 1710093284 29616 7a0eee4a99ac333a1d57f85e101f890b "cusdep asy pdf 6_780_Notes-1"
-  "6_780_Notes-2.pdf" 1710105438 36354 bdc1819dcb0e5ac07e2925fa8e4fec0b "cusdep asy pdf 6_780_Notes-2"
-  "6_780_Notes.aux" 1710105441 2273 6015c05181f5df4613ee266219430ad4 "pdflatex"
-  "6_780_Notes.out" 1710105441 2409 831369845b2135b330bc68fc2e2b818d "pdflatex"
-  "6_780_Notes.pre" 1710105441 82 2085988704c78000e4a8d1b1c9ada1e4 "pdflatex"
+  "6_780_Notes-2.pdf" 1710171968 36369 33827528ea5b6cf7026b955622b79977 "cusdep asy pdf 6_780_Notes-2"
+  "6_780_Notes-3.pdf" 1710173175 36534 525c85196304391f9fb6461e60fa0210 "cusdep asy pdf 6_780_Notes-3"
+  "6_780_Notes.aux" 1710173178 2273 bd75cd8666e992f0bfaa7661cadb599b "pdflatex"
+  "6_780_Notes.out" 1710173178 2409 831369845b2135b330bc68fc2e2b818d "pdflatex"
+  "6_780_Notes.pre" 1710173178 123 f1955cdd5251ecfe76a4b6adcd233779 "pdflatex"
   "6_780_Notes.tex" 1710105188 513 2a3063a9081cb32ebae7286c3ca1a5a2 ""
-  "6_780_Notes.toc" 1710105441 1148 ff56dcfc9c8f3890664fc43fddcb43eb "pdflatex"
+  "6_780_Notes.toc" 1710173178 1148 ff56dcfc9c8f3890664fc43fddcb43eb "pdflatex"
   "_andrew.sty" 1707404272 24556 8be0b1119dbe13cce3386e764b0262a2 ""
-  "figures/oclrt_1.txt" 1710105314 2132 d60308cc2f34ca7b75c43a2ae69e28ba ""
-  "figures/oclrt_mu.txt" 1710093266 2122 a93c3b24a40574a64ef6cfa7d8793bf5 ""
+  "figures/oclrt_1.txt" 1710171948 2152 bbdb8bb54125d650cb2d321806653eb7 ""
+  "figures/oclrt_2.txt" 1710173102 2570 2feb538bf51abc19dac9d964c580c976 ""
+  "figures/oclrt_mu.txt" 1710171920 2122 a93c3b24a40574a64ef6cfa7d8793bf5 ""
   "notes/0206.tex" 1707601850 29 bc4941ef09b3d7534eddae3f6226978f ""
   "notes/0208.tex" 1707835082 5767 f5fe7e699db0cdc459975e64ee3e88bb ""
   "notes/0213.tex" 1710094005 8472 e62f26f5f9a59153e095af4a50984b7c ""
-  "notes/0215.tex" 1710105439 890 31487ed4d2bce86dba8c9e0ba5d2c1ff ""
+  "notes/0215.tex" 1710173177 1471 333fb1cd84102a890ccb2f47ac619875 ""
   "notes/0220.tex" 1709124594 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0222.tex" 1709124597 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0227.tex" 1709124603 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "6_780_Notes-1.asy"
   "6_780_Notes-2.asy"
+  "6_780_Notes-3.asy"
   "6_780_Notes.aux"
   "6_780_Notes.log"
   "6_780_Notes.out"
