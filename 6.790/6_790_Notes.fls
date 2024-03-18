@@ -1,4 +1,4 @@
-PWD /Users/andrew/Desktop/mit_classes/notes/notes/6.7900
+PWD /Users/andrew/Desktop/mit_classes/notes/notes/6.790
 INPUT /usr/local/texlive/2023/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -1806,12 +1806,6 @@ INPUT ./6_790_Notes-1.pdf
 INPUT 6_790_Notes-1.pdf
 INPUT ./6_790_Notes-1.pdf
 INPUT ./6_790_Notes-1.pdf
-INPUT ./notes/1107.tex
-INPUT notes/1107.tex
-INPUT ./notes/1107.tex
-INPUT notes/1107.tex
-INPUT ./notes/1107.tex
-INPUT notes/1107.tex
 INPUT 6_790_Notes.aux
 INPUT ./6_790_Notes.out
 INPUT ./6_790_Notes.out
