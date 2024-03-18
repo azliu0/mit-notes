@@ -1,20 +1,20 @@
 # Fdb version 4
-["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710738435 0
-  "6_780_Notes-1.asy" 1710738435 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
+["cusdep asy pdf 6_780_Notes-1"] 1710093282 "6_780_Notes-1.asy" "6_780_Notes-1.pdf" "6_780_Notes-1" 1710766516 0
+  "6_780_Notes-1.asy" 1710766515 2287 811e1933f8499714affffafd8bafeb03 "pdflatex"
   (generated)
   "6_780_Notes-1.pdf"
   (rewritten before read)
-["cusdep asy pdf 6_780_Notes-2"] 1710171967 "6_780_Notes-2.asy" "6_780_Notes-2.pdf" "6_780_Notes-2" 1710738435 0
-  "6_780_Notes-2.asy" 1710738435 2338 31c8672d3c6424221716086f8776db66 "pdflatex"
+["cusdep asy pdf 6_780_Notes-2"] 1710171967 "6_780_Notes-2.asy" "6_780_Notes-2.pdf" "6_780_Notes-2" 1710766516 0
+  "6_780_Notes-2.asy" 1710766515 2338 31c8672d3c6424221716086f8776db66 "pdflatex"
   (generated)
   "6_780_Notes-2.pdf"
   (rewritten before read)
-["cusdep asy pdf 6_780_Notes-3"] 1710173174 "6_780_Notes-3.asy" "6_780_Notes-3.pdf" "6_780_Notes-3" 1710738435 0
-  "6_780_Notes-3.asy" 1710738435 2756 e565b226639fd1eedef3c7658abb7863 "pdflatex"
+["cusdep asy pdf 6_780_Notes-3"] 1710173174 "6_780_Notes-3.asy" "6_780_Notes-3.pdf" "6_780_Notes-3" 1710766516 0
+  "6_780_Notes-3.asy" 1710766515 2756 e565b226639fd1eedef3c7658abb7863 "pdflatex"
   (generated)
   "6_780_Notes-3.pdf"
   (rewritten before read)
-["pdflatex"] 1710738433 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710738435 0
+["pdflatex"] 1710766514 "6_780_Notes.tex" "6_780_Notes.pdf" "6_780_Notes" 1710766516 0
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1697563083 7808 b62b1db054264f85ad8d30c64d8e9497 ""
   "/Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk" 1707837390 5580 ebaa3251c9106e56012994d5139c2710 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -79,6 +79,7 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb" 1240420913 18013 a3754f8df0b4dd3a76b5353fabb31650 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmsc8a.pfb" 1240420913 35145 c0d7a82f6be81407f39e1a6922b63148 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb" 1201048802 25860 1e4d17fc7bf1d0b47e9b47e6099f1971 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb" 1201048802 30452 9ecaa7ccc78b5d3e23f0e8f870dd5088 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb" 1240420913 29290 5f42ab27c55cdf1c35d41e42b8861898 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb" 1255129361 97408 f595704ec2a07246c2d6f7b602587452 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb" 1255129361 119663 e82fa1a58f98ccd89bdbd77311ac9cf1 ""
@@ -334,11 +335,11 @@
   "6_780_Notes-1.pdf" 1710093284 29616 7a0eee4a99ac333a1d57f85e101f890b "cusdep asy pdf 6_780_Notes-1"
   "6_780_Notes-2.pdf" 1710171968 36369 33827528ea5b6cf7026b955622b79977 "cusdep asy pdf 6_780_Notes-2"
   "6_780_Notes-3.pdf" 1710173175 36534 525c85196304391f9fb6461e60fa0210 "cusdep asy pdf 6_780_Notes-3"
-  "6_780_Notes.aux" 1710738435 2790 4f02dba94bac5939e2a05cd5732e5df5 "pdflatex"
-  "6_780_Notes.out" 1710738435 3129 164936fa785b654d4b6f7ec4d48fe25d "pdflatex"
-  "6_780_Notes.pre" 1710738435 123 f1955cdd5251ecfe76a4b6adcd233779 "pdflatex"
-  "6_780_Notes.tex" 1710738433 529 9e6b47c8eaa0b1f90c5ecebecc4e7940 ""
-  "6_780_Notes.toc" 1710738435 1501 b8be4da20e703e3ce47ccb1f99432843 "pdflatex"
+  "6_780_Notes.aux" 1710766516 3417 ce57c405ac0aaaaa3fd67cae77acb23c "pdflatex"
+  "6_780_Notes.out" 1710766516 3908 70b6ed041ed45cbb4cee6f0b1139a0cf "pdflatex"
+  "6_780_Notes.pre" 1710766516 123 f1955cdd5251ecfe76a4b6adcd233779 "pdflatex"
+  "6_780_Notes.tex" 1710738808 529 9e6b47c8eaa0b1f90c5ecebecc4e7940 ""
+  "6_780_Notes.toc" 1710766516 1923 03cdea37fd85d6a44c161ae6909c7c4c "pdflatex"
   "_andrew.sty" 1707404272 24556 8be0b1119dbe13cce3386e764b0262a2 ""
   "figures/oclrt_1.txt" 1710171948 2152 bbdb8bb54125d650cb2d321806653eb7 ""
   "figures/oclrt_2.txt" 1710173102 2570 2feb538bf51abc19dac9d964c580c976 ""
@@ -351,8 +352,8 @@
   "notes/0222.tex" 1710738053 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0227.tex" 1710738035 0 d41d8cd98f00b204e9800998ecf8427e ""
   "notes/0229.tex" 1710738066 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "notes/0305.tex" 1710738000 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "notes/0307.tex" 1710738241 226 df9807d94f8ff453134f9cd1a64343c2 ""
+  "notes/0305.tex" 1710764530 2891 e27eead21b80edc747832c9b752e0666 ""
+  "notes/0307.tex" 1710766513 2664 3037c55e0839d1a77b5bc28f2a4ec66d ""
   (generated)
   "6_780_Notes-1.asy"
   "6_780_Notes-2.asy"
