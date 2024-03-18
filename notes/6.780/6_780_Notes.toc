@@ -11,3 +11,5 @@
 \contentsline {subsection}{\numberline {3.6}Hypothesis Testing in the LRT framework}{12}{subsection.3.6}%
 \contentsline {section}{\numberline {4}February 15, 2024}{12}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Randomizing Neyman-Pearson}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Full Neyman-Pearson Lemma}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Efficient Frontier of Operating Points}{16}{subsection.4.3}%

@@ -12,10 +12,24 @@ First, some intuition on why randomizing can be beneficial. Imagine any scenario
 	\item The Neyman-Pearson function $\zeta_{NP}(\alpha)$ is continuous, which is represented by the blue curve. Specifically, it represents the maximal $P_D$ given that $P_F\leq \alpha$.  
 \end{itemize}
 
-When we randomize, we \comment{finish explanation}
+Now randomize in the following way. For some $p\in (0,1)$, sample $u\sim \Unif[0,1]$, and choose 
+\[\hat{H}(y) = \begin{cases}
+	\hat{H}'(y) & u\leq p \\
+	\hat{H}''(y) & u > p,
+\end{cases}\] 
+where $\hat{H}(y)$ corresponds to the LRT with ratio $\eta'$ and $\hat{H}''(y)$ corresponds to the LRT with ratio $\eta''$.  
+This test achieves
+\begin{align*}
+	P_D &= pP_D(\eta') + (1-p)P_D(\eta'') \\
+	P_F &= pP_F(\eta') + (1-p)P_F(\eta''), 
+\end{align*}
+which lies on the line segment between $(P_D(\eta'), P_F(\eta'))$ and $(P_D(\eta''), P_F(\eta''))$. If we apply this randomization for any $\eta_1,\eta_2$ where the points on the OC-LRT becomes discrete, then we can fill in the ``gaps'' in the Neyman-Pearson function as shown below
 
 \input{figures/oclrt_2.txt}
 
+\subsection{Full Neyman-Pearson Lemma}
+
+Now we are ready for the full version of the Neyman-Pearson Lemma. 
 \begin{theorem}
 \thmlabelname{Neyman-Pearson Lemma}
 
@@ -30,6 +44,92 @@ q(y) = \begin{cases}
 \] 
 where $P_F(q_*) = \alpha$ and $P_D(q_*)\geq P_D(q)$ for any decision rule $q$ satisfying $P_F(q)\leq \alpha$.
 \end{theorem}
-Note that this is essentialy the same as the deterministic statement, except that we have generalized to randomize the decision in case of ties. 
 
-\comment{add proofs of properties}
+To see how this is the same setup as our previous example, consider the randomized OC-LRT from the previous example. We have two hypotheses $\hat{H}'(y)=H_0,\hat{H}''(y)=H_1$ which are LRTs for $\eta_1<\eta_2$ corresponding to distinct, discrete points on the OC-LRT, e.g., $\eta_i=i$ for $i\in [2]$. To achieve larger $P_D$ for some ``middling'' restriction on $P_F$, e.g., $P_F\leq \alpha = 1.5$, we need to randomize, and in particular we showed that the randomized hypothesis given by 
+\[q(y) = \begin{cases}
+	H_0 & L(y) > \eta_2 \\
+	p & \eta_1 < L(y) \leq \eta_2 \\
+	H_1 & L(y) \leq \eta_1,
+\end{cases}\] 
+gives us the more ``optimal'' bound that we want. In the limit where $\eta_1=\eta_2$, we get
+the hypothesis in the Neyman-Pearson lemma.
+
+\begin{proof}
+Assume such a $q_*$ exists. Then we have 
+\[(q_*(y) - q(y))(p_{Y|H}(y|H_1) - \eta p_{Y|H}(y|H_0)) = (q_*(y) - q(y))(L(y) - \eta)p_{Y|H}(y|H_0)\geq 0\quad \forall y\in \mathcal{Y}.\] 
+This can be justified with casework: 
+\begin{itemize}
+	\item If $L(y) < \eta$, $q_*(y) = 0$, and since $q(y)\geq 0$, we get the product of two non-positive things.
+	\item If $L(y) = \eta$, the product is equal to $0$.
+	\item If $L(y) > \eta$, $q_*(y) = 1$, and since $q(y)\leq 1$, we get the product of two non-negative things.
+\end{itemize}
+Thus 
+\[\int (q_*(y) - q(y))(p_{Y|H}(y|H_1) - \eta p_{Y|H}(y|H_0))\ddd y \geq 0,\]
+which is the same as 
+\begin{align*}
+	\int q_*(y)p_{Y|H}(y|H_1)\ddd y - \int & q(y) p_{Y|H}(y|H_1)\ddd y \\
+	&\geq \eta \left(\int q_*(y) p_{Y|H}(y|H_0)\ddd y - \int q(y) p_{Y|H}(y|H_0)\ddd y\right),
+\end{align*}
+i.e., 
+\[P_D(q_*) - P_D(q) \geq \eta(P_F(q_*) - P_F(q)) \geq 0.\] 
+Since we are given $P_F(q_*) = \alpha$ and $P_F(q)\leq \alpha$, this implies $P_D(q_*)\geq P_D(q)$, as desired.
+
+\V 
+
+It remains to show that $q_*$ exists. Note that
+\begin{align*}
+	P_F(q_*) &= \int q_*(y) p_{Y|H}(y|H_0)\ddd y \\
+					 &= \PP[L(y) > \eta|H=H_0] + p\PP[L(y)=\eta|H=H_0].
+\end{align*}
+We would like to force this quantity to be equal to $\alpha$, so we can set 
+\[p = \frac{\alpha - \PP[L(y) > \eta | H=H_0]}{\PP[L(y) = \eta|H=H_0]},\]
+which works as long as we choose $\eta$ correctly. In particular, since we want $p\in [0,1]$, we need 
+\[\alpha \leq \PP[L(y) > \eta | H=H_0] + \PP[L(y) = \eta | H=H_0].\]
+One possibility is to choose $\eta$ as the smallest possible number satisfying $\PP[L(y) > \eta | H=H_0]\leq \alpha$, so that the above inequality holds as soon as we add in the point mass at $L(y)=\eta$. 
+
+This construction works, so we are mostly done. The only edge case is when $\PP[L(y)=\eta|H=H_0]=0$, since this would force 
+\[\frac{\alpha - \PP[L(y) > \eta | H=H_0]}{\PP[L(y) = \eta | H = H_0]}\rightarrow \infty.\]
+In this case we have 
+\[\alpha \leq \PP[L(y) > \eta | H=H_0] + 0 \leq \alpha,\] 
+so $\PP[L(y) > \eta] = \alpha$ and $P_F(q_*) = \PP[L(y) > \eta | H = H_0] = \alpha$ irrespective of the chosen value of $p$. 
+\end{proof}
+
+\subsection{Efficient Frontier of Operating Points}
+
+The Neyman-Pearson function satisfies a few nice properties.
+
+\begin{theorem}
+\corlabel
+
+The Neyman-Pearson function $\zeta_{NP}(\cdot)$ is concave.
+\end{theorem}
+
+\begin{proof}
+This is a direct result of the example above. For any two points on the efficient frontier, we can achieve at least the line connecting these two points by randomizing between the two hypotheses corresponding to these points. Thus, the function is concave. 
+\end{proof}
+
+\begin{theorem}
+\corlabel
+
+Let $\eta_0$ be the smallest number satisfying 
+\[\PP[L(y)<\eta_0|H=H_0]\leq \alpha.\] 
+Then 
+\[\dot{\zeta}_{NP}(P_F(\eta_0)) = \eta_0.\] 
+\end{theorem}
+
+\begin{proof}
+Define $p_{L|H}(\ell | H_0) = \PP[L(y) = \ell | y\sim p_{Y|H}(y|H_0)]$. Now, 
+\begin{align*}
+	P_D(\eta) &= \int \mathbbm{1}(L(y)\geq \eta)L(y)p_{Y|H}(y|H_0)\ddd y \\
+						&= \EE_{y\sim p_{Y|H}(y|H_0)}[\mathbbm{1}(L(y)\geq \eta)L(y)|H=H_0] \\
+						&= \EE_{\ell\sim p_{L|H}(\ell | H_0)}[\mathbbm{1}(\ell\geq \eta)\ell | H=H_0] \\
+						&= \int_{\eta}^{\infty}\ell p_{L|H}(\ell | H_0) \ddd \ell.
+\end{align*}
+Taking a derivative wrt $\ell$ gives 
+\[\frac{\ddd P_D(\eta_0)}{\ddd \ell} = -\eta_0p_{L|H}(\ell | H_0).\] 
+Applying the same argument to $P_F$ gives 
+\[\frac{\ddd P_F(\eta_0)}{\ddd \ell} = -p_{L|H}(\ell | H_0).\] 
+We showed that $\eta_0$ was the ``good'' hypothesis in the proof of the Neyman-Pearson lemma, so $\zeta_{NP}(P_F(\eta_0)) = P_D(\eta_0)$. Thus,
+\[\dot{\zeta}_{NP}(P_F(\eta_0)) = \frac{\dot{P}_D(\eta_0)}{\dot{P}_F(\eta_0)} = \eta_0,\] 
+as desired.
+\end{proof}
