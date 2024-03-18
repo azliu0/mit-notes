@@ -26,7 +26,7 @@ The EM-algorithm is as follows:
 \begin{itemize}
 	\item Initialize $t=0$ and a guess for $\hat{x}^{(0)}$. 
 	\item \textbf{E}: Compute 
-		\[U(x;\hat{x}^{(t)}) = \EE_{p_{Z|Y}(\cdot | y; \hat{x}^{tl)})}[\log p_Z(z;x)].\] 
+		\[U(x;\hat{x}^{(t)}) = \EE_{p_{Z|Y}(\cdot | y; \hat{x}^{(t)})}[\log p_Z(z;x)].\] 
 	\item \textbf{M}: Compute 
 		\[\hat{x}^{(t+1)} = \argmax_{x\in \mathcal{X}}U(x; \hat{x}^{(t)}).\]
 	\item Increment $t$ and repeat the \textbf{EM} cycle until convergence. 
@@ -34,3 +34,34 @@ The EM-algorithm is as follows:
 The intuition behind the \textbf{M}-step here is to guarantee that $\Delta(\hat{x}^{(t+1)}, \hat{x}^{(t)}) \geq 0$, so that we have an increasing (non-decreasing) sequence of likelihoods 
 \[\{\ell_Y(\hat{x}^{(t)})\}_{t\geq 0}.\] 
 The hope is that after enough steps, we can converge on a optimal value. 
+
+\subsection{EM on Logistic Regression}
+
+\subsection{EM on Infectious Disease}
+
+\subsection{EM Alternate Formulation}
+
+Here we introduce an alternate formulation for the EM algorithm that we introduced earlier. Say the complete data is $Z\in \mathcal{Y}\times \mathcal{S}$, where $Y\in \mathcal{Y}$ is our observed data and $S\in \mathcal{S}$ is the latent. Consider the objective function 
+\[\ln \tilde{p}_{Y}(y;x,q_{S|Y}(\cdot|y)) = \EE_{q_{S|Y}(\cdot | y)}[\ln p_{Y,S}(y,s;x)] - \EE_{q_{S|Y}(\cdot | y)}[\ln q_{S|Y}(s|y)],\] 
+for all $x\in \mathcal{X}$ and $y\in \mathcal{Y}$. This is similar to the original setup, but now the conditioning on $x$ no longer affects the distribution over the expected values, and moreover the distribution over the expected values is an additional input to our likelihood function. I'm not sure what the significance of these differences are yet, but this setup will supposedly be important when we learn about variational inference. 
+
+Since we now have two inputs conditioning our likelihood function, we can alternate between them for our algorithm. First, guess $\hat{x}^{(0)}$, and then alternate
+\[\hat{q}_{S|Y}^{(t)}(\cdot | y) = \argmax_{q\in \mathscr{P}_+^{\mathcal{S}}}\ln \tilde{p}_Y(y;\hat{x}^{(t)}, q_{S|Y}(\cdot | y)),\] 
+\[\hat{x}^{(t+1)} = \argmax_{x\in \mathcal{X}}\ln \tilde{p}_Y(y;x,\hat{q}_{S|Y}^{(t)}(\cdot | y)).\] 
+We will show that this is equivalent to the original EM formulation. First, note that 
+\begin{align*}
+	\ln \tilde{p}_{Y}(y;x,q_{S|Y}(\cdot|y)) &= \EE_{q_{S|Y}(\cdot | y)}[\ln p_{Y,S}(y,s;x)] - \EE_{q_{S|Y}(\cdot | y)}[\ln q_{S|Y}(s|y)] \\
+																					&= \EE_{q_{S|Y}(\cdot | y)}[\ln p_{Y}(y;x)] + \EE_{q_{S|Y}(\cdot | y)}[\ln p_{S|Y}(\cdot | y;x)] - \EE_{q_{S|Y}(\cdot | y)}[\ln q_{S|Y}(s|y)] \\
+																					&\leq \ln p_Y(y;x) + \EE_{q_{S|Y}(\cdot | y)}\ln q_{S|Y}(\cdot|y;x) - \EE_{q_{S|Y}}\ln q_{S|Y}(\cdot | y;x) = \ln p_Y(y;x), 
+\end{align*}
+by Gibbs. We have equality when $q_{S|Y}(\cdot | y) = p_{S|Y}(\cdot | y;x)$, so 
+\[q^{(t)}_{S|Y}(\cdot | y) = p_{S|Y}(s|y;x^{(t)}).\] 
+Now,
+\begin{align*}
+	\ln (\tilde{p}_y;x,q_{S|Y}^{(t)}(\cdot | y)) &= \EE_{p_{S|Y}(\cdot|y;x^{(t)})}[\ln p_{Y,S}(y,s;x)] - \EE_{p_{S|Y}(\cdot|y;x^{(t)})}[\ln p_{S|Y}(s|y)].
+\end{align*}
+The second term on the RHS is not a function of $x$, so it doesn't affect our $\argmax$. Since $Z=(Y,S)$, we thus have 
+\[\hat{x}^{(t+1)} = \argmax_{x\in \mathcal{X}}\EE_{p_{Z|Y}(\cdot | y;x^{(t)})}[\ln p_{Z}(z;x)] = U(x;\hat{x}^{(t)}),\]
+which recovers the original EM form, so we are done.
+
+
