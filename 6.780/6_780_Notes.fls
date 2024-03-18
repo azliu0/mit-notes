@@ -1723,6 +1723,7 @@ OUTPUT 6_780_Notes.toc
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpbn8t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn8r.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbne.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
 INPUT ./notes/0206.tex
 INPUT notes/0206.tex
 INPUT ./notes/0206.tex
@@ -1743,7 +1744,6 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmn7t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmn7t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmne.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmn8r.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc
 INPUT ./notes/0213.tex
 INPUT notes/0213.tex
 INPUT ./notes/0213.tex
@@ -1800,10 +1800,16 @@ INPUT ./6_780_Notes-2.pdf
 INPUT 6_780_Notes-2.pdf
 INPUT ./6_780_Notes-2.pdf
 INPUT ./6_780_Notes-2.pdf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8t.tfm
 INPUT ./figures/oclrt_2.txt
 INPUT figures/oclrt_2.txt
 INPUT ./figures/oclrt_2.txt
 INPUT figures/oclrt_2.txt
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpmsc8t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsc8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpmsce.tfm
 OUTPUT 6_780_Notes-3.asy
 INPUT ./6_780_Notes-3.pdf
 INPUT 6_780_Notes-3.pdf
@@ -1846,6 +1852,7 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmsc8a.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb
