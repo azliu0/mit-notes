@@ -1,0 +1,64 @@
+\section{March 5, 2024}
+
+\subsection{Jensen's Inequality}
+
+\begin{theorem}
+\thmlabel
+
+If $\phi(\cdot)$ is concave and $v\in \mathcal{V}$ for some alphabet $\mathcal{V}$, then 
+\[\EE[\phi(v)]\leq \phi(\EE[v]).\] 
+\end{theorem}
+
+Here we say ``concave'' in the sense of a parabola that opens \textbf{downwards}. Intuitively, the expected value of a set of points on such a parabola (i.e., their $y$-values) is less than the expected value of the point on the parabola that has the expected $x$-values of the points, because the edge points on the parabola drags down the expectation.  
+
+\begin{proof}
+	We can prove with induction on the size of $\mathcal{V}$. When $\vert \mathcal{V}\vert = 2$, we have 
+	\[p_v(v_1)\phi(v_1) + p_v(v_2)\phi(v_2)\leq \phi(p_v(v_1)v_1 + p_v(v_2)v_2),\]
+	directly from concavity. Now, for any larger $\vert \mathcal{V}\vert$,  
+	\begin{align*}
+		\sum_i p_v(v_i)\phi(v_i) &= p_v(v_1)\phi(v_1) + \sum_{i>1}p_v(v_i)\phi(v_i) \\
+														 &= p_v(v_1)\phi(v_1) + (1-p_v(v_1))\sum_{i>1}\frac{p_v(v_i)}{1-p_v(v_1)}\phi(v_i) \\
+														 &\leq p_v(v_1)\phi(v_1) + (1-p_v(v_1))\phi\left(\sum_{i>1}\frac{p_v(v_i)v_i}{1-p_v(v_1)}\right) \\
+														 &\leq \phi(\sum p_v(v_i)v_i) = \phi(\EE[v]),
+	\end{align*}
+	assuming without loss of generality that $\phi(v_1)\neq 1$. If there doesn't exist such a $v_i$, then all of the $p_v(v_i)\in \{0,1\}$, so $\EE[\phi(v)]=\phi(v_j)=\phi(\EE[v])$ for the singular $v_j$ with $p_j=1$.
+\end{proof}
+
+\subsection{Csiszar's Inequality}
+
+\begin{theorem}
+\thmlabel
+
+Given positive finite-length sequences $a_1,\hdots, a_N$ and $b_1, \hdots, b_N$, and strictly convex $f$,
+\[\sum_{i=1}^N b_if \left(\frac{a_i}{b_i}\right)\geq \left(\sum_{i=1}^N b_i\right)f \left(\frac{\sum_{i=1}^Na_i}{\sum_{i=1}^Nb_i}\right),\] 
+with equality if and only if $a_i/b_i$ is constant. 
+\end{theorem}
+
+\begin{proof}
+This is essentially a direct application of Jensen's inequality. To convert the LHS into a probability distribution, we divide out by $\sum b_i$, and then apply Jensen's to finish: 
+\begin{align*}
+	\sum_{i=1}^N b_if \left(\frac{a_i}{b_i}\right) &= \sum b_i \sum_{i=1}^N \frac{b_i}{\sum b_i} f \left(\frac{a_i}{b_i}\right) \\
+																								 &\geq \sum b_i f \left(\sum_{i=1}^n \frac{b_i}{\sum b_i}\cdot \frac{a_i}{b_i}\right) \\
+																								 &= \sum b_i f \left(\frac{\sum a_i}{\sum b_i}\right).
+\end{align*}
+\end{proof}
+
+\subsection{Gibbs' Inequality}
+
+This is a very important inequality. 
+
+\begin{theorem}
+\thmlabel
+
+Let $v$ be an r.v. distributed as $p$. For any alternative distribution $q$, 
+\[\EE_p[\log p(v)]\geq \EE_p[\log q(v)],\] 
+with equality iff $q\equiv p$. 
+\end{theorem}
+
+\begin{proof}
+By Jensen,
+\begin{align*}
+	\EE_p[\log q(v)] - \EE_p[\log p(v)] &= \EE_p \left(\log \frac{q(v)}{p(v)}\right) \\
+																			&\leq \log \EE_p \left(\frac{q(v)}{p(v)}\right) = 0.
+\end{align*}
+\end{proof}

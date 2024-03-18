@@ -1,10 +1,36 @@
 \section{March 7, 2024}
 
-\subsection{Jensen's Inequality}
+\subsection{Complete Data}
 
-\begin{theorem}
-\thmlabel
+Consider the following setup. We have some observed data $y$ sampled from $Y$, which has distribution $p_Y(\cdot; x)$ for some $x\in \mathcal{X}$. We want 
+\[\hat{x}(y) = \argmax_{a\in \mathcal{X}}\log p_Y(y; a),\] 
+i.e., the maximum likelihood hypothesis that explains the data we observed. Define $\ell_Y(a;y) = \log p_Y(y;a)$, so that
+\[\hat{x}(y) = \argmax_{a\in \mathcal{X}}\ell_Y(a; y). \] 
+Now suppose that there exists some latents $z$ sampled from $Z$, which has distribution $p_Z(\cdot; x)$. $Z$ is the ``complete data'', i.e., $Y = g(Z)$ for some deterministic $g$. $Z$ always exists, but we may not be able to observe it; we have to guess a form that is reasonable and hope that the results work. Given the data, we can compute an expected likelihood of our latent distribution: 
+\[\EE_{Z|Y}(\cdot | y; x')[\ell_Z(x; z)],\]
+for any $x'\in \mathcal{X}$. We cannot compute the true value, since we are assuming that we don't have access to the complete data (in practice, the ``complete data'' is just a guess, e.g., I assume that the data is being generated from $k$-clusters). Also, since $Y=g(Z)$ deterministically, we can say that 
+\[p_Z(z;x) = p_{Z,Y}(z,y;x) = p_{Z|Y}(z|y;x)p_Y(y;x),\]
+so taking the log and then expectation of both sides gives 
+\[\log p_Y(y;x) = \EE_{p_{Z|Y}(\cdot | y; x')}[\log p_Z(z;x)] - \EE_{p_{Z|Y}(\cdot | y; x')}[\log p_{Z|Y}(z|y; x)]\] 
+for all $x,x'\in \mathcal{X}$. Re-write this term wise as 
+\[\ell_Y(x;y) = U(x;x') + V(x;x').\] 
+By Gibbs, $V(x;x')\geq V(x';x')$, so this rearranges to 
+\begin{align*}
+\ell_Y(x;y)\geq (U(x;x')-U(x';x')) + U(x';x')+V(x';x') \geq \Delta(x,x') + \ell_Y(x';y).
+\end{align*} 
+Given that we choose $x$ s.t. $\Delta(x,x') > 0$, we now have $\ell_Y(x;y) > \ell_Y(x';y)$, which gives a way to guarantee an increase in log likelihood. This is the foundation for the EM-algorithm.
 
-If $\phi(\cdot)$ is concave and $v\in \mathcal{V}$ for some alphabet $\mathcal{V}$, then 
-\[\EE[\phi(v)]\leq \phi(\EE[v]).\] 
-\end{theorem}
+\subsection{Expectation-Maximization Algorithm}
+
+The EM-algorithm is as follows: 
+\begin{itemize}
+	\item Initialize $t=0$ and a guess for $\hat{x}^{(0)}$. 
+	\item \textbf{E}: Compute 
+		\[U(x;\hat{x}^{(t)}) = \EE_{p_{Z|Y}(\cdot | y; \hat{x}^{tl)})}[\log p_Z(z;x)].\] 
+	\item \textbf{M}: Compute 
+		\[\hat{x}^{(t+1)} = \argmax_{x\in \mathcal{X}}U(x; \hat{x}^{(t)}).\]
+	\item Increment $t$ and repeat the \textbf{EM} cycle until convergence. 
+\end{itemize}
+The intuition behind the \textbf{M}-step here is to guarantee that $\Delta(\hat{x}^{(t+1)}, \hat{x}^{(t)}) \geq 0$, so that we have an increasing (non-decreasing) sequence of likelihoods 
+\[\{\ell_Y(\hat{x}^{(t)})\}_{t\geq 0}.\] 
+The hope is that after enough steps, we can converge on a optimal value. 
