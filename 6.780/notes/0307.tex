@@ -37,6 +37,56 @@ The hope is that after enough steps, we can converge on a optimal value.
 
 \subsection{EM on Logistic Regression}
 
+The goal of linear regression is to assign a probability $\sigma(\theta^Tx)$ that the assigned label of a data point is $1$. Suppose we have complete data 
+
+\[\mathcal{D}_+ = \{(u_i,v_i,w_i)\}_{1\leq i\leq N},\] 
+where the hidden part of the data is a mixture component $w_i\in \{0,1\}$. The observed data is 
+
+\[\mathcal{D} = \{(u_i,v_i)\}_{1\leq i\leq N},\]
+which are the standard pairs of vectors $u_i$ and labels $v_i\in \{\pm 1\}$ for logistic regression. For the \mathbf{E} step, we are interested in $p_Z(z)$, which is governed by
+
+\[p_{V,U,W}(v,u,w) = p_{V|U,W}(v|u,w)p_U(u)p_W(w).\] 
+We have 
+\[p_{V|U,W}(v|u,w) = \frac{1}{1 + e^{-vx_w^Tt(u)}},\] 
+where $t(u)$ is a feature vector extracted from $u$, and $x_w$ is the learned hypothesis vector given mixture $w$. If we suppose that $w\sim \Bern(q)$ for unknown $q$, then we also have 
+\[p_W(w) = \exp\left(w\ln \left(\frac{q}{1-q}\right) + \ln (1-q)\right),\] 
+so
+\[\ln p_Z(z) = -\ln(1+e^{-vx_w^Tt(u)}) + \ln p_U(u) + w\ln\left(\frac{q}{1-q}\right) + \ln (1-q).\] 
+The full hypothesis that we want to learn is $\theta = (x_0, x_1, q)$. Now we can compute the expectation. For the first term,
+\begin{align*}
+	&\EE_{p_{Z|Y}(\cdot | y; \theta')}[-\ln (1 + e^{-vx_w^Tt(u)})] \\
+	&\qquad = -p_{W|U,V}(0|u,v;\theta')\ln(1+e^{-vx_0^Tt(u)}) - p_{W|U,V}(1|u,v;\theta')\ln(1 + e^{-vx_1^Tt(u)}).
+\end{align*}
+For the last term,
+\begin{align*}
+	\EE_{p_{Z|Y}(\cdot | y; \theta')}[w\ln \left(\frac{q}{1-q}\right) + \ln (1-q)] = p_{W|U,V}(1|u,v;\theta')\ln\left(\frac{q}{1-q}\right) + \ln(1-q),
+\end{align*}
+so the whole expectation is
+\begin{align*}
+	U(\theta, \theta') &= \EE_{p_{Z|Y}(\cdot | y; \theta')}[\sum_{i=1}^N\ln p_Z(z_i)] \\
+										 &= -\sum_{i=1}^N p_{W|U,V}(0|u_i,v_i;\theta')\ln(1 + e^{-v_ix_0^Tt(u_n)}) \\
+										 &\qquad -\sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\ln(1 + e^{-v_ix_1^Tt(u_n)}) \\
+										 &\qquad + \sum_{i=1}^N\ln p_U(u_i) + \sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\ln \left(\frac{q}{1-q}\right) + N \ln(1-q).
+\end{align*}
+To calculate each of the posteriors, we can use Bayes': 
+\begin{align*}
+	&p_{W|U,V}(1|u_i,v_i;\theta')\\
+	&\qquad = \frac{p_{W}(1;\theta')p_{V|U,W}(v_i|u_i,w_i=1;\theta')}{p_{W}(0;\theta')p_{V|U,W}(v_i|u_i,w_i=1;\theta') + p_W(1;\theta')p_{V|U,W}(v_i|u_i,w_i=1;\theta')} \\
+	&\qquad= \frac{q'(1 + \exp(-v_i(x_1')^Tt(u_i)))^{-1}}{(1-q')(1 + \exp(-v_i(x_0')^Tt(u_i)))^{-1} + q'(1 + \exp(-v_i(x_1')^Tt(u_i)))^{-1}} \\
+	&\qquad= \left(1 + \frac{1-q'}{q'}\frac{1 + \exp(-v_i(x_1')^Tt(u))}{1 + \exp(-v(x'_0)^Tt(u))}\right)^{-1}.
+\end{align*}
+For the $\mathbf{M}$ step, we can optimize each component in $\theta=(x_0,x_1,q)$ separately. In particular, we can take 
+\[x_i^{(t+1)} = \argmin_{x} \sum_{i=1}^N \ln(1 + e^{-v_ix^Tt(u_i)})\]
+and 
+\[q^{(t+1)} = \argmax_{q} \sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\ln \left(\frac{q}{1-q}\right) + N\ln(1-q).\] 
+The posteriors rely only on $q'$, so they are constant relative to our maximization. We can solve directly for the maximization for $q^{(l+1)}$: 
+\begin{align*}
+&\left(\frac{1}{N}\sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\right)\ln\left(\frac{q}{1-q}\right) + \ln(1-q) \\
+&\qquad = \left(\frac{1}{N}\sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\right) \ln (q) + \left(1 - \frac{1}{N}\sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta')\right)\ln (1-q). 
+\end{align*}
+This the expected value of log Bernoulli $\ln q$ with respect to another Bernoulli, so by Gibbs,
+\[q^{(t+1)} = \frac{1}{N}\sum_{i=1}^N p_{W|U,V}(1|u_i,v_i;\theta').\] 
+
 \subsection{EM on Infectious Disease}
 
 Say we have a population of $N$ people over $T$ years, and data $y_i\in \{0,1\}$ signalling whether a subject $i\in [N]$ contracted an infectious disease by te end of the $T$ years. We have access to a record $\mu_{ij}\in \{0,1\}$ that tells us whether or not subject $i\in [N]$ was exposed to the disease in year $j\in [T]$. Our goal is to estimate the infection rate $r_j$ for each year $j\in [T]$. 
@@ -64,7 +114,7 @@ Taking critical points gives
 \[\sum_{i=1}^N\left(\mu_{ij}\EE_{p_{Z|Y(\cdot | y;r')}}[z_{ij}]\cdot \frac{1-r_j}{r_j}\frac{(1-r_j) + r_j}{(1-r_j)^2} - \frac{\mu_{ij}}{1-r_j}\right) = 0,\] 
 which gives
 \[r_j = \frac{\sum_{i=1}^N\left(\mu_{ij}\cdot \frac{\mathbbm{1}(y_i=1)\mu_{ij}r_j'}{\sum_{j'=1}^T\mathbbm{1}(y_i=1)\mu_{ij'}r_{j'}'}\right)}{\sum_{i=1}^N\mu_{ij}}.\] 
-Note that this result intuitively makes sense; amongst all the days where we observed a subject getting exposed to the disease ($\mu_{ij}=1$), we want $r_j$ to approach the true proportion $\EE[z_{ij}]$ of infected peoples. 
+Note that this result intuitively makes sense; we want $r_j$ to approach the true proportion $\EE[z_{ij}]$ of infected subjects, and we weight only by $\mu_{ij}=1$ because we can say definitively that $z_{ij}=1$ should only happen when subjects are exposed.
 
 \subsection{EM Alternate Formulation}
 
