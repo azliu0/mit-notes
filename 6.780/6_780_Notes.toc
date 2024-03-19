@@ -22,4 +22,4 @@
 \contentsline {subsection}{\numberline {6.2}Expectation-Maximization Algorithm}{21}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}EM on Logistic Regression}{22}{subsection.6.3}%
 \contentsline {subsection}{\numberline {6.4}EM on Infectious Disease}{22}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}EM Alternate Formulation}{22}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.5}EM Alternate Formulation}{23}{subsection.6.5}%

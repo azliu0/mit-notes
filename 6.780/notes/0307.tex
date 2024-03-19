@@ -39,6 +39,33 @@ The hope is that after enough steps, we can converge on a optimal value.
 
 \subsection{EM on Infectious Disease}
 
+Say we have a population of $N$ people over $T$ years, and data $y_i\in \{0,1\}$ signalling whether a subject $i\in [N]$ contracted an infectious disease by te end of the $T$ years. We have access to a record $\mu_{ij}\in \{0,1\}$ that tells us whether or not subject $i\in [N]$ was exposed to the disease in year $j\in [T]$. Our goal is to estimate the infection rate $r_j$ for each year $j\in [T]$. 
+
+Naturally, the ``complete'' data that explains our observations can be represented by $z_{ij}\in \{0,1\}$ indicating whether $i$ contracted the disease during year $j$. We don't have access to this data, but we can use the EM algorithm on this latent space to estimate $r_j$. 
+
+\V
+
+\noindent We can show using a bit of casework that 
+\[p_{z_{ij}}(z_{ij};r) = r_j^{\mu_{ij}z_{ij}}(1-r_j)^{\mu_{ij}z_{ij}},\] 
+so 
+\[\ln p_Z(z;r) = \sum_{i=1}^N\sum_{j=1}^T z_{ij}\mu_{ij}\ln r_j + \mu_{ij}(1-z_{ij})\ln (1-r_j).\] 
+Now we perform $\mathbf{E}$: 
+\begin{align*}
+	&\EE_{p_{Z|Y}(\cdot | y;r')}\left[\sum_{i=1}^N\sum_{j=1}^Tz_{ij}\mu_{ij}\ln r_j + \mu_{ij}(1-z_{ij})\ln (1-r_j)\right] \\
+	&\qquad\qquad= \sum_{j=1}^T\sum_{i=1}^N \mu_{ij}\EE_{p_{Z|Y}(\cdot | y;r')}[z_{ij}]\left(\frac{r_j}{1-r_j}\right) + \mu_{ij}\ln (1-r_j).
+\end{align*}
+We also need the expectation for each $z_{ij}$: 
+\begin{align*}
+	\EE_{p_{Z|Y}(\cdot | y;r')}[z_{ij}] = \PP[z_{ij}=1|Y=y,r'] = \frac{\mathbbm{1}(y_i=1)\mu_{ij}r_j'}{\sum_{j'=1}^T\mathbbm{1}(y_i=1)\mu_{ij'}r_{j'}'}.
+\end{align*}
+To perform $\mathbf{M}$, note that we can optimize one component at a time by taking the inner sum, i.e., 
+\[r_j = \argmax_{r_j}\left(\sum_{i=1}^N\mu_{ij}\EE_{p_{Z|Y(\cdot | y;r')}}[z_{ij}]\left(\ln \frac{r_j}{1-r_j}\right) + \mu_{ij}\ln (1-r_j)\right).\] 
+Taking critical points gives
+\[\sum_{i=1}^N\left(\mu_{ij}\EE_{p_{Z|Y(\cdot | y;r')}}[z_{ij}]\cdot \frac{1-r_j}{r_j}\frac{(1-r_j) + r_j}{(1-r_j)^2} - \frac{\mu_{ij}}{1-r_j}\right) = 0,\] 
+which gives
+\[r_j = \frac{\sum_{i=1}^N\left(\mu_{ij}\cdot \frac{\mathbbm{1}(y_i=1)\mu_{ij}r_j'}{\sum_{j'=1}^T\mathbbm{1}(y_i=1)\mu_{ij'}r_{j'}'}\right)}{\sum_{i=1}^N\mu_{ij}}.\] 
+Note that this result intuitively makes sense; amongst all the days where we observed a subject getting exposed to the disease ($\mu_{ij}=1$), we want $r_j$ to approach the true proportion $\EE[z_{ij}]$ of infected peoples. 
+
 \subsection{EM Alternate Formulation}
 
 Here we introduce an alternate formulation for the EM algorithm that we introduced earlier. Say the complete data is $Z\in \mathcal{Y}\times \mathcal{S}$, where $Y\in \mathcal{Y}$ is our observed data and $S\in \mathcal{S}$ is the latent. Consider the objective function 
