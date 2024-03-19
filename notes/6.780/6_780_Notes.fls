@@ -1862,6 +1862,10 @@ INPUT ./notes/0307.tex
 INPUT notes/0307.tex
 INPUT ./notes/0307.tex
 INPUT notes/0307.tex
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/kpfonts/jkpbn7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/public/kpfonts/jkpbn7t.vf
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyd.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyd.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyd.fd
