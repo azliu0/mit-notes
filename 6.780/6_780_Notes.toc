@@ -23,3 +23,5 @@
 \contentsline {subsection}{\numberline {6.3}EM on Logistic Regression}{22}{subsection.6.3}%
 \contentsline {subsection}{\numberline {6.4}EM on Infectious Disease}{24}{subsection.6.4}%
 \contentsline {subsection}{\numberline {6.5}EM Alternate Formulation}{25}{subsection.6.5}%
+\contentsline {section}{\numberline {7}March 12, 2024}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Generalized Cost Functions}{27}{subsection.7.1}%

@@ -1,0 +1,45 @@
+\section{March 12, 2024}
+
+\subsection{Generalized Cost Functions}
+
+Today we consider more generalized Bayes Decision models that outputs a decision $q: \mathcal{X}\rightarrow \RR$ which is a probability distribution over the hypothesis space, rather than a single output. 
+
+To generalize metrics for the effectiveness of such models, we need to generalize the cost functions that we've been using. Our new cost functions must be functions of the correct hypothesis and the distribution output of the model, i.e., $C: (\mathcal{X}, (\mathcal{X}\rightarrow \RR))\rightarrow \RR$. There are certain qualities that we want these cost functions to have. 
+
+\begin{definition}
+\deflabel
+
+A cost function $C(\cdot, \cdot)$ is \ac{proper} if it leads to us choosing the true belief, i.e., 
+\[p_{X|Y}(\cdot | y) = \argmin_{q}\EE[C(x,q)|Y=y]\quad \forall y\in \mathcal{Y}.\] 
+\end{definition}
+
+\begin{theorem}
+\claimlabel
+
+The log-loss cost criterion is proper.
+\end{theorem}
+
+\begin{proof}
+	\[\EE_{p_{X|Y}(\cdot | y)}[-A\log q(x) + B(x)]\]
+is minimized when $q = p_{X|Y}$, by Gibbs.
+\end{proof}
+
+\begin{definition}
+\deflabel
+
+A cost function $C(\cdot, cdot)$ is \ac{local} if there exists $\phi: (\mathcal{X}, \RR)\rightarrow \RR$ s.t. $C(x,q) = \phi(x,q(x))$ for all $x\in \mathcal{X}$.
+\end{definition}
+
+In words, local cost functions are only functions of the probability of the actual outcome $x$, rather than the entire probability distribution. 
+
+\begin{theorem}
+\thmlabel
+
+Given alphabet $\mathcal{X}$ with size $L := \vert \mathcal{X}\vert\geq 3$, log-loss is the only smooth, local, proper cost function.
+\end{theorem}
+
+\begin{proof}
+	Let $\mathcal{X} = \{x_1,\hdots, x_L\}$, $q_l = q(x_l)$,$p_l = p_{X|Y}(x_l|y)$, and $\phi_l(\cdot) = \phi_l(x_l,\cdot)$ be our local cost functions. Since the cost functions are proper, 
+	\[(p_1,\hdots,p_L) = \argmin_{q_i\text{ valid}} \sum_{l=1}^L p_l\phi_l(q_l).\] 
+We can use Lagrange multipliers to 
+\end{proof}
