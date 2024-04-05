@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  5 APR 2024 06:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  5 APR 2024 07:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1887,7 +1887,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[30]) (./notes/0402.tex) (./notes/0404.tex)
+[30]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1895,23 +1895,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[31] (./6_780_Notes.aux)
+[31]) (./notes/0402.tex) (./notes/0404.tex)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[32] (./6_780_Notes.aux)
 Package rerunfilecheck Info: File `6_780_Notes.out' has not changed.
 (rerunfilecheck)             Checksum: 8869DA7D485B745006E4417A77B775DF;5391.
  ) 
 Here is how much of TeX's memory you used:
- 54732 strings out of 476025
- 1231762 string characters out of 5790016
+ 54733 strings out of 476025
+ 1231769 string characters out of 5790016
  1904728 words of memory out of 5000000
  73931 multiletter control sequences out of 15000+600000
  636565 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,14n,118p,1046b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk> </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmsc8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyd.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_780_Notes.pdf (31 pages, 310599 bytes).
+Output written on 6_780_Notes.pdf (32 pages, 312752 bytes).
 PDF statistics:
- 515 PDF objects out of 1000 (max. 8388607)
- 418 compressed objects within 5 object streams
- 62 named destinations out of 1000 (max. 500000)
+ 519 PDF objects out of 1000 (max. 8388607)
+ 421 compressed objects within 5 object streams
+ 63 named destinations out of 1000 (max. 500000)
  268 words of extra memory for PDF output out of 10000 (max. 10000000)
 
