@@ -2,6 +2,18 @@
 
 \subsection{Continuous Information Theory}
 
+Many of the formulas we used in the discrete case work mostly the same in the continuous case. Let $X,Y$ be continuous r.v.s; then, 
+\[h(X) = -\int_{\infty}^{\infty} p_X(x) \log p_X(x)\ddd x,\] 
+and 
+\[h(X|Y=y) = -\int_{\infty}^{\infty}p_{X|Y}(x|y)\log p_{X|Y}(x|y)\ddd x,\]
+and 
+\[h(X|Y) = \int_{-\infty}^{\infty}p_Y(y)h(X|Y=y)\ddd y = -\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} p_{X,Y}(x,y)\log p_{X|Y}(x|y)\ddd x \ddd y.\] 
+Mutual information is defined the same
+\[I(X;Y) = h(X) - h(X|Y) = h(Y) - h(Y|X),\]
+and information divergence as well
+\[D(p||q) = \int_{-\infty}^{\infty}p(x) \log \frac{p(x)}{q(x)}\ddd x.\] 
+There are some differences in the way that these functions behave under coordinate transformations. In the discrete cases, relabelling the alphabet does not change the behavior of any functions. In the continuous case, suppose that $X = g(S)$ for some monotonically increasing, differentiable mapping on $S$. 
+
 \subsection{Gaussian Distribution Information Measures}
 
 Now we derive some information measures on Gaussian distributions. Let $Y = aX + Z$, where $X\sim \Norm(0,1)$ and $Z\sim \Norm(0,1)$. This is the scalar version of the so-called \ac{innovations form} for Gaussian vectors. Then, we have that 

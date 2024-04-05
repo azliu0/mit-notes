@@ -27,4 +27,4 @@
 \contentsline {subsection}{\numberline {7.1}Generalized Cost Functions}{28}{subsection.7.1}%
 \contentsline {section}{\numberline {8}March 19, 2024}{29}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Continuous Information Theory}{29}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Gaussian Distribution Information Measures}{29}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.2}Gaussian Distribution Information Measures}{30}{subsection.8.2}%
