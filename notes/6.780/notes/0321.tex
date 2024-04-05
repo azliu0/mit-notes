@@ -1,0 +1,48 @@
+\section{March 19, 2024}
+
+\subsection{Continuous Information Theory}
+
+\subsection{Gaussian Distribution Information Measures}
+
+Now we derive some information measures on Gaussian distributions. Let $Y = aX + Z$, where $X\sim \Norm(0,1)$ and $Z\sim \Norm(0,1)$. This is the scalar version of the so-called \ac{innovations form} for Gaussian vectors. Then, we have that 
+\begin{align*}
+	p_{X|Y}(x|y) &\propto \exp \left(-\frac{1}{2}(y-ax)^2\right)\exp \left(-\frac{1}{2}x^2\right) \\
+							 &\propto \exp \left(-\frac{1}{2} \left(x^2(a^2+1) - 2ayx + y^2\right)\right) \\
+							 &\propto \exp \left(-\frac{1}{2} \left(\frac{x - ay/(a^2+1)}{1/(a+1)}\right)^2\right),
+\end{align*}
+so 
+\[p_{X|Y}(x|y) \sim \Norm(\mu_{X|Y}, \lambda_{X|Y}) = \Norm\left(\frac{ay}{a^2+1}, \frac{1}{a+1}\right).\] 
+
+\begin{example}
+\exlabel
+
+Differential entropy.
+\end{example}
+
+Let $X\sim \Norm(\mu, \sigma^2)$. Then,
+\begin{align*}
+	h(X) &= -\int_{-\infty}^{\infty}p_X(x)\log p_X(x) \ddd x\\
+			 &= -\int_{-\infty}^{\infty}p_X(x)\left(-\frac{1}{2}\log(2\pi\sigma^2)-\frac{(x-\mu)^2}{2\sigma^2}\right)\ddd x \\
+			 &= \frac{1}{2}\log(2\pi\sigma^2) + \frac{1}{2} \\
+			 &= \frac{1}{2}\log(2\pi e\sigma^2).
+\end{align*}
+
+\begin{example}
+\exlabel
+
+Conditional differential entropy.
+\end{example}
+
+\noindent Consider the example $(X,Y)$ defined from before. From the conditional distribution, 
+\[h(X|Y=y) = \frac{1}{2}\log\left(\frac{2\pi e}{a+1}\right).\] 
+Therefore, 
+\[h(X|Y) = \int_{-\infty}^{\infty}h(X|Y=y)\Norm(y;0,a^2+1)\ddd y = \frac{1}{2} \log \left(\frac{2\pi e}{a+1}\right).\] 
+
+\begin{example}
+\exlabel
+
+Mutual information.
+\end{example}
+
+\noindent Using the same example $(X,Y)$ defined above,
+\[I(X;Y) = h(X) - h(X|Y) = \frac{1}{2}\log(a+1).\] 
