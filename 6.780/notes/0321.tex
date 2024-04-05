@@ -12,7 +12,27 @@ Mutual information is defined the same
 \[I(X;Y) = h(X) - h(X|Y) = h(Y) - h(Y|X),\]
 and information divergence as well
 \[D(p||q) = \int_{-\infty}^{\infty}p(x) \log \frac{p(x)}{q(x)}\ddd x.\] 
-There are some differences in the way that these functions behave under coordinate transformations. In the discrete cases, relabelling the alphabet does not change the behavior of any functions. In the continuous case, suppose that $X = g(S)$ for some monotonically increasing, differentiable mapping on $S$. 
+There are some differences in the way that these functions behave under coordinate transformations. In the discrete cases, relabelling the alphabet does not change the behavior of any functions. In the continuous case, suppose that $X = g(S)$ for some monotonically increasing, differentiable mapping on $S$. Then for any $x$ and $s = g^{-1}(x)$, we must have:
+\begin{itemize}
+	\item $\ddd x = \ddd s \dot{g}(s)$
+	\item $p_X(x)\dot{g}(s) = p_S(s)$. This isn't related to the main discussion, but there are a few ways to think about why this must be the case. The first is that we want the unit integral area to be the same should remain the same under transformation, i.e., $p_X(x) \ddd x = p_S(s) \ddd s$. Another way to think about this is that an interval of unit length $[s, s+\ddd s]$ gets mapped to $[g(s), g(s)+\dot{g}(s)\ddd s]$, which is longer by a factor of $\dot{g}(s)$; therefore, the height $p_X(x)$ should be shorter by a factor of $\dot{g}(s)$, in order to keep the total area $1$. 
+\end{itemize}
+So the differential entropy is
+\begin{align*}
+	h(X) = -\int_{\infty}^{\infty}\frac{p_S(s)}{\dot{g}(s)}\log \frac{p_S(s)}{\dot{g}(s)} \dot{g}(s)\ddd s = h(S) + \EE[\log(\dot{g}(s))].
+\end{align*}
+It is not invariant to coordinate transformations. On the other hand, mutual information under coordinate transformation is 
+\begin{align*}
+	I(X;Y) &= h(X) - h(X|Y) \\
+				 &= h(S) + \EE[\log (\cdot{g}(s))] - h(S|Y) - \EE[\log (\cdot {g}(s))] \\
+				 &= h(S) - h(S|Y),
+\end{align*}
+so it remains the same. Similarly, information divergence 
+\begin{align*}
+	D(p_x||q_x) &= \int_{-\infty}^{\infty}p_X(x)\log \frac{p_X(x)}{q_X(x)} \ddd x \\
+					&= \int_{-\infty}^{\infty}p_S(s)\log \frac{p_S(s)}{q_S(s)} \ddd s = D(p_s||q_s) 
+\end{align*}
+is also invariant. 
 
 \subsection{Gaussian Distribution Information Measures}
 
