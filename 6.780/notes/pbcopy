@@ -19,7 +19,7 @@ There are some differences in the way that these functions behave under coordina
 \end{itemize}
 So the differential entropy is
 \begin{align*}
-	h(X) = -\int_{-\infty}^{\infty}\frac{p_S(s)}{\dot{g}(s)}\log \frac{p_S(s)}{\dot{g}(s)} \dot{g}(s)\ddd s = h(S) + \EE[\log(\dot{g}(s))].
+	h(X) = -\int_{\infty}^{\infty}\frac{p_S(s)}{\dot{g}(s)}\log \frac{p_S(s)}{\dot{g}(s)} \dot{g}(s)\ddd s = h(S) + \EE[\log(\dot{g}(s))].
 \end{align*}
 It is not invariant to coordinate transformations. On the other hand, mutual information under coordinate transformation is 
 \begin{align*}
