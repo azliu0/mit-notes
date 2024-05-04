@@ -28,3 +28,4 @@
 \contentsline {section}{\numberline {8}March 19, 2024}{29}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Continuous Information Theory}{29}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Gaussian Distribution Information Measures}{30}{subsection.8.2}%
+\contentsline {section}{\numberline {9}April 18, 2024}{32}{section.9}%
