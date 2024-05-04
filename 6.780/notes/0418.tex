@@ -1,3 +1,71 @@
 \section{April 18, 2024}
 
+\subsection{Type Definitions}
+
+We begin by introducing the empirical distribution. This is the same empirical distribution from before, and grounds our discussion for the Method of Types. Assume that all samples are drawn over the finite alphabet $\mathcal{Y}=\{1,\hdots,M\}$. 
+\begin{definition}
+\deflabelname{Empirical Distribution}
+
+Let $Y=(y_1,\hdots,y_N)\in \mathcal{Y}^N$. Then, we denote $\hat{p}(b; Y)$ as the \ac{type} of $Y$, which is the frequency distribution of letters sampled in the sequence, i.e., 
+\[\hat{p}(b; Y) = \frac{1}{N}\sum_{n=1}^N \mathbbm{1}_{b=y_n}.\] 
+\end{definition}
+
+We let $\mathcal{P}_N^{\mathcal{Y}}$ be the set of all possible types over all length $N$ sequences generated from $\mathcal{Y}$. Further, we define the \ac{type class}
+\[\mathcal{T}_N^{\mathcal{Y}}(p) = \{Y\in \mathcal{Y}^N: \hat{p}(\cdot; Y) \equiv p(\cdot)\},\]
+i.e., the set of all sequences with a given type. As a reminder from previous discussions, we also define the exponential rate notation: 
+\begin{definition}
+\deflabelname{Exponential Rate Notation}
+
+We say that $f(N)\overset{\cdot}{=} 2^{N\alpha}$, i.e., the growth rate of $f(N)$ is $\alpha$, when 
+\[\lim_{N\rightarrow \infty}\frac{\log f(N)}{N} = \alpha.\] 
+\end{definition}
+
+\subsection{Method of Types}
+
+Now we derive some useful results on types. 
+
+\begin{theorem}
+\lemlabel
+
+Let $Y=(y_1,\hdots,y_N)\in \mathcal{Y}^N$ and $q\in \mathcal{P}^{\mathcal{Y}}$ be an arbitrary distribution. Then, 
+\[q^N(Y) = 2^{-N(D(\hat{p}(\cdot; Y)\Vert q) + H(\hat{p}(\cdot; Y)))}.\] 
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+	\frac{1}{N}\log q^N(Y) &= \frac{1}{N}\sum_{n=1}^N \log q(y_n) \\
+												 &= \sum_{b\in \mathcal{Y}} \hat{p}(b; Y)\log q(b) \\
+												 &= \sum_{b\in \mathcal{Y}} \hat{p}(b; Y)\log \hat{p}(b; Y) - \hat{p}(b; Y)\log \frac{\hat{p}(b; Y)}{q(b)} \\
+												 &= -H(\hat{p}(\cdot; Y)) - D(\hat{p}(\cdot; Y)||q). 
+\end{align*}
+\end{proof}
+
+\noindent Some special cases to take note of: 
+\begin{itemize}
+	\item For any distribution $p\in \mathcal{P}^{\mathcal{Y}}$, if $Y\in \mathcal{Y}_N^{\mathcal{Y}}(p)$, i.e., $Y$ has \textit{type} $p$, then 
+		\[q^N(Y) = 2^{-N(D(p||q) + H(p))}.\]
+		This is essentially just a restatement of the lemma. 
+	\item If we take $p,Y$ from the previous bullet point and set $p=q$, then we also have
+		\[p^N(Y) = 2^{-NH(p)}.\] 
+\end{itemize}
+
+The next result establishes that the number of sequences in a type class is exponential.
+
+\begin{theorem}
+\lemlabel
+
+Let $p\in \mathcal{P}_N^{\mathcal{Y}}$. Then
+\[\vert \mathcal{T}_N^{\mathcal{Y}}(p)\vert \overset{\cdot}{=} 2^{NH(p)}.\] 
+\end{theorem}
+
+\begin{proof}
+We will equivalently show that
+\[cN^{-\vert \mathcal{Y}\vert}2^{NH(p)}\leq \vert \mathcal{T}_N^{\mathcal{Y}}(p)\vert \leq 2^{NH(p)}\] 
+for constant $c$ (with respect to $N$). The upper bound can be shown as follows: 
+\begin{align*}
+	\vert \mathcal{T}_N^{\mathcal{Y}}(p)\vert = \sum_{}
+\end{align*}
+\end{proof}
+
+
 

@@ -28,4 +28,16 @@
 \contentsline {section}{\numberline {8}March 19, 2024}{29}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Continuous Information Theory}{29}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Gaussian Distribution Information Measures}{30}{subsection.8.2}%
-\contentsline {section}{\numberline {9}April 18, 2024}{32}{section.9}%
+\contentsline {section}{\numberline {9}March 21, 2024}{32}{section.9}%
+\contentsline {section}{\numberline {10}April 2, 2024}{32}{section.10}%
+\contentsline {section}{\numberline {11}April 4, 2024}{32}{section.11}%
+\contentsline {section}{\numberline {12}April 9, 2024}{32}{section.12}%
+\contentsline {section}{\numberline {13}April 11, 2024}{32}{section.13}%
+\contentsline {section}{\numberline {14}April 16, 2024}{32}{section.14}%
+\contentsline {section}{\numberline {15}April 18, 2024}{32}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Type Definitions}{32}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Method of Types}{33}{subsection.15.2}%
+\contentsline {section}{\numberline {16}April 23, 2024}{35}{section.16}%
+\contentsline {section}{\numberline {17}April 25, 2024}{35}{section.17}%
+\contentsline {section}{\numberline {18}April 30, 2024}{35}{section.18}%
+\contentsline {section}{\numberline {19}May 2, 2024}{35}{section.19}%
