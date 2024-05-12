@@ -19,6 +19,7 @@ i.e., the set of all sequences with a given type. As a reminder from previous di
 We say that $f(N)\overset{\cdot}{=} 2^{N\alpha}$, i.e., the growth rate of $f(N)$ is $\alpha$, when 
 \[\lim_{N\rightarrow \infty}\frac{\log f(N)}{N} = \alpha.\] 
 \end{definition}
+\noindent Most of the important results from this lecture deals with exponentially growing things, which is why this notation is useful. 
 
 \subsection{Method of Types}
 
@@ -47,9 +48,10 @@ Let $Y=(y_1,\hdots,y_N)\in \mathcal{Y}^N$ and $q\in \mathcal{P}^{\mathcal{Y}}$ b
 		This is essentially just a restatement of the lemma. 
 	\item If we take $p,Y$ from the previous bullet point and set $p=q$, then we also have
 		\[p^N(Y) = 2^{-NH(p)}.\] 
+		This is essentially just a restatement of the definition of self-entropy.
 \end{itemize}
 
-The next result establishes that the number of sequences in a type class is exponential.
+\noindent The next result establishes that the number of sequences in a type class is exponential.
 
 \begin{theorem}
 \lemlabel
@@ -66,6 +68,5 @@ for constant $c$ (with respect to $N$). The upper bound can be shown as follows:
 	\vert \mathcal{T}_N^{\mathcal{Y}}(p)\vert = \sum_{}
 \end{align*}
 \end{proof}
-
 
 
