@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  11 MAY 2024 17:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  14 MAY 2024 23:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -24,7 +24,7 @@ File: size11.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \bibindent=\dimen140
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-) (./_andrew.sty
+) (/Users/andrew/Library/texmf/tex/latex/_andrew.sty
 Package: _andrew 2022/10/01 Andrew's sty file
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/kpfonts.sty
 Package: kpfonts  2023/01/18 v3.35
@@ -1593,19 +1593,11 @@ File: t1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for T1/jkptt.
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}]
 LaTeX Font Info:    Font shape `T1/lmss/b/n' in size <10.95> not available
 (Font)              Font shape `T1/lmss/bx/n' tried instead on input line 17.
- (./6_780_Notes.toc [2])
+ (./6_780_Notes.toc)
 \tf@toc=\write7
 \openout7 = `6_780_Notes.toc'.
 
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[3] (./notes/0206.tex) (./notes/0208.tex
+ [2] (./notes/0206.tex) (./notes/0208.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1613,7 +1605,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4]
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 52--53
 []\T1/jkp/m/n/10.95 Given a pri-ori prob-a-bil-i-ties $\OML/jkp/m/it/10.95 P[]; P[]$\T1/jkp/m/n/10.95 , data $\OML/jkp/m/it/10.95 y$\T1/jkp/m/n/10.95 , ob-ser-va-tion mod-els
  []
@@ -1630,7 +1622,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5]
+[4]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1638,7 +1630,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6]) (./notes/0213.tex
+[5]) (./notes/0213.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1646,7 +1638,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[7]
+[6]
 LaTeX Font Info:    Trying to load font information for TS1+jkp on input line 30.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
 File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
@@ -1658,10 +1650,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[8] (./figures/oclrt_mu.txt
+[7] (./figures/oclrt_mu.txt
 \openout4 = `6_780_Notes-1.asy'.
 
-<6_780_Notes-1.pdf, id=315, 228.1604pt x 227.61336pt>
+<6_780_Notes-1.pdf, id=224, 228.1604pt x 227.61336pt>
 File: 6_780_Notes-1.pdf Graphic file (type pdf)
 <use 6_780_Notes-1.pdf>
 Package pdftex.def Info: 6_780_Notes-1.pdf  used on input line 33.
@@ -1674,7 +1666,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[9])
+[8])
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1682,7 +1674,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[10 <./6_780_Notes-1.pdf>]
+[9 <./6_780_Notes-1.pdf>]
 LaTeX Font Info:    Trying to load font information for U+bbm on input line 92.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
@@ -1694,7 +1686,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[11]
+[10]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1702,10 +1694,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12]) (./notes/0215.tex (./figures/oclrt_1.txt
+[11]) (./notes/0215.tex (./figures/oclrt_1.txt
 \openout4 = `6_780_Notes-2.asy'.
 
-<6_780_Notes-2.pdf, id=357, 268.88957pt x 235.45967pt>
+<6_780_Notes-2.pdf, id=266, 268.88957pt x 235.45967pt>
 File: 6_780_Notes-2.pdf Graphic file (type pdf)
 <use 6_780_Notes-2.pdf>
 Package pdftex.def Info: 6_780_Notes-2.pdf  used on input line 39.
@@ -1718,7 +1710,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[13]) (./figures/oclrt_2.txt
+[12]) (./figures/oclrt_2.txt
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1726,10 +1718,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[14 <./6_780_Notes-2.pdf>]
+[13 <./6_780_Notes-2.pdf>]
 \openout4 = `6_780_Notes-3.asy'.
 
-<6_780_Notes-3.pdf, id=389, 268.88957pt x 235.45967pt>
+<6_780_Notes-3.pdf, id=298, 268.88957pt x 235.45967pt>
 File: 6_780_Notes-3.pdf Graphic file (type pdf)
 <use 6_780_Notes-3.pdf>
 Package pdftex.def Info: 6_780_Notes-3.pdf  used on input line 45.
@@ -1742,7 +1734,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[15 <./6_780_Notes-3.pdf>]
+[14 <./6_780_Notes-3.pdf>]
 Overfull \hbox (1.72926pt too wide) detected at line 59
 \OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^@ \OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OT1/jkp/m/n/10.95 ))(\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 H[]\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^@ \OML/jkp/m/it/10.95 ^^Qp[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 H[]\OT1/jkp/m/n/10.95 )) = (\OML/jkp/m/it/10.95 q[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^@ \OML/jkp/m/it/10.95 q\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OT1/jkp/m/n/10.95 ))(\OML/jkp/m/it/10.95 L\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^@ \OML/jkp/m/it/10.95 ^^Q\OT1/jkp/m/n/10.95 )\OML/jkp/m/it/10.95 p[]\OT1/jkp/m/n/10.95 (\OML/jkp/m/it/10.95 y\OMS/jkp/m/n/10.95 j\OML/jkp/m/it/10.95 H[]\OT1/jkp/m/n/10.95 ) \OMS/jkp/m/n/10.95 ^^U \OT1/jkp/m/n/10.95 0 \OMS/jkp/m/n/10.95 8\OML/jkp/m/it/10.95 y \OMS/jkp/m/n/10.95 2 Y\OML/jkp/m/it/10.95 :
  []
@@ -1754,7 +1746,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[16]
+[15]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1762,7 +1754,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[17]) (./notes/0220.tex) (./notes/0222.tex) (./notes/0227.tex) (./notes/0229.tex) (./notes/0305.tex
+[16]) (./notes/0220.tex) (./notes/0222.tex) (./notes/0227.tex) (./notes/0229.tex) (./notes/0305.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[17]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1778,7 +1778,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[19]
+[19]) (./notes/0307.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1786,7 +1786,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[20]) (./notes/0307.tex
+[20]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1795,14 +1795,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [21]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[22]
 
 ./notes/0307.tex:46: LaTeX Error: \mathbf allowed only in math mode.
 
@@ -1815,6 +1807,14 @@ l.46 ...or logistic regression. For the \mathbf{E}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[22]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1839,14 +1839,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [25]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[26]
 LaTeX Font Info:    Trying to load font information for U+jkpsyd on input line 126.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyd.fd
 File: ujkpsyd.fd 2006/08/15 v1.0
@@ -1863,7 +1855,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[27]
+[26]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1871,7 +1863,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[28]) (./notes/0314.tex) (./notes/0319.tex
+[27]) (./notes/0314.tex) (./notes/0319.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[28]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1887,7 +1887,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[30]
+[30]) (./notes/0321.tex) (./notes/0402.tex) (./notes/0404.tex) (./notes/0409.tex) (./notes/0411.tex) (./notes/0416.tex) (./notes/0418.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1895,7 +1895,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[31]) (./notes/0321.tex) (./notes/0402.tex) (./notes/0404.tex) (./notes/0409.tex) (./notes/0411.tex) (./notes/0416.tex) (./notes/0418.tex
+[31]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1911,15 +1911,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[33]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[34]) (./notes/0423.tex) (./notes/0425.tex) (./notes/0430.tex) (./notes/0502.tex)
+[33]) (./notes/0423.tex) (./notes/0425.tex) (./notes/0430.tex) (./notes/0502.tex)
 Overfull \hbox (1310.524pt too wide) in paragraph at lines 3--20
 \T1/jkp/m/n/10.95 Hello world!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
  []
@@ -1931,23 +1923,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[35] (./6_780_Notes.aux)
+[34] (./6_780_Notes.aux)
 Package rerunfilecheck Info: File `6_780_Notes.out' has not changed.
 (rerunfilecheck)             Checksum: 9CA70A59757785211061307E6137B55A;6975.
  ) 
 Here is how much of TeX's memory you used:
  54782 strings out of 476025
- 1232398 string characters out of 5790016
- 1904729 words of memory out of 5000000
+ 1232503 string characters out of 5790016
+ 1904654 words of memory out of 5000000
  73948 multiletter control sequences out of 15000+600000
  636565 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,14n,118p,1046b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk> </Users/andrew/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm8.600pk></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpmsc8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpsyd.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkpttmn8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on 6_780_Notes.pdf (35 pages, 321947 bytes).
+Output written on 6_780_Notes.pdf (34 pages, 316452 bytes).
 PDF statistics:
- 614 PDF objects out of 1000 (max. 8388607)
- 512 compressed objects within 6 object streams
- 79 named destinations out of 1000 (max. 500000)
+ 522 PDF objects out of 1000 (max. 8388607)
+ 422 compressed objects within 5 object streams
+ 78 named destinations out of 1000 (max. 500000)
  372 words of extra memory for PDF output out of 10000 (max. 10000000)
 
